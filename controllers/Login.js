@@ -1,6 +1,6 @@
-const User = require('../models/user');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');
 
 //Get login page
 exports.getLogin = (req, res, next) => {
@@ -37,7 +37,9 @@ exports.postlogin = async (req, res, next) => {
       req.session.isLoggedin = true;
       req.session.user = user;
       return req.session.save((err) => {
-        console.log(err);
+        if(err) {
+          console.log(err);
+        }
         res.redirect('/');
       });
     }

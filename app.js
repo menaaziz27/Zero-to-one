@@ -1,29 +1,43 @@
-//defining packages
-
+// ============ Node-Packages ============ 
 const express = require('express');
 const bodyparser = require('body-parser');
-const path = require('path');
-const app = express();
 const session = require('express-session');
 const csrf = require('csurf');
-const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-//storing sessions in database
-const MongoDB_URI =
-  'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+// ============ Core-Modules ============
+const path = require('path');
 
+// ============ My-Modules ============
+require('./utils/db');
+const User = require('./models/User');
+
+// ============ constant vars ============
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+
+const app = express();
+
+// Routes
+const homeRoutes = require('./routes/home')
+const authRoutes = require('./routes/auth');
+
+
+// storing sessions in DB
 const store = new MongoDBStore({
   uri: MongoDB_URI,
   collection: 'sessions',
 });
 
-//Routes
-const homeRoutes = require('./routes/home');
-const authRoutes = require('./routes/auth');
+// set ejs template engines
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-//set sessions config
+// ==== middlewares which will be executed before every incoming request ====
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+// for attaching session object in every request and connect the cookie id with its
+// appropriate user session
 app.use(
   session({
     secret: 'my secret',
@@ -32,16 +46,6 @@ app.use(
     store: store,
   }),
 );
-
-//models
-const User = require('./models/user');
-
-app.use(bodyparser.urlencoded({ extended: false }));
-
-// set ejs template engines
-app.set('view engine', 'ejs');
-app.set('views', 'views');
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -58,24 +62,18 @@ app.use((req, res, next) => {
 });
 
 // const csrfProtection = csrf();
+// app.use(csrfProtection)
 app.use(flash());
 
-// app.use(csrfProtection)
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedin;
   next();
 });
 
+
+// ============ Routes ============
 app.use(homeRoutes);
 app.use(authRoutes);
+// app.use(notFoundRoute)
 
-//app.use(404)
-
-mongoose
-  .connect(MongoDB_URI)
-  .then((result) => {
-    app.listen(3000);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+app.listen(3000)

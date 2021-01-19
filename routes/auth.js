@@ -1,19 +1,19 @@
+// ============ Node-Packages ============ 
 const express = require('express');
+const { check, body } = require('express-validator');
 
-const router = express.Router();
-
+// ============ My-Modules ============ 
 const registerController = require('../controllers/Register');
 const LoginController = require('../controllers/Login');
 const ResetController = require('../controllers/resetPassword');
+const User = require('../models/User');
+
+const router = express.Router();
 
 
-const { check, body } = require('express-validator/check');
-
-router.get('/Register', registerController.getRegister);
-
-const User = require('../models/user');
 
 //Registeration
+router.get('/Register', registerController.getRegister);
 
 router.post(
   '/Register',
