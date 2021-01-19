@@ -1,19 +1,16 @@
-// ============ Node-Packages ============ 
+// ============ Node-Packages============ 
 const express = require('express');
 const { check, body } = require('express-validator');
 
 // ============ My-Modules ============ 
-const registerController = require('../controllers/Register');
-const LoginController = require('../controllers/Login');
-const ResetController = require('../controllers/resetPassword');
+const authController = require('../controllers/authController');
 const User = require('../models/User');
 
 const router = express.Router();
 
 
-
 //Registeration
-router.get('/Register', registerController.getRegister);
+router.get('/Register', authController.getRegister);
 
 router.post(
   '/Register',
@@ -52,12 +49,12 @@ router.post(
         return true;
       }),
   ],
-  registerController.postRegister,
+  authController.postRegister,
 );
 
 //Login
 
-router.get('/Login', LoginController.getLogin);
+router.get('/Login', authController.getLogin);
 
 router.post(
   '/Login',
@@ -81,21 +78,21 @@ router.post(
       .isAlphanumeric()
       .trim(),
   ],
-  LoginController.postlogin,
+  authController.postlogin,
 );
 
 //logOut
 
-router.post('/logout', LoginController.postLogout);
+router.post('/logout', authController.postLogout);
 
 //Reset password
 
-router.get('/reset', ResetController.getReset);
-router.post('/reset', ResetController.postReset);
+router.get('/reset', authController.getReset);
+router.post('/reset', authController.postReset);
 
-router.get('/reset/:token',ResetController.getNewPassword);
+router.get('/reset/:token',authController.getNewPassword);
 
-router.post('/new-password',ResetController.postNewPassword);
+router.post('/new-password',authController.postNewPassword);
 
 
 

@@ -1,8 +1,10 @@
+// ============ Node-Packages ============ 
 const express = require('express');
 
-const router = express.Router();
+// ============ My-Modules ============ 
+const homeController = require('../controllers/homeController');
 
-const homeController = require('../controllers/home');
+const router = express.Router();
 
 router.get('/', homeController.getHome);
 
