@@ -46,14 +46,20 @@
               <li><a href="#about">About</a></li>
               <li><a href="#services">Plans</a></li>               
               <li class="mr-5"><a href="#contact">Contact Us</a></li>
+              <% if (isAuthenticated) { %>
+              <li class="mr-5"><a href="/profile">profile</a></li>
+              <% }%>
               </li>
             </ul>
           </nav><!-- .nav-menu -->
 
           <% if (isAuthenticated) { %>
+          
+
             <form method="POST" action="/logout">
                 <button class="get-started-btn scrollto">Logout</button>
             </form>
+
             <% } else { %>
           <a  href="/Register" class="get-started-btn scrollto">Get Started</a>
           <% } %>
