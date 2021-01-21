@@ -19,14 +19,15 @@ const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 const app = express();
 
 // Routes
-const homeRoutes = require('./routes/home')
-const authRoutes = require('./routes/auth');
+const homeRoutes = require('./routes/home');
+const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/user')
 
 
 // storing sessions in DB
 const store = new MongoDBStore({
-  uri: MongoDB_URI,
-  collection: 'sessions',
+    uri: MongoDB_URI,
+    collection: 'sessions',
 });
 
 // set ejs template engines
@@ -39,26 +40,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 // for attaching session object in every request and connect the cookie id with its
 // appropriate user session
 app.use(
-  session({
-    secret: 'my secret',
-    resave: false,
-    saveUninitialized: false,
-    store: store,
-  }),
+    session({
+        secret: 'my secret',
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+    }),
 );
 
 app.use((req, res, next) => {
-  if (!req.session.user) {
-    return next();
-  }
-  User.findById(req.session.user._id)
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    if (!req.session.user) {
+        return next();
+    }
+    User.findById(req.session.user._id)
+        .then((user) => {
+            req.user = user;
+            next();
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 // const csrfProtection = csrf();
@@ -66,14 +67,15 @@ app.use((req, res, next) => {
 app.use(flash());
 
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isLoggedin;
-  next();
+    res.locals.isAuthenticated = req.session.isLoggedin;
+    next();
 });
 
 
 // ============ Routes ============
 app.use(homeRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
 // app.use(notFoundRoute)
 
 app.listen(3000)

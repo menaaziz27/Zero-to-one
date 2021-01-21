@@ -2,12 +2,13 @@
 const express = require('express');
 
 // ============ My-Modules ============ 
-const homeController = require('../controllers/homeController');
+const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/', homeController.getHome);
+router.get('/profile', userController.getProfile);
 
-router.get('/roadmaps', homeController.getRoadmaps)
+router.get('/editProfile', userController.getEditProfile)
+
 
 module.exports = router;
