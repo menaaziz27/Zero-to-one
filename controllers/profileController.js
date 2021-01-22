@@ -60,17 +60,23 @@ exports.postUpdateProfile = async(req, res, next) =>{
   // console.log(gender)
   console.log(skill1)
   console.log(skill2)
-  const image = req.file
-  const Image= image.path
+  let image;
+  let Image;
+  image = req.file
+  console.log(image, '65')
+  if(image !== undefined){
+       Image= image.path
+  }
   try{
   const user = await User.findOne({_id : userid})
      user.name = name
      user.bio = bio
-     if(image){
+     console.log(image)
+     if(image !== undefined){
        user.Image = Image
      }
      user.save()
-     res.redirect('/profile/'+userid)
+     res.redirect('/users/profile/'+userid)
   }
   catch(e){
     console.log(e)
