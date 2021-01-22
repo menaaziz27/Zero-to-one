@@ -6,7 +6,7 @@
     <title>zero to one</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="style.css" rel="stylesheet">
+    <!-- <link href="style.css" rel="stylesheet"> -->
 
 
     <!-- ==================== IF IT'S NOT AUTHENTICATED ===================== -->
@@ -187,8 +187,8 @@
                     color: inherit;
                 }
             </style>
-            <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
+            <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
             <% } %>
                 <!-- ================== END ====================== -->
 </head>
@@ -212,10 +212,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/roadmaps">Roadmaps</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users/me">Profile</a>
-                    </li>
                     <% if(isAuthenticated) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/me">Profile</a>
+                        </li>
                         <li class="nav-item">
                             <form method="POST" action="/auth/logout">
                                 <button class="btn btn-success scrollto">Logout</button>
@@ -892,41 +892,34 @@
                                     Latest News
                                 </h2>
                                 <!-- beginning of first news -->
-                                <div class="ct-latest media">
-                                    <div class="media-left">
-                                        <img alt="widget image" class="media-object"
-                                            src="http://www.webcorpco.com/core/fileparse.php/409/urlt/customer-is-king.jpg"
-                                            style="max-width: 90px; user-select: auto;">
-                                    </div>
-                                    <div class="media-body">
-                                        <h2 class="ct-latest-header media-heading">
-                                            Tips and tricks React.js
-                                        </h2>
-                                        <p>
-                                            It is quintessential that brands pay close attention to the digital
-                                            experiences they
-                                            deliver and personalize these experiences to increases sales and ROI.
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- ending of first news -->
-                                <div class="ct-latest media">
-                                    <div class="media-left">
-                                        <img alt="widget image" class="media-object"
-                                            src="http://www.webcorpco.com/core/fileparse.php/409/urlt/customer-is-king.jpg"
-                                            style="max-width: 90px; user-select: auto;">
-                                    </div>
-                                    <div class="media-body">
-                                        <h2 class="ct-latest-header media-heading">
-                                            Build REST API with Node.js
-                                        </h2>
-                                        <p>
-                                            It is quintessential that brands pay close attention to the digital
-                                            experiences they
-                                            deliver and personalize these experiences to increases sales and ROI.
-                                        </p>
-                                    </div>
-                                </div>
+                                <% if (news) { %>
+                                    <% news.forEach(function(article, index) { %>
+                                        <% if(index < 2) { %>
+                                            <a href="<%= article.url %>" target="_blank"></a>
+                                            <div class="ct-latest media">
+                                                <div class="media-left">
+                                                    <% if (article.cover_image !==null) { %>
+                                                        <img alt="widget image" class="media-object"
+                                                            src="<%= article.cover_image %>"
+                                                            style="max-width: 90px; user-select: auto;">
+                                                        <% } %>
+                                                </div>
+                                                <div class="media-body">
+                                                    <a href="<%= article.url %>" target="_blank">
+                                                        <h2 class="ct-latest-header media-heading">
+                                                            <%= article.title %>
+                                                        </h2>
+
+                                                        <p>
+                                                            <%= article.description %>
+                                                        </p>
+                                                </div>
+                                            </div>
+                                            </a>
+                                            <!-- ending of first news -->
+                                            <% } %>
+                                                <% }) %>
+                                                    <% } %>
                             </div>
                             <!-- friends menu -->
                             <!-- <div class="card">

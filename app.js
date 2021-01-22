@@ -22,7 +22,7 @@ const app = express();
 const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/user')
-const userPosts = require('./routes/post')
+const postRoutes = require('./routes/post')
 
 
 // storing sessions in DB
@@ -77,7 +77,7 @@ app.use((req, res, next) => {
 app.use(homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
-// app.use('/posts', userPosts)
+app.use('/posts', postRoutes)
 // app.use(notFoundRoute)
 
 app.listen(3000)
