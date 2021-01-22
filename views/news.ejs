@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <br>
+    <% if (news) { %>
+        <% news.forEach(function(article) { %>
+            <em>
+                <%= article.user.name %>
+            </em>
+            <a href="<%= article.url %>" target="_blank">
+                <h1>
+                    <%= article.title %>
+                </h1>
+            </a>
+            <p>
+                <%= article.description %>
+            </p>
+            <hr>
+            <% }) %>
+                <% } %>
+</body>
+
+</html>
