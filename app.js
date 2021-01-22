@@ -4,6 +4,7 @@ const bodyparser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const multer = require('multer');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 // ============ Core-Modules ============
@@ -14,7 +15,7 @@ require('./utils/db');
 const User = require('./models/User');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoonee';
 
 const app = express();
 
@@ -35,9 +36,33 @@ const store = new MongoDBStore({
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+//set upload image settings
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
 // ==== middlewares which will be executed before every incoming request ====
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter  }).single('image'));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 // for attaching session object in every request and connect the cookie id with its
 // appropriate user session
 app.use(

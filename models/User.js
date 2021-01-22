@@ -16,6 +16,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  Image: String,
   name: String,
   bio: String,
   resetToken: String,

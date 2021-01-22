@@ -6,16 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Profile</title>
 	<!-- bootstrap css -->
-
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-		integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> 
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-
-
-
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 		integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+
+
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -40,18 +40,15 @@
 				<!-- profile photo -->
 				<div class="span3 well">
 					<center>
-						<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img
-								src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R"
+						<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="/<%=user.Image%>"
 								name="aboutme" width="140" height="140" class="rounded-circle"></a>
 						<h3>
-							<%= user.email %>
+							<%=user.name%>
 						</h3>
-						<a href="/users/editProfile" class="btn btn-primary">edit profile</a>
+						<a href="/users/updateProfile" class="btn btn-primary">edit profile</a>
 					</center>
 				</div>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore iure exercitationem nam itaque, laborum
-				dolores necessitatibus voluptate non tempora, ducimus totam libero mollitia officiis expedita
-				repudiandae in provident suscipit debitis?
+				<%=user.bio%>
 			</div>
 			<!-- SKILSS SECTION -->
 			<div class="col-md-3 align-self-start border border-info rounded mt-3 py-2">
@@ -63,7 +60,7 @@
 			</div>
 			<!-- POSTS SECTION -->
 			<div class="col-md-9 align-self-start border border-info rounded mt-3 py-2">
-				<!-- <h1 style="text-align: center;">Posts</h1> -->
+				<h1 style="text-align: center;">Posts</h1>
 				<section class="card">
 					<div class="card-header">
 						<ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -167,7 +164,6 @@
 									</li>
 								</ul>
 							</div>
-
 
 							<!-- collapsed comments begins -->
 							<div class="collapse" id="collapseExample">
