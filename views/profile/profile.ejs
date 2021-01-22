@@ -36,12 +36,12 @@
                 <!-- profile photo -->
                 <div class="span3 well">
                     <center>
-                    <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="/<%=Image%>" name="aboutme" width="140" height="140" class="rounded-circle"></a>
-                    <h3><%=name%></h3>
+                    <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="/<%=user.Image%>" name="aboutme" width="140" height="140" class="rounded-circle"></a>
+                    <h3><%=user.name%></h3>
                     <a href="/updateProfile" class="btn btn-primary">edit profile</a>
                     </center>
                 </div>
-                <%=bio%>
+                <%=user.bio%>
             </div>
             <!-- SKILSS SECTION -->
             <div class="col-md-3 align-self-start border border-info rounded mt-3 py-2">

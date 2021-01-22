@@ -1,3 +1,11 @@
 exports.getHome = (req, res, next) => {
-  res.render('home/index', {});
+  let userid
+  if(req.user){
+    userid = req.user._id.toString()  
+ }else{
+    userid =null
+ } 
+  res.render('home/index', {
+    userid : userid
+  });
 };

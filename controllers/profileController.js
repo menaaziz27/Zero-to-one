@@ -1,25 +1,38 @@
 const User = require('../models/User');
 
 
-exports.getProfile =  (req, res, next) => {
-  let name
-  let bio
-  let Image
-      if(req.user){
-         name = req.user.name
-         bio = req.user.bio
-         Image = req.user.Image
-      }else{
-         name = null
-         bio = null
-         Image = null
-      }
-      res.render('profile/profile',{
-      name: name,
-      bio: bio,
-      Image:Image
+// exports.getProfile =  (req, res, next) => {
+//   let name
+//   let bio
+//   let Image
+//       if(req.user){
+//          name = req.user.name
+//          bio = req.user.bio
+//          Image = req.user.Image
+//       }else{
+//          name = null
+//          bio = null
+//          Image = null
+//       }
+//       res.render('profile/profile',{
+//       name: name,
+//       bio: bio,
+//       Image:Image
+//       })
+// }
+exports.getUsersProfile = async (req, res, next) => {
+
+  const userid = req.params.id
+  try{
+    const user = await User.findOne({_id : userid})
+      // console.log(user)
+    res.render('profile/profile',{
+    user : user
       })
-  
+    }
+    catch(e){
+      console.log(e)
+    }
 }
  
 exports.getUpdateProfile =  (req, res, next) =>{
@@ -27,14 +40,12 @@ exports.getUpdateProfile =  (req, res, next) =>{
   if(req.user){
     userid = req.user._id
  }else{
-    userid= null
+    userid = null
  }
        res.render('profile/edit-profile',
        {
         userid : userid
        })
-       
-
 }
 exports.postUpdateProfile = async(req, res, next) =>{
   const userid = req.body.userid
@@ -45,9 +56,9 @@ exports.postUpdateProfile = async(req, res, next) =>{
   const gender = req.body.gender
   const skill1 = req.body.skill1
   const skill2 = req.body.skill2
-  console.log(country)
-  console.log(YOB)
-  console.log(gender)
+  // console.log(country)
+  // console.log(YOB)
+  // console.log(gender)
   console.log(skill1)
   console.log(skill2)
   const image = req.file
@@ -60,7 +71,7 @@ exports.postUpdateProfile = async(req, res, next) =>{
        user.Image = Image
      }
      user.save()
-     res.redirect('/profile')
+     res.redirect('/profile/'+userid)
   }
   catch(e){
     console.log(e)
