@@ -21,7 +21,6 @@ const User = require('../models/User');
 //       })
 // }
 exports.getUsersProfile = async (req, res, next) => {
-
   const userid = req.params.id
   try{
     const user = await User.findOne({_id : userid})
