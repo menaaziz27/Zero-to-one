@@ -15,7 +15,7 @@ require('./utils/db');
 const User = require('./models/User');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb://localhost:27017/zerotoonee';
+const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/Blog?&w=majority';
 
 const app = express();
 
