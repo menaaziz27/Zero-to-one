@@ -15,7 +15,7 @@ require('./utils/db');
 const User = require('./models/User');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/Blog?&w=majority';
+const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
 
 const app = express();
 
@@ -75,12 +75,14 @@ app.use(
 );
 
 app.use((req, res, next) => {
+  
     if (!req.session.user) {
         return next();
     }
     User.findById(req.session.user._id)
         .then((user) => {
             req.user = user;
+            res.locals.currentUser = req.user;
             next();
         })
         .catch((err) => {
