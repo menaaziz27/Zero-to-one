@@ -181,7 +181,7 @@ exports.postReset = (req, res, next) => {
           subject: 'Password reset',
           html: `
           <p> you requested password reset </p>
-          <p> Click this <a href ="http://localhost:3000/reset/${token}" >link </a> to set a new password </p>
+          <p> Click this <a href ="http://localhost:3000/auth/reset/${token}" >link </a> to set a new password </p>
            `,
         });
       })
@@ -238,7 +238,7 @@ exports.postNewPassword = (req, res, next) => {
       return resetUser.save();
     })
     .then((result) => {
-      res.redirect('/login');
+      res.redirect('/auth/login');
       return transporter.sendMail({
         to: resetUser.email,
         from: 'abdallahhassann1998@gmail.com',

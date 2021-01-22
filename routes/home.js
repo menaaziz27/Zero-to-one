@@ -10,4 +10,6 @@ router.get('/', homeController.getHome);
 
 router.get('/roadmaps', homeController.getRoadmaps)
 
+router.get('/news', homeController.getNews)
+
 module.exports = router;

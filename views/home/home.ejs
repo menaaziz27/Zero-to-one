@@ -196,7 +196,7 @@
 <body>
     <nav class="navbar navbar-expand-sm d-block navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">ZERO <span style="padding-bottom: 5;"><img src="img/right-arrow.png"
+            <a class="navbar-brand" href="/">ZERO <span style="padding-bottom: 5;"><img src="img/right-arrow.png"
                         width="16px" alt=""></span> ONE</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -213,20 +213,23 @@
                         <a class="nav-link" href="/roadmaps">Roadmaps</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile">Profile</a>
+                        <a class="nav-link" href="/users/me">Profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Login">login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Register">Get Started</a>
-                    </li>
-                    <li class="nav-item">
-                        <form method="POST" action="/logout">
-                            <button class="btn btn-success scrollto">Logout</button>
-                        </form>
-                    </li>
-                    <li>
+                    <% if(isAuthenticated) { %>
+                        <li class="nav-item">
+                            <form method="POST" action="/auth/logout">
+                                <button class="btn btn-success scrollto">Logout</button>
+                            </form>
+                        </li>
+                        <% } else { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/auth/Login">login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/auth/Register">Get Started</a>
+                            </li>
+                            <% } %>
+                                <!-- <li>
                         <a href="#" class="nav-link " data-toggle="dropdown"><span><img src="img/down-arrow.png"
                                     alt="down-arrow"></span></a>
                         <div class="dropdown-menu">
@@ -234,14 +237,14 @@
                             <a href="#" class="dropdown-item">Link 2</a>
                             <a href="#" class="dropdown-item">Link 3</a>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- carousel -->
     <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
+    <!-- carousel -->
     <% if(!isAuthenticated) { %>
         <!-- SLIDER WITH CAPTIONS -->
         <div id="slider4" class="carousel slide d-block fullCarousel" data-ride="carousel">
