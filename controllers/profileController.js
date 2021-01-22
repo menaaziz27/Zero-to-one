@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const Post = require('../models/Post')
 
 // exports.getProfile =  (req, res, next) => {
 //   let name
@@ -24,10 +24,14 @@ exports.getUsersProfile = async (req, res, next) => {
 
   const userid = req.params.id
   try{
-    const user = await User.findOne({_id : userid})
-      // console.log(user)
+    const userDoc = await User.findOne({_id : userid})
+    console.log(userDoc)
+    const posts = await Post.find({ user: userDoc._id }) .sort({ createdAt: "desc" })
+    .populate("user");;
     res.render('profile/profile',{
-    user : user
+    user : userDoc,
+    userid: userDoc._id.toString(),
+    posts
       })
     }
     catch(e){
@@ -42,10 +46,10 @@ exports.getUpdateProfile =  (req, res, next) =>{
  }else{
     userid = null
  }
-       res.render('profile/edit-profile',
-       {
-        userid : userid
-       })
+  res.render('profile/edit-profile',
+  {
+    userid : userid
+  })
 }
 exports.postUpdateProfile = async(req, res, next) =>{
   const userid = req.body.userid

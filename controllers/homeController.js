@@ -1,4 +1,5 @@
 const axios = require('axios');
+const Post = require('../models/Post')
 
 exports.getHome = async (req, res, next) => {
     const data = await axios.get("https://dev.to/api/articles");
@@ -8,11 +9,18 @@ exports.getHome = async (req, res, next) => {
         userid = req.user._id.toString()  
     }else{
         userid =null
-    } 
-    res.render('home/home', {
-        news: news,
-        userid : userid
-    })
+    }
+    try {
+      const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user")
+      console.log(posts)
+      res.render('home/home', {
+          news: news,
+          userid : userid,
+          posts
+      })
+    } catch(e) {
+
+    }
 };
 
 

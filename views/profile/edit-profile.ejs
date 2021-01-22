@@ -456,8 +456,15 @@
                         <label for="password">Address</label>
                         <input class="form-control" type="text" id="address" placeholder="Address">
                     </div>
-
-                    <button class="btn btn-primary btn-block mx-auto" type="submit">Update</button>
+                    <div class="row">
+                        <div class="col-6">
+                            <a class="btn btn-outline-dark btn-block mx-auto"
+                                href="/users/profile/<%= userid %>">Back</a>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-success btn-block mx-auto" type="submit">Update</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
