@@ -78,6 +78,7 @@ app.use(homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes)
+// app.use('/admin', adminRoutes)
 // app.use(notFoundRoute)
 
 app.listen(3000)

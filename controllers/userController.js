@@ -1,5 +1,7 @@
 exports.getProfile = (req,res) => {
-    res.render('profile/profile')
+    res.render('profile/profile', {
+        user: req.session.user
+    })
 }
 
 

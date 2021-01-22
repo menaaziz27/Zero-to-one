@@ -2,24 +2,33 @@
 const express = require('express');
 
 // ============ My-Modules ============ 
-const postController = require('../controllers/postController');
+const {
+    getAllPosts,
+    getPost,
+    getEdit,
+    createPost,
+    updatePost,
+    deletePost
+} = require('../controllers/postController');
 
 const router = express.Router();
 
 
-router.get('/allposts', postController.getAllPosts)
+router.get('/allposts', getAllPosts)
 
 // get post by id
-router.get('/:id', postController.getPost)
+router.get('/:id', getPost)
+
+router.get('/:id/edit', getEdit)
 
 // create new post
-router.post('/create', postController.createPost)
+router.post('/create', createPost)
 
 // update post
-router.put('/:id', postController.updatePost)
+router.put('/:id', updatePost)
 
 // delete post by id 
-router.delete('/:id', postController.deletePost);
+router.delete('/:id', deletePost);
 
 
 // get a userprofile

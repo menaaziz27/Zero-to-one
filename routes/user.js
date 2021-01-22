@@ -2,13 +2,13 @@
 const express = require('express');
 
 // ============ My-Modules ============ 
-const userController = require('../controllers/userController');
+const { getProfile, getEditProfile } = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/me', userController.getProfile);
+router.get('/me', getProfile);
 
-router.get('/editProfile', userController.getEditProfile)
+router.get('/editProfile', getEditProfile)
 
 // get a userprofile
 // router.get('/:username')

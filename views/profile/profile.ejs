@@ -43,7 +43,9 @@
 						<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img
 								src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R"
 								name="aboutme" width="140" height="140" class="rounded-circle"></a>
-						<h3>Joe Sixpack</h3>
+						<h3>
+							<%= user.email %>
+						</h3>
 						<a href="/users/editProfile" class="btn btn-primary">edit profile</a>
 					</center>
 				</div>
@@ -61,7 +63,7 @@
 			</div>
 			<!-- POSTS SECTION -->
 			<div class="col-md-9 align-self-start border border-info rounded mt-3 py-2">
-				<h1 style="text-align: center;">Posts</h1>
+				<!-- <h1 style="text-align: center;">Posts</h1> -->
 				<section class="card">
 					<div class="card-header">
 						<ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">

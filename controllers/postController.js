@@ -2,6 +2,10 @@ exports.getPost = (req,res) => {
 
 }
 
+exports.getEdit = (req,res) => {
+
+}
+
 exports.createPost = (req,res) => {
     
 }
@@ -15,5 +19,5 @@ exports.deletePost = (req,res) => {
 }
 
 exports.getAllPosts = (req,res) => {
-    
+
 }
