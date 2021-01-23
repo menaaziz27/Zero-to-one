@@ -646,7 +646,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="container py-4">
                 <div class="copyright">
                     &copy; Copyright <strong><span>Zero2One</span></strong>. All Rights Reserved
@@ -752,7 +751,7 @@
                                                     </h2>
                                                 </a>
                                                 <p class="small text-secondary m-0 mt-1">
-                                                    <%= post.createdAt %>
+                                                    <%= moment(post.createdAt).format("YYYY-MM-DD HH:mm") %>
                                                 </p>
                                             </div>
 
