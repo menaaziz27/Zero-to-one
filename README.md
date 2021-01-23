@@ -1,3 +1,6 @@
-- [] TODO
-- [] TODO
-- [] TODO
+- [] edit & delete post
+- [] render images with posts
+- [] two home views for auth and for unAuth
+- [] side menu bar for navigating in home
+- [] nav bar for the rest of views
+- []
