@@ -751,7 +751,7 @@
                                                     </h2>
                                                 </a>
                                                 <p class="small text-secondary m-0 mt-1">
-                                                    <%= post.createdAt %>
+                                                    <%= moment(post.createdAt).format("YYYY-MM-DD HH:mm") %>
                                                 </p>
                                             </div>
 

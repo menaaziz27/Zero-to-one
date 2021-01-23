@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Post = require('../models/Post')
+const moment = require('moment');
 
 // exports.getProfile =  (req, res, next) => {
 //   let name
@@ -33,7 +34,8 @@ exports.getUsersProfile = async (req, res, next) => {
     res.render('profile/profile',{
     user : userDoc,
     userid: userid,
-    posts
+    posts,
+    moment
       })
     }
     catch(e){

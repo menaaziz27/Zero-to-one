@@ -1,4 +1,6 @@
 const axios = require('axios');
+const moment = require('moment');
+
 const Post = require('../models/Post')
 
 exports.getHome = async (req, res, next) => {
@@ -16,7 +18,8 @@ exports.getHome = async (req, res, next) => {
       res.render('home/home', {
           news: news,
           userid : userid,
-          posts
+          posts,
+          moment
       })
     } catch(e) {
 
