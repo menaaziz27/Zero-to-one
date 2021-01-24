@@ -1,10 +1,12 @@
 const axios = require('axios');
+const moment = require('moment');
+
 const Post = require('../models/Post')
 
 exports.getHome = async (req, res, next) => {
     const data = await axios.get("https://dev.to/api/articles");
     const news = data.data;
-    let userid
+    let userid;
     if(req.user){
         userid = req.user._id.toString()  
     }else{
@@ -16,7 +18,8 @@ exports.getHome = async (req, res, next) => {
       res.render('home/home', {
           news: news,
           userid : userid,
-          posts
+          posts,
+          moment
       })
     } catch(e) {
 

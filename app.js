@@ -58,6 +58,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+
 // ==== middlewares which will be executed before every incoming request ====
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -93,6 +94,7 @@ app.use((req, res, next) => {
 // const csrfProtection = csrf();
 // app.use(csrfProtection)
 app.use(flash());
+
 
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedin;

@@ -155,18 +155,18 @@
 									<div class="">
 										<a class="text-decoration-none" href="#">
 											<img class=""
-												src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
+												src="/<%=post.user.Image%>"
 												width="50" height="50" alt="...">
 										</a>
 									</div>
 									<div class="flex-grow-1 pl-2">
 										<a class="text-decoration-none" href="#">
 											<h2 class="text-capitalize h5 mb-0">
-												<%= user.name %>
+												<%= post.user.name %>
 											</h2>
 										</a>
 										<p class="small text-secondary m-0 mt-1">
-											<%= post.createdAt %>
+											<%= moment(post.createdAt).format("YYYY-MM-DD HH:mm") %>
 										</p>
 									</div>
 

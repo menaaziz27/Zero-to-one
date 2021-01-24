@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Post = require('../models/Post')
+const moment = require('moment');
 
 // exports.getProfile =  (req, res, next) => {
 //   let name
@@ -20,17 +21,20 @@ const Post = require('../models/Post')
 //       Image:Image
 //       })
 // }
+
+
 exports.getUsersProfile = async (req, res, next) => {
   const userid = req.params.id
   try{
     const userDoc = await User.findOne({_id : userid})
-    console.log(userDoc)
-    const posts = await Post.find({ user: userDoc._id }) .sort({ createdAt: "desc" })
-    .populate("user");;
+    const posts = await Post.find({ user: userid }).sort({ createdAt: "desc" })
+    .populate("user");
+    console.log(posts[0])
     res.render('profile/profile',{
     user : userDoc,
-    userid: userDoc._id.toString(),
-    posts
+    userid: userid,
+    posts,
+    moment
       })
     }
     catch(e){
