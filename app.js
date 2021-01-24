@@ -78,11 +78,15 @@ app.use(
 
 app.use((req, res, next) => {
     if (!req.session.user) {
-        return next();
+      return next();
     }
-  User.findById(req.session.user._id)
+    User.findById(req.session.user._id)
     .then((user) => {
-        req.user = user;
+      req.user = user;
+      let currentUser = req.user || null;
+      let userid = req.user._id || null;
+      res.locals.currentUser = currentUser;
+      res.locals.userid = userid
         next();
     })
     .catch((err) => {
@@ -104,8 +108,6 @@ app.use(flash());
 
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedin;
-    res.locals.currentUser = req.user;
-    res.locals.userid = req.user._id
     next();
 });
 
