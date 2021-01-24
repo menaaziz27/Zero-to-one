@@ -739,16 +739,18 @@
                                         <div class="row m-0">
                                             <div class="">
                                                 <a class="text-decoration-none" href="#">
-                                                    <img class=""
+                                                    <img class="rounded-circle"
                                                         src="/<%=post.user.Image%>"
                                                         width="50" height="50" alt="...">
                                                 </a>
                                             </div>
                                             <div class="flex-grow-1 pl-2">
                                                 <a class="text-decoration-none" href="#">
-                                                    <h2 class="text-capitalize h5 mb-0">
-                                                        <%= post.user.name %>
-                                                    </h2>
+                                                   <a href="users/profile/<%=post.user._id%>"">
+                                                       <h2 class="text-capitalize h5 mb-0">
+                                                            <%= post.user.name %>
+                                                        </h2>
+                                                   </a> 
                                                 </a>
                                                 <p class="small text-secondary m-0 mt-1">
                                                     <%= moment(post.createdAt).fromNow() %>

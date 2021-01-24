@@ -7,5 +7,5 @@
 - [] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)
 - [] side menu bar for navigating in home
 - [] nav bar for the rest of views
-- [] render images with posts
+- [X] render images with posts
 - []
