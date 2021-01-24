@@ -3,6 +3,8 @@
 - [] post details
 - [] edit & delete post ajax
 - [] show edit and delete posts for the user if he owns it
+- [] show skills and user data (Bio, age, date of birth, address, websites, native languages, preferrable languages)
+- [] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)
 - [] side menu bar for navigating in home
 - [] nav bar for the rest of views
 - [] render images with posts

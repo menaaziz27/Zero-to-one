@@ -6,6 +6,7 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const cors = require('cors');
 
 // ============ Core-Modules ============
 const path = require('path');
@@ -92,10 +93,19 @@ app.use((req, res, next) => {
 // const csrfProtection = csrf();
 // app.use(csrfProtection)
 app.use(flash());
+// app.use('*', cors())
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//   next();
+// });
 
 
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedin;
+    res.locals.currentUser = req.user;
+    res.locals.userid = req.user._id
     next();
 });
 
