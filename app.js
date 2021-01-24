@@ -85,7 +85,8 @@ app.use((req, res, next) => {
     .then((user) => {
       req.user = user;
       let currentUser = req.user || null;
-      let userid = req.user._id || null;
+      let userid = req.user._id.toString() || null;
+      console.log(userid)
       res.locals.currentUser = currentUser;
       res.locals.userid = userid
         next();

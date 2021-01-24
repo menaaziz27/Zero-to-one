@@ -58,7 +58,7 @@ exports.postRegister = async (req, res, next) => {
 
     user.save();
 
-    res.redirect('/Login');
+    res.redirect('/auth/Login');
     //! this code is not gonna be reached
     transporter.sendMail({
       to: email,
