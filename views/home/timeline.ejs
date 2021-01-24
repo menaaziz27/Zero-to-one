@@ -214,7 +214,7 @@
                     </li>
                     <% if(isAuthenticated) { %>
                         <li class="nav-item">
-                            <a class="nav-link" href="/users/profile/<%= userid %>">Profile</a>
+                            <a class="nav-link" href="/users/profile/<%=userid%>">Profile</a>
                         </li>
                         <li class="nav-item">
                             <form method="POST" action="/auth/logout">
@@ -710,20 +710,23 @@
                                 </ul>
                             </div>
                             <div class="card-body">
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                        aria-labelledby="posts-tab">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="message">post</label>
-                                            <textarea style="resize: none;" class="form-control" id="message" rows="3"
-                                                placeholder="What are you thinking..."></textarea>
+                                <form action="/posts/create" method="POST">
+                                    <div class="card-body">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                                aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;" class="form-control" name="post" id="post"
+                                                        rows="3" placeholder="What are you thinking..."></textarea>
+                                                </div>
+                                            </div>
                                         </div>
-
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-primary">share</button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-primary">share</button>
-                                </div>
+                                </form>
                             </div>
                         </section>
                         <!--- Post Form Ends -->
@@ -746,7 +749,7 @@
                                             </div>
                                             <div class="flex-grow-1 pl-2">
                                                 <a class="text-decoration-none" href="#">
-                                                   <a href="users/profile/<%=post.user._id%>"">
+                                                   <a href="users/profile/<%=post.user._id%>">
                                                        <h2 class="text-capitalize h5 mb-0">
                                                             <%= post.user.name %>
                                                         </h2>
@@ -756,7 +759,7 @@
                                                     <%= moment(post.createdAt).fromNow() %>
                                                 </p>
                                             </div>
-
+                                            <% if(userid == post.user._id ) { %>
                                             <div class="dropdown">
                                                 <a class="" href="#" role="button" id="dropdownMenuLink"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -768,6 +771,7 @@
                                                     <a class="dropdown-item text-primary" href="#">Delete</a>
                                                 </div>
                                             </div>
+                                            <% }%>
                                         </div>
                                         <!-- post body -->
                                         <div class="">

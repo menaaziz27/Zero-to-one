@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>User profile</title>
+    <title><%=user.name%>|Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" media="all" href="/css/v.css" id="main-crayons-stylesheet" />
     <link rel="stylesheet" media="all" href="/css/zz.css" id="main-minimal-stylesheet" />
@@ -520,16 +520,16 @@
                     <header class="profile-header crayons-card mt-2">
                         <div class="relative profile-header__top">
                             <span class="crayons-avatar crayons-avatar--3xl">
-                                <img src="/<%= currentUser.Image %>" width="128" height="128"
-                                    alt="<%= currentUser.name %> profile picture" class="crayons-avatar__image">
+                                <img src="/<%= user.Image %>" width="128" height="128"
+                                    alt="<%= user.name %> profile picture" class="crayons-avatar__image">
                             </span>
                         </div>
                         <div class="profile-header__details">
                             <h1 class="crayons-title fw-heavy mb-2">
-                                <%=currentUser.name%>
+                                <%=user.name%>
                             </h1>
                             <p class="fs-base m:fs-l color-base-90 mb-4 mx-auto max-w-100 m:max-w-75">
-                                <%= currentUser.bio %>
+                                <%= user.bio %>
                             </p>
                             <div class="profile-header__meta">
                                 <span class="profile-header__meta__item">
@@ -580,9 +580,12 @@
                                         </svg>
                                     </a>
                                 </span>
+                                <% if(userid == user._id ) { %>
+
                                 <span>
                                     <a href="/users/updateProfile" class="btn btn-success">Edit Profile</a>
                                 </span>
+                                <% } %>
                             </div>
                         </div>
                         <div class="profile-header__bottom fs-base">
@@ -740,15 +743,15 @@
                                                 <div class="crayons-story__author-pic">
 
                                                     <a href="aemiej.html" class="crayons-avatar  crayons-avatar--l  ">
-                                                        <img src="/<%= currentUser.Image %>" alt="aemiej profile"
+                                                        <img src="/<%= post.user.Image %>" alt="aemiej profile"
                                                             class="crayons-avatar__image" />
                                                     </a>
                                                 </div>
                                                 <div>
                                                     <p>
-                                                        <a href="aemiej.html"
+                                                        <a href="users/profile/<%=post.user._id%>"
                                                             class="crayons-story__secondary fw-medium">
-                                                            <%=currentUser.name%>
+                                                            <%=post.user.name%>
                                                         </a>
                                                     </p>
                                                     <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
@@ -819,6 +822,7 @@
                                                     <small class="crayons-story__tertiary fs-xs mr-2">
                                                         2 min read
                                                     </small>
+                                                    <% if(userid == post.user._id ) { %>
                                                     <a type="button" href="/posts/<%= post._id %>/edit"
                                                         id="article-save-button-421966"
                                                         class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
@@ -826,6 +830,7 @@
                                                         title="Save to reading list">
                                                         <span class="bm-initial">edit</span>
                                                     </a>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                         </div>
