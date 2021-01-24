@@ -1,6 +1,6 @@
 - [x] two home views for auth and for unAuth
 - [x] auth middleware and protecting routes
-- [] post details
+- [x] post details
 - [] edit & delete post ajax
 - [] show edit and delete posts for the user if he owns it
 - [] show skills and user data (Bio, age, date of birth, address, websites, native languages, preferrable languages)
