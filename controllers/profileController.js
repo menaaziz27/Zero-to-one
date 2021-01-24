@@ -30,7 +30,7 @@ exports.getUsersProfile = async (req, res, next) => {
     const posts = await Post.find({ user: userid }).sort({ createdAt: "desc" })
     .populate("user");
     console.log(posts[0])
-    res.render('profile/profile',{
+    res.render('profile/user-profile',{
     user : userDoc,
     userid: userid,
     posts,
