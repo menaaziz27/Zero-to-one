@@ -204,7 +204,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/timeline">Timeline</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/news">News</a>
@@ -751,7 +751,7 @@
                                                     </h2>
                                                 </a>
                                                 <p class="small text-secondary m-0 mt-1">
-                                                    <%= moment(post.createdAt).format("YYYY-MM-DD HH:mm") %>
+                                                    <%= moment(post.createdAt).fromNow() %>
                                                 </p>
                                             </div>
 

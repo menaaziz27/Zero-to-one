@@ -4,10 +4,10 @@ const express = require('express');
 // ============ My-Modules ============ 
 const {
     getAllPosts,
-    getPost,
     getEdit,
+    getPostDetail,
     createPost,
-    updatePost,
+    postEdit,
     deletePost
 } = require('../controllers/postController');
 
@@ -16,19 +16,22 @@ const router = express.Router();
 
 router.get('/allposts', getAllPosts)
 
-// get post by id
-router.get('/:id', getPost)
+// get post detail
+router.get('/:id', getPostDetail)
 
+// get post by id
 router.get('/:id/edit', getEdit)
+
+// update post
+router.post('/:id/edit', postEdit)
+
+// delete post by id 
+router.post('/:id/delete', deletePost);
+
 
 // create new post
 router.post('/create', createPost)
 
-// update post
-router.put('/:id', updatePost)
-
-// delete post by id 
-router.delete('/:id', deletePost);
 
 
 // get a userprofile
