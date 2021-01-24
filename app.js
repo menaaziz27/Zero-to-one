@@ -6,7 +6,7 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const cors = require('cors');
+
 
 // ============ Core-Modules ============
 const path = require('path');
@@ -16,7 +16,7 @@ require('./utils/db');
 const User = require('./models/User');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
 
 const app = express();
 
@@ -77,6 +77,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
+  
     if (!req.session.user) {
       return next();
     }

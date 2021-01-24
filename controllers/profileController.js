@@ -24,7 +24,6 @@ const moment = require('moment');
 
 
 exports.getUsersProfile = async (req, res, next) => {
-
   const userid = req.params.id
   try{
     const userDoc = await User.findOne({_id : userid})
