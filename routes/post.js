@@ -19,16 +19,17 @@ router.get('/allposts', getAllPosts)
 // get post by id
 router.get('/:id', getPost)
 
-router.get('/:id/edit', getEdit)
-
-// create new post
-router.post('/create', createPost)
-
 // update post
-router.put('/:id', updatePost)
 
 // delete post by id 
 router.delete('/:id', deletePost);
+
+router.get('/:id/edit', getEdit)
+
+router.post('/:id/edit', updatePost)
+// create new post
+router.post('/create', createPost)
+
 
 
 // get a userprofile

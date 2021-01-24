@@ -1,6 +1,9 @@
-- [] edit & delete post
-- [] render images with posts
-- [] two home views for auth and for unAuth
+- [x] two home views for auth and for unAuth
+- [x] auth middleware and protecting routes
+- [] post details
+- [] edit & delete post ajax
+- [] show edit and delete posts for the user if he owns it
 - [] side menu bar for navigating in home
 - [] nav bar for the rest of views
+- [] render images with posts
 - []

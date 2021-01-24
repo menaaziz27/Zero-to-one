@@ -110,7 +110,7 @@ exports.postlogin = async (req, res, next) => {
         if(err) {
           console.log(err);
         }
-        res.redirect('/');
+        res.redirect('/timeline');
       });
     }
     res.status(422).render('auth/Login', {

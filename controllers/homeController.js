@@ -3,7 +3,17 @@ const moment = require('moment');
 
 const Post = require('../models/Post')
 
-exports.getHome = async (req, res, next) => {
+exports.getHome = (req, res, next) => {
+    let userid;
+    if(req.user){
+        userid = req.user._id.toString()  
+    }else{
+        userid =null
+    }
+    res.render('home/index', { userid })
+};
+
+exports.getTimeline = async (req, res, next) => {
     const data = await axios.get("https://dev.to/api/articles");
     const news = data.data;
     let userid;
@@ -15,7 +25,7 @@ exports.getHome = async (req, res, next) => {
     try {
       const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user")
       console.log(posts)
-      res.render('home/home', {
+      res.render('home/timeline', {
           news: news,
           userid : userid,
           posts,
