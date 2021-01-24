@@ -47,7 +47,7 @@ exports.postRegister = async (req, res, next) => {
   try {
     let user = await User.findOne({ email: email });
     if (user) {
-      res.redirect('/Register');
+      res.redirect('/auth/Register');
     }
 
     const hashedpass = await bcrypt.hash(password, 12);
@@ -110,7 +110,7 @@ exports.postlogin = async (req, res, next) => {
         if(err) {
           console.log(err);
         }
-        res.redirect('/');
+        res.redirect('/timeline');
       });
     }
     res.status(422).render('auth/Login', {
