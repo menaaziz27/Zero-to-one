@@ -10,7 +10,7 @@ exports.getEdit = async (req,res) => {
 
   try {
     const post = await Post.findById(postId)
-    console.log(post)
+    // console.log(post)
     res.render('post/post-edit', {
       post,
       userid
@@ -43,7 +43,7 @@ exports.getPostDetail = async (req, res) => {
 
   try {
     const post = await Post.findById(postId).populate('user');
-    console.log(post)
+    // console.log(post)
     res.render('post/post-detail', {
       post
     })
@@ -68,7 +68,7 @@ exports.deletePost = async (req, res) => {
 // Create
 exports.createPost = async (req,res) => {
     const { post } = req.body;
-    console.log(post);
+    // console.log(post);
     try {
       const newPost = new Post({
         user: req.session.user,

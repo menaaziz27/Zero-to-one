@@ -26,12 +26,12 @@ const moment = require('moment');
 exports.getUsersProfile = async (req, res, next) => {
   
   const userId = req.params.id
-  console.log(userId)
+  // console.log(userId)
   try{
     const userDoc = await User.findOne({_id : userId})
     const posts = await Post.find({ user: userId }).sort({ createdAt: "desc" })
     .populate("user");
-    console.log(posts[0])
+    // console.log(posts[0])
     res.render('profile/user-profile',{
     user : userDoc,
     userId: userId,

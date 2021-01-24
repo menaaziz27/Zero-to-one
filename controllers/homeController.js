@@ -24,7 +24,7 @@ exports.getTimeline = async (req, res, next) => {
     }
     try {
       const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user")
-      console.log(posts)
+    //   console.log(posts)
       res.render('home/timeline', {
           news: news,
           userid : userid,
@@ -44,7 +44,7 @@ exports.getRoadmaps = (req, res, next) => {
 
 exports.getNews = async (req,res) => {
     const data = await axios.get("https://dev.to/api/articles");
-    console.log(data.data[0]);
+    // console.log(data.data[0]);
     const news = data.data;
     res.render('news', {
         title: 'News',
