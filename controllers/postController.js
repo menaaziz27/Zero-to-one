@@ -75,6 +75,8 @@ exports.createPost = async (req,res) => {
         description: post
       })
       await newPost.save()
+      //! =====================
+      //TODO redirect to timeline if he in timeline route
       res.redirect('/users/profile/' + req.session.user._id.toString())
     }catch(e) {
 
