@@ -29,11 +29,11 @@
                     <!-- TEXT FIELD GROUPS -->
                     <div class="form-group">
                         <label for="name">Username</label>
-                        <input class="form-control" type="text" name="name" id="name" placeholder="Enter name">
+                        <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" value="<%=currentUser.name%>">
                     </div>
                     <div class="form-group">
                         <label for="password">Bio</label>
-                        <input class="form-control" type="text" id="address" placeholder="Bio" name="bio">
+                        <input class="form-control" type="text" id="address" placeholder="Bio" name="bio" value="<%=currentUser.bio%>">
                     </div>
                     <input type="hidden" name="userid" value="<%= userid%>">
 
@@ -43,7 +43,8 @@
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label>
-                        <select class="form-control" id="country" name="country" id="country">
+                        <select class="form-control" id="country" name="country" id="country" value="<%=currentUser.country%>">
+                            <option value="<%=currentUser.country%>"><%=currentUser.country%></option>
                             <option value="Afganistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -298,7 +299,8 @@
                     </div> -->
                     <div class="form-group">
                         <label for="year">Date f birth</label>
-                        <select class="form-control" name="date_of_birth" tabindex="9" id="year">
+                        <select class="form-control" name="date_of_birth" tabindex="9" id="year" value="<%=currentUser.yearOfBirth%>">
+                            <option value="<%=currentUser.yearOfBirth%>"><%=currentUser.yearOfBirth%></option>
                             <option value="1920">1920</option>
                             <option value="1921">1921</option>
                             <option value="1922">1922</option>
@@ -411,11 +413,11 @@
                         <div class="col-4">
                             <div class="form-check">
                                 <div class="d-block">
-                                    <input name="skill1" class="form-check-input" type="checkbox"
+                                    <input name="skills" class="form-check-input" type="checkbox"
                                         id="flexSwitchCheckDefault" value="Bioinformatics">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Bioinformatics</label>
                                 </div>
-                                <input name="skill2" class="form-check-input" type="checkbox"
+                                <input name="skills" class="form-check-input" type="checkbox"
                                     id="flexSwitchCheckDefault" value="Cyper Security">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Cyper Security</label>
                             </div>
@@ -423,22 +425,21 @@
                         <div class="col-4">
                             <div class="form-check">
                                 <div class="d-block">
-                                    <input name="skill1" class="form-check-input" type="checkbox"
+                                    <input name="skills" class="form-check-input" type="checkbox"
                                         id="flexSwitchCheckDefault" value="Web development">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Web development</label>
                                 </div>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="Mobile application">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Mobile application</label>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-check">
                                 <div class="d-block">
-                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">Machine
-                                        learning</label>
+                                    <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="Machine learning">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Machine learning</label>
                                 </div>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="IT engineer">
                                 <label class="form-check-label" for="flexSwitchCheckDefault">IT engineer</label>
                             </div>
                         </div>
@@ -454,7 +455,7 @@
                     <br>
                     <div class="form-group">
                         <label for="password">Native language</label>
-                        <input class="form-control" type="text" id="Native language" placeholder="Native language">
+                        <input name="nativeLang" class="form-control" type="text" id="Native language" placeholder="Native language">
                     </div>
                     <div class="row">
                         <div class="col-6">
