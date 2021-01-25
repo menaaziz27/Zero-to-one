@@ -1,7 +1,76 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+
 <body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-sm d-block navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">ZERO <span style="padding-bottom: 5;"><img src="/img/right-arrow.png"
+                        width="16px" alt=""></span> ONE</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/timeline">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/news">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/roadmaps">Roadmaps</a>
+                    </li>
+                    <% if(isAuthenticated && userid !==null) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/profile/<%= userid %>">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="/auth/logout">
+                                <button class="btn btn-success scrollto">Logout</button>
+                            </form>
+                        </li>
+                        <% } else { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/auth/Login">login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/auth/Register">Get Started</a>
+                            </li>
+                            <% } %>
+                                <!-- <li>
+								  <a href="#" class="nav-link " data-toggle="dropdown"><span><img src="img/down-arrow.png"
+											  alt="down-arrow"></span></a>
+								  <div class="dropdown-menu">
+									  <a href="#" class="dropdown-item">Link 1</a>
+									  <a href="#" class="dropdown-item">Link 2</a>
+									  <a href="#" class="dropdown-item">Link 3</a>
+								  </div>
+							  </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- End of NAVBAR -->
 
     <br>
     <% if (news) { %>
@@ -20,6 +89,19 @@
             <hr>
             <% }) %>
                 <% } %>
+
+
+
+                    <!-- bootstrap scripts -->
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                        crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                        crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+                        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+                        crossorigin="anonymous"></script>
 </body>
 
 </html>

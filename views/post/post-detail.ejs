@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>delegates</title>
+    <title>Post Details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
@@ -76,25 +76,34 @@
                     <label class="small text-secondary m-0 mt-1" for="name">
                         By <%= post.user.name %>
                     </label>
-                    <div class="form-group">
-                        <textarea style="resize: none;" class="form-control" name="description" id="post"
-                            rows="3"><%= post.description %></textarea>
-                        <input type="hidden" name="userid" value="<%= userid %>">
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <a class="btn btn-outline-dark btn-block mx-auto"
-                                href="/users/profile/<%= userid %>">Back</a>
+                    <% if(userid==post.user._id ) { %>
+                        <div class="form-group">
+                            <textarea style="resize: none;" class="form-control" name="description" id="post"
+                                rows="3"><%= post.description %></textarea>
+                            <input type="hidden" name="userid" value="<%= userid %>">
                         </div>
-                        <form action="/posts/<%= post._id %>/delete" method="POST">
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-danger btn-block mx-auto"
-                                    type="submit">Delete</button>
-                            </div>
-                        </form>
-                        <div class="col-4">
-                            <button class="btn btn-success btn-block mx-auto" type="submit">Update</button>
-                        </div>
+                        <% } else { %>
+                            <p>
+                                <%= post.description %>
+                            </p>
+                            <% } %>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a class="btn btn-outline-dark btn-block mx-auto"
+                                            href="/users/profile/<%= userid %>">Back</a>
+                                    </div>
+                                    <% if(userid==post.user._id ) { %>
+
+                                        <div class="col-4">
+                                            <button class="btn btn-success btn-block mx-auto"
+                                                type="submit">Update</button>
+                                        </div>
+                                        <% } %>
+                                </div>
+                </form>
+                <form action="/posts/<%= post._id %>/delete" method="POST">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-danger btn-block mx-auto" type="submit">Delete</button>
                     </div>
                 </form>
             </div>

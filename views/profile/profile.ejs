@@ -43,7 +43,7 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="/">Home</a>
+						<a class="nav-link" href="/timeline">Timeline</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/news">News</a>
@@ -51,7 +51,7 @@
 					<li class="nav-item">
 						<a class="nav-link" href="/roadmaps">Roadmaps</a>
 					</li>
-					<% if(isAuthenticated) { %>
+					<% if(isAuthenticated && userid !==null) { %>
 						<li class="nav-item">
 							<a class="nav-link" href="/users/profile/<%= userid %>">Profile</a>
 						</li>
@@ -69,14 +69,14 @@
 							</li>
 							<% } %>
 								<!-- <li>
-                        <a href="#" class="nav-link " data-toggle="dropdown"><span><img src="img/down-arrow.png"
-                                    alt="down-arrow"></span></a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Link 1</a>
-                            <a href="#" class="dropdown-item">Link 2</a>
-                            <a href="#" class="dropdown-item">Link 3</a>
-                        </div>
-                    </li> -->
+								  <a href="#" class="nav-link " data-toggle="dropdown"><span><img src="img/down-arrow.png"
+											  alt="down-arrow"></span></a>
+								  <div class="dropdown-menu">
+									  <a href="#" class="dropdown-item">Link 1</a>
+									  <a href="#" class="dropdown-item">Link 2</a>
+									  <a href="#" class="dropdown-item">Link 3</a>
+								  </div>
+							  </li> -->
 				</ul>
 			</div>
 		</div>
@@ -155,9 +155,8 @@
 								<div class="row m-0">
 									<div class="">
 										<a class="text-decoration-none" href="#">
-											<img class="rounded-circle"
-												src="/<%=post.user.Image%>"
-												width="50" height="50" alt="...">
+											<img class="rounded-circle" src="/<%=post.user.Image%>" width="50"
+												height="50" alt="...">
 										</a>
 									</div>
 									<div class="flex-grow-1 pl-2">
