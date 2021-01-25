@@ -44,7 +44,9 @@
                     <div class="form-group">
                         <label for="country">Country</label>
                         <select class="form-control" id="country" name="country" id="country" value="<%=currentUser.country%>">
+                            <% if( currentUser.country ) { %>
                             <option value="<%=currentUser.country%>"><%=currentUser.country%></option>
+                            <% } %>
                             <option value="Afganistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -300,7 +302,9 @@
                     <div class="form-group">
                         <label for="year">Date f birth</label>
                         <select class="form-control" name="date_of_birth" tabindex="9" id="year" value="<%=currentUser.yearOfBirth%>">
+                            <% if( currentUser.yearOfBirth ) { %>
                             <option value="<%=currentUser.yearOfBirth%>"><%=currentUser.yearOfBirth%></option>
+                            <% } %>
                             <option value="1920">1920</option>
                             <option value="1921">1921</option>
                             <option value="1922">1922</option>
@@ -455,7 +459,7 @@
                     <br>
                     <div class="form-group">
                         <label for="password">Native language</label>
-                        <input name="nativeLang" class="form-control" type="text" id="Native language" placeholder="Native language">
+                        <input name="nativeLang" class="form-control" type="text" id="Native language" placeholder="Native language" value="<%=currentUser.nativeLang%>">
                     </div>
                     <div class="row">
                         <div class="col-6">
