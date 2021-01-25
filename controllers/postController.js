@@ -100,13 +100,14 @@ exports.createPost = async (req,res) => {
         hashtags: findHashtags(post)
       })
       await newPost.save()
-      // console.log(req.query.timeline,'99')
+      console.log(req.query.timeline,'99')
 
       if (req.query.timeline) {
         res.redirect('/timeline');
+      }else{
+        res.redirect('/users/profile/' + req.session.user._id.toString())
       }
 
-      res.redirect('/users/profile/' + req.session.user._id.toString())
     }catch(e) {
 
     }
