@@ -7,9 +7,12 @@
 - [x] render images with posts
 - [x] if the user posted in timeline redirect him to timeline
 - [x] edited post detail view to not show update option for all users
+- [x] add readingTime for post model and in postCreate
 - [x] hashtags and readingTime for posts
+- [x] edited hashtags and readingTime for postEdit controller too
+- [x] fix post detail if the current user is the owner let it textArea if not make it simple <p> tag
+- [x] delete operation for posts
 - [] redirect fix after editing form whether the user was in profile or timeline
-- [] add readingTime for post model and in postCreate
 - [] add see more button to the post description
 - [] edit & delete post ajax
 - [] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)

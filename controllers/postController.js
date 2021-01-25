@@ -31,7 +31,9 @@ exports.postEdit = async (req,res) => {
   try {
     const editPost = await Post.findByIdAndUpdate(postId, {
       user: userid,
-      description: description
+      description: description,
+      readingTime: Math.floor(description.split(" ").length / 100) === 0 ? 1 : Math.floor(description.split(" ").length / 100),
+      hashtags: findHashtags(description)
     });
     res.redirect('/users/profile/' + userid)
   } catch(e) {
@@ -62,7 +64,7 @@ exports.deletePost = async (req, res) => {
   try {
     const deletedPost = await Post.findByIdAndDelete(postId);
     console.log(deletedPost)
-    res.redirect('/users/profile' + req.user._id)
+    res.redirect('/users/profile/' + req.user._id)
   } catch(e) {
     console.log(e)
   }
@@ -87,16 +89,11 @@ exports.createPost = async (req,res) => {
         hashtags: findHashtags(post)
       })
       await newPost.save()
-      // new 
 
-      // console.log(post);
       if (req.query.timeline) {
         res.redirect('/timeline');
       }
 
-
-      //! =====================
-      //TODO redirect to timeline if he in timeline route
       res.redirect('/users/profile/' + req.session.user._id.toString())
     }catch(e) {
 
@@ -104,10 +101,6 @@ exports.createPost = async (req,res) => {
 }
 
 exports.updatePost = (req,res) => {
-    
-}
-
-exports.deletePost = (req,res) => {
     
 }
 
