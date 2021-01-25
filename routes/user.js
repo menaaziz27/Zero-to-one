@@ -2,27 +2,24 @@
 const express = require('express');
 
 // ============ My-Modules ============ 
-const { getProfile, getEditProfile } = require('../controllers/userController');
-const profileController = require('../controllers/profileController');
+
+const {
+  getUpdateProfile,
+  postUpdateProfile,
+  getUsersProfile
+} = require('../controllers/profileController');
 
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 
 const router = express.Router();
 
-router.get('/me', getProfile);
+router.get('/updateProfile', isAuthenticated, getUpdateProfile);
 
-router.get('/editProfile', isAuthenticated, getEditProfile)
-
-router.get('/updateProfile', isAuthenticated, profileController.getUpdateProfile);
-
-router.post('/profile', isAuthenticated, profileController.postUpdateProfile);
+router.post('/profile', isAuthenticated, postUpdateProfile);
 
 
-router.get('/profile/:id', isAuthenticated, profileController.getUsersProfile);
-
-// get a userprofile
-// router.get('/:username')
+router.get('/profile/:id', isAuthenticated, getUsersProfile);
 
 
 module.exports = router;
