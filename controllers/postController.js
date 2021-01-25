@@ -75,7 +75,11 @@ exports.deletePost = async (req, res) => {
   try {
     const deletedPost = await Post.findByIdAndDelete(postId);
     console.log(deletedPost)
-    res.redirect('/users/profile/' + req.user._id)
+    if (req.query.timeline) {
+      res.redirect('/timeline');
+    }else{
+      res.redirect('/users/profile/' + req.session.user._id.toString())
+    }
   } catch(e) {
     console.log(e)
   }
