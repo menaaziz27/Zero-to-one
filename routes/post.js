@@ -3,7 +3,6 @@ const express = require('express');
 
 // ============ My-Modules ============ 
 const {
-    getAllPosts,
     getEdit,
     getPostDetail,
     createPost,
@@ -12,9 +11,6 @@ const {
 } = require('../controllers/postController');
 
 const router = express.Router();
-
-
-router.get('/allposts', getAllPosts)
 
 // get post detail
 router.get('/:id', getPostDetail)
@@ -31,11 +27,6 @@ router.post('/:id/delete', deletePost);
 
 // create new post
 router.post('/create', createPost)
-
-
-
-// get a userprofile
-// router.get('/:username')
 
 
 module.exports = router;

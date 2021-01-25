@@ -26,12 +26,12 @@ const moment = require('moment');
 exports.getUsersProfile = async (req, res, next) => {
   
   const userId = req.params.id
-  // console.log(userId)
+
   try{
     const userDoc = await User.findOne({_id : userId})
     const posts = await Post.find({ user: userId }).sort({ createdAt: "desc" })
     .populate("user");
-    // console.log(posts[0])
+
     res.render('profile/user-profile',{
     user : userDoc,
     userId: userId,
@@ -45,6 +45,7 @@ exports.getUsersProfile = async (req, res, next) => {
 }
  
 exports.getUpdateProfile =  (req, res, next) =>{
+
   let userid
   if(req.user){
     userid = req.user._id
@@ -57,6 +58,7 @@ exports.getUpdateProfile =  (req, res, next) =>{
   })
 }
 exports.postUpdateProfile = async(req, res, next) =>{
+
   const userid = req.body.userid
   const name = req.body.name
   const bio = req.body.bio
@@ -66,15 +68,10 @@ exports.postUpdateProfile = async(req, res, next) =>{
   const skills = req.body.skills
   const nativeLang = req.body.nativeLang
 
-  // console.log(country)
-  // console.log(YOB)
-  // console.log(gender)
-  // console.log(skill1)
-  // console.log(skill2)
   let image;
   let Image;
   image = req.file
-  // console.log(image, '65')
+
   if(image !== undefined){
        Image= image.path
   }
