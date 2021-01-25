@@ -39,7 +39,7 @@ exports.postEdit = async (req,res) => {
       hashtags: findHashtags(description)
     });
     // await editPost.save()
-    console.log(req.query.timeline,'39')
+    // console.log(req.query.timeline,'39')
     if (req.query.timeline) {
       res.redirect('/timeline');
     }else{
@@ -52,13 +52,15 @@ exports.postEdit = async (req,res) => {
 
 // /posts/:id
 exports.getPostDetail = async (req, res) => {
+  let timeline = req.query.timeline || false
   const postId = req.params.id;
 
   try {
     const post = await Post.findById(postId).populate('user');
     // console.log(post)
     res.render('post/post-detail', {
-      post
+      post,
+      timeline
     })
   }catch(e) {
 
@@ -82,7 +84,7 @@ exports.deletePost = async (req, res) => {
 // localhost:3000/posts/create?timeline=true
 exports.createPost = async (req,res) => {
     const { post } = req.body;
-    console.log(post);
+    // console.log(post);
     // TODO find hashtags in post description
     // TODO update the post instance while creating
     // TODO pass the hashtags array to the view
@@ -98,7 +100,7 @@ exports.createPost = async (req,res) => {
         hashtags: findHashtags(post)
       })
       await newPost.save()
-      console.log(req.query.timeline,'99')
+      // console.log(req.query.timeline,'99')
 
       if (req.query.timeline) {
         res.redirect('/timeline');
