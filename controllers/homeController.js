@@ -26,7 +26,7 @@ exports.getTimeline = async (req, res, next) => {
     }
     try {
       const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user")
-      console.log(posts)
+    //   console.log(posts)
       res.render('home/timeline', {
           news: news,
           userid : userid,

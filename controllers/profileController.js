@@ -73,7 +73,7 @@ exports.postUpdateProfile = async(req, res, next) =>{
   let image;
   let Image;
   image = req.file
-  console.log(image, '65')
+  // console.log(image, '65')
   if(image !== undefined){
        Image= image.path
   }
