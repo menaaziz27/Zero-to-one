@@ -712,7 +712,7 @@
                                 </ul>
                             </div>
                             <div class="card-body">
-                                <form action="/posts/create?timeline=true" method="POST">
+                                <form action="/posts/create" method="POST">
                                     <div class="card-body">
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="posts" role="tabpanel"
@@ -762,7 +762,7 @@
                                                             <%=post.user.name%>
                                                         </a>
                                                     </p>
-                                                    <a href="/posts/<%=post._id %>"
+                                                    <a href="/posts/<%=post._id %>?timeline=true"
                                                         class="crayons-story__tertiary fs-xs"><time
                                                             datetime="2020-08-08T06:46:08Z">
                                                             <%= moment(post.createdAt).fromNow() %>
@@ -827,7 +827,7 @@
                                                         <%= post.readingTime %> min read
                                                     </small>
                                                     <% if(userid==post.user._id ) { %>
-                                                        <a type="button" href="/posts/<%= post._id %>/edit"
+                                                        <a type="button" href="/posts/<%= post._id %>/edit?timeline=true"
                                                             id="article-save-button-421966"
                                                             class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
                                                             data-reactable-id="421966" aria-label="Save to reading list"

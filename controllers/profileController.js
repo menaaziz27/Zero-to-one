@@ -63,13 +63,14 @@ exports.postUpdateProfile = async(req, res, next) =>{
   const country = req.body.country
   const YOB = req.body.date_of_birth
   const gender = req.body.gender
-  const skill1 = req.body.skill1
-  const skill2 = req.body.skill2
+  const skills = req.body.skills
+  const nativeLang = req.body.nativeLang
+
   // console.log(country)
   // console.log(YOB)
   // console.log(gender)
-  console.log(skill1)
-  console.log(skill2)
+  // console.log(skill1)
+  // console.log(skill2)
   let image;
   let Image;
   image = req.file
@@ -81,7 +82,16 @@ exports.postUpdateProfile = async(req, res, next) =>{
   const user = await User.findOne({_id : userid})
      user.name = name
      user.bio = bio
-     console.log(image)
+     user.country = country
+     user.yearOfBirth = YOB
+     user.gender = gender
+     if(skills !== undefined){
+     user.skills = skills
+     }
+     user.nativeLang = nativeLang
+     user.bio = bio
+
+    //  console.log(image)
      if(image !== undefined){
        user.Image = Image
      }
