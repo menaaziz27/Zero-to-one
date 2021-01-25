@@ -16,11 +16,16 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  Image: String,
   name: String,
   bio: String,
-  resetToken: String,
+  Image: String,
+  yearOfBirth : String,
+  gender : String,
+  skills :[],
+  country:String,
+  nativeLang:String,
 
+  resetToken: String,
   resetTokenExpiration: Date,
 });
 
