@@ -71,7 +71,7 @@
             <div class="col col-md-6  py-4">
                 <h3 style="text-align: center;">Post Details</h3>
                 <!-- FORM -->
-                <form action="/posts/<%= post._id %>/edit" method="POST">
+                <form action="<% if(timeline){%>/posts/<%= post._id %>/edit?timeline=true<%} else  {%> /posts/<%= post._id %>/edit<%}%>" method="POST">
                     <!-- TEXT FIELD GROUPS -->
                     <label class="small text-secondary m-0 mt-1" for="name">
                         By <%= post.user.name %>
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                 </form>
-                                <form action="/posts/<%= post._id %>/delete" method="POST">
+                                <form action="<% if(timeline){%>/posts/<%= post._id %>/delete?timeline=true<%}else {%> /posts/<%= post._id %>/delete <%}%>" method="POST">
                                     <div class="col-4">
                                         <button type="submit" class="btn btn-danger btn-block mx-auto" type="submit">Delete</button>
                                     </div>
