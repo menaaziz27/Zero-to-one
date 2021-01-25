@@ -13,6 +13,8 @@ const postSchema = new Schema({
         required: [true, "Please enter the description"],
         trim: true,
       },
+      readingTime: Number,
+      hashtags: [String],
       createdAt: {
         type: Date,
         default: Date.now,

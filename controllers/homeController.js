@@ -17,14 +17,16 @@ exports.getTimeline = async (req, res, next) => {
     const data = await axios.get("https://dev.to/api/articles");
     const news = data.data;
     let userid;
+    console.log(userid)
     if(req.user){
         userid = req.user._id.toString()  
+        console.log(userid)
     }else{
         userid =null
     }
     try {
       const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user")
-      console.log(posts)
+    //   console.log(posts)
       res.render('home/timeline', {
           news: news,
           userid : userid,
@@ -32,7 +34,7 @@ exports.getTimeline = async (req, res, next) => {
           moment
       })
     } catch(e) {
-
+        console.log(e)
     }
 };
 
@@ -44,7 +46,7 @@ exports.getRoadmaps = (req, res, next) => {
 
 exports.getNews = async (req,res) => {
     const data = await axios.get("https://dev.to/api/articles");
-    console.log(data.data[0]);
+    // console.log(data.data[0]);
     const news = data.data;
     res.render('news', {
         title: 'News',
