@@ -14,7 +14,7 @@
 - [x] delete operation for posts
 - [x] hide post form for all users except the owner
 - [x] user edit form country and birth of year not working
-- [] redirect fix after editing form whether the user was in profile or timeline
+- [x] redirect fix after editing form whether the user was in profile or timeline
 - [] add see more button to the post description
 - [] edit & delete post ajax
 - [] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)

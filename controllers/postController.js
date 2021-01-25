@@ -5,17 +5,20 @@ const findHashtags = require('find-hashtags');
 // /posts/:id/details
 exports.getEdit = async (req,res) => {
 
+  // if there's timeline query in the request let timeline = true else False
+  let timeline = req.query.timeline || false
   const postId = req.params.id;
   // if there's user in the request let userid = the user
   // if there's no user let userid = null
   let userid = req.user._id || null;
-
+  // console.log(req.query.timeline,'12')
   try {
     const post = await Post.findById(postId)
     // console.log(post)
     res.render('post/post-edit', {
       post,
-      userid
+      userid,
+      timeline
     })
   } catch(e) {
 
@@ -24,7 +27,7 @@ exports.getEdit = async (req,res) => {
 
 // /posts/:id/edit
 exports.postEdit = async (req,res) => {
-
+ 
   const postId = req.params.id;
   const { userid, description } = req.body
 
@@ -35,7 +38,13 @@ exports.postEdit = async (req,res) => {
       readingTime: Math.floor(description.split(" ").length / 100) === 0 ? 1 : Math.floor(description.split(" ").length / 100),
       hashtags: findHashtags(description)
     });
-    res.redirect('/users/profile/' + userid)
+    // await editPost.save()
+    console.log(req.query.timeline,'39')
+    if (req.query.timeline) {
+      res.redirect('/timeline');
+    }else{
+      res.redirect('/users/profile/' + req.session.user._id.toString())
+    }
   } catch(e) {
     console.log(e)
   }
@@ -89,6 +98,7 @@ exports.createPost = async (req,res) => {
         hashtags: findHashtags(post)
       })
       await newPost.save()
+      console.log(req.query.timeline,'99')
 
       if (req.query.timeline) {
         res.redirect('/timeline');
