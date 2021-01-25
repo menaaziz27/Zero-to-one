@@ -86,15 +86,17 @@
                             <a class="btn btn-outline-dark btn-block mx-auto"
                                 href="/users/profile/<%= userid %>">Back</a>
                         </div>
-                        <form action="/posts/<%= post._id %>/delete" method="POST">
+                        <% if(userid==post.user._id ) { %>
+                            <form action="/posts/<%= post._id %>/delete" method="POST">
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-danger btn-block mx-auto"
+                                        type="submit">Delete</button>
+                                </div>
+                            </form>
                             <div class="col-4">
-                                <button type="submit" class="btn btn-danger btn-block mx-auto"
-                                    type="submit">Delete</button>
+                                <button class="btn btn-success btn-block mx-auto" type="submit">Update</button>
                             </div>
-                        </form>
-                        <div class="col-4">
-                            <button class="btn btn-success btn-block mx-auto" type="submit">Update</button>
-                        </div>
+                            <% } %>
                     </div>
                 </form>
             </div>

@@ -1,5 +1,7 @@
 const Post = require('../models/Post');
 
+const findHashtags = require('find-hashtags');
+
 // /posts/:id/details
 exports.getEdit = async (req,res) => {
 
@@ -66,15 +68,33 @@ exports.deletePost = async (req, res) => {
   }
 }
 // Create
+// localhost:3000/posts/create?timeline=true
 exports.createPost = async (req,res) => {
     const { post } = req.body;
-    // console.log(post);
+    console.log(post);
+    // TODO find hashtags in post description
+    // TODO update the post instance while creating
+    // TODO pass the hashtags array to the view
+    // TODO for loop through all hashtags for each post
+    // extract
+    console.log(Math.floor(post.split(" ").length / 100))
+    console.log(findHashtags(post))
     try {
       const newPost = new Post({
         user: req.session.user,
-        description: post
+        description: post,
+        readingTime: Math.floor(post.split(" ").length / 100) === 0 ? 1 : Math.floor(post.split(" ").length / 100),
+        hashtags: findHashtags(post)
       })
       await newPost.save()
+      // new 
+
+      // console.log(post);
+      if (req.query.timeline) {
+        res.redirect('/timeline');
+      }
+
+
       //! =====================
       //TODO redirect to timeline if he in timeline route
       res.redirect('/users/profile/' + req.session.user._id.toString())

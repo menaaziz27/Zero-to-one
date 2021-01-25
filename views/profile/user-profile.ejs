@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        <%=user.name %>| Profile
+        <%= user.name %> | Profile
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" media="all" href="/css/v.css" id="main-crayons-stylesheet" />
@@ -589,7 +589,7 @@
                                 <% if(userid==user._id ) { %>
 
                                     <span>
-                                        <a href="/users/updateProfile" class="btn btn-success">Edit Profile</a>
+                                        <a href="/users/updateProfile" class="btn btn-outline-info">Edit Profile</a>
                                     </span>
                                     <% } %>
                             </div>
@@ -662,9 +662,9 @@
                             </header>
                             <div class="crayons-card__body">
                                 <% user.skills.forEach(function(skill){ %>
-                                    <p>
+                                    <span class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button m-1">
                                         <%= skill %>
-                                    </p>
+                                    </span>
                                     <% }) %>
                             </div>
                         </div>
@@ -733,6 +733,42 @@
                 <main class="crayons-layout__content articles-list" id="articles-list">
                     <div class="substories" id="substories">
 
+                        <!-- ================ beginning of post form -->
+                        <section class="card mb-2">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="posts-tab" data-toggle="tab" href="" role="tab"
+                                            aria-controls="posts" aria-selected="true">Make
+                                            a Post</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <form action="/posts/create" method="POST">
+                                    <div class="card-body">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                                aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;" class="form-control" name="post"
+                                                        id="post" rows="3"
+                                                        placeholder="What are you thinking..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="submit" class="btn btn-outline-success">share</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+
+                        <!-- ============= end of post form =============== -->
+
+
 
                         <% if (posts !==undefined || posts !==null) { %>
                             <% posts.forEach(function(post) { %>
@@ -763,7 +799,7 @@
                                                             <%=post.user.name%>
                                                         </a>
                                                     </p>
-                                                    <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                    <a href="/posts/<%=post._id %>"
                                                         class="crayons-story__tertiary fs-xs"><time
                                                             datetime="2020-08-08T06:46:08Z">
                                                             <%= moment(post.createdAt).fromNow() %>
@@ -775,21 +811,23 @@
 
                                         <div class="crayons-story__indention">
                                             <h2 class="crayons-story__title">
-                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                                    data-preload-image="https://res.cloudinary.com/practicaldev/image/fetch/s--dbg-epq---/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/0eemgine7b7brvqdx1m3.jpg"
-                                                    id="article-link-421966">
+                                                <p>
                                                     <%= post.description %>
-                                                </a>
+                                                </p>
                                             </h2>
                                             <div class="crayons-story__tags">
-                                                <a href="t/github.html" class="crayons-tag"><span
-                                                        class="crayons-tag__prefix">#</span>github</a>
-                                                <a href="t/productivity.html" class="crayons-tag"><span
+                                                <% post.hashtags.forEach(function (tag) { %>
+                                                    <a href="" class="crayons-tag"><span
+                                                            class="crayons-tag__prefix">#</span>
+                                                        <%= tag %>
+                                                    </a>
+                                                    <% }) %>
+                                                        <!-- <a href="t/productivity.html" class="crayons-tag"><span
                                                         class="crayons-tag__prefix">#</span>productivity</a>
                                                 <a href="t/webdev.html" class="crayons-tag"><span
                                                         class="crayons-tag__prefix">#</span>webdev</a>
                                                 <a href="t/codenewbie.html" class="crayons-tag"><span
-                                                        class="crayons-tag__prefix">#</span>codenewbie</a>
+                                                        class="crayons-tag__prefix">#</span>codenewbie</a> -->
                                             </div>
                                             <div class="crayons-story__bottom">
                                                 <div class="crayons-story__details">
@@ -829,7 +867,7 @@
                                                 </div>
                                                 <div class="crayons-story__save">
                                                     <small class="crayons-story__tertiary fs-xs mr-2">
-                                                        2 min read
+                                                        <%= post.readingTime %> min read
                                                     </small>
                                                     <% if(userid==post.user._id ) { %>
                                                         <a type="button" href="/posts/<%= post._id %>/edit"
@@ -1319,7 +1357,6 @@
         </div>
         <div class="crayons-modal__overlay"></div>
     </div>
-
 
 
     <!-- bootstrap scripts -->
