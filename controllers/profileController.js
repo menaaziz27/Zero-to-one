@@ -52,9 +52,31 @@ exports.getUpdateProfile =  (req, res, next) =>{
  }else{
     userid = null
  }
+
+ let websites = req.user.websites;
+
+ let websitesObj = {};
+// convert the array of websites to object of all websites
+  for (const link of websites) {
+
+    if (link.includes("github")) {
+      websitesObj["github"] = link;
+    } else if (link.includes("instagram")) {
+      websitesObj["instagram"] = link;
+    } else if (link.includes("twitter")) {
+      websitesObj["twitter"] = link;
+    } else if  (link.includes("stackoverflow")) {
+      websitesObj["stackoverflow"] = link;
+    } else if (link.includes("linkedin")) {
+      websitesObj["linkedin"] = link;
+    }
+
+  }
+  console.log(websitesObj)
   res.render('profile/edit-profile',
   {
-    userid : userid
+    userid : userid,
+    websitesObj
   })
 }
 exports.postUpdateProfile = async(req, res, next) =>{
