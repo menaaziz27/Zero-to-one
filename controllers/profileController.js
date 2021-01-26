@@ -120,10 +120,12 @@ exports.postUpdateProfile = async(req, res, next) =>{
      }
 
      let websites = [github, linkedin, stackoverflow, twitter, instagram];
+
      if (github === '' || linkedin === '' || stackoverflow === '' || twitter === '' || instagram === '') {
        // pop them from the websites array
        websites = websites.filter(link => link !== '');
      }
+     
      console.log(websites, '127')
      user.websites = websites;
      user.save()
