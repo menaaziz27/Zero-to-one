@@ -18,8 +18,9 @@
 - [x] redirect fix after Back button URL form whether the user was in profile or timeline
 - [x] delete extra profile view
 - [x] nativeLang in edit form and links (websites)
+- [x] render the specified icons for websites
 - [] option to delete websites
-- [] render the specified icons for websites
+- [] option to delete a skill added by mistake
 - [] add see more button to the post description
 - [] edit & delete post ajax
 - [] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)
