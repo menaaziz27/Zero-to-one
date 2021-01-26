@@ -22,6 +22,7 @@ const userSchema = new Schema({
   yearOfBirth : String,
   gender : String,
   skills :[],
+  websites:[String],
   country:String,
   nativeLang:String,
 

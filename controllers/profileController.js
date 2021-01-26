@@ -31,7 +31,7 @@ exports.getUsersProfile = async (req, res, next) => {
     const userDoc = await User.findOne({_id : userId})
     const posts = await Post.find({ user: userId }).sort({ createdAt: "desc" })
     .populate("user");
-
+    console.log(userDoc.websites.github)
     res.render('profile/user-profile',{
     user : userDoc,
     userId: userId,
@@ -52,13 +52,35 @@ exports.getUpdateProfile =  (req, res, next) =>{
  }else{
     userid = null
  }
+
+ let websites = req.user.websites;
+
+ let websitesObj = {};
+// convert the array of websites to object of all websites
+  for (const link of websites) {
+
+    if (link.includes("github")) {
+      websitesObj["github"] = link;
+    } else if (link.includes("instagram")) {
+      websitesObj["instagram"] = link;
+    } else if (link.includes("twitter")) {
+      websitesObj["twitter"] = link;
+    } else if  (link.includes("stackoverflow")) {
+      websitesObj["stackoverflow"] = link;
+    } else if (link.includes("linkedin")) {
+      websitesObj["linkedin"] = link;
+    }
+
+  }
+  console.log(websitesObj)
   res.render('profile/edit-profile',
   {
-    userid : userid
+    userid : userid,
+    websitesObj
   })
 }
 exports.postUpdateProfile = async(req, res, next) =>{
-
+  console.log(req.body)
   const userid = req.body.userid
   const name = req.body.name
   const bio = req.body.bio
@@ -67,6 +89,11 @@ exports.postUpdateProfile = async(req, res, next) =>{
   const gender = req.body.gender
   const skills = req.body.skills
   const nativeLang = req.body.nativeLang
+  const github = req.body.github;
+  const linkedin = req.body.linkedin;
+  const instagram = req.body.instagram;
+  const twitter = req.body.twitter;
+  const stackoverflow = req.body.stackoverflow;
 
   let image;
   let Image;
@@ -86,16 +113,23 @@ exports.postUpdateProfile = async(req, res, next) =>{
      user.skills = skills
      }
      user.nativeLang = nativeLang
-     user.bio = bio
 
     //  console.log(image)
      if(image !== undefined){
        user.Image = Image
      }
+
+     let websites = [github, linkedin, stackoverflow, twitter, instagram];
+     if (github === '' || linkedin === '' || stackoverflow === '' || twitter === '' || instagram === '') {
+       // pop them from the websites array
+       websites = websites.filter(link => link !== '');
+     }
+     console.log(websites)
+     user.websites = websites;
      user.save()
-     res.redirect('/users/profile/'+userid)
+     res.redirect('/users/profile/' + userid)
   }
-  catch(e){
+  catch(e) {
     console.log(e)
   }
 }

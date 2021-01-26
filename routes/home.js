@@ -13,7 +13,6 @@ const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 const router = express.Router();
 
-//! adjust home route for auth and other for unAuth
 router.get('/', getHome);
 
 router.get('/timeline', isAuthenticated, getTimeline);
