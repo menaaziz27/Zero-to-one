@@ -41,7 +41,7 @@
                         </li> -->
                     <li class="nav-item">
                         <form method="POST" action="/auth/logout">
-                            <button class="btn btn-success scrollto">Logout</button>
+                            <button class="btn btn-outline-danger scrollto">Logout</button>
                         </form>
                     </li>
                     <!-- <% } else { %> -->
@@ -71,7 +71,9 @@
             <div class="col col-md-6  py-4">
                 <h3 style="text-align: center;">Post Details</h3>
                 <!-- FORM -->
-                <form action="<% if(timeline){%>/posts/<%= post._id %>/edit?timeline=true<%} else  {%> /posts/<%= post._id %>/edit<%}%>" method="POST">
+                <form
+                    action="<% if(timeline){%>/posts/<%= post._id %>/edit?timeline=true<%} else  {%> /posts/<%= post._id %>/edit<%}%>"
+                    method="POST">
                     <!-- TEXT FIELD GROUPS -->
                     <label class="small text-secondary m-0 mt-1" for="name">
                         By <%= post.user.name %>
@@ -92,20 +94,22 @@
                                         <a class="btn btn-outline-dark btn-block mx-auto"
                                             href="<% if(timeline) { %>/timeline <%} else {%>/users/profile/<%= userid %> <%}%>">Back</a>
                                     </div>
-                                    <% if(userid == post.user._id ) { %>
+                                    <% if(userid==post.user._id ) { %>
 
                                         <div class="col-4">
                                             <button class="btn btn-success btn-block mx-auto"
                                                 type="submit">Update</button>
                                         </div>
-                                    </div>
-                                </form>
-                                <form action="<% if(timeline){%>/posts/<%= post._id %>/delete?timeline=true<%}else {%> /posts/<%= post._id %>/delete <%}%>" method="POST">
-                                    <div class="col-4">
-                                        <button type="submit" class="btn btn-danger btn-block mx-auto" type="submit">Delete</button>
-                                    </div>
-                                </form>
-                                <% } %>
+                                </div>
+                </form>
+                <form
+                    action="<% if(timeline){%>/posts/<%= post._id %>/delete?timeline=true<%}else {%> /posts/<%= post._id %>/delete <%}%>"
+                    method="POST">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-danger btn-block mx-auto" type="submit">Delete</button>
+                    </div>
+                </form>
+                <% } %>
             </div>
         </div>
     </div>

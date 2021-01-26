@@ -47,7 +47,7 @@
                         </li>
                         <li class="nav-item">
                             <form method="POST" action="/auth/logout">
-                                <button class="btn btn-success scrollto">Logout</button>
+                                <button class="btn btn-outline-danger scrollto">Logout</button>
                             </form>
                         </li>
                         <% } else { %>
@@ -79,7 +79,9 @@
             <div class="col-md-6 offset-md-3  border border-primary rounded py-4">
                 <h3 style="text-align: center;">update post</h3>
                 <!-- FORM -->
-                <form action="<% if(timeline){ %>/posts/<%= post._id%>/edit?timeline=true <%}%>/posts/<%= post._id %>/edit" method="POST">
+                <form
+                    action="<% if(timeline){ %>/posts/<%= post._id%>/edit?timeline=true <%}%>/posts/<%= post._id %>/edit"
+                    method="POST">
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="posts" role="tabpanel"
@@ -92,7 +94,8 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <a href="<% if(timeline) { %>/timeline <%} else {%>/users/profile/<%= userid %> <%}%>" class="btn btn-outline-dark">Back</a>
+                            <a href="<% if(timeline) { %>/timeline <%} else {%>/users/profile/<%= userid %> <%}%>"
+                                class="btn btn-outline-dark">Back</a>
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </div>
                     </div>
