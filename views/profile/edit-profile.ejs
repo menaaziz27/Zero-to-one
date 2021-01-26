@@ -479,28 +479,36 @@
                         <label class="crayons-field__label" for="github">
                             Github URL
                         </label>
-                        <input value="" class="form-control mb-2" placeholder="https://github.com/..."
-                            class="crayons-textfield" type="text" name="github" id="github">
-                        <label class="crayons-field__label" for="stackoverflow">
-                            StackOverflow URL
-                        </label>
-                        <input value="" class="form-control mb-2" placeholder="https://stackoverflow.com/users/..."
-                            class="crayons-textfield" type="text" name="stackoverflow" id="stackoverflow">
-                        <label class="crayons-field__label" for="linkedin">
-                            LinkedIn URL
-                        </label>
-                        <input value="" class="form-control mb-2" placeholder="https://www.linkedin.com/in/..."
-                            class="crayons-textfield" type="text" name="linkedin" id="linkedin">
-                        <label class="crayons-field__label" for="linkedin">
-                            Twitter URL
-                        </label>
-                        <input value="" class="form-control mb-2" placeholder="https://www.linkedin.com/in/..."
-                            class="crayons-textfield" type="text" name="twitter" id="twitter">
-                        <label class="crayons-field__label" for="linkedin">
-                            Instagram URL
-                        </label>
-                        <input value="" class="form-control mb-2" placeholder="https://www.linkedin.com/in/..."
-                            class="crayons-textfield" type="text" name="instagram" id="instagram">
+
+                        <% currentUser.websites.forEach(function(link) { %>
+                            <input value="<% if(link.includes('github')) { %><%= link %><% } %>"
+                                class="form-control mb-2" placeholder="https://github.com/..." class="crayons-textfield"
+                                type="text" name="github" id="github">
+                            <label class="crayons-field__label" for="stackoverflow">
+                                StackOverflow URL
+                            </label>
+                            <input value="<% if(link.includes('stackoverflow')) { %><%= link %><% } %>"
+                                class="form-control mb-2" placeholder="https://stackoverflow.com/users/..."
+                                class="crayons-textfield" type="text" name="stackoverflow" id="stackoverflow">
+                            <label class="crayons-field__label" for="linkedin">
+                                LinkedIn URL
+                            </label>
+                            <input value="<% if(link.includes('linkedin')) { %><%= link %><% } %>"
+                                class="form-control mb-2" placeholder="https://www.linkedin.com/in/..."
+                                class="crayons-textfield" type="text" name="linkedin" id="linkedin">
+                            <label class="crayons-field__label" for="linkedin">
+                                Twitter URL
+                            </label>
+                            <input value="<% if(link.includes('twitter')) { %><%= link %><% } %>"
+                                class="form-control mb-2" placeholder="https://www.linkedin.com/in/..."
+                                class="crayons-textfield" type="text" name="twitter" id="twitter">
+                            <label class="crayons-field__label" for="linkedin">
+                                Instagram URL
+                            </label>
+                            <input value="<% if(link.includes('instagram')) { %><%= link %><% } %>"
+                                class="form-control mb-2" placeholder="https://www.linkedin.com/in/..."
+                                class="crayons-textfield" type="text" name="instagram" id="instagram">
+                            <% }) %>
                     </div>
                     <div class="row">
                         <div class="col-6">
