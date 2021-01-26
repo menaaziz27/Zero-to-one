@@ -62,7 +62,7 @@
                         </li>
                         <li class="nav-item">
                             <form method="POST" action="/auth/logout">
-                                <button class="btn btn-success scrollto">Logout</button>
+                                <button class="btn btn-outline-danger scrollto">Logout</button>
                             </form>
                         </li>
                         <% } else { %>
@@ -558,7 +558,7 @@
                                     </svg>
 
                                     <time datetime="2019-08-27T04:14:12Z" class="date">
-                                        <%=user.yearOfBirth%>
+                                        Born in <%=user.yearOfBirth%>
                                     </time>
                                 </span>
 
