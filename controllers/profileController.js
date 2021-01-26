@@ -72,7 +72,7 @@ exports.getUpdateProfile =  (req, res, next) =>{
     }
 
   }
-  console.log(websitesObj)
+  console.log(websitesObj, '75')
   res.render('profile/edit-profile',
   {
     userid : userid,
@@ -124,7 +124,7 @@ exports.postUpdateProfile = async(req, res, next) =>{
        // pop them from the websites array
        websites = websites.filter(link => link !== '');
      }
-     console.log(websites)
+     console.log(websites, '127')
      user.websites = websites;
      user.save()
      res.redirect('/users/profile/' + userid)
