@@ -518,21 +518,31 @@
                 }
             </style>
             <div class="brand-bg">
+                
                 <div class="crayons-layout crayons-layout--limited-l pt-7 m:pt-9">
                     <header class="profile-header crayons-card mt-2">
                         <div class="relative profile-header__top">
                             <span class="crayons-avatar crayons-avatar--3xl">
-                                <img src="/<%= user.Image %>" width="128" height="128"
+                                <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/img/default.jpg <%}%>" width="128" height="128"
                                     alt="<%= user.name %> profile picture" class="crayons-avatar__image">
                             </span>
                         </div>
                         <div class="profile-header__details">
                             <h1 class="crayons-title fw-heavy mb-2">
+                                <% if (user.name) {%>
                                 <%=user.name%>
+                                <% } else { %>
+                                  Your Username
+                                    <%}%>
                             </h1>
                             <p class="fs-base m:fs-l color-base-90 mb-4 mx-auto max-w-100 m:max-w-75">
-                                <%= user.bio %>
-                            </p>
+                                <% if (user.bio) {%>
+                                    <%=user.bio%>
+                                    <% } else { %>
+                                      Your Bio
+                                      <br>
+                                      please complete your profile
+                                        <%}%>                            </p>
                             <div class="profile-header__meta">
                                 <span class="profile-header__meta__item">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Post = require('../models/Post')
 const moment = require('moment');
+const { validationResult } = require('express-validator');
 
 // exports.getProfile =  (req, res, next) => {
 //   let name
@@ -45,7 +46,7 @@ exports.getUsersProfile = async (req, res, next) => {
 }
  
 exports.getUpdateProfile =  (req, res, next) =>{
-
+ 
   let userid
   if(req.user){
     userid = req.user._id
@@ -72,11 +73,13 @@ exports.getUpdateProfile =  (req, res, next) =>{
     }
 
   }
+ 
   console.log(websitesObj, '75')
   res.render('profile/edit-profile',
   {
     userid : userid,
-    websitesObj
+    websitesObj,
+    errorMassage:null
   })
 }
 exports.postUpdateProfile = async(req, res, next) =>{
@@ -102,6 +105,35 @@ exports.postUpdateProfile = async(req, res, next) =>{
   if(image !== undefined){
        Image= image.path
   }
+
+//!Validaton block ===============================
+let websites = req.user.websites;
+ let websitesObj = {};
+// convert the array of websites to object of all websites
+  for (const link of websites) {
+
+    if (link.includes("github")) {
+      websitesObj["github"] = link;
+    } else if (link.includes("instagram")) {
+      websitesObj["instagram"] = link;
+    } else if (link.includes("twitter")) {
+      websitesObj["twitter"] = link;
+    } else if  (link.includes("stackoverflow")) {
+      websitesObj["stackoverflow"] = link;
+    } else if (link.includes("linkedin")) {
+      websitesObj["linkedin"] = link;
+    }
+  }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).render('profile/edit-profile', {
+      errorMassage: errors.array()[0].msg,
+      userid : userid,
+      websitesObj
+    });
+  }
+//! ============================================
+
   try{
   const user = await User.findOne({_id : userid})
      user.name = name

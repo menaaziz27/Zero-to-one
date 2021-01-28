@@ -8,6 +8,7 @@
     <!-- bootstrap css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
         integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <link href="/css/errormessages.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -80,6 +81,11 @@
             <div class="col-md-6 offset-md-3  border border-primary rounded py-4">
                 <h3 style="text-align: center;">update profile</h3>
                 <!-- FORM -->
+                <% if (errorMassage) { %>
+                    <div class="user-message  user-message--error">
+                        <%= errorMassage %>
+                    </div>
+                    <% } %>
                 <form action="/users/profile" method="POST" enctype="multipart/form-data">
                     <!-- TEXT FIELD GROUPS -->
                     <div class="form-group">
@@ -469,7 +475,12 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Gender</label>
-                        <select name="gender" class="form-control" id="exampleFormControlSelect1">
+                        <select name="gender" class="form-control" id="exampleFormControlSelect1"   value="<%=currentUser.gender%>">
+                            <% if( currentUser.gender) { %>
+                                <option value="<%=currentUser.gender%>">
+                                    <%=currentUser.gender%>
+                                </option>
+                                <% } %>
                             <option>male</option>
                             <option>female</option>
                         </select>
@@ -481,11 +492,11 @@
                             <div class="form-check">
                                 <div class="d-block">
                                     <input name="skills" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" value="Bioinformatics">
+                                        id="flexSwitchCheckDefault" value="Bioinformatics" <%if (currentUser.skills.includes("Bioinformatics")) {%> checked <%}%> >
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Bioinformatics</label>
                                 </div>
                                 <input name="skills" class="form-check-input" type="checkbox"
-                                    id="flexSwitchCheckDefault" value="Cyper Security">
+                                    id="flexSwitchCheckDefault" value="Cyper Security" <%if (currentUser.skills.includes("Cyper Security")) {%> checked <%}%>>
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Cyper Security</label>
                             </div>
                         </div>
@@ -493,11 +504,11 @@
                             <div class="form-check">
                                 <div class="d-block">
                                     <input name="skills" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" value="Web development">
+                                        id="flexSwitchCheckDefault" value="Web development" <%if (currentUser.skills.includes("Web development")) {%> checked <%}%> >
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Web development</label>
                                 </div>
                                 <input name="skills" class="form-check-input" type="checkbox"
-                                    id="flexSwitchCheckDefault" value="Mobile application">
+                                    id="flexSwitchCheckDefault" value="Mobile application" <%if (currentUser.skills.includes("Mobile application")) {%> checked <%}%>>
                                 <label class="form-check-label" for="flexSwitchCheckDefault">Mobile application</label>
                             </div>
                         </div>
@@ -505,12 +516,12 @@
                             <div class="form-check">
                                 <div class="d-block">
                                     <input name="skills" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" value="Machine learning">
+                                        id="flexSwitchCheckDefault" value="Machine learning" <%if (currentUser.skills.includes("Machine learning")) {%> checked <%}%>>
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Machine
                                         learning</label>
                                 </div>
                                 <input name="skills" class="form-check-input" type="checkbox"
-                                    id="flexSwitchCheckDefault" value="IT engineer">
+                                    id="flexSwitchCheckDefault" value="IT engineer" <%if (currentUser.skills.includes("IT engineer")) {%> checked <%}%>>
                                 <label class="form-check-label" for="flexSwitchCheckDefault">IT engineer</label>
                             </div>
                         </div>
