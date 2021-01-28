@@ -20,8 +20,11 @@
 - [x] nativeLang in edit form and links (websites)
 - [x] render the specified icons for websites
 - [X] fix error messages styles
+- [x] if user pick a skill this skill will be checked in edit profile
+- [x] add default name, bio and profile picture in profile view
+- [] add validation to edit profile form
 - [] option to delete websites
-- [] option to delete a skill added by mistake
+- [x] option to delete a skill added by mistake
 - [] add see more button to the post description
 - [] edit & delete post ajax
 - [] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)
