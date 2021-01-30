@@ -19,6 +19,8 @@
 - [x] delete extra profile view
 - [x] nativeLang in edit form and links (websites)
 - [x] render the specified icons for websites
+- [] separate each file with its CSS file 
+- [] smooth scrolling & change scrollbar color
 - [] option to delete websites
 - [] option to delete a skill added by mistake
 - [] add see more button to the post description
