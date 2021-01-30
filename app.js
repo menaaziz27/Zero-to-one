@@ -13,11 +13,11 @@ const path = require('path');
 
 // ============ My-Modules ============
 require('./utils/db');
-const User = require('./models/User');
+const { findUser } = require('./middleware/helper');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
-// const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
 
@@ -36,7 +36,7 @@ const store = new MongoDBStore({
 
 // set ejs template engines
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+// app.set('views', 'views');
 
 //set upload image settings
 const fileStorage = multer.diskStorage({
@@ -77,25 +77,8 @@ app.use(
     }),
 );
 
-app.use((req, res, next) => {
-  
-    if (!req.session.user) {
-      return next();
-    }
-    User.findById(req.session.user._id)
-    .then((user) => {
-      req.user = user;
-      let currentUser = req.user || null;
-      let userid = req.user._id.toString() || null;
-      // console.log(userid)
-      res.locals.currentUser = currentUser;
-      res.locals.userid = userid
-        next();
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-});
+// settings currentUser and userId in the locals
+app.use(findUser);
 
 // const csrfProtection = csrf();
 // app.use(csrfProtection)

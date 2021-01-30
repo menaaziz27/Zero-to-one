@@ -79,7 +79,7 @@ router.post(
         return User.findOne({ email: value }).then((userDoc) => {
           if (!userDoc) {
             return Promise.reject(
-              'E-mail does not exist, please write a corerct one.',
+              'E-mail does not exist, please write a correct one.',
             );
           }
         });

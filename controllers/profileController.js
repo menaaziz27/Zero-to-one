@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const Post = require('../models/Post')
 const moment = require('moment');
+const axios = require('axios');
 const { validationResult } = require('express-validator');
 
 // exports.getProfile =  (req, res, next) => {
@@ -27,17 +28,37 @@ const { validationResult } = require('express-validator');
 exports.getUsersProfile = async (req, res, next) => {
   
   const userId = req.params.id
+  let userRepos = [];
 
   try{
     const userDoc = await User.findOne({_id : userId})
     const posts = await Post.find({ user: userId }).sort({ createdAt: "desc" })
     .populate("user");
-    console.log(userDoc.websites.github)
+
+    // fetch first five repose from user's github account to show them in projects section
+    if(userDoc.websites[0].includes("github")) {
+      let userGithubUrl = userDoc.websites[0];
+      const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
+      // substract username after the last backslash and to the last index of the string
+      const githubUsername = userGithubUrl.substring(lastIndexOfBackSlash + 1, userGithubUrl[-1])
+      const response = await axios.get(`https://api.github.com/users/${githubUsername}/repos`)
+      const repos = response.data;
+
+      repos.forEach((repo, index) => {
+        // if userRepose less than 5 objects and the repo is not forked (created by the user himself) => push it into array
+        if (repo.fork !== true && userRepos.length < 5) {
+          userRepos.push({ repoName: repo.name, repoUrl: repo.html_url })
+        }
+      })
+    }
+    console.log(userRepos);
+
     res.render('profile/user-profile',{
     user : userDoc,
     userId: userId,
     posts,
-    moment
+    moment,
+    userRepos
       })
     }
     catch(e){
@@ -47,16 +68,11 @@ exports.getUsersProfile = async (req, res, next) => {
  
 exports.getUpdateProfile =  (req, res, next) =>{
  
-  let userid
-  if(req.user){
-    userid = req.user._id
- }else{
-    userid = null
- }
+  let userid = req.user._id || null;
 
- let websites = req.user.websites;
+  let websites = req.user.websites;
 
- let websitesObj = {};
+  let websitesObj = {};
 // convert the array of websites to object of all websites
   for (const link of websites) {
 
@@ -73,8 +89,8 @@ exports.getUpdateProfile =  (req, res, next) =>{
     }
 
   }
- 
-  console.log(websitesObj, '75')
+  // console.log(websitesObj, '75')
+
   res.render('profile/edit-profile',
   {
     userid : userid,
@@ -150,7 +166,7 @@ let websites = req.user.websites;
      if(image !== undefined){
        user.Image = Image
      }
-
+     // !if github url is provided it will always be first element in my array that's why im checking it there in my profile controller above
      let websites = [github, linkedin, stackoverflow, twitter, instagram];
 
      if (github === '' || linkedin === '' || stackoverflow === '' || twitter === '' || instagram === '') {
@@ -158,7 +174,6 @@ let websites = req.user.websites;
        websites = websites.filter(link => link !== '');
      }
      
-     console.log(websites, '127')
      user.websites = websites;
      user.save()
      res.redirect('/users/profile/' + userid)
