@@ -22,7 +22,7 @@
 - [X] fix error messages styles
 - [x] if user pick a skill this skill will be checked in edit profile
 - [x] add default name, bio and profile picture in profile view
-- [] add validation to edit profile form
+- [x] add validation to edit profile form
 - [] option to delete websites
 - [x] option to delete a skill added by mistake
 - [] add see more button to the post description
