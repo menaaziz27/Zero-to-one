@@ -34,9 +34,8 @@ exports.getUsersProfile = async (req, res, next) => {
     const userDoc = await User.findOne({_id : userId})
     const posts = await Post.find({ user: userId }).sort({ createdAt: "desc" })
     .populate("user");
-
     // fetch first five repose from user's github account to show them in projects section
-    if(userDoc.websites[0].includes("github")) {
+    if(userDoc.websites.length > 0) {
       let userGithubUrl = userDoc.websites[0];
       const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
       // substract username after the last backslash and to the last index of the string
@@ -44,6 +43,7 @@ exports.getUsersProfile = async (req, res, next) => {
       const response = await axios.get(`https://api.github.com/users/${githubUsername}/repos`)
       const repos = response.data;
 
+      //! this block can be better by returning after pushing 5 elements and not iterating through the whole object data
       repos.forEach((repo, index) => {
         // if userRepose less than 5 objects and the repo is not forked (created by the user himself) => push it into array
         if (repo.fork !== true && userRepos.length < 5) {
@@ -51,7 +51,6 @@ exports.getUsersProfile = async (req, res, next) => {
         }
       })
     }
-    console.log(userRepos);
 
     res.render('profile/user-profile',{
     user : userDoc,
