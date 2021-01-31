@@ -23,14 +23,14 @@ exports.getTimeline = async (req, res, next) => {
         userid =null
     }
     try {
-      const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user")
+    const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user")
 
-      res.render('home/timeline', {
-          news: news,
-          userid : userid,
-          posts,
-          moment
-      })
+    res.render('home/timeline', {
+        news: news,
+        userid : userid,
+        posts,
+        moment
+    })
     } catch(e) {
         console.log(e)
     }
@@ -40,7 +40,7 @@ exports.getTimeline = async (req, res, next) => {
 exports.getRoadmaps = (req, res, next) => {
     res.render('roadmaps/roadmap', {});
 };
-  
+
 
 exports.getNews = async (req,res) => {
     const data = await axios.get("https://dev.to/api/articles");
