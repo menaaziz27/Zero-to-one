@@ -4,28 +4,8 @@ const moment = require('moment');
 const axios = require('axios');
 const { validationResult } = require('express-validator');
 
-// exports.getProfile =  (req, res, next) => {
-//   let name
-//   let bio
-//   let Image
-//       if(req.user){
-//          name = req.user.name
-//          bio = req.user.bio
-//          Image = req.user.Image
-//       }else{
-//          name = null
-//          bio = null
-//          Image = null
-//       }
-//       res.render('profile/profile',{
-//       name: name,
-//       bio: bio,
-//       Image:Image
-//       })
-// }
 
-
-exports.getUsersProfile = async (req, res, next) => {
+exports.getUsersProfile = async (req, res) => {
   
   const userId = req.params.id
   let userRepos = [];
@@ -34,9 +14,8 @@ exports.getUsersProfile = async (req, res, next) => {
     const userDoc = await User.findOne({_id : userId})
     const posts = await Post.find({ user: userId }).sort({ createdAt: "desc" })
     .populate("user");
-
     // fetch first five repose from user's github account to show them in projects section
-    if(userDoc.websites.length > 0) { 
+    if(userDoc.websites.length > 0) {
       let userGithubUrl = userDoc.websites[0];
       const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
       // substract username after the last backslash and to the last index of the string
@@ -44,6 +23,7 @@ exports.getUsersProfile = async (req, res, next) => {
       const response = await axios.get(`https://api.github.com/users/${githubUsername}/repos`)
       const repos = response.data;
 
+      //! this block can be better by returning after pushing 5 elements and not iterating through the whole object data
       repos.forEach((repo, index) => {
         // if userRepose less than 5 objects and the repo is not forked (created by the user himself) => push it into array
         if (repo.fork !== true && userRepos.length < 5) {
@@ -51,7 +31,6 @@ exports.getUsersProfile = async (req, res, next) => {
         }
       })
     }
-    console.log(userRepos);
 
     res.render('profile/user-profile',{
     user : userDoc,
@@ -66,13 +45,14 @@ exports.getUsersProfile = async (req, res, next) => {
     }
 }
  
-exports.getUpdateProfile =  (req, res, next) =>{
+exports.getUpdateProfile =  (req, res) =>{
  
   let userid = req.user._id || null;
 
   let websites = req.user.websites;
 
   let websitesObj = {};
+  
 // convert the array of websites to object of all websites
   for (const link of websites) {
 
@@ -89,7 +69,6 @@ exports.getUpdateProfile =  (req, res, next) =>{
     }
 
   }
-  // console.log(websitesObj, '75')
 
   res.render('profile/edit-profile',
   {
@@ -98,13 +77,13 @@ exports.getUpdateProfile =  (req, res, next) =>{
     errorMassage:null
   })
 }
-exports.postUpdateProfile = async(req, res, next) =>{
+exports.postUpdateProfile = async(req, res) =>{
   console.log(req.body)
   const userid = req.body.userid
   const name = req.body.name
   const bio = req.body.bio
   const country = req.body.country
-  const YOB = req.body.date_of_birth
+  const BirthDate = req.body.date_of_birth
   const gender = req.body.gender
   const skills = req.body.skills
   const nativeLang = req.body.nativeLang
@@ -155,7 +134,7 @@ let websites = req.user.websites;
      user.name = name
      user.bio = bio
      user.country = country
-     user.yearOfBirth = YOB
+     user.yearOfBirth = BirthDate
      user.gender = gender
      if(skills !== undefined){
      user.skills = skills
