@@ -40,3 +40,4 @@
 - [] Likes and comments system
 - [] every skill in user profile will be a link to its roadmap in the website
 - [] navbar bug while redirecting from profile to roadmaps (getting smaller)
+- [] alert message in profile page to complete user data if it's not provided yet
