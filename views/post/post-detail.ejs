@@ -92,6 +92,12 @@
                                 <%= post.description %>
                             </p>
                             <% } %>
+                                <button onclick="return false;" type="button" onclick="actOnPost(event);"
+                                    data-post-id="<%= post._id %>">Like
+                                </button>
+                                <span id="likes-count-<%= post._id %>">
+                                    <%= post.likes %>
+                                </span>
                                 <div class="row">
                                     <div class="col-4">
                                         <a class="btn btn-outline-dark btn-block mx-auto"

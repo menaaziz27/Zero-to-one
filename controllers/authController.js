@@ -20,6 +20,12 @@ exports.getRegister = (req, res, next) => {
 	res.render("auth/Register", {
 		pageTitle: "Registeration",
 		errorMassage: null,
+		oldInput: {
+			email: '',
+			password: '',
+			confirmPassword: ''
+		},
+		validationErrors: []
 	});
 };
 
@@ -30,25 +36,29 @@ exports.postRegister = async (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
+		console.log(errors.array())
 		return res.status(422).render("auth/Register", {
 			path: "/Register",
 			pageTitle: "Register",
+			// for displaying the red messages
 			errorMassage: errors.array()[0].msg,
 			oldInput: {
 				email: email,
 				password: password,
 				confirmPassword: req.body.confirmPassword,
 			},
+			// for displaying the red border in error's fields
 			validationErrors: errors.array(),
 		});
 	}
 
 	try {
 		let user = await User.findOne({ email: email });
+		// if there's a user
 		if (user) {
-			res.redirect("/auth/Register");
+			return res.redirect("/auth/Register");
 		}
-
+		// if there's no user
 		const hashedpass = await bcrypt.hash(password, 12);
 		user = new User({
 			email: email,
@@ -75,6 +85,11 @@ exports.getLogin = (req, res, next) => {
 	res.render("auth/Login", {
 		pageTitle: "Login",
 		errorMassage: null,
+		oldInput: {
+			email: '',
+			password: ''
+		},
+		validationErrors: []
 	});
 };
 
