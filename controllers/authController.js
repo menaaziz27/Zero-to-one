@@ -175,8 +175,10 @@ exports.postlogin = async (req, res, next) => {
 		const doMatch = await bcrypt.compare(password, user.password); //true or false
 
 		if (doMatch) {
+			// if email exists and password matches
+			// save the user object without his password in the session
+			req.session.user = user.hidePrivateData();
 			req.session.isLoggedin = true;
-			req.session.user = user;
 			return req.session.save(err => {
 				if (err) {
 					console.log(err);
@@ -192,7 +194,7 @@ exports.postlogin = async (req, res, next) => {
 				email: email,
 				password: password,
 			},
-			validationErrors: [{param: 'notMatched'}],
+			validationErrors: [{ param: 'notMatched' }],
 		});
 	} catch (e) {
 		console.log(e);

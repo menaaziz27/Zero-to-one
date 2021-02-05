@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -24,4 +24,13 @@ const userSchema = new Schema({
 	resetTokenExpiration: Date,
 });
 
-module.exports = mongoose.model("User", userSchema);
+userSchema.methods.hidePrivateData = function () {
+	const user = this;
+
+	const userObject = user.toObject();
+
+	delete userObject.password;
+	return userObject;
+};
+
+module.exports = mongoose.model('User', userSchema);
