@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
         integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
 </head>
 
 <body>
@@ -75,36 +76,55 @@
 
     <!-- End of NAVBAR -->
 
-    <br>
-    <% if (news) { %>
-        <% news.forEach(function(article) { %>
-            <em>
-                <%= article.user.name %>
-            </em>
-            <a href="<%= article.url %>" target="_blank">
-                <h1>
-                    <%= article.title %>
-                </h1>
-            </a>
-            <p>
-                <%= article.description %>
-            </p>
-            <hr>
-            <% }) %>
-                <% } %>
+    <!-- search bar -->
+    <div class="container mt-5">
+        <!-- <form class="form-inline"> -->
+        <input type="text" style="width:80%" class="form-control" id="search_query"
+            placeholder="Search for people by name">
+        <input type="submit" class="btn btn-outline-info" style="width:20%" name="submit" value="Search">
+        <!-- </form> -->
+        <div id="result"></div>
+    </div>
+    </div>
+    </div>
 
+    <!-- bootstrap scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+    <!-- JQUERY -->
+    <script src="../public/js/jquery.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> -->
 
+    <script>
+        $(document).ready(() => {
+            $('#search_query').keyup(() => {
+                const query = $('#search_query').val();
 
-                    <!-- bootstrap scripts -->
-                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                        crossorigin="anonymous"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                        crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-                        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-                        crossorigin="anonymous"></script>
+                // now check if the input field has some text or not
+                if (query === '') {
+                    console.log('empty')
+                } else {
+                    $('#result').html('');
+                    $.ajax({
+                        url: '/search/users',
+                        method: 'POST',
+                        data: { query },
+                        dataType: 'text',
+                        success: (response) => {
+                            console.log(response)
+                        },
+                        error: function (err, status) { console.log(err); }
+                    })
+                }
+            })
+        })
+
+    </script>
 </body>
 
 </html>
