@@ -27,7 +27,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/timeline">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/search">Search</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/news">News</a>
@@ -35,32 +38,32 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/roadmaps">Roadmaps</a>
                     </li>
-                    <!-- <% if(isAuthenticated) { %> -->
-                    <!-- <li class="nav-item">
+                    <% if(isAuthenticated && userid !==null) { %>
+                        <li class="nav-item">
                             <a class="nav-link" href="/users/profile/<%= userid %>">Profile</a>
-                        </li> -->
-                    <li class="nav-item">
-                        <form method="POST" action="/auth/logout">
-                            <button class="btn btn-outline-danger scrollto">Logout</button>
-                        </form>
-                    </li>
-                    <!-- <% } else { %> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/Login">login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth/Register">Get Started</a>
-                    </li>
-                    <!-- <% } %> -->
-                    <!-- <li>
-                            <a href="#" class="nav-link " data-toggle="dropdown"><span><img src="img/down-arrow.png"
-                                        alt="down-arrow"></span></a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Link 1</a>
-                                <a href="#" class="dropdown-item">Link 2</a>
-                                <a href="#" class="dropdown-item">Link 3</a>
-                            </div>
-                        </li> -->
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="/auth/logout">
+                                <button class="btn btn-outline-danger scrollto">Logout</button>
+                            </form>
+                        </li>
+                        <% } else { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/auth/Login">login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/auth/Register">Get Started</a>
+                            </li>
+                            <% } %>
+                                <!-- <li>
+                                <a href="#" class="nav-link " data-toggle="dropdown"><span><img src="img/down-arrow.png"
+                                            alt="down-arrow"></span></a>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">Link 1</a>
+                                    <a href="#" class="dropdown-item">Link 2</a>
+                                    <a href="#" class="dropdown-item">Link 3</a>
+                                </div>
+                            </li> -->
                 </ul>
             </div>
         </div>
@@ -89,6 +92,12 @@
                                 <%= post.description %>
                             </p>
                             <% } %>
+                                <button onclick="return false;" type="button" onclick="actOnPost(event);"
+                                    data-post-id="<%= post._id %>">Like
+                                </button>
+                                <span id="likes-count-<%= post._id %>">
+                                    <%= post.likes %>
+                                </span>
                                 <div class="row">
                                     <div class="col-4">
                                         <a class="btn btn-outline-dark btn-block mx-auto"
