@@ -1,5 +1,5 @@
 // ============ Node-Packages ============
-const express = require("express");
+const router = require("express").Router();
 
 // ============ My-Modules ============
 const {
@@ -9,8 +9,6 @@ const {
 	postEdit,
 	deletePost,
 } = require("../controllers/postController");
-
-const router = express.Router();
 
 // get post detail
 router.get("/:id", getPostDetail);

@@ -1,8 +1,8 @@
-const User = require("../models/User");
-const Post = require("../models/Post");
-const moment = require("moment");
-const axios = require("axios");
-const { validationResult } = require("express-validator");
+const User = require('../models/User');
+const Post = require('../models/Post');
+const moment = require('moment');
+const axios = require('axios');
+const { body, validationResult } = require('express-validator');
 
 exports.getUsersProfile = async (req, res) => {
 	const userId = req.params.id;
@@ -10,14 +10,21 @@ exports.getUsersProfile = async (req, res) => {
 
 	try {
 		const userDoc = await User.findOne({ _id: userId });
-		const posts = await Post.find({ user: userId }).sort({ createdAt: "desc" }).populate("user");
+		const posts = await Post.find({ user: userId })
+			.sort({ createdAt: 'desc' })
+			.populate('user');
 		// fetch first five repose from user's github account to show them in projects section
 		if (userDoc.websites.length > 0) {
 			let userGithubUrl = userDoc.websites[0];
-			const lastIndexOfBackSlash = userGithubUrl.lastIndexOf("/");
+			const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
 			// substract username after the last backslash and to the last index of the string
-			const githubUsername = userGithubUrl.substring(lastIndexOfBackSlash + 1, userGithubUrl[-1]);
-			const response = await axios.get(`https://api.github.com/users/${githubUsername}/repos`);
+			const githubUsername = userGithubUrl.substring(
+				lastIndexOfBackSlash + 1,
+				userGithubUrl[-1]
+			);
+			const response = await axios.get(
+				`https://api.github.com/users/${githubUsername}/repos`
+			);
 			const repos = response.data;
 
 			//! this block can be better by returning after pushing 5 elements and not iterating through the whole object data
@@ -29,7 +36,7 @@ exports.getUsersProfile = async (req, res) => {
 			});
 		}
 
-		res.render("profile/user-profile", {
+		res.render('profile/user-profile', {
 			user: userDoc,
 			userId: userId,
 			posts,
@@ -50,25 +57,34 @@ exports.getUpdateProfile = (req, res) => {
 
 	// convert the array of websites to object of all websites
 	for (const link of websites) {
-		if (link.includes("github")) {
-			websitesObj["github"] = link;
-		} else if (link.includes("instagram")) {
-			websitesObj["instagram"] = link;
-		} else if (link.includes("twitter")) {
-			websitesObj["twitter"] = link;
-		} else if (link.includes("stackoverflow")) {
-			websitesObj["stackoverflow"] = link;
-		} else if (link.includes("linkedin")) {
-			websitesObj["linkedin"] = link;
+		if (link.includes('github')) {
+			websitesObj['github'] = link;
+		} else if (link.includes('instagram')) {
+			websitesObj['instagram'] = link;
+		} else if (link.includes('twitter')) {
+			websitesObj['twitter'] = link;
+		} else if (link.includes('stackoverflow')) {
+			websitesObj['stackoverflow'] = link;
+		} else if (link.includes('linkedin')) {
+			websitesObj['linkedin'] = link;
 		}
 	}
 
-	res.render("profile/edit-profile", {
+	res.render('profile/edit-profile', {
 		userid: userid,
 		websitesObj,
 		errorMassage: null,
 	});
 };
+
+exports.validateProfile = [
+	body(
+		'name',
+		'Please enter a valid name must be at least 4 chars long'
+	).isLength({ min: 4 }),
+	body('bio', ' Bio must be at least 10 chars long').isLength({ min: 10 }),
+];
+
 exports.postUpdateProfile = async (req, res) => {
 	console.log(req.body);
 	const userid = req.body.userid;
@@ -98,21 +114,21 @@ exports.postUpdateProfile = async (req, res) => {
 	let websitesObj = {};
 	// convert the array of websites to object of all websites
 	for (const link of websites) {
-		if (link.includes("github")) {
-			websitesObj["github"] = link;
-		} else if (link.includes("instagram")) {
-			websitesObj["instagram"] = link;
-		} else if (link.includes("twitter")) {
-			websitesObj["twitter"] = link;
-		} else if (link.includes("stackoverflow")) {
-			websitesObj["stackoverflow"] = link;
-		} else if (link.includes("linkedin")) {
-			websitesObj["linkedin"] = link;
+		if (link.includes('github')) {
+			websitesObj['github'] = link;
+		} else if (link.includes('instagram')) {
+			websitesObj['instagram'] = link;
+		} else if (link.includes('twitter')) {
+			websitesObj['twitter'] = link;
+		} else if (link.includes('stackoverflow')) {
+			websitesObj['stackoverflow'] = link;
+		} else if (link.includes('linkedin')) {
+			websitesObj['linkedin'] = link;
 		}
 	}
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render("profile/edit-profile", {
+		return res.status(422).render('profile/edit-profile', {
 			errorMassage: errors.array()[0].msg,
 			userid: userid,
 			websitesObj,
@@ -140,19 +156,19 @@ exports.postUpdateProfile = async (req, res) => {
 		let websites = [github, linkedin, stackoverflow, twitter, instagram];
 
 		if (
-			github === "" ||
-			linkedin === "" ||
-			stackoverflow === "" ||
-			twitter === "" ||
-			instagram === ""
+			github === '' ||
+			linkedin === '' ||
+			stackoverflow === '' ||
+			twitter === '' ||
+			instagram === ''
 		) {
 			// pop them from the websites array
-			websites = websites.filter((link) => link !== "");
+			websites = websites.filter(link => link !== '');
 		}
 
 		user.websites = websites;
 		user.save();
-		res.redirect("/users/profile/" + userid);
+		res.redirect('/users/profile/' + userid);
 	} catch (e) {
 		console.log(e);
 	}

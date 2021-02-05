@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input class="form-control <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>" 
+                                <input class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid' : '' %>" 
                                 name="password" value="<%= oldInput.password %>" type="password" id="password"
                                     placeholder="Password">
                             </div>

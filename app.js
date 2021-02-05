@@ -94,5 +94,8 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 // app.use('/admin', adminRoutes)
 // app.use(notFoundRoute)
+// app.use((error, req, res, next) => {
+// 	res.redirect("/500");
+// });
 
 app.listen(3000);
