@@ -17,7 +17,6 @@ const {
 	validateLogin,
 } = require('../controllers/authController');
 
-
 router.get('/Register', getRegister);
 router.post('/Register', validateRegister, postRegister);
 router.get('/Login', getLogin);
