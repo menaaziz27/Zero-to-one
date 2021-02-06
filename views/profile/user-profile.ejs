@@ -932,7 +932,7 @@
 
                                                             <a href="users/profile/<%=post.user._id%>"
                                                                 class="crayons-avatar  crayons-avatar--l  ">
-                                                                <img src="/<%= post.user.Image %>" alt="aemiej profile"
+                                                                <img src="<% if(user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>" alt="aemiej profile"
                                                                     class="crayons-avatar__image" />
                                                             </a>
                                                         </div>
