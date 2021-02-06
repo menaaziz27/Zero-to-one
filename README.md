@@ -28,6 +28,7 @@
 - [X] hide user password from publicity
 - [x] add default pic in user posts if it not provided
 - [x] nativeLang is provided in user model but not in edit profile form
+- [x] fix back button in user profile (if we in any user profile -not mine - if i click back it will redirect me to my profile)  
 - [] separate each file with its CSS file
 - [] smooth scrolling & change scrollbar color ans shape
 - [] add validation to edit profile form
