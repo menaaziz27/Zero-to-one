@@ -468,8 +468,7 @@
                         <header class="profile-header crayons-card mt-2">
                             <div class="relative profile-header__top">
                                 <span class="crayons-avatar crayons-avatar--3xl">
-                                    <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/img/default.jpg <%}%>"
-                                        width="128" height="128" alt="<%= user.name %> profile picture"
+                                    <img src="/assets/img/default.png" width="128" height="128" alt="profile picture"
                                         class="crayons-avatar__image">
                                 </span>
                             </div>
@@ -872,8 +871,8 @@
 
                                                                 <a href="users/profile/<%=post.user._id%>"
                                                                     class="crayons-avatar  crayons-avatar--l  ">
-                                                                    <img src="<% if(user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>"
-                                                                        alt="aemiej profile"
+                                                                    <img src="/assets/img/default.png"
+                                                                        alt=" aemiej profile"
                                                                         class="crayons-avatar__image" />
                                                                 </a>
                                                             </div>
