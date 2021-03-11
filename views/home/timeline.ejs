@@ -4,9 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>zero to one</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <!-- <link href="style.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="../../public/assets/bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+        <!-- <link rel="stylesheet" href="../../public/assets/bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+            <link rel="stylesheet" href="../../public/assets/bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+            <link rel="stylesheet" href="../../public/assets/bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+            <link rel="stylesheet" href="../../public/assets/bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+            <link rel="stylesheet" href="../../public/assets/bootstrap-4.3.1-dist/css/bootstrap-grid.css"> -->
+    <!-- <link rel="stylesheet" href="../../public/assets/bootstrap-4.3.1-dist/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="../../public/bootstrap.min.css"> -->
+
 
 
 
@@ -14,13 +22,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" media="all" href="/css/v.css" id="main-crayons-stylesheet" />
     <link rel="stylesheet" media="all" href="/css/zz.css" id="main-minimal-stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style1.css" rel="stylesheet">
+    <link href=".." rel="stylesheet">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+
+
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
         integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"> -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <title>Test2</title>
 
@@ -169,7 +182,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm d-block navbar-light bg-light">
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- <nav class="navbar navbar-expand-sm d-block navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">ZERO <span style="padding-bottom: 5;"><img src="img/right-arrow.png"
                         width="16px" alt=""></span> ONE</a>
@@ -207,216 +221,201 @@
                                 <a class="nav-link" href="/auth/Register">Get Started</a>
                             </li>
                             <% } %>
-                                <!-- <li>
-                        <a href="#" class="nav-link " data-toggle="dropdown"><span><img src="img/down-arrow.png"
-                                    alt="down-arrow"></span></a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item">Link 1</a>
-                            <a href="#" class="dropdown-item">Link 2</a>
-                            <a href="#" class="dropdown-item">Link 3</a>
-                        </div>
-                    </li> -->
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
-    <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
-    <!-- GRID SYSTEM -->
-    <div class="container-fluid my-2">
-        <div class="row">
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional
-                            content.</p>
-                        <a href="#" class="btn btn-sm btn-primary">Go somewhere</a>
+        <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
+        <!-- GRID SYSTEM -->
+        <div class="container-fluid my-2">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional
+                                content.</p>
+                            <a href="#" class="btn btn-sm btn-primary">Go somewhere</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
-            <div class="col">
+                <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                <div class="col">
 
-                <!--- Post Form Begins -->
-                <section class="card mb-2">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="" role="tab"
-                                    aria-controls="posts" aria-selected="true">Make
-                                    a Post</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <form action="/posts/create?timeline=true" method="POST">
-                            <div class="card-body">
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                        aria-labelledby="posts-tab">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="post">post</label>
-                                            <textarea style="resize: none;" class="form-control" name="post" id="post"
-                                                rows="3" placeholder="What are you thinking..."></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-outline-success">share</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-                <!--- Post Form Ends -->
-
-                <!-- begginning of rendering all posts -->
-                <% if (posts !==undefined || posts !==null) { %>
-                    <% posts.forEach(function(post) { %>
-                        <div class="crayons-story " data-content-user-id="219080">
-                            <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
-                                Github Real-Time Status to Improve Your Profile</a>
-
-
-                            <div class="crayons-story__body">
-                                <div class="crayons-story__top">
-                                    <div class="crayons-story__meta">
-                                        <div class="crayons-story__author-pic">
-
-                                            <a href="users/profile/<%= post.user._id %>"
-                                                class="crayons-avatar  crayons-avatar--l  ">
-                                                <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>" alt="aemiej profile"
-                                                    class="crayons-avatar__image" />
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                <a href="users/profile/<%=post.user._id%>"
-                                                    class="crayons-story__secondary fw-medium">
-                                                    <%=post.user.name%>
-                                                </a>
-                                            </p>
-                                            <a href="/posts/<%=post._id %>?timeline=true"
-                                                class="crayons-story__tertiary fs-xs"><time
-                                                    datetime="2020-08-08T06:46:08Z">
-                                                    <%= moment(post.createdAt).fromNow() %>
-                                                </time><span class="time-ago-indicator-initial-placeholder"
-                                                    data-seconds="1596869168"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="crayons-story__indention">
-                                    <h2 class="crayons-story__title">
-                                        <p>
-                                            <%= post.description %>
-                                        </p>
-                                    </h2>
-                                    <div class="crayons-story__tags">
-                                        <% post.hashtags.forEach(function (tag) { %>
-                                            <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                                <%= tag %>
-                                            </a>
-                                            <% }) %>
-                                    </div>
-                                    <div class="crayons-story__bottom">
-                                        <div class="crayons-story__details">
-                                            <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                                class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                                data-reaction-count data-reactable-id="421966">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
-                                                    class="crayons-icon">
-                                                    <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
-                                                    </title>
-                                                    <path
-                                                        d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                    </path>
-                                                </svg>
-
-                                                60
-                                                <span class="hidden s:inline">&nbsp;reactions</span>
-                                            </a>
-                                            <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
-                                                class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
-                                                    class="crayons-icon">
-                                                    <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
-                                                    </title>
-                                                    <path
-                                                        d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                    </path>
-                                                </svg>
-
-                                                1
-                                                <span class="hidden s:inline">&nbsp;comments</span>
-                                            </a>
-                                        </div>
-                                        <div class="crayons-story__save">
-                                            <small class="crayons-story__tertiary fs-xs mr-2">
-                                                <%= post.readingTime %> min read
-                                            </small>
-                                            <% if(userid==post.user._id ) { %>
-                                                <a type="button" href="/posts/<%= post._id %>/edit?timeline=true"
-                                                    id="article-save-button-421966"
-                                                    class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                                    data-reactable-id="421966" aria-label="Save to reading list"
-                                                    title="Save to reading list">
-                                                    <span class="bm-initial">edit</span>
-                                                </a>
-                                                <% } %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <!--- Post Form Begins -->
+                    <section class="card mb-2">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="posts-tab" data-toggle="tab" href="" role="tab"
+                                        aria-controls="posts" aria-selected="true">Make
+                                        a Post</a>
+                                </li>
+                            </ul>
                         </div>
-                        <% }) %>
-                            <% } %>
-                                <!-- Post Ends -->
-            </div>
-            <div class="col-3 d-none d-md-block">
-                <!-- aside latest news -->
-                <aside class="widget">
-                    <div class="widget blog-widget">
-                        <h2 class="widget-header">
-                            Latest News
-                        </h2>
-                        <!-- beginning of first news -->
-                        <% if (news) { %>
-                            <% news.forEach(function(article, index) { %>
-                                <% if(index < 2) { %>
-                                    <a href="<%= article.url %>" target="_blank"></a>
-                                    <div class="ct-latest media">
-                                        <div class="media-left">
-                                            <% if (article.cover_image !==null) { %>
-                                                <img alt="widget image" class="media-object"
-                                                    src="<%= article.cover_image %>"
-                                                    style="max-width: 90px; user-select: auto;">
-                                                <% } %>
-                                        </div>
-                                        <div class="media-body">
-                                            <a href="<%= article.url %>" target="_blank">
-                                                <h2 class="ct-latest-header media-heading">
-                                                    <%= article.title %>
-                                                </h2>
-
-                                                <p>
-                                                    <%= article.description %>
-                                                </p>
+                        <div class="card-body">
+                            <form action="/posts/create?timeline=true" method="POST">
+                                <div class="card-body">
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                            aria-labelledby="posts-tab">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="post">post</label>
+                                                <textarea style="resize: none;" class="form-control" name="post"
+                                                    id="post" rows="3"
+                                                    placeholder="What are you thinking..."></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                    </a>
-                                    <!-- ending of first news -->
-                                    <% } %>
-                                        <% }) %>
-                                            <% } %>
-                    </div>
-                    <!-- friends menu -->
-                    <!-- <div class="card">
+                                    <div class="text-right">
+                                        <button type="submit" class="btn btn-outline-success">share</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <!--- Post Form Ends -->
+
+                    <!-- begginning of rendering all posts -->
+                    <% if (posts !==undefined || posts !==null) { %>
+                        <% posts.forEach(function(post) { %>
+                            <div class="crayons-story " data-content-user-id="219080">
+                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                    aria-labelledby="article-link-421966"
+                                    class="crayons-story__hidden-navigation-link">Use
+                                    Github Real-Time Status to Improve Your Profile</a>
+
+
+                                <div class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <div class="crayons-story__author-pic">
+
+                                                <a href="users/profile/<%= post.user._id %>"
+                                                    class="crayons-avatar  crayons-avatar--l  ">
+                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>"
+                                                        alt="aemiej profile" class="crayons-avatar__image" />
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a href="users/profile/<%=post.user._id%>"
+                                                        class="crayons-story__secondary fw-medium">
+                                                        <%=post.user.name%>
+                                                    </a>
+                                                </p>
+                                                <a href="/posts/<%=post._id %>?timeline=true"
+                                                    class="crayons-story__tertiary fs-xs"><time
+                                                        datetime="2020-08-08T06:46:08Z">
+                                                        <%= moment(post.createdAt).fromNow() %>
+                                                    </time><span class="time-ago-indicator-initial-placeholder"
+                                                        data-seconds="1596869168"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <p>
+                                                <%= post.description %>
+                                            </p>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+                                            <% post.hashtags.forEach(function (tag) { %>
+                                                <a href="" class="crayons-tag"><span
+                                                        class="crayons-tag__prefix">#</span>
+                                                    <%= tag %>
+                                                </a>
+                                                <% }) %>
+                                        </div>
+                                        <div class="crayons-story__bottom">
+                                            <div class="crayons-story__details">
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
+                                                    data-reaction-count data-reactable-id="421966">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
+                                                        class="crayons-icon">
+                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
+                                                        </title>
+                                                        <path
+                                                            d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                                                        </path>
+                                                    </svg>
+
+                                                    60
+                                                    <span class="hidden s:inline">&nbsp;reactions</span>
+                                                </a>
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
+                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
+                                                        class="crayons-icon">
+                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
+                                                        </title>
+                                                        <path
+                                                            d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
+                                                        </path>
+                                                    </svg>
+
+                                                    1
+                                                    <span class="hidden s:inline">&nbsp;comments</span>
+                                                </a>
+                                            </div>
+                                            <div class="crayons-story__save">
+                                                <small class="crayons-story__tertiary fs-xs mr-2">
+                                                    <%= post.readingTime %> min read
+                                                </small>
+                                                <% if(userid==post.user._id ) { %>
+                                                    <a type="button" href="/posts/<%= post._id %>/edit?timeline=true"
+                                                        id="article-save-button-421966"
+                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                        data-reactable-id="421966" aria-label="Save to reading list"
+                                                        title="Save to reading list">
+                                                        <span class="bm-initial">edit</span>
+                                                    </a>
+                                                    <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% } %>
+                                    <!-- Post Ends -->
+                </div>
+                <div class="col-3 d-none d-md-block">
+                    <!-- aside latest news -->
+                    <aside class="widget">
+                        <div class="widget blog-widget">
+                            <h2 class="widget-header">
+                                Latest News
+                            </h2>
+                            <!-- beginning of first news -->
+
+                            <a href=" target=" _blank"></a>
+                            <div class="ct-latest media">
+                                <div class="media-left">
+                                    <img alt="widget image" class="media-object" src="
+                                                        style=" max-width: 90px; user-select: auto;">
+                                </div>
+                                <div class="media-body">
+                                    <a href=" target=" _blank">
+                                        <h2 class="ct-latest-header media-heading">
+
+                                        </h2>
+
+                                        <p>
+                                        </p>
+                                </div>
+                            </div>
+                            </a>
+                            <!-- ending of first news -->
+                        </div>
+                        <!-- friends menu -->
+                        <!-- <div class="card">
 					<div class="card-body p-3">
 						<h5 class="card-title m-0">Friends</h5>
 						<div class="list-group list-group-flush">
@@ -430,8 +429,8 @@
 						</div>
 					</div>
                 </div> -->
-                    <!-- users menu -->
-                    <!-- <div class="card mt-4">
+                        <!-- users menu -->
+                        <!-- <div class="card mt-4">
 					<div class="card-body p-3">
 						<h5 class="card-title m-0">Users</h5>
 						<div class="list-group list-group-flush">
@@ -445,24 +444,25 @@
 						</div>
 					</div>
 				</div> -->
+                </div>
             </div>
         </div>
-    </div>
 
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-    <!-- =================== END OF IF AUTHENTICATED ====================== -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="../../public/bootstrap/js/bootstrap.min.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script> -->
+        <!-- =================== END OF IF AUTHENTICATED ====================== -->
 
 </body>
 

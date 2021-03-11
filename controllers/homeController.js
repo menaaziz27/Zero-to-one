@@ -15,8 +15,7 @@ exports.getHome = (req, res, next) => {
 };
 
 exports.getTimeline = async (req, res, next) => {
-	const data = await axios.get("https://dev.to/api/articles");
-	const news = data.data;
+	// const news = data.data;
 	let userid;
 	if (req.user) {
 		userid = req.user._id.toString();
@@ -27,7 +26,7 @@ exports.getTimeline = async (req, res, next) => {
 		const posts = await Post.find({}).sort({ createdAt: -1 }).populate("user");
 
 		res.render("home/timeline", {
-			news: news,
+
 			userid: userid,
 			posts,
 			moment,
@@ -38,7 +37,7 @@ exports.getTimeline = async (req, res, next) => {
 };
 
 exports.getRoadmaps = (req, res, next) => {
-	res.render("roadmaps/roadmap", {});
+	res.render("roadmaps/roadmaps", {});
 };
 
 exports.getNews = async (req, res) => {
@@ -53,6 +52,14 @@ exports.getNews = async (req, res) => {
 
 exports.getSearch = (req, res) => {
 	res.render("search.ejs");
+};
+
+exports.getTopic = (req, res) => {
+	res.render("topic.ejs");
+};
+
+exports.getDiagram = (req, res) => {
+	res.render("roadmaps/diagram.ejs");
 };
 
 exports.postSearch = async (req, res) => {

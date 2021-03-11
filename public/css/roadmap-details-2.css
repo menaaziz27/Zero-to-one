@@ -1,0 +1,34 @@
+
+a {
+    text-decoration: none;
+    color: #06A763;
+}
+
+.card-content h6.head {
+    margin-top: 10px;
+    margin-bottom: 50px;
+    font-size: 24px;
+    font-weight: bold;
+
+}
+
+/* .card-content p.para{
+
+    }  */
+.timeline-block {
+    margin-bottom: 80px;
+}
+
+@media (max-width: 767px) {
+    .section-title h1 {
+        font-size: 30px !important;
+    }
+
+    .section-title p {
+        font-size: 17px !important;
+    }
+
+    .section-title {
+        height: 400px;
+    }
+}

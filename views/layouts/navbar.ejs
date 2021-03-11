@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-sm d-block   bg-darkk">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">ZERO > ONE</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="hvr-underline-from-center">
+                    <a class="nav-link" href="/timeline">Timeline</a>
+                </li>
+                <!-- <li class="hvr-underline-from-center">
+                    <a class="nav-link" href="#">News</a>
+                </li> -->
+                <li class="hvr-underline-from-center">
+                    <a class="nav-link" href="/roadmaps">Roadmaps</a>
+                </li>
+
+                <% if(isAuthenticated && userid !==null) { %>
+                    <li class="hvr-underline-from-center">
+                        <a class="nav-link" href="/users/profile/<%= userid%>">Profile</a>
+                    </li>
+                    <li class="">
+                        <form method="POST" action="/auth/logout">
+                            <button class="btn btn-outline-danger scrollto">Logout</button>
+                        </form>
+                    </li>
+                    <% } else { %>
+                        <li class="hvr-underline-from-center">
+                            <a class="nav-link" href="auth/Login">login</a>
+                        </li>
+                        <li class="hvr-underline-from-center">
+                            <a class="nav-link" href="auth/Register">Get Started</a>
+                        </li>
+                        <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
