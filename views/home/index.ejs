@@ -32,6 +32,7 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="assets/css/style1.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/scrollbar.css">
   <!-- <link href="assets/css/slider.css" rel="stylesheet"> -->
 
 </head>
@@ -54,7 +55,7 @@
           <li class="hvr-underline-from-center">
             <a class="nav-link" href="/roadmaps">Roadmaps</a>
           </li>
-         
+
           <% if(isAuthenticated && userid !==null) { %>
             <li class="hvr-underline-from-center">
               <a class="nav-link" href="/users/profile/<%= userid%>">Profile</a>
@@ -62,15 +63,15 @@
             <li class="">
               <form method="POST" action="/auth/logout">
                 <button class="btn btn-outline-danger scrollto">Logout</button>
-            </form>
+              </form>
             </li>
             <% } else { %>
               <li class="hvr-underline-from-center">
                 <a class="nav-link" href="auth/Login">login</a>
-            </li>
-            <li class="hvr-underline-from-center">
+              </li>
+              <li class="hvr-underline-from-center">
                 <a class="nav-link" href="auth/Register">Get Started</a>
-            </li>
+              </li>
               <% } %>
         </ul>
       </div>
@@ -91,8 +92,8 @@
         </div>
       </div>
       <% if(!isAuthenticated ) { %>
-      <a href="auth/Register" class="button button--animated">GET STARTED</a>
-      <% } %>
+        <a href="auth/Register" class="button button--animated">GET STARTED</a>
+        <% } %>
     </div>
   </section>
   <!-- </div> -->
@@ -135,8 +136,8 @@
               what about joining us?
             </p>
             <% if(!isAuthenticated ) { %>
-            <a href="#" class="btn-learn-more">GET STARTED</a>
-            <% } %>
+              <a href="#" class="btn-learn-more">GET STARTED</a>
+              <% } %>
           </div>
         </div>
 
@@ -352,21 +353,21 @@
     </section>
     <!-- End Contact Section -->
   </main>
-  
+
   <%- include('../layouts/footer.ejs') %>
 
-  <!-- <div id="preloader">
+    <!-- <div id="preloader">
     </div>
     <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a> -->
-  <!--<div id="preloader"></div>
+    <!--<div id="preloader"></div>
 <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>-->
-  <!-- Vendor JS Files -->
+    <!-- Vendor JS Files -->
 
 
-  <!-- Template Main JS File -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="./bootstrap/js/bootstrap.min.js"></script>
-  <!-- <script src="./assets/js/main.js"></script> -->
+    <!-- Template Main JS File -->
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script src="./assets/js/main.js"></script> -->
 
 </body>
 

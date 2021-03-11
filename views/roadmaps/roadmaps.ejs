@@ -32,14 +32,14 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link href="assets/css/style1.css" rel="stylesheet">
 
-
+    <link rel="stylesheet" href="css/scrollbar.css">
     <!-- <link href="assets/css/style1.css" rel="stylesheet"> -->
 
 </head>
 
 <body>
     <%- include('../layouts/navbar.ejs') %>
-    <!-- <nav class="navbar navbar-expand-sm d-block navbar-light bg-light">
+        <!-- <nav class="navbar navbar-expand-sm d-block navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">ZERO > ONE</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
@@ -64,194 +64,201 @@
         </div>
     </nav> -->
 
-    <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
-    <!-- carousel -->
-    <!-- SLIDER WITH CAPTIONS -->
+        <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
+        <!-- carousel -->
+        <!-- SLIDER WITH CAPTIONS -->
 
-    <!-- </div> -->
+        <!-- </div> -->
 
-    <!-- beginning of main section -->
-    <main id="main">
+        <!-- beginning of main section -->
+        <main id="main">
 
 
-        <section id="services" class="services mb-5">
-            <div class="container">
+            <section id="services" class="services mb-5">
+                <div class="container">
 
-                <div class="section-title">
-                    <h2>Road Maps</h2>
-                    <h4>We are provide a collection of road maps to give a lot of knowledge </h4>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch">
-                        <a href="./topicl">
-                            <div class="icon-box">
-                                <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                                <h4>Web Development</h4>
-                                <p>Web development is the work involved in developing a Web site for the Internet (World
-                                    Wide Web) or an intranet (a private network).</p>
-                            </div>
-                        </a>
+                    <div class="section-title">
+                        <h2>Road Maps</h2>
+                        <h4>We are provide a collection of road maps to give a lot of knowledge </h4>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-md-0">
-                        <a href="./roadmap-details.html">
-                            <div class="icon-box">
-                                <div class="icon"><i class="bx bx-file"></i></div>
-                                <h4><a href="">Bioinformatics</a></h4>
-                                <p>Bioinformatics is an interdisciplinary field that develops methods and software tools
-                                    for
-                                    understanding biological data, in particular when the data sets are large and
-                                    complex.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch">
+                            <a href="./topicl">
+                                <div class="icon-box">
+                                    <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                                    <h4>Web Development</h4>
+                                    <p>Web development is the work involved in developing a Web site for the Internet
+                                        (World
+                                        Wide Web) or an intranet (a private network).</p>
+                                </div>
+                            </a>
+                        </div>
 
-                    <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-lg-0">
-                        <a href="./roadmap-details.html">
-                            <div class="icon-box">
-                                <div class="icon"><i class="bx bx-tachometer"></i></div>
-                                <h4><a href="">Game Development</a></h4>
-                                <p>Game development is the process of developing a video game. The effort is undertaken
-                                    by a
-                                    developer, ranging from a single person to an international team dispersed across
-                                    the
-                                    globe.</p>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-md-0">
+                            <a href="./roadmap-details.html">
+                                <div class="icon-box">
+                                    <div class="icon"><i class="bx bx-file"></i></div>
+                                    <h4><a href="">Bioinformatics</a></h4>
+                                    <p>Bioinformatics is an interdisciplinary field that develops methods and software
+                                        tools
+                                        for
+                                        understanding biological data, in particular when the data sets are large and
+                                        complex.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
 
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
-                        <a href="./roadmap-details.html">
-                            <div class="icon-box">
-                                <div class="icon"><i class="bx bx-world"></i></div>
-                                <h4><a href="">Python</a></h4>
-                                <p>Python is an interpreted, high-level and general-purpose programming language. </p>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-lg-0">
+                            <a href="./roadmap-details.html">
+                                <div class="icon-box">
+                                    <div class="icon"><i class="bx bx-tachometer"></i></div>
+                                    <h4><a href="">Game Development</a></h4>
+                                    <p>Game development is the process of developing a video game. The effort is
+                                        undertaken
+                                        by a
+                                        developer, ranging from a single person to an international team dispersed
+                                        across
+                                        the
+                                        globe.</p>
+                                </div>
+                            </a>
+                        </div>
 
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
-                        <a href="./roadmap-details.html">
-                            <div class="icon-box">
-                                <div class="icon"><i class="bx bx-slideshow"></i></div>
-                                <h4><a href="">Artificial Intelligence</a></h4>
-                                <p>Artificial intelligence (AI), is intelligence demonstrated by machines, unlike the
-                                    natural intelligence displayed by humans and animals, which involves consciousness
-                                    and
-                                    emotionality</p>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
+                            <a href="./roadmap-details.html">
+                                <div class="icon-box">
+                                    <div class="icon"><i class="bx bx-world"></i></div>
+                                    <h4><a href="">Python</a></h4>
+                                    <p>Python is an interpreted, high-level and general-purpose programming language.
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
 
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
-                        <a href="./roadmap-details.html">
-                            <div class="icon-box">
-                                <div class="icon"><i class="bx bx-arch"></i></div>
-                                <h4><a href="">Javascript</a></h4>
-                                <p>JS is a programming language that conforms to the ECMAScript specification.[7]
-                                    JavaScript
-                                    is high-level, often just-in-time compiled, and multi-paradigm.</p>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
+                            <a href="./roadmap-details.html">
+                                <div class="icon-box">
+                                    <div class="icon"><i class="bx bx-slideshow"></i></div>
+                                    <h4><a href="">Artificial Intelligence</a></h4>
+                                    <p>Artificial intelligence (AI), is intelligence demonstrated by machines, unlike
+                                        the
+                                        natural intelligence displayed by humans and animals, which involves
+                                        consciousness
+                                        and
+                                        emotionality</p>
+                                </div>
+                            </a>
+                        </div>
 
-                </div>
-
-        </section>
-        <!-- End Services Section -->
-        <!-- ======= Faq Section ======= -->
-
-        <!-- End Faq Section -->
-
-        <!-- ======= Contact Section ======= -->
-
-    </main>
-    <!-- footer -->
-    <footer id="footer">
-
-        <div class="footer-newsletter" data-aos="fade-up">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <h4>Join Our Zero2One</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
+                            <a href="./roadmap-details.html">
+                                <div class="icon-box">
+                                    <div class="icon"><i class="bx bx-arch"></i></div>
+                                    <h4><a href="">Javascript</a></h4>
+                                    <p>JS is a programming language that conforms to the ECMAScript specification.[7]
+                                        JavaScript
+                                        is high-level, often just-in-time compiled, and multi-paradigm.</p>
+                                </div>
+                            </a>
+                        </div>
 
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="footer-top">
-            <div class="container-fluid">
-                <div class="row">
+            </section>
+            <!-- End Services Section -->
+            <!-- ======= Faq Section ======= -->
 
-                    <div class="col-lg-3 col-md-6 footer-contact" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Zero2One</h3>
-                        <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022<br>
-                            United States <br><br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
-                    </div>
+            <!-- End Faq Section -->
 
-                    <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="200">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
+            <!-- ======= Contact Section ======= -->
 
-                    <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="300">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div>
+        </main>
+        <!-- footer -->
+        <footer id="footer">
 
-                    <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="400">
-                        <h4>Our Social Networks</h4>
-                        <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-                        <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            <div class="footer-newsletter" data-aos="fade-up">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <h4>Join Our Zero2One</h4>
+                            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-        <div class="container py-4">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Zero2One</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact . -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/ -->
 
-                Designed by <a href="#">Zero2One</a>
-            </div>
-        </div>
-    </footer>
+            <div class="footer-top">
+                <div class="container-fluid">
+                    <div class="row">
 
-    <script src="./assets/vendor/jquery/jquery.min.js"></script>
-    <script src="./bootstrap/js/bootstrap.min.js"></script>
+                        <div class="col-lg-3 col-md-6 footer-contact" data-aos="fade-up" data-aos-delay="100">
+                            <h3>Zero2One</h3>
+                            <p>
+                                A108 Adam Street <br>
+                                New York, NY 535022<br>
+                                United States <br><br>
+                                <strong>Phone:</strong> +1 5589 55488 55<br>
+                                <strong>Email:</strong> info@example.com<br>
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="200">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="300">
+                            <h4>Our Services</h4>
+                            <ul>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                                <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="400">
+                            <h4>Our Social Networks</h4>
+                            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container py-4">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Zero2One</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact . -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/ -->
+
+                    Designed by <a href="#">Zero2One</a>
+                </div>
+            </div>
+        </footer>
+
+        <script src="./assets/vendor/jquery/jquery.min.js"></script>
+        <script src="./bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 
