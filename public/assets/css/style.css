@@ -9,11 +9,9 @@ body {
 
 a {
 	color: #009961;
-	text-transform: capitalize;
 }
 
 a:hover {
-	color: #ffffff;
 	text-decoration: none;
 }
 
@@ -584,6 +582,9 @@ section {
 	color: #050505;
 	font-size: 15px;
 }
+.about img {
+    height: 150px;
+}
 
 /*--------------------------------------------------------------
 # About Us
@@ -679,7 +680,7 @@ section {
 }
 
 .services .icon-box h4 a {
-	color: #282828;
+	color: #0e0c0c;
 	transition: ease-in-out 0.3s;
 }
 
@@ -692,10 +693,11 @@ section {
 .services .icon-box:hover {
 	transform: translateY(-10px);
 	border-color: #009961;
+    color: #009961;
 }
 
-.services .icon-box:hover h4 a {
-	color: #009961;
+.services :hover h4 a {
+	color: #030303;
 }
 
 /*--------------------------------------------------------------
@@ -991,6 +993,9 @@ section {
 	font-style: italic;
 	padding: 0;
 	margin: 0 0 40px 0;
+}
+#footer img {
+    height: 170px;
 }
 
 #footer .social-links {

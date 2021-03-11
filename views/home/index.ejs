@@ -3,79 +3,35 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>zero to one</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- <link href="style.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap.min.css">
-
-
-
-  <!-- ==================== IF IT'S NOT AUTHENTICATED ===================== -->
-  <!-- landig page scripts and links -->
-  <!-- Favicons -->
-  <!-- <link href="assets/img/favicon.png" rel="icon"> -->
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+  
+  
+  
+  <link href="assets/img/logo.jpg" rel="icon">
+  
   <!-- Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
-
+  href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+  rel="stylesheet">
+  
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+  
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/style1.css" rel="stylesheet">
-  <!-- <link href="assets/css/slider.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+  <link href="assets/css/navbar.css" rel="stylesheet">
 
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm d-block navbar-light  bg-darkk">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">ZERO > ONE</a>
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="hvr-underline-from-center">
-            <a class="nav-link" href="/timeline">Timeline</a>
-          </li>
-          <!-- <li class="hvr-underline-from-center">
-                    <a class="nav-link" href="#">News</a>
-                </li> -->
-          <li class="hvr-underline-from-center">
-            <a class="nav-link" href="/roadmaps">Roadmaps</a>
-          </li>
-         
-          <% if(isAuthenticated && userid !==null) { %>
-            <li class="hvr-underline-from-center">
-              <a class="nav-link" href="/users/profile/<%= userid%>">Profile</a>
-            </li>
-            <li class="">
-              <form method="POST" action="/auth/logout">
-                <button class="btn btn-outline-danger scrollto">Logout</button>
-            </form>
-            </li>
-            <% } else { %>
-              <li class="hvr-underline-from-center">
-                <a class="nav-link" href="auth/Login">login</a>
-            </li>
-            <li class="hvr-underline-from-center">
-                <a class="nav-link" href="auth/Register">Get Started</a>
-            </li>
-              <% } %>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <%- include('../layouts/navbar.ejs') %>
+
 
   <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
   <!-- carousel -->
@@ -159,7 +115,7 @@
             <a href="/diagram">
               <div class="icon-box">
                 <div class="icon"><i class="bx bx-window-alt"></i></div>
-                <h4>Web Development</h4>
+                <h4 class="hoover">Web Development</h4>
                 <p>Web development is the work involved in developing a Web site for the Internet (World
                   Wide Web) or an intranet (a private network).</p>
                 <br>
@@ -230,7 +186,7 @@
                   <div id="accordion-list-1" class="collapse show" data-parent=".accordion-list">
                     <p>
                       roadmaps will not be accessible unless you're logged in. if you don't have
-                      an account please go and <a style="display:inline" href="auth/Register.html">make an account and
+                      an account please go and <a style="display:inline" href="auth/Register">make an account and
                         log in with it.</a>
                     </p>
                   </div>
