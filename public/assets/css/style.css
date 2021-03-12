@@ -8,9 +8,12 @@ body {
 }
 
 a {
-	color: #009961;
+	/* color: #009961; */
 }
 
+.footer {
+	color: white;
+}
 a:hover {
 	text-decoration: none;
 }
@@ -21,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: "Raleway", sans-serif;
+	font-family: 'Raleway', sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -39,7 +42,7 @@ h6 {
 }
 
 #preloader:before {
-	content: "";
+	content: '';
 	position: fixed;
 	top: calc(50% - 30px);
 	left: calc(50% - 30px);
@@ -170,11 +173,11 @@ h6 {
 	font-size: 14px;
 	padding: 25px 3px;
 	font-weight: 600;
-	font-family: "Open Sans", sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .nav-menu > ul > li > a:before {
-	content: "";
+	content: '';
 	position: absolute;
 	width: 100%;
 	height: 2px;
@@ -303,7 +306,7 @@ h6 {
 }
 
 .mobile-nav .drop-down > a:after {
-	content: "\ea99";
+	content: '\ea99';
 	font-family: IcoFont;
 	padding-left: 10px;
 	position: absolute;
@@ -311,7 +314,7 @@ h6 {
 }
 
 .mobile-nav .active.drop-down > a:after {
-	content: "\eaa1";
+	content: '\eaa1';
 }
 
 .mobile-nav .drop-down > a {
@@ -360,13 +363,13 @@ h6 {
 #hero {
 	width: 100%;
 	height: 100vh;
-	background: url("../img/background.png") top center;
+	background: url('../img/background.png') top center;
 	background-size: cover;
 	position: relative;
 }
 
 #hero:before {
-	content: "";
+	content: '';
 	background: rgba(2, 54, 6, 0.418);
 
 	position: absolute;
@@ -466,7 +469,7 @@ h6 {
 
 .button::after {
 	background-color: rgba(255, 255, 255, 0.753);
-	content: "";
+	content: '';
 	display: inline-block;
 	height: 100%;
 	width: 100%;
@@ -567,7 +570,7 @@ section {
 }
 
 .section-title h2::after {
-	content: "";
+	content: '';
 	position: absolute;
 	display: block;
 	width: 50px;
@@ -583,7 +586,7 @@ section {
 	font-size: 15px;
 }
 .about img {
-    height: 150px;
+	height: 150px;
 }
 
 /*--------------------------------------------------------------
@@ -622,7 +625,7 @@ section {
 }
 
 .about .content .btn-learn-more {
-	font-family: "Raleway", sans-serif;
+	font-family: 'Raleway', sans-serif;
 	font-weight: 600;
 	font-size: 14px;
 	letter-spacing: 1px;
@@ -693,7 +696,7 @@ section {
 .services .icon-box:hover {
 	transform: translateY(-10px);
 	border-color: #009961;
-    color: #009961;
+	color: #009961;
 }
 
 .services :hover h4 a {
@@ -724,7 +727,7 @@ section {
 
 .faq .content p {
 	font-size: 15px;
-	color: #848484;
+	/* color: #848484; */
 }
 
 .faq .img {
@@ -757,7 +760,7 @@ section {
 .faq .accordion-list a {
 	display: block;
 	position: relative;
-	font-family: "Poppins", sans-serif;
+	font-family: 'Poppins', sans-serif;
 	font-size: 16px;
 	line-height: 24px;
 	font-weight: 500;
@@ -825,7 +828,7 @@ section {
 --------------------------------------------------------------*/
 .contact .info {
 	width: 100%;
-	background-color: #f6f5f5;
+	/* background-color: #f6f5f5; */
 }
 
 .contact .info i {
@@ -857,7 +860,7 @@ section {
 
 .contact .php-email-form {
 	width: 100%;
-	background-color: #f6f5f5;
+	/* background-color: #f6f5f5; */
 }
 
 .contact .php-email-form .form-group {
@@ -902,7 +905,7 @@ section {
 }
 
 .contact .php-email-form .loading:before {
-	content: "";
+	content: '';
 	display: inline-block;
 	border-radius: 50%;
 	width: 24px;
@@ -935,7 +938,7 @@ section {
 	padding: 10px 12px;
 }
 
-.contact .php-email-form button[type="submit"] {
+.contact .php-email-form button[type='submit'] {
 	background: #009961;
 	border: 0;
 	padding: 10px 30px;
@@ -945,7 +948,7 @@ section {
 	border-radius: 50px;
 }
 
-.contact .php-email-form button[type="submit"]:hover {
+.contact .php-email-form button[type='submit']:hover {
 	background: #00b371;
 }
 
@@ -983,7 +986,7 @@ section {
 	font-weight: 700;
 	color: #fff;
 	position: relative;
-	font-family: "Poppins", sans-serif;
+	font-family: 'Poppins', sans-serif;
 	padding: 0;
 	margin: 0 0 15px 0;
 }
@@ -995,7 +998,7 @@ section {
 	margin: 0 0 40px 0;
 }
 #footer img {
-    height: 170px;
+	height: 170px;
 }
 
 #footer .social-links {
@@ -1087,7 +1090,7 @@ section {
 }
 .bb {
 	text-transform: uppercase;
-	font-family: "Raleway", sans-serif;
+	font-family: 'Raleway', sans-serif;
 	font-weight: 600;
 	font-size: 14px;
 	background: #009961;

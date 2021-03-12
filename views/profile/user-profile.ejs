@@ -3,28 +3,25 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
 <head>
     <meta charset="utf-8">
     <title>
         <%= user.name %> | Profile
     </title>
     <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+     <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
     <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link href="/assets/css/navbar.css" rel="stylesheet">
-    
-
-
-
-
-
+    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+    <link href="assets/img/logo-white.png" rel="icon">
 </head>
 
 <body>
@@ -477,8 +474,7 @@
                         <header class="profile-header crayons-card mt-2">
                             <div class="relative profile-header__top">
                                 <span class="crayons-avatar crayons-avatar--3xl">
-                                    <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/img/default.jpg <%}%>"
-                                        width="128" height="128" alt="<%= user.name %> profile picture"
+                                    <img src="/assets/img/default.png" width="128" height="128" alt="profile picture"
                                         class="crayons-avatar__image">
                                 </span>
                             </div>
@@ -511,9 +507,8 @@
                                                     d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1112.728 0zM12 13a2 2 0 100-4 2 2 0 000 4z">
                                                 </path>
                                             </svg>
-                                            <a href="https://www.google.com/maps/place/<%=user.country %>"
-                                                target="_blank">
-                                                <%=user.country%>
+                                            <a href="https://www.google.com/maps/place/Belgium" target="_blank">
+                                                Belgium
                                             </a>
                                         </span>
                                         <% } %>
@@ -530,7 +525,7 @@
                                                     </svg>
 
                                                     <time datetime="2019-08-27T04:14:12Z" class="date">
-                                                        Born in <%=user.yearOfBirth%>
+                                                        Born in 1997
                                                     </time>
                                                 </span>
                                                 <% } %>
@@ -684,11 +679,7 @@
                                     <p class="crayons-definition__value">I'm looking for work!</p>
                                 </div>
                             </div>
-                            <div class="p-3 pt-0 block m:hidden js-user-info-trigger-wrapper">
-                                <button type="button"
-                                    class="crayons-btn crayons-btn--outlined w-100 js-user-info-trigger">More info about
-                                    @aemiej</button>
-                            </div>
+
                             <div class="crayons-modal align-left hidden">
                                 <div class="crayons-modal__box">
                                     <div class="crayons-modal__box__header">
@@ -736,88 +727,92 @@
                                     <h3 class="crayons-subtitle-3">Skills/languages</h3>
                                 </header>
                                 <div class="crayons-card__body">
-                                    <% user.skills.forEach(function(skill){ %>
-                                        <span
-                                            class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button m-1">
-                                            <%= skill %>
-                                        </span>
-                                        <% }) %>
+                                    <span class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button m-1">
+                                        Bioinformatics
+                                    </span>
+                                    <span class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button m-1">
+                                        Web Development
+                                    </span>
                                 </div>
                             </div>
                             <!-- render this div if and only the userRepos is not empty -->
-                            <% if(userRepos.length> 0) { %>
 
-                                <div class="crayons-card crayons-card--secondary">
-                                    <!-- <header class="crayons-card__header">
+                            <div class="crayons-card crayons-card--secondary">
+                                <!-- <header class="crayons-card__header">
                                     <h3 class="crayons-subtitle-3">Projects</h3>
                                 </header> -->
-                                    <!-- iterate through every project and display it -->
-                                    <ul class="list-group">
-                                        <h3 class="crayons-subtitle-3 list-group-item list-group-item-info">Projects
-                                        </h3>
-                                        <% userRepos.forEach(function(repo) { %>
-                                            <a href="<%= repo.repoUrl %>">
-                                                <li class="list-group-item">
-                                                    <%= repo.repoName %>
-                                                </li>
-                                            </a>
-                                            <% }) %>
-                                    </ul>
+                                <!-- iterate through every project and display it -->
+                                <ul class="list-group">
+                                    <h3 class="crayons-subtitle-3 list-group-item list-group-item-info">
+                                        Projects
+                                    </h3>
+                                    <a href="">
+                                        <li class="list-group-item">
+                                            automate-the-boring-stuff
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="list-group-item">
+                                            Nodejs the hard way
+                                        </li>
+                                    </a>
+                                    <a href="">
+                                        <li class="list-group-item">
+                                            MongoDB crud operations
+                                        </li>
+                                    </a>
+                                </ul>
 
 
+                            </div>
+                            <div class="crayons-card crayons-card--secondary">
+                                <header class="crayons-card__header">
+                                    <h3 class="crayons-subtitle-3">Available for...</h3>
+                                </header>
+
+                                <div class="crayons-card__body">
+                                    <p>available for collaboration</p>
                                 </div>
-                                <% } %>
-                                    <div class="crayons-card crayons-card--secondary">
-                                        <header class="crayons-card__header">
-                                            <h3 class="crayons-subtitle-3">Available for...</h3>
-                                        </header>
+                            </div>
 
-                                        <div class="crayons-card__body">
-                                            <p>Web development, testing and analysis, computer vision. </p>
-                                        </div>
-                                    </div>
+                            <div class="crayons-card crayons-card--secondary p-4">
+                                <div class="flex items-center mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
+                                        class="crayons-icon mr-3 color-base-50">
+                                        <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
+                                        <path
+                                            d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
+                                        </path>
+                                    </svg>
 
-                                    <div class="crayons-card crayons-card--secondary p-4">
-                                        <div class="flex items-center mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                                class="crayons-icon mr-3 color-base-50">
-                                                <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
-                                                <path
-                                                    d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
-                                                </path>
-                                            </svg>
+                                    5 posts published
+                                </div>
+                                <div class="flex items-center mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        role="img" aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt"
+                                        class="crayons-icon mr-3 color-base-50">
+                                        <title id="abufedsnsekr607wkz3cghttsqxk7imt">Comment</title>
+                                        <path
+                                            d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
+                                        </path>
+                                    </svg>
 
-                                            5 posts published
-                                        </div>
-                                        <div class="flex items-center mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt"
-                                                class="crayons-icon mr-3 color-base-50">
-                                                <title id="abufedsnsekr607wkz3cghttsqxk7imt">Comment</title>
-                                                <path
-                                                    d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
-                                                </path>
-                                            </svg>
+                                    6 comments written
+                                </div>
+                                <div class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        role="img" aria-labelledby="aavo11kuxepnfcc1uh5458yldkuco6e3"
+                                        class="crayons-icon mr-3 color-base-50">
+                                        <title id="aavo11kuxepnfcc1uh5458yldkuco6e3">Tag</title>
+                                        <path
+                                            d="M7.784 14l.42-4H4V8h4.415l.525-5h2.011l-.525 5h3.989l.525-5h2.011l-.525 5H20v2h-3.784l-.42 4H20v2h-4.415l-.525 5h-2.011l.525-5H9.585l-.525 5H7.049l.525-5H4v-2h3.784zm2.011 0h3.99l.42-4h-3.99l-.42 4z">
+                                        </path>
+                                    </svg>
 
-                                            6 comments written
-                                        </div>
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="aavo11kuxepnfcc1uh5458yldkuco6e3"
-                                                class="crayons-icon mr-3 color-base-50">
-                                                <title id="aavo11kuxepnfcc1uh5458yldkuco6e3">Tag</title>
-                                                <path
-                                                    d="M7.784 14l.42-4H4V8h4.415l.525-5h2.011l-.525 5h3.989l.525-5h2.011l-.525 5H20v2h-3.784l-.42 4H20v2h-4.415l-.525 5h-2.011l.525-5H9.585l-.525 5H7.049l.525-5H4v-2h3.784zm2.011 0h3.99l.42-4h-3.99l-.42 4z">
-                                                </path>
-                                            </svg>
-
-                                            17 tags followed
-                                        </div>
-                                    </div>
+                                    17 tags followed
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -827,25 +822,17 @@
                             <% if(userid===userId) { %>
                                 <!-- ================ beginning of post form -->
                                 <section class="card mb-2">
-                                    <div class="card-header">
-                                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href=""
-                                                    role="tab" aria-controls="posts" aria-selected="true">Make
-                                                    a Post</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                     <div class="card-body">
-                                        <form action="/posts/create" method="POST">
+                                        <form id="submit">
                                             <div class="card-body">
                                                 <div class="tab-content" id="myTabContent">
                                                     <div class="tab-pane fade show active" id="posts" role="tabpanel"
                                                         aria-labelledby="posts-tab">
                                                         <div class="form-group">
                                                             <label class="sr-only" for="post">post</label>
-                                                            <textarea style="resize: none;" class="form-control"
-                                                                name="post" id="post" rows="3"
+                                                            <textarea style="resize: none;height:100px"
+                                                                class="form-control" name="post" id="post" rows="3"
                                                                 placeholder="What are you thinking..."></textarea>
                                                         </div>
                                                     </div>
@@ -881,8 +868,8 @@
 
                                                                 <a href="users/profile/<%=post.user._id%>"
                                                                     class="crayons-avatar  crayons-avatar--l  ">
-                                                                    <img src="<% if(user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>"
-                                                                        alt="aemiej profile"
+                                                                    <img src="/assets/img/default.png"
+                                                                        alt=" aemiej profile"
                                                                         class="crayons-avatar__image" />
                                                                 </a>
                                                             </div>
@@ -1344,19 +1331,19 @@
         </div>
         </div>
 
+        <script src="/assets/vendor/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
 
+        <script>
+            const element = document.querySelector('#submit');
+            element.addEventListener('submit', event => {
+                event.preventDefault();
+            });
+        </script>
 
-                <!-- bootstrap scripts -->
-                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                    crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-                    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                    crossorigin="anonymous"></script>
-
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                    crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
 
 </body>
 

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">    
-    <link href="/css/errormessages.css" rel="stylesheet">
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="/assets/css/errormessages.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,18 +24,24 @@
                             <!-- TEXT FIELD GROUPS -->
                             <div class="form-group">
                                 <label for="email">Email address</label>
-                                <input class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>" 
-                                name="email" type="email" value="<%= oldInput.email %>" id="email"
+                                <input
+                                    class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                                    name="email" type="email" value="<%= oldInput.email %>" id="email"
                                     placeholder="Enter email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid' : '' %>" 
-                                name="password" value="<%= oldInput.password %>" type="password" id="password"
+                                <input
+                                    class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid' : '' %>"
+                                    name="password" value="<%= oldInput.password %>" type="password" id="password"
                                     placeholder="Password">
                             </div>
                             <button class="btn btn-primary btn-block mx-auto" type="submit">Login</button>
                             <a style="text-align: center;" href="/auth/reset"> Reset Password</a>
+                            <br>
+                            <a style="text-align: center;" href="/auth/Register">If you don't have account ? register please</a>
+
+                            <input type="hidden" name="query" value="<%= query %>">
                         </form>
             </div>
         </div>
