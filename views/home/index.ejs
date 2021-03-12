@@ -3,24 +3,17 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>zero to one</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- <link href="style.css" rel="stylesheet"> -->
-  <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap.min.css">
 
 
 
-  <!-- ==================== IF IT'S NOT AUTHENTICATED ===================== -->
-  <!-- landig page scripts and links -->
-  <!-- Favicons -->
-  <!-- <link href="assets/img/favicon.png" rel="icon"> -->
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/logo-white.png" rel="icon">
 
   <!-- Google Fonts -->
-  <link
+  <!-- <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+    rel="stylesheet"> -->
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/icofont/icofont.min.css" rel="stylesheet">
@@ -31,225 +24,186 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/style1.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/scrollbar.css">
-  <!-- <link href="assets/css/slider.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+  <link href="assets/css/navbar.css" rel="stylesheet">
 
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm d-block navbar-light  bg-darkk">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">ZERO > ONE</a>
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="hvr-underline-from-center">
-            <a class="nav-link" href="/timeline">Timeline</a>
-          </li>
-          <!-- <li class="hvr-underline-from-center">
-                    <a class="nav-link" href="#">News</a>
-                </li> -->
-          <li class="hvr-underline-from-center">
-            <a class="nav-link" href="/roadmaps">Roadmaps</a>
-          </li>
+  <%- include('../layouts/navbar.ejs') %>
 
-          <% if(isAuthenticated && userid !==null) { %>
-            <li class="hvr-underline-from-center">
-              <a class="nav-link" href="/users/profile/<%= userid%>">Profile</a>
-            </li>
-            <li class="">
-              <form method="POST" action="/auth/logout">
-                <button class="btn btn-outline-danger scrollto">Logout</button>
-              </form>
-            </li>
-            <% } else { %>
-              <li class="hvr-underline-from-center">
-                <a class="nav-link" href="auth/Login">login</a>
-              </li>
-              <li class="hvr-underline-from-center">
-                <a class="nav-link" href="auth/Register">Get Started</a>
-              </li>
-              <% } %>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
-  <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
-  <!-- carousel -->
-  <section id="hero" class="d-flex flex-column justify-content-center">
+    <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
+    <!-- carousel -->
+    <section id="hero" class="d-flex flex-column justify-content-center">
 
-    <div class="container">
-
-      <div class="row justify-content-center">
-        <div class="col-xl-8">
-          <h1>ZERO TO ONE</h1>
-          <h4>Know your way, connect with developers, collaborate with them and keep yourself updated
-            with modern technologies.</h4>
-        </div>
-      </div>
-      <% if(!isAuthenticated ) { %>
-        <a href="auth/Register" class="button button--animated">GET STARTED</a>
-        <% } %>
-    </div>
-  </section>
-  <!-- </div> -->
-
-  <!-- beginning of main section -->
-  <br>
-  <br>
-  <main id="main">
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
       <div class="container">
 
-        <div class="section-title">
-          <h2>About Us</h2>
-          <p>We are a team of developers who are suffered from being confused about the best way to acheive
-            their
-            goals, it was not clear for us at the beginning .. so we decided to facilitates the
-            communication a bit with a well-known roadmaps for most computer science fields.</p>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-6">
-            <h4>
-              What you'd have access to?
-            </h4>
-            <ul>
-              <li><i class="ri-check-double-line"></i>Roadmaps for most common fields in computer science.
-              </li>
-              <li><i class="ri-check-double-line"></i>Community for people who are interested with most
-                well-known technologies.</li>
-              <li><i class="ri-check-double-line"></i>Keep yourself updated with latest technology news.
-              </li>
-              <!-- <li><i class="ri-check-double-line"></i></li> -->
-            </ul>
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0">
-            <p>
-              Your're a huge part of our community, beleive that you have an imapct on the tech field,
-              what about joining us?
-            </p>
-            <% if(!isAuthenticated ) { %>
-              <a href="#" class="btn-learn-more">GET STARTED</a>
-              <% } %>
+        <div class="row justify-content-center">
+          <div class="col-xl-8">
+            <h1>ZERO TO ONE</h1>
+            <h4>Know your way, connect with developers, collaborate with them and keep yourself updated
+              with modern technologies.</h4>
           </div>
         </div>
-
+        <% if(!isAuthenticated ) { %>
+          <a href="auth/Register" class="button button--animated">GET STARTED</a>
+          <% } %>
       </div>
-    </section><!-- End About Us Section -->
+    </section>
+    <!-- </div> -->
 
+    <!-- beginning of main section -->
     <br>
     <br>
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services mb-5">
-      <div class="container">
+    <main id="main">
 
-        <div class="section-title">
-          <h2>Road Maps</h2>
-          <h4>We are provide a collection of road maps to give a lot of knowledge </h4>
+      <!-- ======= About Us Section ======= -->
+      <section id="about" class="about">
+        <div class="container">
+
+          <div class="section-title">
+            <h2>About Us</h2>
+            <p>We are a team of developers who are suffered from being confused about the best way to acheive
+              their
+              goals, it was not clear for us at the beginning .. so we decided to facilitates the
+              communication a bit with a well-known roadmaps for most computer science fields.</p>
+          </div>
+
+          <div class="row content">
+            <div class="col-lg-6">
+              <h4>
+                What you'd have access to?
+              </h4>
+              <ul>
+                <li><i class="ri-check-double-line"></i>Roadmaps for most common fields in computer science.
+                </li>
+                <li><i class="ri-check-double-line"></i>Community for people who are interested with most
+                  well-known technologies.</li>
+                <li><i class="ri-check-double-line"></i>Keep yourself updated with latest technology news.
+                </li>
+                <!-- <li><i class="ri-check-double-line"></i></li> -->
+              </ul>
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0">
+              <% if(!isAuthenticated ) { %>
+                <p>
+                  Your're a huge part of our community, beleive that you have an imapct on the tech field,
+                  what about joining us?
+                </p>
+                <a href="auth/Register" class="btn-learn-more">GET STARTED</a>
+                <% } %>
+            </div>
+          </div>
+
         </div>
+      </section><!-- End About Us Section -->
 
-        <div class="row">
-          <div class="col-lg-4 col-md-6 d-flex col-sm-12 col-xs-12 align-items-stretch">
-            <a href="/diagram">
+      <br>
+      <br>
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services mb-5">
+        <div class="container">
+
+          <div class="section-title">
+            <h2>Road Maps</h2>
+            <h4>We are provide a collection of road maps to give a lot of knowledge </h4>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex col-sm-12 col-xs-12 align-items-stretch">
+
               <div class="icon-box">
                 <div class="icon"><i class="bx bx-window-alt"></i></div>
-                <h4>Web Development</h4>
+                <a href="/diagram">
+                  <h4 class="hoover">Web Development</h4>
+                </a>
                 <p>Web development is the work involved in developing a Web site for the Internet (World
                   Wide Web) or an intranet (a private network).</p>
                 <br>
                 <span class="button2">view more &rarr;</span>
               </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-dna"></i></div>
+                <a href="">
+                  <h4>Bioinformatics</h4>
+                </a>
+                <p>Bioinformatics is an interdisciplinary field that develops methods and software
+                  tools
+                  for understanding biological data, in particular when the data sets are large
+                  and
+                  complex.</p>
+                <span class="button2">view more &rarr;</span>
+              </div>
+            </div>
+
+            </a>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-game"></i></div>
+                <a href="">
+                  <h4>Game Development</h4>
+                </a>
+                <p>Game development is the process of developing a video game. The effort is
+                  undertaken
+                  by a developer, ranging from a single person to an international team dispersed
+                  across
+                  the globe.</p>
+                <span class="button2">view more &rarr;</span>
+              </div>
+            </div>
             </a>
           </div>
 
-          <a href="./roadmaps.html">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-              <a href="">
-                <div class="icon-box">
-                  <div class="icon"><i class="bx bx-dna"></i></div>
-                  <h4>Bioinformatics</h4>
-                  <p>Bioinformatics is an interdisciplinary field that develops methods and software
-                    tools
-                    for understanding biological data, in particular when the data sets are large
-                    and
-                    complex.</p>
-                  <span class="button2">view more &rarr;</span>
-                </div>
-              </a>
-            </div>
+      </section>
+      <!-- End Services Section -->
+      <!-- ======= Faq Section ======= -->
+      <section id="faq" class="faq">
+        <div class="container-fluid">
 
-          </a>
-          <a href="./roadmaps.html">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-              <a href="">
-                <div class="icon-box">
-                  <div class="icon"><i class="bx bx-game"></i></div>
-                  <h4>Game Development</h4>
+          <div class="row">
 
-                  <p>Game development is the process of developing a video game. The effort is
-                    undertaken
-                    by a developer, ranging from a single person to an international team dispersed
-                    across
-                    the globe.</p>
-                  <span class="button2">view more &rarr;</span>
-                </div>
-            </div>
-          </a>
-        </div>
+            <div
+              class="col-lg-7 .d-none .d-sm-block .d-md-none d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
-    </section>
-    <!-- End Services Section -->
-    <!-- ======= Faq Section ======= -->
-    <section id="faq" class="faq">
-      <div class="container-fluid">
+              <div class="content">
+                <h3>Frequently Asked <strong>Questions</strong></h3>
+                <p>
+                  These are the main common questions being asked by our users.
+                </p>
+              </div>
 
-        <div class="row">
+              <div class="accordion-list">
+                <ul>
+                  <li>
+                    <a data-toggle="collapse" class="collapse" href="#accordion-list-1">How to access
+                      roadmaps ?
+                      <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="accordion-list-1" class="collapse show" data-parent=".accordion-list">
+                      <p>
+                        roadmaps will not be accessible unless you're logged in. if you don't have
+                        an account please go and <a style="display:inline" href="auth/Register">make an account and
+                          log in with it.</a>
+                      </p>
+                    </div>
+                  </li>
 
-          <div
-            class="col-lg-7 .d-none .d-sm-block .d-md-none d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+                  <li>
+                    <a data-toggle="collapse" href="#accordion-list-2" class="collapsed">How to report
+                      a problem?<i class="bx bx-chevron-down icon-show"></i><i
+                        class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="accordion-list-2" class="collapse" data-parent=".accordion-list">
+                      <p style="display:inline">
+                        You can always contact us via contact support form in the home page below
+                        the FAQ section.
+                      </p>
+                    </div>
+                  </li>
 
-            <div class="content">
-              <h3>Frequently Asked <strong>Questions</strong></h3>
-              <p>
-                These are the main common questions being asked by our users.
-              </p>
-            </div>
-
-            <div class="accordion-list">
-              <ul>
-                <li>
-                  <a data-toggle="collapse" class="collapse" href="#accordion-list-1">How to access
-                    roadmaps ?
-                    <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-                  <div id="accordion-list-1" class="collapse show" data-parent=".accordion-list">
-                    <p>
-                      roadmaps will not be accessible unless you're logged in. if you don't have
-                      an account please go and <a style="display:inline" href="auth/Register.html">make an account and
-                        log in with it.</a>
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <a data-toggle="collapse" href="#accordion-list-2" class="collapsed">How to report
-                    a problem?<i class="bx bx-chevron-down icon-show"></i><i
-                      class="bx bx-chevron-up icon-close"></i></a>
-                  <div id="accordion-list-2" class="collapse" data-parent=".accordion-list">
-                    <p style="display:inline">
-                      You can always contact us via contact support form in the home page below
-                      the FAQ section.
-                    </p>
-                  </div>
-                </li>
-
-                <!-- <li>
+                  <!-- <li>
                                 <a data-toggle="collapse" href="#accordion-list-3" class="collapsed">Dolor sit
                                     amet
                                     consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i
@@ -268,106 +222,112 @@
                                 </div>
                             </li> -->
 
-              </ul>
+                </ul>
+              </div>
+
             </div>
 
+            <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
+              style='background-image: url("assets/img/faq.jpg");'>&nbsp;</div>
           </div>
 
-          <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
-            style='background-image: url("assets/img/faq.jpg");'>&nbsp;</div>
+        </div>
+      </section>
+      <!-- End Faq Section -->
+
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container">
+
+          <div class="section-title">
+            <h2>Contact</h2>
+            <p>Whenever you wanted to connect with us or report a problem here is our contact form.</p>
+          </div>
         </div>
 
-      </div>
-    </section>
-    <!-- End Faq Section -->
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>Whenever you wanted to connect with us or report a problem here is our contact form.</p>
-        </div>
-      </div>
-
-
-      <div class="container">
-        <div class="row mt-5">
-          <div class="col-lg-4">
-            <div class="info">
-              <div class="address">
-                <i class="ri-map-pin-line"></i>
-                <h4>Location:</h4>
-                <p>EGYPT</p>
-              </div>
-              <div class="email">
-                <i class="ri-mail-line"></i>
-                <h4>Email:</h4>
-                <p>info@example.com</p>
-              </div>
-              <!--  <div class="phone">
+        <div class="container">
+          <div class="row mt-5">
+            <div class="col-lg-4">
+              <div class="info">
+                <div class="address">
+                  <i class="ri-map-pin-line"></i>
+                  <h4>Location:</h4>
+                  <p>EGYPT</p>
+                </div>
+                <div class="email">
+                  <i class="ri-mail-line"></i>
+                  <h4>Email:</h4>
+                  <p>info@example.com</p>
+                </div>
+                <!--  <div class="phone">
                             <i class="ri-phone-line"></i>
                             <h4>Call:</h4>
                             <p>+1 5589 55488 55s</p>
                         </div>-->
-            </div>
-          </div>
-          <div class="col-lg-8 mt-5 mt-lg-0">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="form-row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
-                    data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validate"></div>
-                </div>
-                <div class="col-md-6 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
-                    data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validate"></div>
-                </div>
               </div>
-              <!-- <div class="form-group">
+            </div>
+            <div class="col-lg-8 mt-5 mt-lg-0">
+              <form id="submit" class="php-email-form">
+                <div class="form-row">
+                  <div class="col-md-6 form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                      data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                      data-rule="email" data-msg="Please enter a valid email" />
+                    <div class="validate"></div>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
                             <input type="text" class="form-control" name="subject" id="subject"
                                 placeholder="Subject" data-rule="minlen:4"
                                 data-msg="Please enter at least 8 chars of subject" />
                             <div class="validate"></div>
                         </div>-->
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required"
-                  data-msg="Please write something for us" placeholder="Message"></textarea>
-                <div class="validate"></div>
-              </div>
-              <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-              <br>
-              <br>
-            </form>
+                <div class="form-group">
+                  <textarea style="resize: none; height:100px" class="form-control" name="message" rows="5"
+                    data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                  <div class="validate"></div>
+                </div>
+                <div class="mb-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+                <div class="text-center"><button class="btn-learn-more" type="submit">Send Message</button></div>
+                <br>
+                <br>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- End Contact Section -->
-  </main>
+      </section>
+      <!-- End Contact Section -->
+    </main>
 
-  <%- include('../layouts/footer.ejs') %>
+    <%- include('../layouts/footer.ejs') %>
 
-    <!-- <div id="preloader">
+      <!-- <div id="preloader">
     </div>
     <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a> -->
-    <!--<div id="preloader"></div>
+      <!--<div id="preloader"></div>
 <a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>-->
-    <!-- Vendor JS Files -->
+      <!-- Vendor JS Files -->
 
 
-    <!-- Template Main JS File -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="./bootstrap/js/bootstrap.min.js"></script>
-    <!-- <script src="./assets/js/main.js"></script> -->
+      <!-- Template Main JS File -->
+      <script src="assets/vendor/jquery/jquery.min.js"></script>
+      <script src="./bootstrap/js/bootstrap.min.js"></script>
+      <script>
+        const element = document.querySelector('#submit');
+        element.addEventListener('submit', event => {
+          event.preventDefault();
+        });
+      </script>
+      <!-- <script src="./assets/js/main.js"></script> -->
 
 </body>
 

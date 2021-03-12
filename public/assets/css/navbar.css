@@ -1,5 +1,5 @@
 .bg-darkk {
-	background-color: #0c0c0c;
+	background-color: #131212;
 }
 .bg-darkk .navbar-nav .nav-link:hover {
 	color: #f3f5f7 !important;
@@ -19,6 +19,9 @@
 
 .bg-darkk .navbar-brand {
 	color: #f8f8f8;
+}
+.bg-darkk .navbar-brand img {
+	height: 30px;
 }
 .bg-darkk .navbar-brand:hover {
 	color: #f8f8f8;
@@ -58,14 +61,12 @@
 }
 .row p {
 	color: rgb(12, 12, 12);
-	text-transform: capitalize;
+	
 }
 /* .row h4{
   color:#009961;
 } */
-.row h5 {
-	color: #ffffff;
-}
+
 #footer p {
 	color: #009961;
 }

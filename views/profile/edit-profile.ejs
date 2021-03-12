@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
+    <link href="assets/img/logo-white.png" rel="icon">
+
     <!-- bootstrap css -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
         integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link href="/css/errormessages.css" rel="stylesheet">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
 
-
+    <!-- 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
         integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
     <link rel="stylesheet" href="css/scrollbar.css">
 
 </head>
@@ -90,7 +93,8 @@
                         <%= errorMassage %>
                     </div>
                     <% } %>
-                        <form action="/users/profile" method="POST" enctype="multipart/form-data">
+                        <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
+                        <form id="submit">
                             <!-- TEXT FIELD GROUPS -->
                             <div class="form-group">
                                 <label for="name">Username</label>
@@ -551,11 +555,11 @@
                     </div> -->
                             <!-- end of grid -->
                             <br>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="password">Native language</label>
                                 <input name="nativeLang" class="form-control" type="text" id="Native language"
                                     placeholder="Native language" value="<%=currentUser.nativeLang%>">
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <h3 for="password">Links</h3>
                                 <label class="crayons-field__label" for="github">
@@ -617,6 +621,12 @@
         </div>
     </div>
 
+    <script>
+        const element = document.querySelector('#submit');
+        element.addEventListener('submit', event => {
+            event.preventDefault();
+        });
+    </script>
     <!-- bootstrap scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
