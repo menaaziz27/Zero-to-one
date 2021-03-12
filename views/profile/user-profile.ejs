@@ -829,7 +829,7 @@
                                 <section class="card mb-2">
 
                                     <div class="card-body">
-                                        <form>
+                                        <form id="submit">
                                             <div class="card-body">
                                                 <div class="tab-content" id="myTabContent">
                                                     <div class="tab-pane fade show active" id="posts" role="tabpanel"
@@ -1339,7 +1339,7 @@
 
 
         <script>
-            const element = document.querySelector('form');
+            const element = document.querySelector('#submit');
             element.addEventListener('submit', event => {
                 event.preventDefault();
             });
