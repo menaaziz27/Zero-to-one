@@ -119,6 +119,14 @@ exports.postRegister = async (req, res, next) => {
 
 //Get login page
 exports.getLogin = (req, res, next) => {
+	let query;
+	if (req.query.index) {
+		query = true;
+	} else {
+		query = false;
+	}
+	// const query = req.query.index || null;
+	console.log(query);
 	res.render('auth/Login', {
 		pageTitle: 'Login',
 		errorMassage: null,
@@ -127,6 +135,7 @@ exports.getLogin = (req, res, next) => {
 			password: '',
 		},
 		validationErrors: [],
+		query,
 	});
 };
 
@@ -153,6 +162,7 @@ exports.validateLogin = [
 
 //Post Login
 exports.postlogin = async (req, res, next) => {
+	const query = req.body.query === 'false' ? false : true;
 	const email = req.body.email;
 	const password = req.body.password;
 
@@ -167,6 +177,7 @@ exports.postlogin = async (req, res, next) => {
 				password: password,
 			},
 			validationErrors: errors.array(),
+			query,
 		});
 	}
 	try {
@@ -183,7 +194,11 @@ exports.postlogin = async (req, res, next) => {
 				if (err) {
 					console.log(err);
 				}
-				res.redirect('/timeline');
+				if (query) {
+					res.redirect('/diagram');
+				} else {
+					res.redirect('/timeline');
+				}
 			});
 		}
 		res.status(422).render('auth/Login', {
@@ -195,6 +210,7 @@ exports.postlogin = async (req, res, next) => {
 				password: password,
 			},
 			validationErrors: [{ param: 'notMatched' }],
+			query,
 		});
 	} catch (e) {
 		console.log(e);
