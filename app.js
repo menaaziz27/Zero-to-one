@@ -16,8 +16,8 @@ require('./utils/db');
 const { findUser } = require('./middleware/helper');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
-// const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
 
@@ -94,7 +94,7 @@ app.use((req, res, next) => {
 app.use(homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
-app.use('/posts', postRoutes);
+// app.use('/posts', postRoutes);
 // app.use('/admin', adminRoutes)
 // app.use(notFoundRoute)
 // app.use((error, req, res, next) => {
