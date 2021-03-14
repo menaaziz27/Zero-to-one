@@ -28,6 +28,10 @@ body {
 a {
 	color: black;
 }
+a:hover {
+	color: black;
+}
+
 input:focus {
 	outline: none;
 }
