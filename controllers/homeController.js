@@ -63,6 +63,9 @@ exports.getCss = (req, res) => {
 exports.getDiagram = (req, res) => {
 	res.render('roadmaps/diagram.ejs');
 };
+exports.getBackDiagram = (req, res) => {
+	res.render('roadmaps/backend.ejs');
+};
 
 exports.postSearch = async (req, res) => {
 	const query = req.body.query;
