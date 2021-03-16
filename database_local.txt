@@ -1,0 +1,1 @@
+/Users/abdo4/mongodb/bin/mongod.exe --dbpath=/Users/abdo4/mongodb-data
