@@ -126,8 +126,7 @@ exports.getLogin = (req, res, next) => {
 		query = false;
 	}
 	// const query = req.query.index || null;
-	console.log(query);
-	res.render('auth/Login', {
+	res.render('auth/login2', {
 		pageTitle: 'Login',
 		errorMassage: null,
 		oldInput: {
@@ -142,7 +141,7 @@ exports.getLogin = (req, res, next) => {
 exports.validateLogin = [
 	check('email')
 		.isEmail()
-		.withMessage('please enter a valid email address.')
+		.withMessage('Please enter a valid email address.')
 		.normalizeEmail()
 		.custom((value, { req }) => {
 			//async validation (we wating for date )
@@ -168,7 +167,7 @@ exports.postlogin = async (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/Login', {
+		return res.status(422).render('auth/login2', {
 			path: '/Login',
 			pageTitle: 'Login',
 			errorMassage: errors.array()[0].msg,
@@ -201,10 +200,10 @@ exports.postlogin = async (req, res, next) => {
 				}
 			});
 		}
-		res.status(422).render('auth/Login', {
+		res.status(422).render('auth/login2', {
 			path: '/Login',
 			pageTitle: 'Login',
-			errorMassage: "password don't match",
+			errorMassage: "Password don't match!",
 			oldInput: {
 				email: email,
 				password: password,
