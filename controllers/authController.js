@@ -121,7 +121,8 @@ exports.postRegister = async (req, res, next) => {
 exports.getLogin = (req, res, next) => {
 	let query;
 	if (req.query.index) {
-		query = true;
+    console.log(req.query.index)
+		query = req.query.index === "webdevelopment" ? "webdevelopment" : "bioinformatics"
 	} else {
 		query = false;
 	}
@@ -162,7 +163,13 @@ exports.validateLogin = [
 
 //Post Login
 exports.postlogin = async (req, res, next) => {
-	const query = req.body.query === 'false' ? false : true;
+	// const query = req.body.query === 'webdevelop' ? false : true;
+  let query;
+  if(req.body.query) {
+    query = req.body.query;
+  } else {
+    query = false;
+  }
 	const email = req.body.email;
 	const password = req.body.password;
 
@@ -194,9 +201,11 @@ exports.postlogin = async (req, res, next) => {
 				if (err) {
 					console.log(err);
 				}
-				if (query) {
+				if (query === 'webdevelopment') {
 					res.redirect('/diagram');
-				} else {
+				} else if (query === 'bioinformatics') {
+          res.redirect('/bioinformatics')
+        }else {
 					res.redirect('/timeline');
 				}
 			});
