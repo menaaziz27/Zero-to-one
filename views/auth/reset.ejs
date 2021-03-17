@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Reset Password</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link href="/assets/css/errormessages.css" rel="stylesheet">
     <link href="/auth/auth.css" rel="stylesheet">
@@ -17,27 +17,28 @@
     <div class="container">
         <div class="row align-items-center" style="height: 100vh;">
             <div class="col-md-6 offset-md-3  rounded py-4">
-       
                 <form method="POST" action="/auth/reset" novalidate>
-                <% if (errorMassage) { %>
-                    <div class="user-message  user-message--error">
-                        <%= errorMassage %>
-                    </div>
-                    <% } %>
-                     
-          
+                    <h2>Reset Password</h2>
+                    <% if (errorMassage) { %>
+                        <div class="user-message  user-message--error">
+                            <%= errorMassage %>
+                        </div>
+                        <% } %>
+
+
                             <!-- TEXT FIELD GROUPS -->
 
                             <div class="form-group">
                                 <input class="form-control" name="email" type="email" id="email" placeholder="Email">
                             </div>
-                            <button class="btn btn-primary btn-block mx-auto button custom-btn btn-16" type="submit">RESET
+                            <button class="btn btn-primary btn-block mx-auto button custom-btn btn-16"
+                                type="submit">RESET
                                 PASSWORD</button>
-                        </form>
+                </form>
             </div>
         </div>
     </div>
-    
+
 
     <!-- bootstrap scripts -->
     <script src="/assets/vendor/jquery/jquery.min.js"></script>
