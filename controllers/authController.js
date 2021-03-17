@@ -125,6 +125,7 @@ exports.getLogin = (req, res, next) => {
 	} else {
 		query = false;
 	}
+	
 	// const query = req.query.index || null;
 	res.render('auth/Login', {
 		pageTitle: 'Login',

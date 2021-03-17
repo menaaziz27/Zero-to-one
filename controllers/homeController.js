@@ -66,6 +66,9 @@ exports.getDiagram = (req, res) => {
 exports.getBackDiagram = (req, res) => {
 	res.render('roadmaps/backend.ejs');
 };
+exports.getBioDiagram = (req, res) => {
+	res.render('roadmaps/Bioinformatics.ejs');
+};
 
 exports.postSearch = async (req, res) => {
 	const query = req.body.query;

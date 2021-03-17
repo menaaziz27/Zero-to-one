@@ -12,6 +12,7 @@ const {
 	getDiagram,
 	getCss,
   getBackDiagram,
+  getBioDiagram
 } = require('../controllers/homeController');
 
 const { isAuthenticated } = require('../middleware/isAuthenticated');
@@ -26,6 +27,7 @@ router.get('/diagram', isAuthenticated, getDiagram);
 router.get('/html', isAuthenticated, getHtml);
 router.get('/css', isAuthenticated, getCss);
 router.get('/backend', isAuthenticated, getBackDiagram);
+router.get('/bioinformatics', isAuthenticated, getBioDiagram);
 
 
 module.exports = router;
