@@ -22,24 +22,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
     <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link href="/assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <style>
-        html {
-            height: 100%;
-        }
 
-        body {
-            height: 100%;
-            margin: 0;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-color: #20bf55;
-            background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link href="/assets/css/style.css" rel="stylesheet">
 
-        }
-    </style>
+
 </head>
 
 <body>
@@ -47,8 +36,8 @@
 
         <div class="container">
 
-            <div class="row align-items-center" style="height: 600px;">
-                <div class="col-md-6 offset-md-3  border border-primary rounded py-4">
+            <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
+                <div class="col-md-6 offset-md-3  rounded py-4">
                     <h3 style="text-align: center;">update profile</h3>
                     <!-- FORM -->
                     <% if (errorMassage) { %>
@@ -585,17 +574,19 @@
                             </form>
                 </div>
             </div>
-        </div>
 
-        <script>
-            const element = document.querySelector('#submit');
-            element.addEventListener('submit', event => {
-                event.preventDefault();
-            });
-        </script>
-        <!-- bootstrap scripts -->
-        <script src="/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        </div>
+        <%- include('../layouts/footer.ejs') %>
+
+            <script>
+                const element = document.querySelector('#submit');
+                element.addEventListener('submit', event => {
+                    event.preventDefault();
+                });
+            </script>
+            <!-- bootstrap scripts -->
+            <script src="/assets/vendor/jquery/jquery.min.js"></script>
+            <script src="/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 
