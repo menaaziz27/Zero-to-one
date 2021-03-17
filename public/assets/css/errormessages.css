@@ -4,16 +4,18 @@
 	margin: auto;
 	width: 90%;
 	/* border: 1px solid #4771fa; */
-	padding: 0.5rem;
+	padding: 1rem;
 	border-radius: 3px;
 	/* background: #b9c9ff; */
 	text-align: center;
+	margin-top: .2rem;
+	margin-bottom: .1rem;
 }
 
 .user-message--error {
-	border-color: red;
+	border-color: rgba(255, 0, 0, 0.712);
 	/* background: rgb(255, 176, 176); */
-	color: red;
+	color: rgba(255, 0, 0, 0.712);
 	/* font-size: 25px;
 	font-weight: bold; */
 }
