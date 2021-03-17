@@ -167,7 +167,7 @@ exports.postlogin = async (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/login2', {
+		return res.status(422).render('auth/Login', {
 			path: '/Login',
 			pageTitle: 'Login',
 			errorMassage: errors.array()[0].msg,
@@ -200,7 +200,7 @@ exports.postlogin = async (req, res, next) => {
 				}
 			});
 		}
-		res.status(422).render('auth/login2', {
+		res.status(422).render('auth/Login', {
 			path: '/Login',
 			pageTitle: 'Login',
 			errorMassage: "Password don't match!",
