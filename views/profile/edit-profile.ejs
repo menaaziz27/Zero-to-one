@@ -46,7 +46,7 @@
                         </div>
                         <% } %>
                             <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
-                            <form id="submit">
+                            <form  action="/users/profile" method="POST" enctype="multipart/form-data" id="submit">
                                 <!-- TEXT FIELD GROUPS -->
                                 <div class="form-group">
                                     <label for="name">Username</label>
@@ -578,12 +578,12 @@
         </div>
         <%- include('../layouts/footer.ejs') %>
 
-            <script>
+            <!-- <script>
                 const element = document.querySelector('#submit');
                 element.addEventListener('submit', event => {
                     event.preventDefault();
                 });
-            </script>
+            </script> -->
             <!-- bootstrap scripts -->
             <script src="/assets/vendor/jquery/jquery.min.js"></script>
             <script src="/bootstrap/js/bootstrap.min.js"></script>

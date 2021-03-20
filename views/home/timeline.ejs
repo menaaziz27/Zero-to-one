@@ -237,7 +237,7 @@
                     <section class="card mb-2">
 
                         <div class="card-body">
-                            <form id="submit">
+                            <form action="/posts/create?timeline=true" method="POST" id="submit">
                                 <div class="card-body">
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="posts" role="tabpanel"
@@ -260,297 +260,115 @@
                     <!--- Post Form Ends -->
 
                     <!-- begginning of rendering all posts -->
-                    <!-- post1 -->
-                    <div class="crayons-story " data-content-user-id="219080">
-                        <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                            aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
-                            Github Real-Time Status to Improve Your Profile</a>
+                    <!-- begginning of rendering all posts -->
+                    <% if (posts !==undefined || posts !==null) { %>
+                        <% posts.forEach(function(post) { %>
+                            <div class="crayons-story " data-content-user-id="219080">
+                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                    aria-labelledby="article-link-421966"
+                                    class="crayons-story__hidden-navigation-link">Use
+                                    Github Real-Time Status to Improve Your Profile</a>
 
 
-                        <div class="crayons-story__body">
-                            <div class="crayons-story__top">
-                                <div class="crayons-story__meta">
-                                    <div class="crayons-story__author-pic">
+                                <div class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <div class="crayons-story__author-pic">
 
-                                        <a href="users/profile/<%= userid %>"
-                                            class="crayons-avatar  crayons-avatar--l  ">
-                                            <img src="/assets/img/grad.jpg" alt="aemiej profile"
-                                                class="crayons-avatar__image" />
-                                        </a>
+                                                <a href="users/profile/<%= post.user._id %>"
+                                                    class="crayons-avatar  crayons-avatar--l  ">
+                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>"
+                                                        alt="aemiej profile" class="crayons-avatar__image" />
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a href="users/profile/<%=post.user._id%>"
+                                                        class="crayons-story__secondary fw-medium">
+                                                        <%=post.user.name%>
+                                                    </a>
+                                                </p>
+                                                <a href="/posts/<%=post._id %>?timeline=true"
+                                                    class="crayons-story__tertiary fs-xs"><time
+                                                        datetime="2020-08-08T06:46:08Z">
+                                                        <%= moment(post.createdAt).fromNow() %>
+                                                    </time><span class="time-ago-indicator-initial-placeholder"
+                                                        data-seconds="1596869168"></span></a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p>
-                                            <a href="users/profile/<%= userid %>"
-                                                class="crayons-story__secondary fw-medium">
-                                                Lara
-                                            </a>
-                                        </p>
-                                        <a href="" class="crayons-story__tertiary fs-xs"><time
-                                                datetime="2020-08-08T06:46:08Z">
-                                                13 min ago
-                                            </time><span class="time-ago-indicator-initial-placeholder"
-                                                data-seconds="1596869168"></span></a>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="crayons-story__indention">
-                                <h2 class="crayons-story__title">
-                                    <p>
-                                        hello could anyone connect with me I need help in my graduation project!
-                                        thanks in advance!
-                                    </p>
-                                </h2>
-                                <div class="crayons-story__tags">
-                                    <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                        Help
-                                    </a>
-                                    <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                        javascript
-                                    </a>
-                                </div>
-                                <div class="crayons-story__bottom">
-                                    <div class="crayons-story__details">
-                                        <a href=""
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                            data-reaction-count data-reactable-id="421966">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol" class="crayons-icon">
-                                                <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
-                                                </title>
-                                                <path
-                                                    d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                </path>
-                                            </svg>
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <p>
+                                                <%= post.description %>
+                                            </p>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+                                            <% post.hashtags.forEach(function (tag) { %>
+                                                <a href="" class="crayons-tag"><span
+                                                        class="crayons-tag__prefix">#</span>
+                                                    <%= tag %>
+                                                </a>
+                                                <% }) %>
+                                        </div>
+                                        <div class="crayons-story__bottom">
+                                            <div class="crayons-story__details">
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
+                                                    data-reaction-count data-reactable-id="421966">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
+                                                        class="crayons-icon">
+                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
+                                                        </title>
+                                                        <path
+                                                            d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                                                        </path>
+                                                    </svg>
 
-                                            60
-                                            <span class="hidden s:inline">&nbsp;reactions</span>
-                                        </a>
-                                        <a href=""
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y" class="crayons-icon">
-                                                <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
-                                                </title>
-                                                <path
-                                                    d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                </path>
-                                            </svg>
+                                                    60
+                                                    <span class="hidden s:inline">&nbsp;reactions</span>
+                                                </a>
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
+                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
+                                                        class="crayons-icon">
+                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
+                                                        </title>
+                                                        <path
+                                                            d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
+                                                        </path>
+                                                    </svg>
 
-                                            1
-                                            <span class="hidden s:inline">&nbsp;comments</span>
-                                        </a>
-                                    </div>
-                                    <div class="crayons-story__save">
-                                        <small class="crayons-story__tertiary fs-xs mr-2">
-                                            2 min read
-                                        </small>
-                                        <a type="button" href="" id="article-save-button-421966"
-                                            class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                            data-reactable-id="421966" aria-label="Save to reading list"
-                                            title="Save to reading list">
-                                            <span class="bm-initial">edit</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- endpost -->
-                    <!-- post1 -->
-                    <div class="crayons-story " data-content-user-id="219080">
-                        <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                            aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
-                            Github Real-Time Status to Improve Your Profile</a>
-
-
-                        <div class="crayons-story__body">
-                            <div class="crayons-story__top">
-                                <div class="crayons-story__meta">
-                                    <div class="crayons-story__author-pic">
-
-                                        <a href="/users/profile/<%= userid %>"
-                                            class="crayons-avatar  crayons-avatar--l  ">
-                                            <img src="/assets/img/man2.jpg" alt="aemiej profile"
-                                                class="crayons-avatar__image" />
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            <a href="/users/profile/<%= userid %>"
-                                                class="crayons-story__secondary fw-medium">
-                                                Mike
-                                            </a>
-                                        </p>
-                                        <a href="" class="crayons-story__tertiary fs-xs"><time
-                                                datetime="2020-08-08T06:46:08Z">
-                                                21 min ago
-                                            </time><span class="time-ago-indicator-initial-placeholder"
-                                                data-seconds="1596869168"></span></a>
+                                                    1
+                                                    <span class="hidden s:inline">&nbsp;comments</span>
+                                                </a>
+                                            </div>
+                                            <div class="crayons-story__save">
+                                                <small class="crayons-story__tertiary fs-xs mr-2">
+                                                    <%= post.readingTime %> min read
+                                                </small>
+                                                <% if(userid==post.user._id ) { %>
+                                                    <a type="button" href="/posts/<%= post._id %>/edit?timeline=true"
+                                                        id="article-save-button-421966"
+                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                        data-reactable-id="421966" aria-label="Save to reading list"
+                                                        title="Save to reading list">
+                                                        <span class="bm-initial">edit</span>
+                                                    </a>
+                                                    <% } %>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="crayons-story__indention">
-                                <h2 class="crayons-story__title">
-                                    <p>
-                                        do you know that you can change REACT state without useState function??
-                                    </p>
-                                </h2>
-                                <div class="crayons-story__tags">
-                                    <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                        ReactJS
-                                    </a>
-                                    <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                        javascript
-                                    </a>
-                                </div>
-                                <div class="crayons-story__bottom">
-                                    <div class="crayons-story__details">
-                                        <a href=""
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                            data-reaction-count data-reactable-id="421966">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol" class="crayons-icon">
-                                                <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
-                                                </title>
-                                                <path
-                                                    d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                </path>
-                                            </svg>
-
-                                            4
-                                            <span class="hidden s:inline">&nbsp;reactions</span>
-                                        </a>
-                                        <a href=""
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y" class="crayons-icon">
-                                                <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
-                                                </title>
-                                                <path
-                                                    d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                </path>
-                                            </svg>
-
-                                            3
-                                            <span class="hidden s:inline">&nbsp;comments</span>
-                                        </a>
-                                    </div>
-                                    <div class="crayons-story__save">
-                                        <small class="crayons-story__tertiary fs-xs mr-2">
-                                            1 min read
-                                        </small>
-                                        <a type="button" href="" id="article-save-button-421966"
-                                            class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                            data-reactable-id="421966" aria-label="Save to reading list"
-                                            title="Save to reading list">
-                                            <span class="bm-initial">edit</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- endpost -->
-                    <!-- post1 -->
-                    <div class="crayons-story " data-content-user-id="219080">
-                        <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                            aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
-                            Github Real-Time Status to Improve Your Profile</a>
-
-
-                        <div class="crayons-story__body">
-                            <div class="crayons-story__top">
-                                <div class="crayons-story__meta">
-                                    <div class="crayons-story__author-pic">
-
-                                        <a href="/users/profile/<%= userid %>"
-                                            class="crayons-avatar  crayons-avatar--l  ">
-                                            <img src="/assets/img/default.png" alt="aemiej profile"
-                                                class="crayons-avatar__image" />
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            <a href="users/profile/<%= userid %>"
-                                                class="crayons-story__secondary fw-medium">
-                                                guest
-                                            </a>
-                                        </p>
-                                        <a href="" class="crayons-story__tertiary fs-xs"><time
-                                                datetime="2020-08-08T06:46:08Z">
-                                                2 hours ago
-                                            </time><span class="time-ago-indicator-initial-placeholder"
-                                                data-seconds="1596869168"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="crayons-story__indention">
-                                <h2 class="crayons-story__title">
-                                    <p>
-                                        looking for someone to collaborate with me in my MERN stack project is anyone
-                                        in?
-                                    </p>
-                                </h2>
-                                <div class="crayons-story__tags">
-                                    <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                        mern-stack
-                                    </a>
-                                    <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                        nodejs
-                                    </a>
-                                </div>
-                                <div class="crayons-story__bottom">
-                                    <div class="crayons-story__details">
-                                        <a href=""
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                            data-reaction-count data-reactable-id="421966">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol" class="crayons-icon">
-                                                <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
-                                                </title>
-                                                <path
-                                                    d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                </path>
-                                            </svg>
-
-                                            3
-                                            <span class="hidden s:inline">&nbsp;reactions</span>
-                                        </a>
-                                        <a href=""
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y" class="crayons-icon">
-                                                <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
-                                                </title>
-                                                <path
-                                                    d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                </path>
-                                            </svg>
-
-                                            2
-                                            <span class="hidden s:inline">&nbsp;comments</span>
-                                        </a>
-                                    </div>
-                                    <div class="crayons-story__save">
-                                        <small class="crayons-story__tertiary fs-xs mr-2">
-                                            1 min read
-                                        </small>
-                                        <a type="button" href="" id="article-save-button-421966"
-                                            class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                            data-reactable-id="421966" aria-label="Save to reading list"
-                                            title="Save to reading list">
-                                            <span class="bm-initial">edit</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- endpost -->
-                    <!-- Post Ends -->
+                            <% }) %>
+                                <% } %>
+                                    <!-- Post Ends -->
+                                    <!-- endpost -->
+                                    <!-- Post Ends -->
                 </div>
                 <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
                     <!-- aside latest news -->
@@ -560,27 +378,37 @@
                                 Latest News
                             </h2>
                             <!-- beginning of first news -->
+                            <!-- beginning of first news -->
+                            <% if (news) { %>
+                                <% news.forEach(function(article, index) { %>
+                                    <% if(index < 2) { %>
+                                        <a href="<%= article.url %>" target="_blank"></a>
+                                        <div class="ct-latest media">
+                                            <div class="media-left">
+                                                <% if (article.cover_image !==null) { %>
+                                                    <img alt="widget image" class="media-object"
+                                                        src="<%= article.cover_image %>"
+                                                        style="max-width: 90px; user-select: auto;">
+                                                    <% } %>
+                                            </div>
+                                            <div class="media-body">
+                                                <a href="<%= article.url %>" target="_blank">
+                                                    <h2 class="ct-latest-header media-heading">
+                                                        <%= article.title %>
+                                                    </h2>
 
-                            <a href="/timeline"></a>
-                            <div class="ct-latest media">
-                                <div class="media-left">
-                                    <img alt="widget image" class="media-object" src="/assets/img/hero-bg.jpg"
-                                        style=" max-width: 90px; user-select: auto;">
-                                </div>
-                                <div class="media-body">
-                                    <a href="/timeline">
-                                        <h2 class="ct-latest-header media-heading">
-                                            Authentication vs authorization?
-                                        </h2>
+                                                    <p>
+                                                        <%= article.description %>
+                                                    </p>
+                                            </div>
+                                        </div>
+                                        </a>
+                                        <!-- ending of first news -->
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
 
-                                        <p>
-                                            Authentication and authorization are necessary for many of the applications
-                                            we build.
-                                        </p>
-                                </div>
-                            </div>
-                            </a>
-                            <!-- ending of first news -->
+                                                    <!-- ending of first news -->
                         </div>
                         <!-- friends menu -->
                         <!-- <div class="card">
@@ -625,12 +453,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
             integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
             crossorigin="anonymous"></script>
-        <script>
+        <!-- <script>
             const element = document.querySelector('#submit');
             element.addEventListener('submit', event => {
                 event.preventDefault();
             });
-        </script>
+        </script> -->
 
 </body>
 

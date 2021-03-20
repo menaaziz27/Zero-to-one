@@ -15,7 +15,8 @@ exports.getHome = (req, res, next) => {
 };
 
 exports.getTimeline = async (req, res, next) => {
-	// const news = data.data;
+	const data = await axios.get('https://dev.to/api/articles');
+	const news = data.data;
 	let userid;
 	if (req.user) {
 		userid = req.user._id.toString();
@@ -29,6 +30,7 @@ exports.getTimeline = async (req, res, next) => {
 			userid: userid,
 			posts,
 			moment,
+			news,
 		});
 	} catch (e) {
 		console.log(e);
