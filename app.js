@@ -94,10 +94,10 @@ app.use((req, res, next) => {
 app.use(homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
-// app.use('/posts', postRoutes);
+app.use('/posts', postRoutes);
 // app.use('/admin', adminRoutes)
 app.use((req,res) => {
-  res.render('404.ejs')
+	res.render('404.ejs')
 })
 // app.use((error, req, res, next) => {
 // 	res.redirect("/500");

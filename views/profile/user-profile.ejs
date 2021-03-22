@@ -471,139 +471,206 @@
         </style>
         <div id="page-content" class="wrapper stories stories-index" data-current-page="stories-index">
             <div id="page-content-inner">
-
+                <style>
+                    :root {
+                        --profile-brand-color: #08304c;
+                    }
+                </style>
                 <div class="brand-bg">
 
                     <div class="crayons-layout crayons-layout--limited-l pt-7 m:pt-9">
                         <header class="profile-header crayons-card mt-2">
                             <div class="relative profile-header__top">
                                 <span class="crayons-avatar crayons-avatar--3xl">
-                                    <img src="/assets/img/grad.jpg" width="128" height="128" alt="profile picture"
+                                    <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/img/default.jpg <%}%>"
+                                        width="128" height="128" alt="<%= user.name %> profile picture"
                                         class="crayons-avatar__image">
                                 </span>
                             </div>
                             <div class="profile-header__details">
                                 <h1 class="crayons-title fw-heavy mb-2">
-                                    Lara
+                                    <% if (user.name) { %>
+                                        <%=user.name%>
+                                            <% } else { %>
+                                                Your Username
+                                                <%}%>
                                 </h1>
                                 <p class="fs-base m:fs-l color-base-90 mb-4 mx-auto max-w-100 m:max-w-75">
-                                    passionate developer who is interested in learning new technologies. let's connect
-                                    ^^
+                                    <% if (user.bio) { %>
+                                        <%=user.bio%>
+                                            <% } else { %>
+                                                Your Bio
+                                                <br>
+                                                please complete your profile
+                                                <%}%>
                                 </p>
                                 <div class="profile-header__meta">
-                                    <span class="profile-header__meta__item">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" role="img"
-                                            aria-labelledby="ajrrqijsqelmczu6fuyonzk2o2aipwjf"
-                                            class="crayons-icon mr-2 shrink-0">
-                                            <title id="ajrrqijsqelmczu6fuyonzk2o2aipwjf">Location</title>
-                                            <path
-                                                d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1112.728 0zM12 13a2 2 0 100-4 2 2 0 000 4z">
-                                            </path>
-                                        </svg>
-                                        <a href="https://www.google.com/maps/place/Belgium" target="_blank">
-                                            Belgium
-                                        </a>
-                                    </span>
-                                    <span class="profile-header__meta__item">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" role="img"
-                                            aria-labelledby="anjkwa5vdl5arp7w1vfot5espto7wmqu"
-                                            class="crayons-icon mr-2 shrink-0">
-                                            <title id="anjkwa5vdl5arp7w1vfot5espto7wmqu">Joined</title>
-                                            <path
-                                                d="M8 6v3.999h3V6h2v3.999h3V6h2v3.999L19 10a3 3 0 012.995 2.824L22 13v1c0 1.014-.377 1.94-.999 2.645L21 21a1 1 0 01-1 1H4a1 1 0 01-1-1v-4.36a4.025 4.025 0 01-.972-2.182l-.022-.253L2 14v-1a3 3 0 012.824-2.995L5 10l1-.001V6h2zm11 6H5a1 1 0 00-.993.883L4 13v.971l.003.147a2 2 0 003.303 1.4c.363-.312.602-.744.674-1.218l.015-.153.005-.176c.036-1.248 1.827-1.293 1.989-.134l.01.134.004.147a2 2 0 003.992.031l.012-.282c.124-1.156 1.862-1.156 1.986 0l.012.282a2 2 0 003.99 0L20 14v-1a1 1 0 00-.883-.993L19 12zM7 1c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 11-2.898-.776C5.85 2.002 7 2.5 7 1zm5 0c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 01-2.898-.776C10.85 2.002 12 2.5 12 1zm5 0c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 01-2.898-.776C15.85 2.002 17 2.5 17 1z">
-                                            </path>
-                                        </svg>
-
-                                        <time datetime="2019-08-27T04:14:12Z" class="date">
-                                            Born in 1997
-                                        </time>
-                                    </span>
-
-
-                                    <!-- ===================== BEGINNING OF USER ICONS =================== -->
-                                    <span class="profile-header__meta__item -ml-1">
-                                        <a href="" target="_blank" rel="noopener me"
-                                            class="px-1 align-middle inline-block">
+                                    <% if(user.country) { %>
+                                        <span class="profile-header__meta__item">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="asvbuum4kw8vemhcg889mu56yavgzwd7" class="crayons-icon">
-                                                <title id="asvbuum4kw8vemhcg889mu56yavgzwd7">
-                                                    Twitter logo
-                                                </title>
+                                                aria-labelledby="ajrrqijsqelmczu6fuyonzk2o2aipwjf"
+                                                class="crayons-icon mr-2 shrink-0">
+                                                <title id="ajrrqijsqelmczu6fuyonzk2o2aipwjf">Location</title>
                                                 <path
-                                                    d="M22.162 5.656a8.383 8.383 0 01-2.402.658A4.196 4.196 0 0021.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 00-7.126 3.814 11.874 11.874 0 01-8.62-4.37 4.168 4.168 0 00-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 01-1.894-.523v.052a4.185 4.185 0 003.355 4.101 4.211 4.211 0 01-1.89.072A4.185 4.185 0 007.97 16.65a8.395 8.395 0 01-6.191 1.732 11.83 11.83 0 006.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.495 8.495 0 002.087-2.165l-.001-.001z"
-                                                    fill="#65bbf2"></path>
-                                            </svg>
-
-                                        </a>
-
-                                        <a href="" target="_blank" rel="noopener me"
-                                            class="px-1 align-middle inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="a5nl481y7j37phzbyqnjerkf4zvrrws5" class="crayons-icon">
-                                                <title id="a5nl481y7j37phzbyqnjerkf4zvrrws5">
-                                                    GitHub logo
-                                                </title>
-                                                <path
-                                                    d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 006.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 012.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0022 12c0-5.525-4.475-10-10-10z">
+                                                    d="M18.364 17.364L12 23.728l-6.364-6.364a9 9 0 1112.728 0zM12 13a2 2 0 100-4 2 2 0 000 4z">
                                                 </path>
                                             </svg>
+                                            <a href="https://www.google.com/maps/place/<%=user.country %>"
+                                                target="_blank">
+                                                <%=user.country%>
+                                            </a>
+                                        </span>
+                                        <% } %>
+                                            <% if(user.yearOfBirth) { %>
+                                                <span class="profile-header__meta__item">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" role="img"
+                                                        aria-labelledby="anjkwa5vdl5arp7w1vfot5espto7wmqu"
+                                                        class="crayons-icon mr-2 shrink-0">
+                                                        <title id="anjkwa5vdl5arp7w1vfot5espto7wmqu">Joined</title>
+                                                        <path
+                                                            d="M8 6v3.999h3V6h2v3.999h3V6h2v3.999L19 10a3 3 0 012.995 2.824L22 13v1c0 1.014-.377 1.94-.999 2.645L21 21a1 1 0 01-1 1H4a1 1 0 01-1-1v-4.36a4.025 4.025 0 01-.972-2.182l-.022-.253L2 14v-1a3 3 0 012.824-2.995L5 10l1-.001V6h2zm11 6H5a1 1 0 00-.993.883L4 13v.971l.003.147a2 2 0 003.303 1.4c.363-.312.602-.744.674-1.218l.015-.153.005-.176c.036-1.248 1.827-1.293 1.989-.134l.01.134.004.147a2 2 0 003.992.031l.012-.282c.124-1.156 1.862-1.156 1.986 0l.012.282a2 2 0 003.99 0L20 14v-1a1 1 0 00-.883-.993L19 12zM7 1c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 11-2.898-.776C5.85 2.002 7 2.5 7 1zm5 0c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 01-2.898-.776C10.85 2.002 12 2.5 12 1zm5 0c1.32.871 1.663 2.088 1.449 2.888a1.5 1.5 0 01-2.898-.776C15.85 2.002 17 2.5 17 1z">
+                                                        </path>
+                                                    </svg>
 
-                                        </a>
+                                                    <time datetime="2019-08-27T04:14:12Z" class="date">
+                                                        Born in <%=user.yearOfBirth%>
+                                                    </time>
+                                                </span>
+                                                <% } %>
 
-                                        <a href="" target="_blank" rel="noopener me"
-                                            class="px-1 align-middle inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="ak6r3gjdfrurvdom6zjq82ha9drfv80w" class="crayons-icon">
-                                                <title id="ak6r3gjdfrurvdom6zjq82ha9drfv80w">
-                                                    LinkedIn logo</title>
-                                                <path
-                                                    d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715h-.001zM7.003 8.575a1.546 1.546 0 01-1.287-2.409 1.548 1.548 0 111.286 2.409h.001zm1.336 9.764H5.666V9.75H8.34v8.589h-.001zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.004z">
-                                                </path>
-                                            </svg>
 
-                                        </a>
-                                        <a href="" target="_blank" rel="noopener me"
-                                            class="px-1 align-middle inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="a280n9hh26830f9q5y3lbak50hj9k6q9" class="crayons-icon">
-                                                <title id="a280n9hh26830f9q5y3lbak50hj9k6q9">
-                                                    StackOverflow logo
-                                                </title>
-                                                <path
-                                                    d="M18 20.002V14.67h2v7.333H4V14.67h2v5.333h12v-.001zM7.599 14.736l.313-1.98 8.837 1.7-.113 1.586-9.037-1.306zm1.2-4.532l.732-1.6 7.998 3.733-.733 1.599-7.998-3.732h.001zm2.265-3.932l1.133-1.333 6.798 5.665-1.133 1.333-6.798-5.665zm4.332-4.132l5.265 7.064-1.4 1.067-5.264-7.065 1.4-1.066h-.001zM7.332 18.668v-2h9.33v2h-9.33z">
-                                                </path>
-                                            </svg>
+                                                    <!-- ===================== BEGINNING OF USER ICONS =================== -->
+                                                    <span class="profile-header__meta__item -ml-1">
+                                                        <!-- if twitter -->
+                                                        <% user.websites.forEach( function(link) { %>
+                                                            <% if(link.includes("twitter")) { %>
+                                                                <a href="<%= link %>" target="_blank" rel="noopener me"
+                                                                    class="px-1 align-middle inline-block">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" role="img"
+                                                                        aria-labelledby="asvbuum4kw8vemhcg889mu56yavgzwd7"
+                                                                        class="crayons-icon">
+                                                                        <title id="asvbuum4kw8vemhcg889mu56yavgzwd7">
+                                                                            Twitter
+                                                                            logo
+                                                                        </title>
+                                                                        <path
+                                                                            d="M22.162 5.656a8.383 8.383 0 01-2.402.658A4.196 4.196 0 0021.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 00-7.126 3.814 11.874 11.874 0 01-8.62-4.37 4.168 4.168 0 00-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 01-1.894-.523v.052a4.185 4.185 0 003.355 4.101 4.211 4.211 0 01-1.89.072A4.185 4.185 0 007.97 16.65a8.395 8.395 0 01-6.191 1.732 11.83 11.83 0 006.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.495 8.495 0 002.087-2.165l-.001-.001z"
+                                                                            fill="#65bbf2"></path>
+                                                                    </svg>
 
-                                        </a>
+                                                                </a>
+                                                                <% } %>
 
-                                        <a href="" target="_blank" rel="noopener nofollow me"
-                                            class="px-1 align-middle inline-block">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="aekt8ogeq8yiwrqcbfl23u1jjduau1u8" class="crayons-icon">
-                                                <title id="aekt8ogeq8yiwrqcbfl23u1jjduau1u8">
-                                                    Instagram logo
-                                                </title>
-                                                <path
-                                                    d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.508-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z">
-                                                </path>
-                                            </svg>
+                                                                    <!-- if github -->
+                                                                    <% if(link.includes("github")) { %>
+                                                                        <a href="<%= link %>" target="_blank"
+                                                                            rel="noopener me"
+                                                                            class="px-1 align-middle inline-block">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" role="img"
+                                                                                aria-labelledby="a5nl481y7j37phzbyqnjerkf4zvrrws5"
+                                                                                class="crayons-icon">
+                                                                                <title
+                                                                                    id="a5nl481y7j37phzbyqnjerkf4zvrrws5">
+                                                                                    GitHub
+                                                                                    logo
+                                                                                </title>
+                                                                                <path
+                                                                                    d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 006.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.28 9.28 0 012.5-.338c.85 0 1.7.112 2.5.337 1.912-1.3 2.75-1.024 2.75-1.024.55 1.375.2 2.4.1 2.65.637.7 1.025 1.587 1.025 2.687 0 3.838-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0022 12c0-5.525-4.475-10-10-10z">
+                                                                                </path>
+                                                                            </svg>
 
-                                        </a>
-                                    </span>
+                                                                        </a>
+                                                                        <% } %>
 
-                                    <!-- ========================= END OF USER ICONS FOR WEBSITES ======================  -->
+                                                                            <!-- if linkedin -->
+                                                                            <% if(link.includes("linkedin")) { %>
+                                                                                <a href="<%= link %>" target="_blank"
+                                                                                    rel="noopener me"
+                                                                                    class="px-1 align-middle inline-block">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="24" height="24"
+                                                                                        viewBox="0 0 24 24" role="img"
+                                                                                        aria-labelledby="ak6r3gjdfrurvdom6zjq82ha9drfv80w"
+                                                                                        class="crayons-icon">
+                                                                                        <title
+                                                                                            id="ak6r3gjdfrurvdom6zjq82ha9drfv80w">
+                                                                                            LinkedIn
+                                                                                            logo</title>
+                                                                                        <path
+                                                                                            d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715h-.001zM7.003 8.575a1.546 1.546 0 01-1.287-2.409 1.548 1.548 0 111.286 2.409h.001zm1.336 9.764H5.666V9.75H8.34v8.589h-.001zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.004z">
+                                                                                        </path>
+                                                                                    </svg>
 
-                                    <span>
-                                        <a href="/users/updateProfile" class="btn btn-outline-info">Edit
-                                            Profile</a>
-                                    </span>
+                                                                                </a>
+                                                                                <% } %>
+
+                                                                                    <!-- if stackoverflow -->
+                                                                                    <% if(link.includes("stackoverflow"))
+                                                                                        { %>
+                                                                                        <a href="<%= link %>"
+                                                                                            target="_blank"
+                                                                                            rel="noopener me"
+                                                                                            class="px-1 align-middle inline-block">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="24" height="24"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                role="img"
+                                                                                                aria-labelledby="a280n9hh26830f9q5y3lbak50hj9k6q9"
+                                                                                                class="crayons-icon">
+                                                                                                <title
+                                                                                                    id="a280n9hh26830f9q5y3lbak50hj9k6q9">
+                                                                                                    StackOverflow logo
+                                                                                                </title>
+                                                                                                <path
+                                                                                                    d="M18 20.002V14.67h2v7.333H4V14.67h2v5.333h12v-.001zM7.599 14.736l.313-1.98 8.837 1.7-.113 1.586-9.037-1.306zm1.2-4.532l.732-1.6 7.998 3.733-.733 1.599-7.998-3.732h.001zm2.265-3.932l1.133-1.333 6.798 5.665-1.133 1.333-6.798-5.665zm4.332-4.132l5.265 7.064-1.4 1.067-5.264-7.065 1.4-1.066h-.001zM7.332 18.668v-2h9.33v2h-9.33z">
+                                                                                                </path>
+                                                                                            </svg>
+
+                                                                                        </a>
+                                                                                        <% } %>
+
+                                                                                            <% if(link.includes("instagram"))
+                                                                                                { %>
+                                                                                                <a href="<%= link %>"
+                                                                                                    target="_blank"
+                                                                                                    rel="noopener nofollow me"
+                                                                                                    class="px-1 align-middle inline-block">
+                                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                        width="24"
+                                                                                                        height="24"
+                                                                                                        viewBox="0 0 24 24"
+                                                                                                        role="img"
+                                                                                                        aria-labelledby="aekt8ogeq8yiwrqcbfl23u1jjduau1u8"
+                                                                                                        class="crayons-icon">
+                                                                                                        <title
+                                                                                                            id="aekt8ogeq8yiwrqcbfl23u1jjduau1u8">
+                                                                                                            Instagram
+                                                                                                            logo
+                                                                                                        </title>
+                                                                                                        <path
+                                                                                                            d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.508-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z">
+                                                                                                        </path>
+                                                                                                    </svg>
+
+                                                                                                </a>
+                                                                                                <% } %>
+                                                                                                    <% }) %>
+                                                    </span>
+
+                                                    <!-- ========================= END OF USER ICONS FOR WEBSITES ======================  -->
+                                                    <% if(userid==user._id ) { %>
+
+                                                        <span>
+                                                            <a href="/users/updateProfile"
+                                                                class="btn btn-outline-info">Edit
+                                                                Profile</a>
+                                                        </span>
+                                                        <% } %>
                                 </div>
                             </div>
                             <div class="profile-header__bottom fs-base">
@@ -619,10 +686,15 @@
                                 </div>
                                 <div class="crayons-definition">
                                     <strong class="crayons-definition__title">Work status</strong>
-                                    <p class="crayons-definition__value">I'm looking for work!</p>
+                                    <p class="crayons-definition__value">I am looking for work!</p>
                                 </div>
                             </div>
-
+                            <div class="p-3 pt-0 block m:hidden js-user-info-trigger-wrapper">
+                                <button type="button"
+                                    class="crayons-btn crayons-btn--outlined w-100 js-user-info-trigger">More
+                                    info about
+                                    @aemiej</button>
+                            </div>
                             <div class="crayons-modal align-left hidden">
                                 <div class="crayons-modal__box">
                                     <div class="crayons-modal__box__header">
@@ -670,680 +742,605 @@
                                     <h3 class="crayons-subtitle-3">Skills/languages</h3>
                                 </header>
                                 <div class="crayons-card__body">
-                                    <span class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button m-1">
-                                        Bioinformatics
-                                    </span>
-                                    <span class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button m-1">
-                                        Web Development
-                                    </span>
+                                    <% user.skills.forEach(function(skill){ %>
+                                        <span
+                                            class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button m-1">
+                                            <%= skill %>
+                                        </span>
+                                        <% }) %>
                                 </div>
                             </div>
+                            <!-- render this div if and only the userRepos is not empty -->
+                            <% if(userRepos.length> 0) { %>
 
-                            <div class="crayons-card crayons-card--secondary">
-                                <!-- <header class="crayons-card__header">
-                                    <h3 class="crayons-subtitle-3">Projects</h3>
-                                </header> -->
-                                <!-- iterate through every project and display it -->
-                                <ul class="list-group">
-                                    <h3 class="crayons-subtitle-3 list-group-item list-group-item-info">
-                                        Projects
-                                    </h3>
-                                    <a href="">
-                                        <li class="list-group-item">
-                                            automate-the-boring-stuff
-                                        </li>
-                                    </a>
-                                    <a href="">
-                                        <li class="list-group-item">
-                                            Nodejs the hard way
-                                        </li>
-                                    </a>
-                                    <a href="">
-                                        <li class="list-group-item">
-                                            MongoDB crud operations
-                                        </li>
-                                    </a>
-                                </ul>
+                                <div class="crayons-card crayons-card--secondary">
+                                    <!-- <header class="crayons-card__header">
+                                            <h3 class="crayons-subtitle-3">Projects</h3>
+                                        </header> -->
+                                    <!-- iterate through every project and display it -->
+                                    <ul class="list-group">
+                                        <h3 class="crayons-subtitle-3 list-group-item list-group-item-info">Projects
+                                        </h3>
+                                        <% userRepos.forEach(function(repo) { %>
+                                            <a href="<%= repo.repoUrl %>">
+                                                <li class="list-group-item">
+                                                    <%= repo.repoName %>
+                                                </li>
+                                            </a>
+                                            <% }) %>
+                                    </ul>
 
 
-                            </div>
-                            <div class="crayons-card crayons-card--secondary">
-                                <header class="crayons-card__header">
-                                    <h3 class="crayons-subtitle-3">Available for...</h3>
-                                </header>
-
-                                <div class="crayons-card__body">
-                                    <p>available for collaboration</p>
                                 </div>
-                            </div>
+                                <% } %>
+                                    <div class="crayons-card crayons-card--secondary">
+                                        <header class="crayons-card__header">
+                                            <h3 class="crayons-subtitle-3">Available for...</h3>
+                                        </header>
 
-                            <div class="crayons-card crayons-card--secondary p-4">
-                                <div class="flex items-center mb-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                        class="crayons-icon mr-3 color-base-50">
-                                        <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
-                                        <path
-                                            d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
-                                        </path>
-                                    </svg>
+                                        <div class="crayons-card__body">
+                                            <p>Web development, testing and analysis, computer vision. </p>
+                                        </div>
+                                    </div>
 
-                                    5 posts published
-                                </div>
-                                <div class="flex items-center mb-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        role="img" aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt"
-                                        class="crayons-icon mr-3 color-base-50">
-                                        <title id="abufedsnsekr607wkz3cghttsqxk7imt">Comment</title>
-                                        <path
-                                            d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
-                                        </path>
-                                    </svg>
+                                    <div class="crayons-card crayons-card--secondary p-4">
+                                        <div class="flex items-center mb-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" role="img"
+                                                aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
+                                                class="crayons-icon mr-3 color-base-50">
+                                                <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
+                                                <path
+                                                    d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
+                                                </path>
+                                            </svg>
 
-                                    6 comments written
-                                </div>
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        role="img" aria-labelledby="aavo11kuxepnfcc1uh5458yldkuco6e3"
-                                        class="crayons-icon mr-3 color-base-50">
-                                        <title id="aavo11kuxepnfcc1uh5458yldkuco6e3">Tag</title>
-                                        <path
-                                            d="M7.784 14l.42-4H4V8h4.415l.525-5h2.011l-.525 5h3.989l.525-5h2.011l-.525 5H20v2h-3.784l-.42 4H20v2h-4.415l-.525 5h-2.011l.525-5H9.585l-.525 5H7.049l.525-5H4v-2h3.784zm2.011 0h3.99l.42-4h-3.99l-.42 4z">
-                                        </path>
-                                    </svg>
+                                            5 posts published
+                                        </div>
+                                        <div class="flex items-center mb-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" role="img"
+                                                aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt"
+                                                class="crayons-icon mr-3 color-base-50">
+                                                <title id="abufedsnsekr607wkz3cghttsqxk7imt">Comment</title>
+                                                <path
+                                                    d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
+                                                </path>
+                                            </svg>
 
-                                    17 tags followed
-                                </div>
-                            </div>
+                                            6 comments written
+                                        </div>
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" role="img"
+                                                aria-labelledby="aavo11kuxepnfcc1uh5458yldkuco6e3"
+                                                class="crayons-icon mr-3 color-base-50">
+                                                <title id="aavo11kuxepnfcc1uh5458yldkuco6e3">Tag</title>
+                                                <path
+                                                    d="M7.784 14l.42-4H4V8h4.415l.525-5h2.011l-.525 5h3.989l.525-5h2.011l-.525 5H20v2h-3.784l-.42 4H20v2h-4.415l-.525 5h-2.011l.525-5H9.585l-.525 5H7.049l.525-5H4v-2h3.784zm2.011 0h3.99l.42-4h-3.99l-.42 4z">
+                                                </path>
+                                            </svg>
+
+                                            17 tags followed
+                                        </div>
+                                    </div>
                         </div>
                     </div>
 
                     <main class="crayons-layout__content articles-list" id="articles-list">
                         <div class="substories" id="substories">
 
-                            <!-- ================ beginning of post form -->
-                            <section class="card mb-2">
+                            <% if(userid===userId) { %>
+                                <!-- ================ beginning of post form -->
+                                <section class="card mb-2">
+                                    <div class="card-header">
+                                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href=""
+                                                    role="tab" aria-controls="posts" aria-selected="true">Make
+                                                    a Post</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="/posts/create" method="POST">
+                                            <div class="card-body">
+                                                <div class="tab-content" id="myTabContent">
+                                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                                        aria-labelledby="posts-tab">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="post">post</label>
+                                                            <textarea style="resize: none;height:100px"
+                                                                class="form-control" name="post" id="post" rows="3"
+                                                                placeholder="What are you thinking..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <button type="submit" class="btn btn-outline-success">share</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
+                                <% } %>
 
-                                <div class="card-body">
-                                    <form id="submit">
-                                        <div class="card-body">
-                                            <div class="tab-content" id="myTabContent">
-                                                <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                                    aria-labelledby="posts-tab">
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="post">post</label>
-                                                        <textarea style="resize: none;height:100px" class="form-control"
-                                                            name="post" id="post" rows="3"
-                                                            placeholder="What are you thinking..."></textarea>
+                                    <!-- ============= end of post form =============== -->
+
+
+
+                                    <% if (posts !==undefined || posts !==null) { %>
+                                        <% posts.forEach(function(post) { %>
+                                            <!-- =================== beginning of the post ======================== -->
+
+                                            <div class="crayons-story " data-content-user-id="219080">
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                    aria-labelledby="article-link-421966"
+                                                    class="crayons-story__hidden-navigation-link">Use
+                                                    Github Real-Time Status to Improve Your Profile</a>
+
+
+                                                <div class="crayons-story__body">
+                                                    <div class="crayons-story__top">
+                                                        <div class="crayons-story__meta">
+                                                            <div class="crayons-story__author-pic">
+
+                                                                <a href="users/profile/<%=post.user._id%>"
+                                                                    class="crayons-avatar  crayons-avatar--l  ">
+                                                                    <img src="<% if(user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>"
+                                                                        alt="aemiej profile"
+                                                                        class="crayons-avatar__image" />
+                                                                </a>
+                                                            </div>
+                                                            <div>
+                                                                <p>
+                                                                    <a href="users/profile/<%=post.user._id%>"
+                                                                        class="crayons-story__secondary fw-medium">
+                                                                        <%=post.user.name%>
+                                                                    </a>
+                                                                </p>
+                                                                <a href="/posts/<%=post._id %>"
+                                                                    class="crayons-story__tertiary fs-xs"><time
+                                                                        datetime="2020-08-08T06:46:08Z">
+                                                                        <%= moment(post.createdAt).fromNow() %>
+                                                                    </time><span
+                                                                        class="time-ago-indicator-initial-placeholder"
+                                                                        data-seconds="1596869168"></span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="crayons-story__indention">
+                                                        <h2 class="crayons-story__title">
+                                                            <p>
+                                                                <%= post.description %>
+                                                            </p>
+                                                        </h2>
+                                                        <div class="crayons-story__tags">
+                                                            <% post.hashtags.forEach(function (tag) { %>
+                                                                <a href="" class="crayons-tag"><span
+                                                                        class="crayons-tag__prefix">#</span>
+                                                                    <%= tag %>
+                                                                </a>
+                                                                <% }) %>
+                                                                    <!-- <a href="t/productivity.html" class="crayons-tag"><span
+                                                                class="crayons-tag__prefix">#</span>productivity</a>
+                                                        <a href="t/webdev.html" class="crayons-tag"><span
+                                                                class="crayons-tag__prefix">#</span>webdev</a>
+                                                        <a href="t/codenewbie.html" class="crayons-tag"><span
+                                                                class="crayons-tag__prefix">#</span>codenewbie</a> -->
+                                                        </div>
+                                                        <div class="crayons-story__bottom">
+                                                            <div class="crayons-story__details">
+                                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
+                                                                    data-reaction-count data-reactable-id="421966">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" role="img"
+                                                                        aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
+                                                                        class="crayons-icon">
+                                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">
+                                                                            Reactions
+                                                                        </title>
+                                                                        <path
+                                                                            d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                                                                        </path>
+                                                                    </svg>
+
+                                                                    60
+                                                                    <span class="hidden s:inline">&nbsp;reactions</span>
+                                                                </a>
+                                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
+                                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" role="img"
+                                                                        aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
+                                                                        class="crayons-icon">
+                                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">
+                                                                            Comments
+                                                                        </title>
+                                                                        <path
+                                                                            d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
+                                                                        </path>
+                                                                    </svg>
+
+                                                                    1
+                                                                    <span class="hidden s:inline">&nbsp;comments</span>
+                                                                </a>
+                                                            </div>
+                                                            <div class="crayons-story__save">
+                                                                <small class="crayons-story__tertiary fs-xs mr-2">
+                                                                    <%= post.readingTime %> min read
+                                                                </small>
+                                                                <% if(userid==post.user._id ) { %>
+                                                                    <a type="button" href="/posts/<%= post._id %>/edit"
+                                                                        id="article-save-button-421966"
+                                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                                        data-reactable-id="421966"
+                                                                        aria-label="Save to reading list"
+                                                                        title="Save to reading list">
+                                                                        <span class="bm-initial">edit</span>
+                                                                    </a>
+                                                                    <% } %>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="text-right">
-                                                <button type="submit" class="btn btn-outline-info">share</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </section>
+                                            <% }) %>
+                                                <% } %>
+                                                    <!-- =================== end of the post =================== -->
 
-                            <!-- ============= end of post form =============== -->
+                                                    <!-- ===================== beginning of the post ======================= -->
 
-
-
-                            <!-- =================== beginning of the post ======================== -->
-                            <!-- post1 -->
-                            <div class="crayons-story " data-content-user-id="219080">
-                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                    aria-labelledby="article-link-421966"
-                                    class="crayons-story__hidden-navigation-link">Use
-                                    Github Real-Time Status to Improve Your Profile</a>
-
-
-                                <div class="crayons-story__body">
-                                    <div class="crayons-story__top">
-                                        <div class="crayons-story__meta">
-                                            <div class="crayons-story__author-pic">
-
-                                                <a href="/users/profile/<%= userid %>"
-                                                    class="crayons-avatar  crayons-avatar--l  ">
-                                                    <img src="/assets/img/grad.jpg" alt="aemiej profile"
-                                                        class="crayons-avatar__image" />
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <p>
-                                                    <a href="/users/profile/<%= userid %>"
-                                                        class="crayons-story__secondary fw-medium">
-                                                        Lara
+                                                    <!-- <div class="crayons-story " data-content-user-id="219080">
+                                    <a href="aemiej/the-best-web-development-courses-3hgm.html"
+                                        aria-labelledby="article-link-556244" class="crayons-story__hidden-navigation-link">The
+                                        Best Web Development Courses</a>
+                                    <div class="crayons-story__body">
+                                        <div class="crayons-story__top">
+                                            <div class="crayons-story__meta">
+                                                <div class="crayons-story__author-pic">
+                                                    <a href="aemiej.html" class="crayons-avatar  crayons-avatar--l  ">
+                                                        <img src="/img/ss.jpg" alt="aemiej profile"
+                                                            class="crayons-avatar__image" />
                                                     </a>
-                                                </p>
-                                                <a href="" class="crayons-story__tertiary fs-xs"><time
-                                                        datetime="2020-08-08T06:46:08Z">
-                                                        13 min ago
-                                                    </time><span class="time-ago-indicator-initial-placeholder"
-                                                        data-seconds="1596869168"></span></a>
+                                                </div>
+                                                <div>
+                                                    <p>
+                                                        <a href="aemiej.html" class="crayons-story__secondary fw-medium">
+                                                            Aemie Jariwala
+                                                        </a>
+                                                    </p>
+                                                    <a href="aemiej/the-best-web-development-courses-3hgm.html"
+                                                        class="crayons-story__tertiary fs-xs"><time
+                                                            datetime="2020-12-30T08:59:54Z">Dec 30</time><span
+                                                            class="time-ago-indicator-initial-placeholder"
+                                                            data-seconds="1609318794"></span></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="crayons-story__indention">
-                                        <h2 class="crayons-story__title">
-                                            <p>
-                                                hello could anyone connect with me I need help in my graduation project!
-                                                thanks in advance!
-                                            </p>
-                                        </h2>
-                                        <div class="crayons-story__tags">
-                                            <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                                Help
-                                            </a>
-                                            <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                                javascript
-                                            </a>
-                                        </div>
-                                        <div class="crayons-story__bottom">
-                                            <div class="crayons-story__details">
-                                                <a href=""
-                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                                    data-reaction-count data-reactable-id="421966">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
-                                                        class="crayons-icon">
-                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
-                                                        </title>
-                                                        <path
-                                                            d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                        </path>
-                                                    </svg>
-
-                                                    2
-                                                    <span class="hidden s:inline">&nbsp;reactions</span>
+                                        <div class="crayons-story__indention">
+                                            <h2 class="crayons-story__title">
+                                                <a href="aemiej/the-best-web-development-courses-3hgm.html"
+                                                    data-preload-image="https://res.cloudinary.com/practicaldev/image/fetch/s--4tLLm42c--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/y2kjaw1n7nzpjdwf36pl.jpg"
+                                                    id="article-link-556244">
+                                                    The Best Web Development Courses
                                                 </a>
-                                                <a href=""
-                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
-                                                        class="crayons-icon">
-                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
-                                                        </title>
-                                                        <path
-                                                            d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                        </path>
-                                                    </svg>
-
-                                                    3
-                                                    <span class="hidden s:inline">&nbsp;comments</span>
-                                                </a>
-                                            </div>
-                                            <div class="crayons-story__save">
-                                                <small class="crayons-story__tertiary fs-xs mr-2">
-                                                    1 min read
-                                                </small>
-                                                <a type="button" href="" id="article-save-button-421966"
-                                                    class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                                    data-reactable-id="421966" aria-label="Save to reading list"
-                                                    title="Save to reading list">
-                                                    <span class="bm-initial">edit</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- endpost -->
-                            <div class="crayons-story " data-content-user-id="219080">
-                                <a href="" aria-labelledby="article-link-421966"
-                                    class="crayons-story__hidden-navigation-link">Use
-                                    Github Real-Time Status to Improve Your Profile</a>
-
-
-                                <div class="crayons-story__body">
-                                    <div class="crayons-story__top">
-                                        <div class="crayons-story__meta">
-                                            <div class="crayons-story__author-pic">
-
-                                                <a href="/users/profile/<%= userid %>"
-                                                    class="crayons-avatar  crayons-avatar--l  ">
-                                                    <img src="/assets/img/grad.jpg" alt=" aemiej profile"
-                                                        class="crayons-avatar__image" />
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <p>
-                                                    <a href="/users/profile/<%= userid %>"
-                                                        class="crayons-story__secondary fw-medium">
-                                                        Lara
-                                                    </a>
-                                                </p>
-                                                <a href="/posts/" class="crayons-story__tertiary fs-xs"><time
-                                                        datetime="2020-08-08T06:46:08Z">
-                                                        1 hour ago
-                                                    </time><span class="time-ago-indicator-initial-placeholder"
-                                                        data-seconds="1596869168"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="crayons-story__indention">
-                                        <h2 class="crayons-story__title">
-                                            <p>
-                                                this is my first post on zero to one community!
-                                            </p>
-                                        </h2>
-                                        <div class="crayons-story__tags">
-                                            <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                                first
-                                            </a>
-                                            <!-- <a href="t/productivity.html" class="crayons-tag"><span
-                                                        class="crayons-tag__prefix">#</span>productivity</a>
+                                            </h2>
+                                            <div class="crayons-story__tags">
                                                 <a href="t/webdev.html" class="crayons-tag"><span
                                                         class="crayons-tag__prefix">#</span>webdev</a>
-                                                <a href="t/codenewbie.html" class="crayons-tag"><span
-                                                        class="crayons-tag__prefix">#</span>codenewbie</a> -->
+                                                <a href="t/writing.html" class="crayons-tag"><span
+                                                        class="crayons-tag__prefix">#</span>writing</a>
+                                            </div>
+                                            <div class="crayons-story__bottom">
+                                                <div class="crayons-story__details">
+                                                    <a href="aemiej/the-best-web-development-courses-3hgm.html"
+                                                        class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
+                                                        data-reaction-count data-reactable-id="556244">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            role="img" aria-labelledby="ahqdlk3t2quvv7rcf7eayhywe3564m0r"
+                                                            class="crayons-icon">
+                                                            <title id="ahqdlk3t2quvv7rcf7eayhywe3564m0r">Reactions</title>
+                                                            <path
+                                                                d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                                                            </path>
+                                                        </svg>
+        
+                                                        16
+                                                        <span class="hidden s:inline">&nbsp;reactions</span>
+                                                    </a>
+                                                </div>
+                                                <div class="crayons-story__save">
+                                                    <small class="crayons-story__tertiary fs-xs mr-2">
+                                                        3 min read
+                                                    </small>
+                                                    <button type="button" id="article-save-button-556244"
+                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                        data-reactable-id="556244" aria-label="Save to reading list"
+                                                        title="Save to reading list">
+                                                        <span class="bm-initial">edit</span>
+        
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+
+                                                    <!-- =================== end of the post ======================== -->
+
+
+
+
+                                                    <!-- <div class="profile-comment-card crayons-card mt-2 m:mt-0 mb-2">
+                                    <div class="crayons-card__header">
+                                        <h3 class="crayons-subtitle-2">
+                                            Recent comments
+                                        </h3>
+                                    </div>
+                                    <a href="aemiej/comment/13b4e.html" class="profile-comment-row ">
+                                        <h4 class="fw-bold fs-base m-0 mb-1">
+                                            Small tip on how to get your article covered on dev.to
+                                        </h4>
+                                        <div class="inline-flex items-center fs-s gap-2">
+                                            <p class="color-base-80">
+                                                I just landed across this article and a must say, this are so...
+                                            <p>
+                                                <small class="color-base-60 fs-s comment-date whitespace-nowrap">
+                                                    <time datetime="2020-08-08T18:30:53Z">Dec 8</time>
+                                                </small>
+                                        </div>
+                                    </a>
+                                    <a href="aemiej/comment/109ke.html" class="profile-comment-row ">
+                                        <h4 class="fw-bold fs-base m-0 mb-1">
+                                            What was your win this week?
+                                        </h4>
+                                        <div class="inline-flex items-center fs-s gap-2">
+                                            <p class="color-base-80">
+                                                My win this week is that I resolved an issue that has been bo...
+                                            <p>
+                                                <small class="color-base-60 fs-s comment-date whitespace-nowrap">
+                                                    <time datetime="2020-06-13T05:38:56Z">Dec 1</time>
+                                                </small>
+                                        </div>
+                                    </a>
+                                    <a href="aemiej/comment/ncjd.html" class="profile-comment-row ">
+                                        <h4 class="fw-bold fs-base m-0 mb-1">
+                                            📦 npm Cheat-Sheet [infographic + pdf]
+                                        </h4>
+                                        <div class="inline-flex items-center fs-s gap-2">
+                                            <p class="color-base-80">
+        
+        
+                                                Cheatsheets on major frameworks such as React, Angular coul...
+                                            <p>
+                                                <small class="color-base-60 fs-s comment-date whitespace-nowrap">
+                                                    <time datetime="2020-04-05T16:18:05Z">Nov 30</time>
+                                                </small>
+                                        </div>
+                                    </a>
+                                    <a href="aemiej/comment/hglm.html" class="profile-comment-row ">
+                                        <h4 class="fw-bold fs-base m-0 mb-1">
+                                            Prefer Model.DoesNotExist over ObjectDoesNotExist in Django
+                                        </h4>
+                                        <div class="inline-flex items-center fs-s gap-2">
+                                            <p class="color-base-80">
+        
+        
+                                                I have added my ip address to the allowed host to be access...
+                                            <p>
+                                                <small class="color-base-60 fs-s comment-date whitespace-nowrap">
+                                                    <time datetime="2019-11-09T11:30:39Z">Nov 29 &#39;19</time>
+                                                </small>
+                                        </div>
+                                    </a>
+                                    <a href="aemiej/comment/f4oi.html" class="profile-comment-row ">
+                                        <h4 class="fw-bold fs-base m-0 mb-1">
+                                            Homemade Machine Learning in Python
+                                        </h4>
+                                        <div class="inline-flex items-center fs-s gap-2">
+                                            <p class="color-base-80">
+        
+        
+                                                Learn machine learning from scratch is absolutely delightfu...
+                                            <p>
+                                                <small class="color-base-60 fs-s comment-date whitespace-nowrap">
+                                                    <time datetime="2019-09-09T01:55:49Z">Nov 27 &#39;19</time>
+                                                </small>
+                                        </div>
+                                    </a>
+                                </div> -->
+
+                                                    <!-- <div class="crayons-story " data-content-user-id="219080">
+                                    <a href="aemiej/noise-canceling-extension-52fd.html" aria-labelledby="article-link-449449"
+                                        class="crayons-story__hidden-navigation-link">Sound-Muter extension</a>
+        
+        
+                                    <div class="crayons-story__body">
+                                        <div class="crayons-story__top">
+                                            <div class="crayons-story__meta">
+                                                <div class="crayons-story__author-pic">
+        
+                                                    <a href="aemiej.html" class="crayons-avatar  crayons-avatar--l  ">
+                                                        <img src="/img/ss.jpg" alt="aemiej profile"
+                                                            class="crayons-avatar__image" />
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <p>
+                                                        <a href="aemiej.html" class="crayons-story__secondary fw-medium">
+                                                            Aemie Jariwala
+                                                        </a>
+                                                    </p>
+                                                    <a href="aemiej/noise-canceling-extension-52fd.html"
+                                                        class="crayons-story__tertiary fs-xs"><time
+                                                            datetime="2020-09-07T14:21:37Z">Sep 7</time><span
+                                                            class="time-ago-indicator-initial-placeholder"
+                                                            data-seconds="1599488497"></span></a>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                                    <!-- <div class="crayons-story__indention">
+                                    <h2 class="crayons-story__title">
+                                        <a href="aemiej/noise-canceling-extension-52fd.html"
+                                            data-preload-image="https://res.cloudinary.com/practicaldev/image/fetch/s--oSawdKwj--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/rvnthfauso80bucopedz.png"
+                                            id="article-link-449449">
+                                            Sound-Muter extension
+                                        </a>
+                                    </h2>
+                                    <div class="crayons-story__tags">
+                                        <a href="t/javascript.html" class="crayons-tag"><span
+                                                class="crayons-tag__prefix">#</span>javascript</a>
+                                        <a href="t/webdev.html" class="crayons-tag"><span
+                                                class="crayons-tag__prefix">#</span>webdev</a>
+                                        <a href="t/productivity.html" class="crayons-tag"><span
+                                                class="crayons-tag__prefix">#</span>productivity</a>
+                                        <a href="t/womenintech.html" class="crayons-tag"><span
+                                                class="crayons-tag__prefix">#</span>womenintech</a>
+                                    </div>
+                                    <div class="crayons-story__bottom">
+                                        <div class="crayons-story__details">
+                                            <a href="aemiej/noise-canceling-extension-52fd.html"
+                                                class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
+                                                data-reaction-count data-reactable-id="449449">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
+                                                    aria-labelledby="abej1l7dvbjfp8a16j354u0093ec5esq" class="crayons-icon">
+                                                    <title id="abej1l7dvbjfp8a16j354u0093ec5esq">Reactions</title>
+                                                    <path
+                                                        d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                                                    </path>
+                                                </svg>
+        
+                                                36
+                                                <span class="hidden s:inline">&nbsp;reactions</span>
+                                            </a>
+                                            <a href="aemiej/noise-canceling-extension-52fd.html#comments"
+                                                class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
+                                                    aria-labelledby="a8p2x751zdwdle18thos1gif11gt4ry5" class="crayons-icon">
+                                                    <title id="a8p2x751zdwdle18thos1gif11gt4ry5">Comments</title>
+                                                    <path
+                                                        d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
+                                                    </path>
+                                                </svg>
+        
+                                                2
+                                                <span class="hidden s:inline">&nbsp;comments</span>
+                                            </a>
+                                        </div>
+                                        <div class="crayons-story__save">
+                                            <small class="crayons-story__tertiary fs-xs mr-2">
+                                                4 min read
+                                            </small>
+                                            <button type="button" id="article-save-button-449449"
+                                                class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                data-reactable-id="449449" aria-label="Save to reading list"
+                                                title="Save to reading list">
+                                                <span class="bm-initial">edit</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <!-- <div class="crayons-story " data-content-user-id="219080">
+                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                    aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
+                                    Github Real-Time Status to Improve Your Profile</a>
+        
+        
+                                <div class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <div class="crayons-story__author-pic">
+        
+                                                <a href="aemiej.html" class="crayons-avatar  crayons-avatar--l  ">
+                                                    <img src="/img/ss.jpg" alt="aemiej profile" class="crayons-avatar__image" />
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a href="aemiej.html" class="crayons-story__secondary fw-medium">
+                                                        Aemie Jariwala
+                                                    </a>
+                                                </p>
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                    class="crayons-story__tertiary fs-xs"><time
+                                                        datetime="2020-08-08T06:46:08Z">Aug
+                                                        8</time><span class="time-ago-indicator-initial-placeholder"
+                                                        data-seconds="1596869168"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                data-preload-image="https://res.cloudinary.com/practicaldev/image/fetch/s--dbg-epq---/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/0eemgine7b7brvqdx1m3.jpg"
+                                                id="article-link-421966">
+                                                Use Github Real-Time Status to Improve Your Profile
+                                            </a>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+                                            <a href="t/github.html" class="crayons-tag"><span
+                                                    class="crayons-tag__prefix">#</span>github</a>
+                                            <a href="t/productivity.html" class="crayons-tag"><span
+                                                    class="crayons-tag__prefix">#</span>productivity</a>
+                                            <a href="t/webdev.html" class="crayons-tag"><span
+                                                    class="crayons-tag__prefix">#</span>webdev</a>
+                                            <a href="t/codenewbie.html" class="crayons-tag"><span
+                                                    class="crayons-tag__prefix">#</span>codenewbie</a>
                                         </div>
                                         <div class="crayons-story__bottom">
                                             <div class="crayons-story__details">
                                                 <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
                                                     class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
                                                     data-reaction-count data-reactable-id="421966">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
-                                                        class="crayons-icon">
-                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">
-                                                            Reactions
-                                                        </title>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
+                                                        aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol" class="crayons-icon">
+                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions</title>
                                                         <path
                                                             d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
                                                         </path>
                                                     </svg>
-
-                                                    13
+        
+                                                    60
                                                     <span class="hidden s:inline">&nbsp;reactions</span>
                                                 </a>
                                                 <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
                                                     class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
-                                                        class="crayons-icon">
-                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">
-                                                            Comments
-                                                        </title>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
+                                                        aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y" class="crayons-icon">
+                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments</title>
                                                         <path
                                                             d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
                                                         </path>
                                                     </svg>
-
+        
                                                     1
                                                     <span class="hidden s:inline">&nbsp;comments</span>
                                                 </a>
                                             </div>
                                             <div class="crayons-story__save">
                                                 <small class="crayons-story__tertiary fs-xs mr-2">
-                                                    1 min read
+                                                    2 min read
                                                 </small>
-                                                <a type="button" href="/posts//edit" id="article-save-button-421966"
+                                                <button type="button" id="article-save-button-421966"
                                                     class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
                                                     data-reactable-id="421966" aria-label="Save to reading list"
                                                     title="Save to reading list">
                                                     <span class="bm-initial">edit</span>
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- =================== end of the post =================== -->
-
-                            <!-- ===================== beginning of the post ======================= -->
-
-                            <!-- <div class="crayons-story " data-content-user-id="219080">
-                            <a href="aemiej/the-best-web-development-courses-3hgm.html"
-                                aria-labelledby="article-link-556244" class="crayons-story__hidden-navigation-link">The
-                                Best Web Development Courses</a>
-                            <div class="crayons-story__body">
-                                <div class="crayons-story__top">
-                                    <div class="crayons-story__meta">
-                                        <div class="crayons-story__author-pic">
-                                            <a href="aemiej.html" class="crayons-avatar  crayons-avatar--l  ">
-                                                <img src="/img/ss.jpg" alt="aemiej profile"
-                                                    class="crayons-avatar__image" />
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                <a href="aemiej.html" class="crayons-story__secondary fw-medium">
-                                                    Aemie Jariwala
-                                                </a>
-                                            </p>
-                                            <a href="aemiej/the-best-web-development-courses-3hgm.html"
-                                                class="crayons-story__tertiary fs-xs"><time
-                                                    datetime="2020-12-30T08:59:54Z">Dec 30</time><span
-                                                    class="time-ago-indicator-initial-placeholder"
-                                                    data-seconds="1609318794"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="crayons-story__indention">
-                                    <h2 class="crayons-story__title">
-                                        <a href="aemiej/the-best-web-development-courses-3hgm.html"
-                                            data-preload-image="https://res.cloudinary.com/practicaldev/image/fetch/s--4tLLm42c--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/y2kjaw1n7nzpjdwf36pl.jpg"
-                                            id="article-link-556244">
-                                            The Best Web Development Courses
-                                        </a>
-                                    </h2>
-                                    <div class="crayons-story__tags">
-                                        <a href="t/webdev.html" class="crayons-tag"><span
-                                                class="crayons-tag__prefix">#</span>webdev</a>
-                                        <a href="t/writing.html" class="crayons-tag"><span
-                                                class="crayons-tag__prefix">#</span>writing</a>
-                                    </div>
-                                    <div class="crayons-story__bottom">
-                                        <div class="crayons-story__details">
-                                            <a href="aemiej/the-best-web-development-courses-3hgm.html"
-                                                class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                                data-reaction-count data-reactable-id="556244">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    role="img" aria-labelledby="ahqdlk3t2quvv7rcf7eayhywe3564m0r"
-                                                    class="crayons-icon">
-                                                    <title id="ahqdlk3t2quvv7rcf7eayhywe3564m0r">Reactions</title>
-                                                    <path
-                                                        d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                    </path>
-                                                </svg>
-
-                                                16
-                                                <span class="hidden s:inline">&nbsp;reactions</span>
-                                            </a>
-                                        </div>
-                                        <div class="crayons-story__save">
-                                            <small class="crayons-story__tertiary fs-xs mr-2">
-                                                3 min read
-                                            </small>
-                                            <button type="button" id="article-save-button-556244"
-                                                class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                                data-reactable-id="556244" aria-label="Save to reading list"
-                                                title="Save to reading list">
-                                                <span class="bm-initial">edit</span>
-
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-
-
-                            <!-- =================== end of the post ======================== -->
-
-
-
-
-                            <!-- <div class="profile-comment-card crayons-card mt-2 m:mt-0 mb-2">
-                            <div class="crayons-card__header">
-                                <h3 class="crayons-subtitle-2">
-                                    Recent comments
-                                </h3>
-                            </div>
-                            <a href="aemiej/comment/13b4e.html" class="profile-comment-row ">
-                                <h4 class="fw-bold fs-base m-0 mb-1">
-                                    Small tip on how to get your article covered on dev.to
-                                </h4>
-                                <div class="inline-flex items-center fs-s gap-2">
-                                    <p class="color-base-80">
-                                        I just landed across this article and a must say, this are so...
-                                    <p>
-                                        <small class="color-base-60 fs-s comment-date whitespace-nowrap">
-                                            <time datetime="2020-08-08T18:30:53Z">Dec 8</time>
-                                        </small>
-                                </div>
-                            </a>
-                            <a href="aemiej/comment/109ke.html" class="profile-comment-row ">
-                                <h4 class="fw-bold fs-base m-0 mb-1">
-                                    What was your win this week?
-                                </h4>
-                                <div class="inline-flex items-center fs-s gap-2">
-                                    <p class="color-base-80">
-                                        My win this week is that I resolved an issue that has been bo...
-                                    <p>
-                                        <small class="color-base-60 fs-s comment-date whitespace-nowrap">
-                                            <time datetime="2020-06-13T05:38:56Z">Dec 1</time>
-                                        </small>
-                                </div>
-                            </a>
-                            <a href="aemiej/comment/ncjd.html" class="profile-comment-row ">
-                                <h4 class="fw-bold fs-base m-0 mb-1">
-                                    📦 npm Cheat-Sheet [infographic + pdf]
-                                </h4>
-                                <div class="inline-flex items-center fs-s gap-2">
-                                    <p class="color-base-80">
-
-
-                                        Cheatsheets on major frameworks such as React, Angular coul...
-                                    <p>
-                                        <small class="color-base-60 fs-s comment-date whitespace-nowrap">
-                                            <time datetime="2020-04-05T16:18:05Z">Nov 30</time>
-                                        </small>
-                                </div>
-                            </a>
-                            <a href="aemiej/comment/hglm.html" class="profile-comment-row ">
-                                <h4 class="fw-bold fs-base m-0 mb-1">
-                                    Prefer Model.DoesNotExist over ObjectDoesNotExist in Django
-                                </h4>
-                                <div class="inline-flex items-center fs-s gap-2">
-                                    <p class="color-base-80">
-
-
-                                        I have added my ip address to the allowed host to be access...
-                                    <p>
-                                        <small class="color-base-60 fs-s comment-date whitespace-nowrap">
-                                            <time datetime="2019-11-09T11:30:39Z">Nov 29 &#39;19</time>
-                                        </small>
-                                </div>
-                            </a>
-                            <a href="aemiej/comment/f4oi.html" class="profile-comment-row ">
-                                <h4 class="fw-bold fs-base m-0 mb-1">
-                                    Homemade Machine Learning in Python
-                                </h4>
-                                <div class="inline-flex items-center fs-s gap-2">
-                                    <p class="color-base-80">
-
-
-                                        Learn machine learning from scratch is absolutely delightfu...
-                                    <p>
-                                        <small class="color-base-60 fs-s comment-date whitespace-nowrap">
-                                            <time datetime="2019-09-09T01:55:49Z">Nov 27 &#39;19</time>
-                                        </small>
-                                </div>
-                            </a>
-                        </div> -->
-
-                            <!-- <div class="crayons-story " data-content-user-id="219080">
-                            <a href="aemiej/noise-canceling-extension-52fd.html" aria-labelledby="article-link-449449"
-                                class="crayons-story__hidden-navigation-link">Sound-Muter extension</a>
-
-
-                            <div class="crayons-story__body">
-                                <div class="crayons-story__top">
-                                    <div class="crayons-story__meta">
-                                        <div class="crayons-story__author-pic">
-
-                                            <a href="aemiej.html" class="crayons-avatar  crayons-avatar--l  ">
-                                                <img src="/img/ss.jpg" alt="aemiej profile"
-                                                    class="crayons-avatar__image" />
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                <a href="aemiej.html" class="crayons-story__secondary fw-medium">
-                                                    Aemie Jariwala
-                                                </a>
-                                            </p>
-                                            <a href="aemiej/noise-canceling-extension-52fd.html"
-                                                class="crayons-story__tertiary fs-xs"><time
-                                                    datetime="2020-09-07T14:21:37Z">Sep 7</time><span
-                                                    class="time-ago-indicator-initial-placeholder"
-                                                    data-seconds="1599488497"></span></a>
-                                        </div>
-                                    </div>
-                                </div> -->
-
-                            <!-- <div class="crayons-story__indention">
-                            <h2 class="crayons-story__title">
-                                <a href="aemiej/noise-canceling-extension-52fd.html"
-                                    data-preload-image="https://res.cloudinary.com/practicaldev/image/fetch/s--oSawdKwj--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/rvnthfauso80bucopedz.png"
-                                    id="article-link-449449">
-                                    Sound-Muter extension
-                                </a>
-                            </h2>
-                            <div class="crayons-story__tags">
-                                <a href="t/javascript.html" class="crayons-tag"><span
-                                        class="crayons-tag__prefix">#</span>javascript</a>
-                                <a href="t/webdev.html" class="crayons-tag"><span
-                                        class="crayons-tag__prefix">#</span>webdev</a>
-                                <a href="t/productivity.html" class="crayons-tag"><span
-                                        class="crayons-tag__prefix">#</span>productivity</a>
-                                <a href="t/womenintech.html" class="crayons-tag"><span
-                                        class="crayons-tag__prefix">#</span>womenintech</a>
-                            </div>
-                            <div class="crayons-story__bottom">
-                                <div class="crayons-story__details">
-                                    <a href="aemiej/noise-canceling-extension-52fd.html"
-                                        class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                        data-reaction-count data-reactable-id="449449">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                            aria-labelledby="abej1l7dvbjfp8a16j354u0093ec5esq" class="crayons-icon">
-                                            <title id="abej1l7dvbjfp8a16j354u0093ec5esq">Reactions</title>
-                                            <path
-                                                d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                            </path>
-                                        </svg>
-
-                                        36
-                                        <span class="hidden s:inline">&nbsp;reactions</span>
-                                    </a>
-                                    <a href="aemiej/noise-canceling-extension-52fd.html#comments"
-                                        class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                            aria-labelledby="a8p2x751zdwdle18thos1gif11gt4ry5" class="crayons-icon">
-                                            <title id="a8p2x751zdwdle18thos1gif11gt4ry5">Comments</title>
-                                            <path
-                                                d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                            </path>
-                                        </svg>
-
-                                        2
-                                        <span class="hidden s:inline">&nbsp;comments</span>
-                                    </a>
-                                </div>
-                                <div class="crayons-story__save">
-                                    <small class="crayons-story__tertiary fs-xs mr-2">
-                                        4 min read
-                                    </small>
-                                    <button type="button" id="article-save-button-449449"
-                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                        data-reactable-id="449449" aria-label="Save to reading list"
-                                        title="Save to reading list">
-                                        <span class="bm-initial">edit</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                        </div>
-
-                        <!-- <div class="crayons-story " data-content-user-id="219080">
-                        <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                            aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
-                            Github Real-Time Status to Improve Your Profile</a>
-
-
-                        <div class="crayons-story__body">
-                            <div class="crayons-story__top">
-                                <div class="crayons-story__meta">
-                                    <div class="crayons-story__author-pic">
-
-                                        <a href="aemiej.html" class="crayons-avatar  crayons-avatar--l  ">
-                                            <img src="/img/ss.jpg" alt="aemiej profile" class="crayons-avatar__image" />
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            <a href="aemiej.html" class="crayons-story__secondary fw-medium">
-                                                Aemie Jariwala
-                                            </a>
-                                        </p>
-                                        <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                            class="crayons-story__tertiary fs-xs"><time
-                                                datetime="2020-08-08T06:46:08Z">Aug
-                                                8</time><span class="time-ago-indicator-initial-placeholder"
-                                                data-seconds="1596869168"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="crayons-story__indention">
-                                <h2 class="crayons-story__title">
-                                    <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                        data-preload-image="https://res.cloudinary.com/practicaldev/image/fetch/s--dbg-epq---/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/0eemgine7b7brvqdx1m3.jpg"
-                                        id="article-link-421966">
-                                        Use Github Real-Time Status to Improve Your Profile
-                                    </a>
-                                </h2>
-                                <div class="crayons-story__tags">
-                                    <a href="t/github.html" class="crayons-tag"><span
-                                            class="crayons-tag__prefix">#</span>github</a>
-                                    <a href="t/productivity.html" class="crayons-tag"><span
-                                            class="crayons-tag__prefix">#</span>productivity</a>
-                                    <a href="t/webdev.html" class="crayons-tag"><span
-                                            class="crayons-tag__prefix">#</span>webdev</a>
-                                    <a href="t/codenewbie.html" class="crayons-tag"><span
-                                            class="crayons-tag__prefix">#</span>codenewbie</a>
-                                </div>
-                                <div class="crayons-story__bottom">
-                                    <div class="crayons-story__details">
-                                        <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                            data-reaction-count data-reactable-id="421966">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol" class="crayons-icon">
-                                                <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions</title>
-                                                <path
-                                                    d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                </path>
-                                            </svg>
-
-                                            60
-                                            <span class="hidden s:inline">&nbsp;reactions</span>
-                                        </a>
-                                        <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
-                                            class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img"
-                                                aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y" class="crayons-icon">
-                                                <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments</title>
-                                                <path
-                                                    d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                </path>
-                                            </svg>
-
-                                            1
-                                            <span class="hidden s:inline">&nbsp;comments</span>
-                                        </a>
-                                    </div>
-                                    <div class="crayons-story__save">
-                                        <small class="crayons-story__tertiary fs-xs mr-2">
-                                            2 min read
-                                        </small>
-                                        <button type="button" id="article-save-button-421966"
-                                            class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                            data-reactable-id="421966" aria-label="Save to reading list"
-                                            title="Save to reading list">
-                                            <span class="bm-initial">edit</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                            </div> -->
 
 
                         <div class="placeholder-div"></div>
@@ -1353,18 +1350,16 @@
         </div>
         </div>
 
-        <script src="/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
 
-        <script>
+<script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- <script>
             const element = document.querySelector('#submit');
             element.addEventListener('submit', event => {
                 event.preventDefault();
             });
-        </script>
-
-
-
-</body>
+        </script> -->
 
 </html>
