@@ -96,7 +96,9 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 // app.use('/posts', postRoutes);
 // app.use('/admin', adminRoutes)
-// app.use(notFoundRoute)
+app.use((req,res) => {
+  res.render('404.ejs')
+})
 // app.use((error, req, res, next) => {
 // 	res.redirect("/500");
 // });
