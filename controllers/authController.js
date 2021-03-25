@@ -31,25 +31,35 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.validateRegister = [
+	body('name', 'Name must be at least 4 characters.')
+		.exists()
+		.isLength({ min: 4 })
+		.isAlphanumeric()
+		.trim()
+		.custom((value, { req }) => {
+			//async validation (we wating for date )
+			return User.findOne({ name: value }).then(userDoc => {
+				if (userDoc) {
+					return Promise.reject('Name is already taken.');
+				}
+			});
+		}),
 	check('email')
 		.isEmail()
-		.withMessage('please enter a valid email')
+		.withMessage('This email is not valid!')
 		.custom((value, { req }) => {
 			//async validation (we wating for date )
 			return User.findOne({ email: value }).then(userDoc => {
 				if (userDoc) {
-					return Promise.reject(
-						'E-mail is already exist, please pick a different one.'
-					);
+					return Promise.reject('Email is already exist.');
 				}
 			});
 		})
 		.normalizeEmail(),
-
 	//password validation
 	body(
 		'password',
-		'please enter a password with only numbers and text and at least 5 characters. '
+		'Please enter a password with only numbers, text and at least 5 characters. '
 	)
 		.isLength({ min: 5 })
 		.isAlphanumeric()
@@ -69,6 +79,7 @@ exports.validateRegister = [
 //post Register
 exports.postRegister = async (req, res, next) => {
 	const email = req.body.email;
+	const name = req.body.name;
 	const password = req.body.password;
 
 	const errors = validationResult(req);
@@ -80,6 +91,7 @@ exports.postRegister = async (req, res, next) => {
 			// for displaying the red messages
 			errorMassage: errors.array()[0].msg,
 			oldInput: {
+				name,
 				email: email,
 				password: password,
 				confirmPassword: req.body.confirmPassword,
@@ -91,6 +103,7 @@ exports.postRegister = async (req, res, next) => {
 
 	try {
 		let user = await User.findOne({ email: email });
+		//! el mfrod el check da myt3mllosh excution 5ales 3shan 3amleno already f el validation bta3t express-validator
 		// if there's a user
 		if (user) {
 			return res.redirect('/auth/register');
@@ -98,6 +111,7 @@ exports.postRegister = async (req, res, next) => {
 		// if there's no user
 		const hashedpass = await bcrypt.hash(password, 12);
 		user = new User({
+			name,
 			email: email,
 			password: hashedpass,
 		});

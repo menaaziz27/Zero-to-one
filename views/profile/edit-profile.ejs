@@ -37,19 +37,19 @@
         <div class="container">
 
             <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
-                <div class="col-md-6 offset-md-3  rounded py-4">
+                <div class="py-4 rounded col-md-6 offset-md-3">
                     <h3 style="text-align: center;">update profile</h3>
                     <!-- FORM -->
                     <% if (errorMassage) { %>
-                        <div class="user-message  user-message--error">
+                        <div class="user-message user-message--error">
                             <%= errorMassage %>
                         </div>
                         <% } %>
                             <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
-                            <form  action="/users/profile" method="POST" enctype="multipart/form-data" id="submit">
+                            <form action="/users/profile" method="POST" enctype="multipart/form-data" id="submit">
                                 <!-- TEXT FIELD GROUPS -->
                                 <div class="form-group">
-                                    <label for="name">Username</label>
+                                    <label for="name">Name</label>
                                     <input class="form-control" type="text" name="name" id="name"
                                         placeholder="Enter name" value="<%=currentUser.name%>">
                                 </div>
@@ -522,7 +522,7 @@
                                     </label>
                                     <input
                                         value="<% if (websitesObj.github) { %><%= websitesObj.github %><% } else {%><% } %>"
-                                        class="form-control mb-2" placeholder="https://github.com/..."
+                                        class="mb-2 form-control" placeholder="https://github.com/..."
                                         class="crayons-textfield" type="text" name="github" id="github">
 
 
@@ -531,7 +531,7 @@
                                     </label>
                                     <input
                                         value="<% if (websitesObj.stackoverflow) { %><%= websitesObj.stackoverflow %><% } else {%><% } %>"
-                                        class="form-control mb-2" placeholder="https://stackoverflow.com/users/..."
+                                        class="mb-2 form-control" placeholder="https://stackoverflow.com/users/..."
                                         class="crayons-textfield" type="text" name="stackoverflow" id="stackoverflow">
 
 
@@ -540,7 +540,7 @@
                                     </label>
                                     <input
                                         value="<% if (websitesObj.linkedin) { %><%= websitesObj.linkedin %><% } else {%><% } %>"
-                                        class="form-control mb-2" placeholder="https://www.linkedin.com/in/..."
+                                        class="mb-2 form-control" placeholder="https://www.linkedin.com/in/..."
                                         class="crayons-textfield" type="text" name="linkedin" id="linkedin">
 
 
@@ -549,7 +549,7 @@
                                     </label>
                                     <input
                                         value="<% if (websitesObj.twitter) { %><%= websitesObj.twitter %><% } else {%><% } %>"
-                                        class="form-control mb-2" placeholder="https://www.twitter.com/in/..."
+                                        class="mb-2 form-control" placeholder="https://www.twitter.com/in/..."
                                         class="crayons-textfield" type="text" name="twitter" id="twitter">
 
 
@@ -558,17 +558,17 @@
                                     </label>
                                     <input
                                         value="<% if (websitesObj.instagram) { %><%= websitesObj.instagram %><% } else {%><% } %>"
-                                        class="form-control mb-2" placeholder="https://www.instagram.com/in/..."
+                                        class="mb-2 form-control" placeholder="https://www.instagram.com/in/..."
                                         class="crayons-textfield" type="text" name="instagram" id="instagram">
 
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <a class="btn btn-outline-dark btn-block mx-auto"
+                                        <a class="mx-auto btn btn-outline-dark btn-block"
                                             href="/users/profile/<%= userid %>">BACK</a>
                                     </div>
                                     <div class="col-6">
-                                        <button class="btn btn-success btn-block mx-auto" type="submit">UPDATE</button>
+                                        <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>
                                     </div>
                                 </div>
                             </form>
