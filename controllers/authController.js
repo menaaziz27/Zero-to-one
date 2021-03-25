@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport(
 
 //get register page
 exports.getRegister = (req, res, next) => {
-	res.render('auth/Register', {
+	res.render('auth/register', {
 		pageTitle: 'Registeration',
 		errorMassage: null,
 		oldInput: {
@@ -74,8 +74,8 @@ exports.postRegister = async (req, res, next) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
-		return res.status(422).render('auth/Register', {
-			path: '/Register',
+		return res.status(422).render('auth/register', {
+			path: '/register',
 			pageTitle: 'Register',
 			// for displaying the red messages
 			errorMassage: errors.array()[0].msg,
@@ -93,7 +93,7 @@ exports.postRegister = async (req, res, next) => {
 		let user = await User.findOne({ email: email });
 		// if there's a user
 		if (user) {
-			return res.redirect('/auth/Register');
+			return res.redirect('/auth/register');
 		}
 		// if there's no user
 		const hashedpass = await bcrypt.hash(password, 12);
@@ -104,7 +104,7 @@ exports.postRegister = async (req, res, next) => {
 
 		user.save();
 
-		res.redirect('/auth/Login');
+		res.redirect('/auth/login');
 
 		transporter.sendMail({
 			to: email,
@@ -121,14 +121,17 @@ exports.postRegister = async (req, res, next) => {
 exports.getLogin = (req, res, next) => {
 	let query;
 	if (req.query.index) {
-    console.log(req.query.index)
-		query = req.query.index === "webdevelopment" ? "webdevelopment" : "bioinformatics"
+		console.log(req.query.index);
+		query =
+			req.query.index === 'webdevelopment'
+				? 'webdevelopment'
+				: 'bioinformatics';
 	} else {
 		query = false;
 	}
-	
+
 	// const query = req.query.index || null;
-	res.render('auth/Login', {
+	res.render('auth/login', {
 		pageTitle: 'Login',
 		errorMassage: null,
 		oldInput: {
@@ -164,19 +167,19 @@ exports.validateLogin = [
 //Post Login
 exports.postlogin = async (req, res, next) => {
 	// const query = req.body.query === 'webdevelop' ? false : true;
-  let query;
-  if(req.body.query) {
-    query = req.body.query;
-  } else {
-    query = false;
-  }
+	let query;
+	if (req.body.query) {
+		query = req.body.query;
+	} else {
+		query = false;
+	}
 	const email = req.body.email;
 	const password = req.body.password;
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/Login', {
-			path: '/Login',
+		return res.status(422).render('auth/login', {
+			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: errors.array()[0].msg,
 			oldInput: {
@@ -204,14 +207,14 @@ exports.postlogin = async (req, res, next) => {
 				if (query === 'webdevelopment') {
 					res.redirect('/diagram');
 				} else if (query === 'bioinformatics') {
-          res.redirect('/bioinformatics')
-        }else {
+					res.redirect('/bioinformatics');
+				} else {
 					res.redirect('/timeline');
 				}
 			});
 		}
-		res.status(422).render('auth/Login', {
-			path: '/Login',
+		res.status(422).render('auth/login', {
+			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: "Password don't match!",
 			oldInput: {

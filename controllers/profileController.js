@@ -4,7 +4,7 @@ const moment = require('moment');
 const axios = require('axios');
 const { body, validationResult } = require('express-validator');
 
-exports.getUsersProfile = async (req, res) => {
+exports.getUserProfile = async (req, res) => {
 	const userId = req.params.id;
 	let userRepos = [];
 

@@ -33,9 +33,7 @@ const store = new MongoDBStore({
 	collection: 'sessions',
 });
 
-// set ejs template engines
 app.set('view engine', 'ejs');
-// app.set('views', 'views');
 
 //set upload image settings
 const fileStorage = multer.diskStorage({
@@ -84,6 +82,10 @@ app.use(findUser);
 // const csrfProtection = csrf();
 // app.use(csrfProtection)
 app.use(flash());
+app.use((req, res, next) => {
+	console.log(req.session.user);
+	next();
+});
 
 app.use((req, res, next) => {
 	res.locals.isAuthenticated = req.session.isLoggedin;
@@ -96,9 +98,9 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 // app.use('/admin', adminRoutes)
-app.use((req,res) => {
-	res.render('404.ejs')
-})
+app.use((req, res) => {
+	res.render('404.ejs');
+});
 // app.use((error, req, res, next) => {
 // 	res.redirect("/500");
 // });

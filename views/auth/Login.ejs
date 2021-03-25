@@ -17,7 +17,7 @@
         <div class="row align-items-center" style="height: 600px;">
 
             <div class="col-md-6 offset-md-3  border border-primary rounded py-4">
-                <form method="POST" action="/auth/Login" novalidate>
+                <form method="POST" action="/auth/login" novalidate>
                     <h2>Login</h2>
                     <h3>
                         <% if (errorMassage) { %>
@@ -25,31 +25,32 @@
                                 <%= errorMassage %>
                             </div>
                             <% } %>
-                    </h4>
+                                </h4>
 
 
-                    <!-- TEXT FIELD GROUPS -->
-                    <div class="form-group">
-                        <!--<label for="email">Email address</label>-->
-                        <input
-                            class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
-                            name="email" type="email" value="<%= oldInput.email %>" id="email"
-                            placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <!--<label for="password">Password</label>-->
-                        <input
-                            class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid' : '' %>"
-                            name="password" value="<%= oldInput.password %>" type="password" id="password"
-                            placeholder="Password">
-                    </div>
-                    <button class="btn btn-primary btn-block mx-auto" type="submit">Login</button>
-                    <a href="/auth/reset"> Reset Password</a>
-                    <b>
-                        <p> If you don't have account ? <a style="text-align: center;" href="/auth/Register">register
-                                please</a></p>
+                                <!-- TEXT FIELD GROUPS -->
+                                <div class="form-group">
+                                    <!--<label for="email">Email address</label>-->
+                                    <input
+                                        class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                                        name="email" type="email" value="<%= oldInput.email %>" id="email"
+                                        placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <!--<label for="password">Password</label>-->
+                                    <input
+                                        class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid' : '' %>"
+                                        name="password" value="<%= oldInput.password %>" type="password" id="password"
+                                        placeholder="Password">
+                                </div>
+                                <button class="btn btn-primary btn-block mx-auto" type="submit">Login</button>
+                                <a href="/auth/reset"> Reset Password</a>
+                                <b>
+                                    <p> If you don't have account ? <a style="text-align: center;"
+                                            href="/auth/register">register
+                                            please</a></p>
 
-                        <input type="hidden" name="query" value="<%= query %>">
+                                    <input type="hidden" name="query" value="<%= query %>">
                 </form>
             </div>
         </div>
