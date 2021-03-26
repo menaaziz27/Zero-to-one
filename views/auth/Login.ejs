@@ -16,14 +16,14 @@
     <div class="container">
         <div class="row align-items-center" style="height: 600px;">
 
-            <div class="col-md-6 offset-md-3  border border-primary rounded py-4">
+            <div class="py-4 border rounded col-md-6 offset-md-3 border-primary">
                 <form method="POST" action="/auth/login" novalidate>
                     <h2>Login</h2>
                     <h3>
                         <% if (errorMassage) { %>
-                            <div class="user-message  user-message--error">
+                            <h3 class="user-message user-message--error animate">
                                 <%= errorMassage %>
-                            </div>
+                            </h3>
                             <% } %>
                                 </h4>
 
@@ -43,7 +43,7 @@
                                         name="password" value="<%= oldInput.password %>" type="password" id="password"
                                         placeholder="Password">
                                 </div>
-                                <button class="btn btn-primary btn-block mx-auto" type="submit">Login</button>
+                                <button class="mx-auto btn btn-primary btn-block" type="submit">Login</button>
                                 <a href="/auth/reset"> Reset Password</a>
                                 <b>
                                     <p> If you don't have account ? <a style="text-align: center;"

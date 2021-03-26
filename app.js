@@ -14,18 +14,17 @@ const path = require('path');
 // ============ My-Modules ============
 require('./utils/db');
 const { findUser } = require('./middleware/helper');
+// Routes
+const homeRoutes = require('./routes/home');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 
 // ============ constant vars ============
 // const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
 const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
-
-// Routes
-const homeRoutes = require('./routes/home');
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
-const postRoutes = require('./routes/post');
 
 // storing sessions in DB
 const store = new MongoDBStore({
@@ -60,11 +59,11 @@ const fileFilter = (req, file, cb) => {
 // ==== middlewares which will be executed before every incoming request ====
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use("/public", express.static("./public/"));
 app.use(
 	multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
 // for attaching session object in every request and connect the cookie id with its
 // appropriate user session
 app.use(
@@ -82,10 +81,6 @@ app.use(findUser);
 // const csrfProtection = csrf();
 // app.use(csrfProtection)
 app.use(flash());
-app.use((req, res, next) => {
-	console.log(req.session.user);
-	next();
-});
 
 app.use((req, res, next) => {
 	res.locals.isAuthenticated = req.session.isLoggedin;

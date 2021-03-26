@@ -8,8 +8,8 @@
 	border-radius: 3px;
 	/* background: #b9c9ff; */
 	text-align: center;
-	margin-top: .2rem;
-	margin-bottom: .1rem;
+	margin-top: 0.2rem;
+	margin-bottom: 0.1rem;
 }
 
 .user-message--error {
@@ -25,7 +25,7 @@
 	border-width: 2px;
 }
 
-h3 {
+.animate {
 	position: relative;
 	animation-name: move;
 	animation-duration: 0.75s;

@@ -31,7 +31,7 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.validateRegister = [
-	body('name', 'Name must be at least 4 characters.')
+	body('name', 'Name must be at least 4 characters in text or numbers only.')
 		.exists()
 		.isLength({ min: 4 })
 		.isAlphanumeric()
