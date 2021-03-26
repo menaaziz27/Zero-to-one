@@ -680,38 +680,6 @@
                                     <p class="crayons-definition__value">I am looking for work!</p>
                                 </div>
                             </div>
-
-                            <div class="hidden crayons-modal align-left">
-                                <div class="crayons-modal__box">
-                                    <div class="crayons-modal__box__header">
-                                        <h2 class="crayons-modal__box__header__title">Chat with Aemie Jariwala</h2>
-                                        <button title="Close"
-                                            class="crayons-btn crayons-btn--ghost-dimmed crayons-btn--icon close-modal">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" role="img"
-                                                aria-labelledby="ap3c8bnq9fdgufyzg5c7aobvnxaugo60" class="crayons-icon">
-                                                <title id="ap3c8bnq9fdgufyzg5c7aobvnxaugo60">Close modal</title>
-                                                <path
-                                                    d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636l4.95 4.95z">
-                                                </path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div class="crayons-modal__box__body">
-                                        <form id="new-message-form" class="mb-4 message-form"
-                                            data-info='{"id":219080,"className":"User","username":"aemiej", "showChat":"private"}'>
-                                            <textarea id="new-message" rows="4" cols="70"
-                                                placeholder="Enter your message here..."
-                                                class="crayons-textfield"></textarea>
-                                            <button type="submit" class="submit-message crayons-btn">Send</button>
-                                        </form>
-                                        <p class="fs-s color-base-60">All private interactions <b>must</b> abide by the
-                                            <a href="code-of-conduct.html">code of conduct</a>.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="crayons-modal__overlay"></div>
-                            </div>
                         </header>
                     </div>
                 </div>
@@ -861,16 +829,15 @@
                                                         <div class="crayons-story__meta">
                                                             <div class="crayons-story__author-pic">
 
-                                                                <a href="users/profile/<%=post.user._id%>"
+                                                                <a href="/users/profile/<%=user._id%>"
                                                                     class="crayons-avatar crayons-avatar--l ">
                                                                     <img src="<% if(user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
-                                                                        alt="aemiej profile"
-                                                                        class="crayons-avatar__image" />
+                                                                        alt="" class="crayons-avatar__image" />
                                                                 </a>
                                                             </div>
                                                             <div>
                                                                 <p>
-                                                                    <a href="users/profile/<%=post.user._id%>"
+                                                                    <a href="/users/profile/<%=user._id%>"
                                                                         class="crayons-story__secondary fw-medium">
                                                                         <%=post.user.name%>
                                                                     </a>
@@ -978,7 +945,7 @@
                                             <div class="crayons-story__meta">
                                                 <div class="crayons-story__author-pic">
                                                     <a href="aemiej.html" class="crayons-avatar crayons-avatar--l ">
-                                                        <img src="/img/ss.jpg" alt="aemiej profile"
+                                                        <img src="/img/ss.jpg" alt=""
                                                             class="crayons-avatar__image" />
                                                     </a>
                                                 </div>
@@ -1141,7 +1108,7 @@
                                                 <div class="crayons-story__author-pic">
         
                                                     <a href="aemiej.html" class="crayons-avatar crayons-avatar--l ">
-                                                        <img src="/img/ss.jpg" alt="aemiej profile"
+                                                        <img src="/img/ss.jpg" alt=""
                                                             class="crayons-avatar__image" />
                                                     </a>
                                                 </div>
@@ -1236,7 +1203,7 @@
                                             <div class="crayons-story__author-pic">
         
                                                 <a href="aemiej.html" class="crayons-avatar crayons-avatar--l ">
-                                                    <img src="/img/ss.jpg" alt="aemiej profile" class="crayons-avatar__image" />
+                                                    <img src="/img/ss.jpg" alt="" class="crayons-avatar__image" />
                                                 </a>
                                             </div>
                                             <div>

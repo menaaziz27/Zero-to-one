@@ -1,6 +1,6 @@
-const Post = require("../models/Post");
+const Post = require('../models/Post');
 
-const findHashtags = require("find-hashtags");
+const findHashtags = require('find-hashtags');
 
 // /posts/:id/details
 exports.getEdit = async (req, res) => {
@@ -10,12 +10,14 @@ exports.getEdit = async (req, res) => {
 	let userid = req.user._id || null;
 	try {
 		const post = await Post.findById(postId);
-		res.render("post/post-edit", {
+		res.render('post/post-edit', {
 			post,
 			userid,
 			timeline,
 		});
-	} catch (e) {}
+	} catch (e) {
+		console.log(e);
+	}
 };
 
 // /posts/:id/edit
@@ -28,17 +30,17 @@ exports.postEdit = async (req, res) => {
 			user: userid,
 			description: description,
 			readingTime:
-				Math.floor(description.split(" ").length / 100) === 0
+				Math.floor(description.split(' ').length / 100) === 0
 					? 1
-					: Math.floor(description.split(" ").length / 100),
+					: Math.floor(description.split(' ').length / 100),
 			hashtags: findHashtags(description),
 		});
 		// await editPost.save()
 		// console.log(req.query.timeline,'39')
 		if (req.query.timeline) {
-			res.redirect("/timeline");
+			res.redirect('/timeline');
 		} else {
-			res.redirect("/users/profile/" + req.session.user._id.toString());
+			res.redirect('/users/profile/' + req.session.user._id.toString());
 		}
 	} catch (e) {
 		console.log(e);
@@ -51,8 +53,8 @@ exports.getPostDetail = async (req, res) => {
 	const postId = req.params.id;
 
 	try {
-		const post = await Post.findById(postId).populate("user");
-		res.render("post/post-detail", {
+		const post = await Post.findById(postId).populate('user');
+		res.render('post/post-detail', {
 			post,
 			timeline,
 		});
@@ -65,9 +67,9 @@ exports.deletePost = async (req, res) => {
 	try {
 		await Post.findByIdAndDelete(postId);
 		if (req.query.timeline) {
-			res.redirect("/timeline");
+			res.redirect('/timeline');
 		} else {
-			res.redirect("/users/profile/" + req.session.user._id.toString());
+			res.redirect('/users/profile/' + req.session.user._id.toString());
 		}
 	} catch (e) {
 		console.log(e);
@@ -84,18 +86,18 @@ exports.createPost = async (req, res) => {
 			user: req.session.user,
 			description: post,
 			readingTime:
-				Math.floor(post.split(" ").length / 100) === 0
+				Math.floor(post.split(' ').length / 100) === 0
 					? 1
-					: Math.floor(post.split(" ").length / 100),
+					: Math.floor(post.split(' ').length / 100),
 			hashtags: findHashtags(post),
 		});
 
 		await newPost.save();
 
 		if (req.query.timeline) {
-			res.redirect("/timeline");
+			res.redirect('/timeline');
 		} else {
-			res.redirect("/users/profile/" + req.session.user._id.toString());
+			res.redirect('/users/profile/' + req.session.user._id.toString());
 		}
 	} catch (e) {
 		console.log(e);
