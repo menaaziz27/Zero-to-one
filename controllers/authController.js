@@ -4,6 +4,7 @@ const { check, body, validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const uuid = require('uuid');
 
 const transporter = nodemailer.createTransport(
 	sendgridTransport({
@@ -76,11 +77,27 @@ exports.validateRegister = [
 		}),
 ];
 
+let id;
+let username;
+async function ensureUsernameUniqueness(name) {
+	// generate random usernames
+	let user;
+	do {
+		id = uuid.v4();
+		username = name + id.slice(0, 2);
+		user = await User.findOne({ username });
+	} while (user !== null);
+	return username;
+}
+
 //post Register
 exports.postRegister = async (req, res, next) => {
 	const email = req.body.email;
 	const name = req.body.name;
 	const password = req.body.password;
+
+	// ensure of username uniqueness
+	username = await ensureUsernameUniqueness(name);
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
@@ -114,6 +131,7 @@ exports.postRegister = async (req, res, next) => {
 			name,
 			email: email,
 			password: hashedpass,
+			username,
 		});
 
 		user.save();
