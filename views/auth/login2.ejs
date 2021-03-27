@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
     <link href="/assets/css/errormessages.css" rel="stylesheet">
-    
+
     <!-- <link href="/auth/login.css" rel="stylesheet"> -->
     <link href="/assets/img/logo-white.png" rel="icon">
 
@@ -21,13 +21,13 @@
                 <h1 style="text-align: center;">ZERO TO ONE</h1>
                 <% if (errorMassage) { %>
                     <div class="user-message  user-message--error">
-                        <h3>
+                        <h3 class="animate">
                             <%= errorMassage %>
                         </h3>
                     </div>
                     <% } %>
                         <br><br>
-                        <form method="POST" action="/auth/Login" novalidate>
+                        <form method="POST" action="/auth/login" novalidate>
                             <!-- TEXT FIELD GROUPS -->
                             <div class="form-group">
                                 <input
@@ -46,7 +46,7 @@
                             <br>
                             <a style="text-align: center;color:black" href="/auth/reset">Forgot your password?</a>
                             <br>
-                            <a style="text-align: center; color:black" href="/auth/Register">Not registered yet?</a>
+                            <a style="text-align: center; color:black" href="/auth/register">Not registered yet?</a>
 
                             <input type="hidden" name="query" value="<%= query %>">
                         </form>

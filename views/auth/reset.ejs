@@ -16,13 +16,13 @@
 <body>
     <div class="container">
         <div class="row align-items-center" style="height: 100vh;">
-            <div class="col-md-6 offset-md-3  rounded py-4">
+            <div class="py-4 rounded col-md-6 offset-md-3">
                 <form method="POST" action="/auth/reset" novalidate>
                     <h2>Reset Password</h2>
                     <% if (errorMassage) { %>
-                        <div class="user-message  user-message--error">
+                        <h3 class="user-message user-message--error animate">
                             <%= errorMassage %>
-                        </div>
+                        </h3>
                         <% } %>
 
 
@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <input class="form-control" name="email" type="email" id="email" placeholder="Email">
                             </div>
-                            <button class="btn btn-primary btn-block mx-auto button custom-btn btn-16"
+                            <button class="mx-auto btn btn-primary btn-block button custom-btn btn-16"
                                 type="submit">RESET
                                 PASSWORD</button>
                 </form>

@@ -3,8 +3,8 @@ exports.isAuthenticated = (req, res, next) => {
 		return next();
 	}
 	if (req.query.index) {
-		res.redirect(`/auth/Login?index=${req.query.index}`);
+		res.redirect(`/auth/login?index=${req.query.index}`);
 	} else {
-		res.redirect('/auth/Login');
+		res.redirect('/auth/login');
 	}
 };

@@ -4,6 +4,7 @@ const { check, body, validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
+const uuid = require('uuid');
 
 const transporter = nodemailer.createTransport(
 	sendgridTransport({
@@ -18,7 +19,7 @@ const transporter = nodemailer.createTransport(
 
 //get register page
 exports.getRegister = (req, res, next) => {
-	res.render('auth/Register', {
+	res.render('auth/register', {
 		pageTitle: 'Registeration',
 		errorMassage: null,
 		oldInput: {
@@ -31,25 +32,35 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.validateRegister = [
+	body('name', 'Name must be at least 4 characters in text or numbers only.')
+		.exists()
+		.isLength({ min: 4 })
+		.isAlphanumeric()
+		.trim()
+		.custom((value, { req }) => {
+			//async validation (we wating for date )
+			return User.findOne({ name: value }).then(userDoc => {
+				if (userDoc) {
+					return Promise.reject('Name is already taken.');
+				}
+			});
+		}),
 	check('email')
 		.isEmail()
-		.withMessage('please enter a valid email')
+		.withMessage('This email is not valid!')
 		.custom((value, { req }) => {
 			//async validation (we wating for date )
 			return User.findOne({ email: value }).then(userDoc => {
 				if (userDoc) {
-					return Promise.reject(
-						'E-mail is already exist, please pick a different one.'
-					);
+					return Promise.reject('Email is already exist.');
 				}
 			});
 		})
 		.normalizeEmail(),
-
 	//password validation
 	body(
 		'password',
-		'please enter a password with only numbers and text and at least 5 characters. '
+		'Please enter a password with only numbers, text and at least 5 characters. '
 	)
 		.isLength({ min: 5 })
 		.isAlphanumeric()
@@ -66,20 +77,38 @@ exports.validateRegister = [
 		}),
 ];
 
+let id;
+let username;
+async function ensureUsernameUniqueness(name) {
+	// generate random usernames
+	let user;
+	do {
+		id = uuid.v4();
+		username = name + id.slice(0, 2);
+		user = await User.findOne({ username });
+	} while (user !== null);
+	return username;
+}
+
 //post Register
 exports.postRegister = async (req, res, next) => {
 	const email = req.body.email;
+	const name = req.body.name;
 	const password = req.body.password;
+
+	// ensure of username uniqueness
+	username = await ensureUsernameUniqueness(name);
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
-		return res.status(422).render('auth/Register', {
-			path: '/Register',
+		return res.status(422).render('auth/register', {
+			path: '/register',
 			pageTitle: 'Register',
 			// for displaying the red messages
 			errorMassage: errors.array()[0].msg,
 			oldInput: {
+				name,
 				email: email,
 				password: password,
 				confirmPassword: req.body.confirmPassword,
@@ -91,20 +120,23 @@ exports.postRegister = async (req, res, next) => {
 
 	try {
 		let user = await User.findOne({ email: email });
+		//! el mfrod el check da myt3mllosh excution 5ales 3shan 3amleno already f el validation bta3t express-validator
 		// if there's a user
 		if (user) {
-			return res.redirect('/auth/Register');
+			return res.redirect('/auth/register');
 		}
 		// if there's no user
 		const hashedpass = await bcrypt.hash(password, 12);
 		user = new User({
+			name,
 			email: email,
 			password: hashedpass,
+			username,
 		});
 
 		user.save();
 
-		res.redirect('/auth/Login');
+		res.redirect('/auth/login');
 
 		transporter.sendMail({
 			to: email,
@@ -121,14 +153,17 @@ exports.postRegister = async (req, res, next) => {
 exports.getLogin = (req, res, next) => {
 	let query;
 	if (req.query.index) {
-    console.log(req.query.index)
-		query = req.query.index === "webdevelopment" ? "webdevelopment" : "bioinformatics"
+		console.log(req.query.index);
+		query =
+			req.query.index === 'webdevelopment'
+				? 'webdevelopment'
+				: 'bioinformatics';
 	} else {
 		query = false;
 	}
-	
+
 	// const query = req.query.index || null;
-	res.render('auth/Login', {
+	res.render('auth/login', {
 		pageTitle: 'Login',
 		errorMassage: null,
 		oldInput: {
@@ -164,19 +199,19 @@ exports.validateLogin = [
 //Post Login
 exports.postlogin = async (req, res, next) => {
 	// const query = req.body.query === 'webdevelop' ? false : true;
-  let query;
-  if(req.body.query) {
-    query = req.body.query;
-  } else {
-    query = false;
-  }
+	let query;
+	if (req.body.query) {
+		query = req.body.query;
+	} else {
+		query = false;
+	}
 	const email = req.body.email;
 	const password = req.body.password;
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/Login', {
-			path: '/Login',
+		return res.status(422).render('auth/login', {
+			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: errors.array()[0].msg,
 			oldInput: {
@@ -204,14 +239,14 @@ exports.postlogin = async (req, res, next) => {
 				if (query === 'webdevelopment') {
 					res.redirect('/diagram');
 				} else if (query === 'bioinformatics') {
-          res.redirect('/bioinformatics')
-        }else {
+					res.redirect('/bioinformatics');
+				} else {
 					res.redirect('/timeline');
 				}
 			});
 		}
-		res.status(422).render('auth/Login', {
-			path: '/Login',
+		res.status(422).render('auth/login', {
+			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: "Password don't match!",
 			oldInput: {

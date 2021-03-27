@@ -180,15 +180,15 @@
 
         <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
         <!-- GRID SYSTEM -->
-        <div class="container-fluid my-2">
+        <div class="my-2 container-fluid">
             <div class="row">
-                <div class="col-md-3">
+                <div class="mb-2 col-md-3">
                     <div class="card">
                         <div class="card-body">
                             <div class="flex items-center mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                    class="crayons-icon mr-3 color-base-50">
+                                    class="mr-3 crayons-icon color-base-50">
                                     <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
                                     <path
                                         d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
@@ -198,30 +198,11 @@
                                 5 posts published
                             </div>
                             <div class="flex items-center mb-4">
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    role="img" aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt"
-                                    class="crayons-icon mr-3 color-base-50">
-                                    <title id="abufedsnsekr607wkz3cghttsqxk7imt">Comment</title>
-                                    <path
-                                        d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
-                                    </path>
-                                </svg> -->
-
-
                                 <span style="display: inline-block; margin-right: 3px;"><i style="margin-right: 16px;"
                                         class="far fa-user"></i>126
                                     users in the website</span>
                             </div>
-
                             <div class="flex items-center">
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    role="img" aria-labelledby="aavo11kuxepnfcc1uh5458yldkuco6e3"
-                                    class="crayons-icon mr-3 color-base-50">
-                                    <title id="aavo11kuxepnfcc1uh5458yldkuco6e3">Tag</title>
-                                    <path
-                                        d="M7.784 14l.42-4H4V8h4.415l.525-5h2.011l-.525 5h3.989l.525-5h2.011l-.525 5H20v2h-3.784l-.42 4H20v2h-4.415l-.525 5h-2.011l.525-5H9.585l-.525 5H7.049l.525-5H4v-2h3.784zm2.011 0h3.99l.42-4h-3.99l-.42 4z">
-                                    </path>
-                                </svg> -->
                                 <span style="display: inline-block; margin-right: 3px;">
                                     <i style="margin-right: 16px;" class="fas fa-road"></i>
                                     6 roadmaps
@@ -234,7 +215,7 @@
                 <div class="col">
 
                     <!--- Post Form Begins -->
-                    <section class="card mb-2">
+                    <section class="mb-2 card">
 
                         <div class="card-body">
                             <form action="/posts/create?timeline=true" method="POST" id="submit">
@@ -276,8 +257,8 @@
                                             <div class="crayons-story__author-pic">
 
                                                 <a href="users/profile/<%= post.user._id %>"
-                                                    class="crayons-avatar  crayons-avatar--l  ">
-                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/img/default.jpg <%}%>"
+                                                    class="crayons-avatar crayons-avatar--l ">
+                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
                                                         alt="aemiej profile" class="crayons-avatar__image" />
                                                 </a>
                                             </div>
@@ -347,7 +328,7 @@
                                                 </a>
                                             </div>
                                             <div class="crayons-story__save">
-                                                <small class="crayons-story__tertiary fs-xs mr-2">
+                                                <small class="mr-2 crayons-story__tertiary fs-xs">
                                                     <%= post.readingTime %> min read
                                                 </small>
                                                 <% if(userid==post.user._id ) { %>
@@ -412,8 +393,8 @@
                         </div>
                         <!-- friends menu -->
                         <!-- <div class="card">
-					<div class="card-body p-3">
-						<h5 class="card-title m-0">Friends</h5>
+					<div class="p-3 card-body">
+						<h5 class="m-0 card-title">Friends</h5>
 						<div class="list-group list-group-flush">
 							<a href="#" class="list-group-item list-group-item-action text-primary">
 							Justo moto pani
@@ -426,9 +407,9 @@
 					</div>
                 </div> -->
                         <!-- users menu -->
-                        <!-- <div class="card mt-4">
-					<div class="card-body p-3">
-						<h5 class="card-title m-0">Users</h5>
+                        <!-- <div class="mt-4 card">
+					<div class="p-3 card-body">
+						<h5 class="m-0 card-title">Users</h5>
 						<div class="list-group list-group-flush">
 							<a href="#" class="list-group-item list-group-item-action text-primary">
 							Cras justo odio
@@ -450,9 +431,6 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script src="./bootstrap/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-            integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
-            crossorigin="anonymous"></script>
         <!-- <script>
             const element = document.querySelector('#submit');
             element.addEventListener('submit', event => {

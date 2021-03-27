@@ -4,7 +4,7 @@ const moment = require('moment');
 const axios = require('axios');
 const { body, validationResult } = require('express-validator');
 
-exports.getUsersProfile = async (req, res) => {
+exports.getUserProfile = async (req, res) => {
 	const userId = req.params.id;
 	let userRepos = [];
 
@@ -78,15 +78,13 @@ exports.getUpdateProfile = (req, res) => {
 };
 
 exports.validateProfile = [
-	body(
-		'name',
-		'Please enter a valid name must be at least 4 chars long'
-	).isLength({ min: 4 }),
-	body('bio', ' Bio must be at least 10 chars long').isLength({ min: 10 }),
+	body('name', 'Name must be at least 4 characters in text or numbers only.')
+		.exists()
+		.isLength({ min: 4 })
+		.isAlphanumeric(),
 ];
 
 exports.postUpdateProfile = async (req, res) => {
-	console.log(req.body);
 	const userid = req.body.userid;
 	const name = req.body.name;
 	const bio = req.body.bio;
@@ -130,6 +128,7 @@ exports.postUpdateProfile = async (req, res) => {
 	if (!errors.isEmpty()) {
 		return res.status(422).render('profile/edit-profile', {
 			errorMassage: errors.array()[0].msg,
+			name,
 			userid: userid,
 			websitesObj,
 		});

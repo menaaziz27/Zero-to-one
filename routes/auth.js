@@ -17,10 +17,10 @@ const {
 	validateLogin,
 } = require('../controllers/authController');
 
-router.get('/Register', getRegister);
-router.post('/Register', validateRegister, postRegister);
-router.get('/Login', getLogin);
-router.post('/Login', validateLogin, postlogin);
+router.get('/register', getRegister);
+router.post('/register', validateRegister, postRegister);
+router.get('/login', getLogin);
+router.post('/login', validateLogin, postlogin);
 router.post('/logout', postLogout);
 router.get('/reset', getReset);
 router.post('/reset', postReset);
