@@ -5,14 +5,17 @@ const axios = require('axios');
 const { body, validationResult } = require('express-validator');
 
 exports.getUserProfile = async (req, res) => {
-	const userId = req.params.id;
+	// const userId = req.params.id;
+  	const username = req.params.username;
+
 	let userRepos = [];
 
 	try {
-		const userDoc = await User.findOne({ _id: userId });
+		const userDoc = await User.findOne({ username: username });
+    userId=userDoc._id
 		const posts = await Post.find({ user: userId })
-			.sort({ createdAt: 'desc' })
-			.populate('user');
+    .sort({ createdAt: 'desc' })
+    .populate('user');
 		// fetch first five repose from user's github account to show them in projects section
 		if (userDoc.websites.length > 0) {
 			let userGithubUrl = userDoc.websites[0];
@@ -38,7 +41,8 @@ exports.getUserProfile = async (req, res) => {
 
 		res.render('profile/user-profile', {
 			user: userDoc,
-			userId: userId,
+      userId:userId,
+			username: username,
 			posts,
 			moment,
 			userRepos,
@@ -86,6 +90,7 @@ exports.validateProfile = [
 
 exports.postUpdateProfile = async (req, res) => {
 	const userid = req.body.userid;
+  const username = req.body.username;
 	const name = req.body.name;
 	const bio = req.body.bio;
 	const country = req.body.country;
@@ -167,7 +172,7 @@ exports.postUpdateProfile = async (req, res) => {
 
 		user.websites = websites;
 		user.save();
-		res.redirect('/users/profile/' + userid);
+		res.redirect('/users/profile/' + username);
 	} catch (e) {
 		console.log(e);
 	}

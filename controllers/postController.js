@@ -40,7 +40,7 @@ exports.postEdit = async (req, res) => {
 		if (req.query.timeline) {
 			res.redirect('/timeline');
 		} else {
-			res.redirect('/users/profile/' + req.session.user._id.toString());
+			res.redirect('/users/profile/' + req.session.user.username);
 		}
 	} catch (e) {
 		console.log(e);
@@ -97,7 +97,7 @@ exports.createPost = async (req, res) => {
 		if (req.query.timeline) {
 			res.redirect('/timeline');
 		} else {
-			res.redirect('/users/profile/' + req.session.user._id.toString());
+			res.redirect('/users/profile/' + req.session.user.username);
 		}
 	} catch (e) {
 		console.log(e);

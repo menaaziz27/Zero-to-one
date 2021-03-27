@@ -15,6 +15,6 @@ router.get('/updateProfile', isAuthenticated, getUpdateProfile);
 
 router.post('/profile', isAuthenticated, validateProfile, postUpdateProfile);
 
-router.get('/profile/:id', isAuthenticated, getUserProfile);
+router.get('/profile/:username', isAuthenticated, getUserProfile);
 
 module.exports = router;

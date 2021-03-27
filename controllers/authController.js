@@ -120,11 +120,6 @@ exports.postRegister = async (req, res, next) => {
 
 	try {
 		let user = await User.findOne({ email: email });
-		//! el mfrod el check da myt3mllosh excution 5ales 3shan 3amleno already f el validation bta3t express-validator
-		// if there's a user
-		if (user) {
-			return res.redirect('/auth/register');
-		}
 		// if there's no user
 		const hashedpass = await bcrypt.hash(password, 12);
 		user = new User({

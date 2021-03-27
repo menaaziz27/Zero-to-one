@@ -35,7 +35,7 @@
 - [] option to delete websites
 - [] add see more button to the post description
 - [] edit & delete post ajax
-- [] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)
+- [x] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)
 - [] side menu bar for navigating in home
 - [] search page for users and posts with specific tags
 - [] search functionality by post (words - hashtags - usernames - skills - languages)
