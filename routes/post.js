@@ -26,3 +26,4 @@ router.post("/:id/delete", deletePost);
 router.post("/create", createPost);
 
 module.exports = router;
+
