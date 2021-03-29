@@ -60,7 +60,7 @@ exports.validateRegister = [
 	//password validation
 	body(
 		'password',
-		'Please enter a password with only numbers, text and at least 5 characters. '
+		'Please enter a password with only numbers, text and at least 5 characters.'
 	)
 		.isLength({ min: 5 })
 		.isAlphanumeric()
@@ -84,7 +84,7 @@ async function ensureUsernameUniqueness(name) {
 	let user;
 	do {
 		id = uuid.v4();
-		username = name + id.slice(0, 2);
+		username = name + id.slice(0, 3);
 		user = await User.findOne({ username });
 	} while (user !== null);
 	return username;
@@ -117,7 +117,6 @@ exports.postRegister = async (req, res, next) => {
 			validationErrors: errors.array(),
 		});
 	}
-
 	try {
 		let user = await User.findOne({ email: email });
 		// if there's no user
