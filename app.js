@@ -7,20 +7,12 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('ejs');
-const mongoose = require('mongoose');
-
-//==================admin bro ===================
-const buildAdminRouter = require('./routes/admin');
-const { default: AdminBro } = require('admin-bro')
-const AdminBroMongoose = require('admin-bro-mongoose');
-AdminBro.registerAdapter(AdminBroMongoose);
-
 // ============ Core-Modules ============
 const path = require('path');
 
 // ============ My-Modules ============
 // require('./utils/db');
-// const run = require('./utils/db');
+const run = require('./utils/db');
 const { findUser } = require('./middleware/helper');
 // Routes
 const homeRoutes = require('./routes/home');
@@ -98,36 +90,21 @@ app.use((req, res, next) => {
 });
 
 // ============ Routes ============
-
 app.use(homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('roadmap',roadmap);
-
 // app.use('/admin', adminRoutes)
-// app.use((req, res) => {
-// 	res.render('404.ejs');
-// });
+app.use((req, res) => {
+	res.render('404.ejs');
+});
 // app.use((error, req, res, next) => {
   // 	res.redirect("/500");
   // });
-  const run = async () => {
-    const Post = require('./models/Post')
-    const database= await mongoose.connect('mongodb://localhost:27017/zerotoone', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    const options = {
-      databases: [database],
-      resources: [
-        {resource : Post ,options:{listProperties:['user','description']}}
-      ]
-      
-    };
-    const admin = new AdminBro(options);
-    const router = buildAdminRouter(admin);
-    app.use(admin.options.rootPath, router);
-    app.listen(3000)
-  }
+
+  // Admin route Options
   run();
+
+  
+  app.listen(3000)
