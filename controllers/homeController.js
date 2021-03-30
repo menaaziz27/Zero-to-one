@@ -63,20 +63,46 @@ exports.postSearchPosts = async (req,res) => {
 		const { query } = req.body;
 		console.log(query)
 	try {
-		const posts = await Post.find({ 'description': {$regex: new RegExp(`^${query}.*`, 'i')},
-		'hashtags': {$regex: new RegExp(`^${query}.*`, 'i')},
-		}, 
-		{
-			_id:0,
-			__v:0
-		}, function(err, users) {
-			if(err) return console.log(err);
-			console.log(users)
-		}
+		const posts = await Post.aggregate(
+			[{
+				$match: {
+					$or: [{
+						description: {
+						$regex: query,
+						'$options': 'i'
+					}}, {
+						hashtags: {
+							$regex: query,
+							'$options': 'i'
+						}
+					},{
+						user: {
+							$regex: query,
+							'$options': 'i'
+						}
+					}]
+					}
+			}]
 		);
-		// console.log(users);
-		res.redirect('/search');
-		// console.log(users);
+		const populatedPosts = await Post.populate(posts, { path: 'user'});
+		console.log(populatedPosts);
+		const defaultImage = "assets/img/default.png"
+		const modifiedPosts = populatedPosts.map(match => 
+			`
+				
+				<div class="card card-body mb-1">
+					<div>
+						<a href="/users/profile/${match.user.username}">
+							<img class="rounded-circle avatar-xs rounded float-left" src="/${match.user.Image || defaultImage}" width="100" height="75">
+						</a>
+					</div>
+					<a href="/users/profile/${match.user.username}">
+          <h4>${match.description} (${match.user.email})<span class="text-primary">${match.readingTime} ${match.hashtags[0]}</span></h4>
+					</a>
+        </div>
+      `).join('')
+			// console.log(modifiedUsers);
+		res.send({modifiedPosts})
 	} catch (e) {
 		console.log(e);
 	}
