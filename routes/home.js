@@ -7,6 +7,8 @@ const {
 	getNews,
 	getTimeline,
 	getSearch,
+	getSearchPosts,
+	postSearchPosts,
 	postSearch,
 	getHtml,
 	getDiagram,
@@ -22,6 +24,8 @@ router.get('/timeline', isAuthenticated, getTimeline);
 router.get('/roadmaps', getRoadmaps);
 router.get('/news', getNews);
 router.get('/search', getSearch);
+router.get('/search/posts', getSearchPosts);
+router.post('/search/posts', postSearchPosts);
 router.post('/search/users', postSearch);
 router.get('/diagram', isAuthenticated, getDiagram);
 router.get('/html', isAuthenticated, getHtml);

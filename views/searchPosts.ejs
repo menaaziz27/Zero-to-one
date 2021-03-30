@@ -26,7 +26,7 @@
             <input id="search" type="search" name="search" placeholder="find your needs here">
             <button type="submit">Search</button>
         </form>
-        <a href="/search/posts">want to search for posts ?</a>
+        <a href="/search">want to search for users ?</a>
         <div id="match-list" class="container"></div>
 
         <!--===================================== profile test ====================================-->
@@ -69,14 +69,14 @@
                             $('#search').val() = ''
                         } else {
                             $.ajax({
-                                url: '/search/users',
+                                url: '/search/posts',
                                 method: 'POST',
                                 dataType: "json",
                                 contentType: 'application/json',
                                 data: JSON.stringify({ query: searchText }),
                                 success: function (response) {
-                                    console.log(response.modifiedUsers)
-                                    $('#match-list').html(response.modifiedUsers);
+                                    console.log(response.modifiedPosts)
+                                    $('#match-list').html(response.modifiedPosts);
                                 }
                             })
                         }

@@ -55,6 +55,91 @@ exports.getSearch = (req, res) => {
 	res.render('search2.ejs');
 };
 
+exports.getSearchPosts = (req,res) => {
+	res.render('searchPosts.ejs')
+}
+
+exports.postSearchPosts = async (req,res) => {
+		const { query } = req.body;
+		console.log(query)
+	try {
+		const posts = await Post.find({ 'description': {$regex: new RegExp(`^${query}.*`, 'i')},
+		'hashtags': {$regex: new RegExp(`^${query}.*`, 'i')},
+		}, 
+		{
+			_id:0,
+			__v:0
+		}, function(err, users) {
+			if(err) return console.log(err);
+			console.log(users)
+		}
+		);
+		// console.log(users);
+		res.redirect('/search');
+		// console.log(users);
+	} catch (e) {
+		console.log(e);
+	}
+}
+
+
+// $lookup is the same as populate but used with aggregate
+// exports.postSearchPosts = async (req,res) => {
+// 	const { query } = req.body;
+// 	console.log(query)
+// 		try {
+// 			const posts = await Post.aggregate(
+// 			[{
+// 				$match: {
+// 					$or: [{
+// 						description: {
+// 						$regex: query,
+// 						'$options': 'i'
+// 					}}, {
+// 						hashtags: {
+// 							$regex: query,
+// 							'$options': 'i'
+// 						}
+// 					}]
+// 					}
+// 			}, {
+//         $lookup: {
+//             from: "User",
+//             localField: "user",
+//             foreignField: "_id",
+//             as: "userdoc"
+//         }
+//     }]
+// 		);
+// 		// console.log(posts)
+// 		const defaultImage = "assets/img/default.png"
+// 		//! response is being sent before the function finish execution
+// 		let modifiedPosts = await posts.map(async (post) => {
+// 			let postOwner, markup;
+// 			const pickedPost = await Post.findOne({user: post.user}).populate('user');
+// 				console.log(pickedPost.user)
+// 				markup = `<div class="card card-body mb-1">
+// 						<div>
+// 							<a href="/users/profile/${pickedPost.user.username}">
+// 								<img class="rounded-circle avatar-xs rounded float-left" src="/" width="100" height="75">
+// 							</a>
+// 						</div>
+// 						<a href="/users/profile/${pickedPost.user.username}">
+// 						<h4>${post.description} (${pickedPost.user.username})<span class="text-primary">${post.readingTime}</span></h4>
+// 						</a>
+// 					</div>
+// 				`
+// 			// console.log(postOwner)
+// 		return markup;
+// 		});
+// 		modifiedPosts = await modifiedPosts.join('');
+// 		console.log(modifiedPosts, '1111111111111111111111111111111115')
+// 		res.send({modifiedPosts})
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// }
+
 exports.postSearch = async (req, res) => {
 	const { query } = req.body;
 	console.log(query)
