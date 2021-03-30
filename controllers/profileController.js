@@ -85,7 +85,6 @@ exports.validateProfile = [
 	body('name', 'Name must be at least 4 characters in text or numbers only.')
 		.exists()
 		.isLength({ min: 4 })
-		.isAlphanumeric(),
 ];
 
 exports.postUpdateProfile = async (req, res) => {

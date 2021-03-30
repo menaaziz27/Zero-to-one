@@ -46,3 +46,7 @@
 - [] alert message in profile page to complete user data if it's not provided yet
 - [] website locally only or globally only
 - [] navbar layout
+- [] automatically generate user age after adding birth of year
+- [] pagination and limiting for search page
+- [] adjust db schema
+- [] adjust roadmaps controller and rounting

@@ -35,7 +35,6 @@ exports.validateRegister = [
 	body('name', 'Name must be at least 4 characters in text or numbers only.')
 		.exists()
 		.isLength({ min: 4 })
-		.isAlphanumeric()
 		.trim()
 		.custom((value, { req }) => {
 			//async validation (we wating for date )
@@ -84,7 +83,7 @@ async function ensureUsernameUniqueness(name) {
 	let user;
 	do {
 		id = uuid.v4();
-		username = name + id.slice(0, 3);
+		username = name.split(' ').join('') + id.slice(0, 3);
 		user = await User.findOne({ username });
 	} while (user !== null);
 	return username;
