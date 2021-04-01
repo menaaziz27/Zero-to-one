@@ -14,7 +14,7 @@ const options = {
   rootPath:'/admin',
   branding: {
     companyName: 'ZEROTOONE',
-  },
+  }
 };
 
 module.exports = options;

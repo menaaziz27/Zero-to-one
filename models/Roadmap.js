@@ -12,7 +12,11 @@ const roademapSchema = new Schema({
 		required: [true, "Please enter the description"],
 		trim: true,
 	},
-  steps: []
+  steps: [{
+    title: String,
+    description:String,
+    ref : [String]
+  }]
 
 });
 
