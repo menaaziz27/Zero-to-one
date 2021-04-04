@@ -1,8 +1,8 @@
 const axios = require('axios');
 const moment = require('moment');
 const User = require('../models/User');
-
 const Post = require('../models/Post');
+const { Error } = require('mongoose');
 
 exports.getHome = (req, res, next) => {
 	let userid;
@@ -52,8 +52,244 @@ exports.getNews = async (req, res) => {
 };
 
 exports.getSearch = (req, res) => {
-	res.render('search.ejs');
+	res.render('search2.ejs');
 };
+
+exports.getSearchPosts = (req,res) => {
+	res.render('searchPosts.ejs')
+}
+
+exports.postSearchPosts = async (req,res) => {
+		const { query } = req.body;
+		console.log(query)
+	try {
+		const posts = await Post.aggregate(
+			[{
+				$match: {
+					$or: [{
+						description: {
+						$regex: query,
+						'$options': 'i'
+					}}, {
+						hashtags: {
+							$regex: query,
+							'$options': 'i'
+						}
+					},{
+						user: {
+							$regex: query,
+							'$options': 'i'
+						}
+					}]
+					}
+			}]
+		);
+		//! this line is tricky :D 
+		const populatedPosts = await Post.populate(posts, { path: 'user'});
+		console.log(populatedPosts);
+		const defaultImage = "assets/img/default.png"
+		const modifiedPosts = populatedPosts.map(match => 
+			`
+				
+				<div class="card card-body mb-1">
+					<div>
+						<a href="/users/profile/${match.user.username}">
+							<img class="rounded-circle avatar-xs rounded float-left" src="/${match.user.Image || defaultImage}" width="100" height="75">
+						</a>
+					</div>
+					<a href="/users/profile/${match.user.username}">
+          <h4>${match.description} (${match.user.email})<span class="text-primary">${match.readingTime} ${match.hashtags[0]}</span></h4>
+					</a>
+        </div>
+      `).join('')
+			// console.log(modifiedUsers);
+		res.send({modifiedPosts})
+	} catch (e) {
+		console.log(e);
+	}
+}
+
+
+// $lookup is the same as populate but used with aggregate
+// exports.postSearchPosts = async (req,res) => {
+// 	const { query } = req.body;
+// 	console.log(query)
+// 		try {
+// 			const posts = await Post.aggregate(
+// 			[{
+// 				$match: {
+// 					$or: [{
+// 						description: {
+// 						$regex: query,
+// 						'$options': 'i'
+// 					}}, {
+// 						hashtags: {
+// 							$regex: query,
+// 							'$options': 'i'
+// 						}
+// 					}]
+// 					}
+// 			}, {
+//         $lookup: {
+//             from: "User",
+//             localField: "user",
+//             foreignField: "_id",
+//             as: "userdoc"
+//         }
+//     }]
+// 		);
+// 		// console.log(posts)
+// 		const defaultImage = "assets/img/default.png"
+// 		//! response is being sent before the function finish execution
+// 		let modifiedPosts = await posts.map(async (post) => {
+// 			let postOwner, markup;
+// 			const pickedPost = await Post.findOne({user: post.user}).populate('user');
+// 				console.log(pickedPost.user)
+// 				markup = `<div class="card card-body mb-1">
+// 						<div>
+// 							<a href="/users/profile/${pickedPost.user.username}">
+// 								<img class="rounded-circle avatar-xs rounded float-left" src="/" width="100" height="75">
+// 							</a>
+// 						</div>
+// 						<a href="/users/profile/${pickedPost.user.username}">
+// 						<h4>${post.description} (${pickedPost.user.username})<span class="text-primary">${post.readingTime}</span></h4>
+// 						</a>
+// 					</div>
+// 				`
+// 			// console.log(postOwner)
+// 		return markup;
+// 		});
+// 		modifiedPosts = await modifiedPosts.join('');
+// 		console.log(modifiedPosts, '1111111111111111111111111111111115')
+// 		res.send({modifiedPosts})
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// }
+
+exports.postSearch = async (req, res) => {
+	const { query } = req.body;
+	console.log(query)
+		try {
+		const users = await User.aggregate(
+			[{
+				$match: {
+					$or: [{
+						name: {
+						$regex: query,
+						'$options': 'i'
+					}}, {
+						email: {
+							$regex: query,
+							'$options': 'i'
+						}
+					},{
+						username: {
+							$regex: query,
+							'$options': 'i'
+						}
+					},{
+						bio: {
+							$regex: query,
+							'$options': 'i'
+						}
+					},{
+						country: {
+							$regex: query,
+							'$options': 'i'
+						}
+					}]
+					}
+			}]
+		);
+		const defaultImage = "assets/img/default.png"
+		const modifiedUsers = users.map(match => 
+			`
+				
+				<div class="card card-body mb-1">
+					<div>
+						<a href="/users/profile/${match.username}">
+							<img class="rounded-circle avatar-xs rounded float-left" src="/${match.Image || defaultImage}" width="100" height="75">
+						</a>
+					</div>
+					<a href="/users/profile/${match.username}">
+          <h4>${match.name} (${match.email})<span class="text-primary">${match.username}</span></h4>
+					</a>
+        </div>
+      `).join('')
+			console.log(modifiedUsers);
+		res.send({modifiedUsers})
+		// res.send({modifiedUsers})
+	} catch (e) {
+		console.log(e);
+	}
+}
+
+//! partial search working
+// exports.postSearch = async (req, res) => {
+// 	const query = req.body.search;
+// 	try {
+// 		const users = await User.aggregate(
+// 			[{
+// 				$match: {
+// 					$or: [{
+// 						name: {
+// 						$regex: query,
+// 						'$options': 'i'
+// 					}}, {
+// 						email: {
+// 							$regex: query,
+// 							'$options': 'i'
+// 						}
+// 					},{
+// 						username: {
+// 							$regex: query,
+// 							'$options': 'i'
+// 						}
+// 					},{
+// 						bio: {
+// 							$regex: query,
+// 							'$options': 'i'
+// 						}
+// 					},{
+// 						country: {
+// 							$regex: query,
+// 							'$options': 'i'
+// 						}
+// 					}]
+// 					}
+// 			}]
+// 		);
+// 		console.log(users);
+// 		res.redirect('/search');
+// 		// console.log(users);
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// };
+
+
+// partial search regex
+
+// exports.postSearch = async (req, res) => {
+// 	const query = req.body.search;
+// 	try {
+// 		const users = await User.find({ name: {$regex: new RegExp(query) }}, 
+// 		{
+// 			_id:0,
+// 			__v:0
+// 		}, function(err, users) {
+// 			if(err) return console.log(err);
+// 			console.log(users)
+// 		}
+// 		);
+// 		// console.log(users);
+// 		res.redirect('/search');
+// 		// console.log(users);
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// };
 
 exports.getHtml = (req, res) => {
 	res.render('html.ejs');
@@ -70,14 +306,4 @@ exports.getBackDiagram = (req, res) => {
 };
 exports.getBioDiagram = (req, res) => {
 	res.render('roadmaps/Bioinformatics.ejs');
-};
-
-exports.postSearch = async (req, res) => {
-	const query = req.body.query;
-	try {
-		const users = await User.find({ name: query });
-		console.log(users);
-	} catch (e) {
-		console.log(e);
-	}
 };
