@@ -84,6 +84,7 @@ exports.postSearchPosts = async (req,res) => {
 					}
 			}]
 		);
+		//! this line is tricky :D 
 		const populatedPosts = await Post.populate(posts, { path: 'user'});
 		console.log(populatedPosts);
 		const defaultImage = "assets/img/default.png"
