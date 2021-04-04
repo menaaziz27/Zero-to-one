@@ -7,16 +7,20 @@ const roademapSchema = new Schema({
 		type: String,
 		required: true,
 	},
+  summary:{
+    type:String,
+    required: [true, 'summary required']
+  },
 	description: {
 		type: String,
 		required: [true, "Please enter the description"]
 	},
+  url:String,
   steps: [{
-    title: String,
-    description:String,
-    ref : [String]
+    // type: Schema.Types.ObjectId, ref:'topic'
+    title:String
   }]
 
 });
 
-module.exports = mongoose.model("Roadmap", roademapSchema);
+module.exports = mongoose.model("roadmap", roademapSchema);

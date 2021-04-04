@@ -59,71 +59,18 @@
                         </div>
         
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-md-0">
-                                <div class="icon-box">
-                                    <div class="icon"><i class="bx bx-window-alt"></i></div>
-                                    <a href="/diagram?index=webdevelopment">
-                                        <h4>Web Development</h4>
-                                    </a>
-                                        <p>Web development is the work involved in developing a Web site for the Internet (World
-                                            Wide Web) or an intranet (a private network).</p>
-                                            <br>
-                                
-                                    </div>
-                            </div>
-        
-                            <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-md-0">
-                                <div class="icon-box">
-                                    <div class="icon"><i class="bx bx-dna"></i></div>
-                                    <h4><a href="/bioinformatics?index=bioinformatics">Bioinformatics</a></h4>
-                                    <p>Bioinformatics is an interdisciplinary field that develops methods and software tools
-                                        for
-                                        understanding biological data, in particular when the data sets are large and
-                                        complex.
-                                    </p>
+                            <% for (let i = 0; i < roadmaps.length; i++) { %>
+                                <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-md-0">
+                                    <div class="icon-box">
+                                        <div class="icon"><i class="bx bx-window-alt"></i></div>
+                                        <a href="/diagram/<%= roadmaps[i].url %>">
+                                            <h4><%= roadmaps[i].title %></h4>
+                                        </a>
+                                            <p><%= roadmaps[i].description %></p>
+                                    
+                                        </div>
                                 </div>
-                            </div>
-        
-                            <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-lg-0">
-                                <div class="icon-box">
-                                    <div class="icon"><i class="bx bx-game"></i></div>
-                                    <h4><a href="">Game Development</a></h4>
-                                    <p>Game development is the process of developing a video game. The effort is undertaken
-                                        by a
-                                        developer, ranging from a single person to an international team dispersed across
-                                        the
-                                        globe.</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
-                                <div class="icon-box">
-                                    <div class="icon"><i class="bx bx-atom"></i></div>
-                                    <h4><a href="">Python</a></h4>
-                                    <p>Python is an interpreted, high-level and general-purpose programming language. </p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
-                                <div class="icon-box">
-                                    <div class="icon"><i class="bx bx-brain"></i></div>
-                                    <h4><a href="">Artificial Intelligence</a></h4>
-                                    <p>Artificial intelligence (AI), is intelligence demonstrated by machines, unlike the
-                                        natural intelligence displayed by humans and animals, which involves consciousness
-                                        and
-                                        emotionality</p>
-                                </div>
-                            </div>
-        
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 d-flex align-items-stretch mt-4">
-                                <div class="icon-box">
-                                    <div class="icon"><i class="bx bx-code-block"></i></div>
-                                    <h4><a href="">Javascript</a></h4>
-                                    <p>JS is a programming language that conforms to the ECMAScript specification.[7]
-                                        JavaScript
-                                        is high-level, often just-in-time compiled, and multi-paradigm.</p>
-                                </div>
-                            </div>
+                                <% } %>
         
                         </div>
         

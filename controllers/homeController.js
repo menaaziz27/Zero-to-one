@@ -3,6 +3,8 @@ const moment = require('moment');
 const User = require('../models/User');
 
 const Post = require('../models/Post');
+const Roadmap= require('../models/Roadmap');
+
 
 exports.getHome = (req, res, next) => {
 	let userid;
@@ -11,12 +13,13 @@ exports.getHome = (req, res, next) => {
 	} else {
 		userid = null;
 	}
+
 	res.render('home/index', { userid });
 };
 
 exports.getTimeline = async (req, res, next) => {
-	const data = await axios.get('https://dev.to/api/articles');
-	const news = data.data;
+	// const data = await axios.get('https://dev.to/api/articles');
+	// const news = data.data;
 	let userid;
 	if (req.user) {
 		userid = req.user._id.toString();
@@ -30,26 +33,34 @@ exports.getTimeline = async (req, res, next) => {
 			userid: userid,
 			posts,
 			moment,
-			news,
+			news:''
 		});
 	} catch (e) {
 		console.log(e);
 	}
 };
 
-exports.getRoadmaps = (req, res, next) => {
-	res.render('roadmaps/roadmaps', {});
+exports.getRoadmaps = async (req, res, next) => {
+	try {
+		const roadmaps = await Roadmap.find({})
+
+		res.render('roadmaps/roadmaps', {
+      roadmaps
+    });
+	} catch (e) {
+		console.log(e);
+	}
 };
 
-exports.getNews = async (req, res) => {
-	const data = await axios.get('https://dev.to/api/articles');
+// exports.getNews = async (req, res) => {
+// 	const data = await axios.get('https://dev.to/api/articles');
 
-	const news = data.data;
-	res.render('news', {
-		title: 'News',
-		news: news,
-	});
-};
+// 	const news = data.data;
+// 	res.render('news', {
+// 		title: 'News',
+// 		news: news,
+// 	});
+// };
 
 exports.getSearch = (req, res) => {
 	res.render('search.ejs');

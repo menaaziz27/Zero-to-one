@@ -105,6 +105,5 @@ app.use((req, res) => {
 
   // Admin route Options
   run();
-
   
   app.listen(3000)
