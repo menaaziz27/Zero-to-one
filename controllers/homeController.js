@@ -6,7 +6,7 @@ const Post = require('../models/Post');
 const Roadmap= require('../models/Roadmap');
 
 
-exports.getHome = (req, res, next) => {
+exports.getHome = async(req, res, next) => {
 	let userid;
 	if (req.user) {
 		userid = req.user._id.toString();
@@ -14,7 +14,8 @@ exports.getHome = (req, res, next) => {
 		userid = null;
 	}
 
-	res.render('home/index', { userid });
+  const roadmaps = await Roadmap.find({});
+	res.render('home/index', { userid, roadmaps });
 };
 
 exports.getTimeline = async (req, res, next) => {
@@ -43,6 +44,7 @@ exports.getTimeline = async (req, res, next) => {
 exports.getRoadmaps = async (req, res, next) => {
 	try {
 		const roadmaps = await Roadmap.find({})
+    console.log(roadmaps)
 
 		res.render('roadmaps/roadmaps', {
       roadmaps

@@ -19,7 +19,7 @@ const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
-const roadmap = require('./routes/roadmap');
+const roadmapRoutes = require('./routes/roadmap');
 
 
 // ============ constant vars ============
@@ -94,7 +94,7 @@ app.use(homeRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
-app.use('roadmap',roadmap);
+app.use('/roadmaps',roadmapRoutes);
 // app.use('/admin', adminRoutes)
 app.use((req, res) => {
 	res.render('404.ejs');

@@ -16,3 +16,21 @@ exports.createRoadmap = async (req, res) => {
 		console.log(e);
 	}
 };
+
+// roadmaps/:roadmap
+exports.getRoadmap = async (req,res) => {
+  const roadmapName = req.params.roadmap;
+
+  try {
+    const roadmap = await Roadmap.findOne({routeName: roadmapName}).populate('steps');
+    console.log(roadmap)
+    const steps = roadmap.steps;
+    console.log(steps[0].title)
+    res.render('roadmaps/diagram', {
+      roadmap,
+      steps
+    })
+  }catch(e) {
+    console.log(e)
+  }
+}
