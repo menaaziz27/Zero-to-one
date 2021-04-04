@@ -103,5 +103,4 @@ app.use((req, res) => {
 // 	res.redirect("/500");
 // });
 
-console.log('added a new line to make a commit');
 app.listen(3000);
