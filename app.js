@@ -59,7 +59,7 @@ const fileFilter = (req, file, cb) => {
 
 // ==== middlewares which will be executed before every incoming request ====
 // app.use(morgan('tiny'));
-app.use(bodyparser.json())
+app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
@@ -103,4 +103,5 @@ app.use((req, res) => {
 // 	res.redirect("/500");
 // });
 
+console.log('added a new line to make a commit');
 app.listen(3000);
