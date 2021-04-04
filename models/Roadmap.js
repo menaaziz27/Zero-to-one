@@ -9,8 +9,7 @@ const roademapSchema = new Schema({
 	},
 	description: {
 		type: String,
-		required: [true, "Please enter the description"],
-		trim: true,
+		required: [true, "Please enter the description"]
 	},
   steps: [{
     title: String,
