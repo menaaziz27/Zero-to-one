@@ -22,8 +22,8 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 
 // ============ constant vars ============
-// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
-const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+// const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
 
@@ -59,7 +59,7 @@ const fileFilter = (req, file, cb) => {
 
 // ==== middlewares which will be executed before every incoming request ====
 // app.use(morgan('tiny'));
-app.use(bodyparser.json())
+app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(

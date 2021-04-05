@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose
-	.connect('mongodb://localhost:27017/zerotoone', {
+	.connect('mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority', {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})

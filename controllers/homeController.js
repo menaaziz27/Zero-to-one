@@ -52,7 +52,7 @@ exports.getNews = async (req, res) => {
 };
 
 exports.getSearch = (req, res) => {
-	res.render('search2.ejs');
+	res.render('user_search.ejs');
 };
 
 exports.getSearchPosts = (req,res) => {
