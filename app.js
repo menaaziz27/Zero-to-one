@@ -1,6 +1,6 @@
 // ============ Node-Packages ============
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
@@ -22,8 +22,8 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
-// const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
 
