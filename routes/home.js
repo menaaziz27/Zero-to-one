@@ -14,7 +14,8 @@ const {
 	getDiagram,
 	getCss,
   getBackDiagram,
-  getBioDiagram
+  getBioDiagram,
+  getDashboard
 } = require('../controllers/homeController');
 
 const { isAuthenticated } = require('../middleware/isAuthenticated');
@@ -24,6 +25,7 @@ router.get('/timeline', isAuthenticated, getTimeline);
 router.get('/roadmaps', getRoadmaps);
 router.get('/news', getNews);
 router.get('/search', getSearch);
+router.get('/dashboard', getDashboard);
 router.get('/search/posts', getSearchPosts);
 router.post('/search/posts', postSearchPosts);
 router.post('/search/users', postSearch);

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="assets/img/logo-white.png" rel="icon">
+
+    <title>Dashboard</title>
+
+
+
+    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" /> -->
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>Test2</title>
+
+
+    <style>
+        .h7 {
+            font-size: 0.9rem
+        }
+
+        .sectional-wrapper {
+            margin-bottom: 80px;
+            padding-top: 20px;
+        }
+
+        .sectional-wrapper .sub-header h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 35px;
+            font-weight: bold;
+            padding-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .h2,
+        h2 {
+            font-size: 30px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        p {
+            min-height: 21px;
+        }
+
+        .aside-section {
+            padding-top: 6px;
+        }
+
+        .widget {
+            padding-top: 0px;
+        }
+
+        .widget-header {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .widget {
+            padding-top: 0px;
+        }
+
+        .widget+.widget {
+            padding-top: 0px;
+        }
+
+        .widget {
+            padding-top: 0px;
+        }
+
+        .widget-header {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .ct-latest {
+            cursor: pointer;
+        }
+
+        .ct-latest {
+            padding: 15px 10px;
+            border-top: 1px solid #e1e1e1;
+            border-bottom: 1px solid #e1e1e1;
+            -webkit-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+            margin-top: -1px !important;
+        }
+
+        .ct-latest .media-left {
+            padding-right: 15px;
+        }
+
+        .media-body,
+        .media-left,
+        .media-right {
+            display: table-cell;
+            vertical-align: top;
+        }
+
+        .media img {
+            max-width: none;
+        }
+
+        .media-body,
+        .media-left,
+        .media-right {
+            display: table-cell;
+            vertical-align: top;
+        }
+
+        .media-body {
+            width: 10000px;
+        }
+
+        .ct-latest-header {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            font-size: 17px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .media-heading {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .ct-latest p {
+            font-size: 13px;
+        }
+
+        .ct-latest:hover {
+            background-color: #e1e1e1;
+        }
+
+        a {
+            color: #4F4F99;
+        }
+
+        a,
+        a:hover,
+        a:focus,
+        a:active {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+
+    <!-- ================== END ====================== -->
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+
+        <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+                <div class="mb-2 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="widget-header">
+                                Dashboard
+                            </h2>
+                            <div class="flex items-center mb-4">
+                                <a href="">
+
+                                    <span style="display: inline-block; margin-right: 3px;">
+                                        <h4>
+                                                <i style="margin-right: 16px;"class="far fa-user"></i> 
+                                                Users 
+                                           </h4> 
+                                        </span>
+                                </a>
+                            </div>
+                            <div class="flex items-center mb-4">
+                                <a href="">
+                                    <h4>
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                           role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
+                                           class="mr-3 crayons-icon color-base-50">
+                                           <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
+                                           <path
+                                               d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
+                                           </path>
+                                       </svg>
+                                        Posts 
+                                   </h4> 
+                                </a>
+                            </div>
+                            <div class="flex items-center">
+                                <a href="">
+
+                                    <span style="display: inline-block; margin-right: 3px;">
+                                        <h4>
+                                            <i style="margin-right: 16px;" class="fas fa-road"></i>
+                                            Roadmaps 
+                                       </h4>                                
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                <div class="col">
+
+                    <!--- Post Form Begins -->
+                    <section class="mb-2 card">
+
+                        <div class="card-body">
+                        
+                        </div>
+                    </section>
+                    <!--- Post Form Ends -->
+
+                    <!-- begginning of rendering all posts -->
+                    <!-- begginning of rendering all posts -->
+                  
+                            <div class="crayons-story " data-content-user-id="219080">
+                              
+                            </div>
+                      
+                                    <!-- Post Ends -->
+                                    <!-- endpost -->
+                                    <!-- Post Ends -->
+                </div>
+                <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
+                    <!-- aside latest news -->
+                    <aside class="widget">
+                        <div class="widget blog-widget">
+                            <h2 class="widget-header">
+                                Dash
+                            </h2>
+                            <!-- beginning of first news -->
+                            <!-- beginning of first news -->
+                      
+                                     
+                                        <!-- ending of first news -->
+                                     
+
+                                                    <!-- ending of first news -->
+                        </div>
+                        <!-- friends menu -->
+                        <!-- <div class="card">
+					<div class="p-3 card-body">
+						<h5 class="m-0 card-title">Friends</h5>
+						<div class="list-group list-group-flush">
+							<a href="#" class="list-group-item list-group-item-action text-primary">
+							Justo moto pani
+							</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Harry consectetur</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Dobi leo risus</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Gadot facilisis in</a>
+							<a href="#" class="btn btn-sm btn-primary">View All</a>
+						</div>
+					</div>
+                </div> -->
+                        <!-- users menu -->
+                        <!-- <div class="mt-4 card">
+					<div class="p-3 card-body">
+						<h5 class="m-0 card-title">Users</h5>
+						<div class="list-group list-group-flush">
+							<a href="#" class="list-group-item list-group-item-action text-primary">
+							Cras justo odio
+							</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Dapibus ac facilisis in</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Morbi leo risus</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Porta ac consectetur ac</a>
+							<a href="#" class="btn btn-sm btn-primary">View All</a>
+						</div>
+					</div>
+				</div> -->
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="assets/vendor/jquery/jquery.min.js"></script>
+        <script src="./bootstrap/js/bootstrap.min.js"></script>
+        <!-- <script>
+            const element = document.querySelector('#submit');
+            element.addEventListener('submit', event => {
+                event.preventDefault();
+            });
+        </script> -->
+
+</body>
+
+</html>
