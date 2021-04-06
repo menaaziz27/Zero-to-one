@@ -10,7 +10,7 @@
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <link rel="stylesheet" href="/public/assets/css/edit-post.css">
+    <link rel="stylesheet" href="/assets/css/edit-post.css">
 
 </head>
 <body>
@@ -34,13 +34,12 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
-                                    <textarea style="resize: none;" class="form-control" name="description" id="post" rows="3">Why I stopped using Redux and Used Recoil Instead</textarea>
+                                    <textarea style="resize: none;" class="form-control" name="description" id="post" rows="3"><%=post.description%></textarea>
                                     <input type="hidden" name="userid" value="<%= userid %>">
                                 </div>
                             </div>
                         </div>
-                       <div class="flex items-center"><button class="crayons-btn crayons-btn--ghost crayons-btn--icon-left mr-2 fw-normal" tabindex="-1" type="button"><svg width="24" height="24" viewBox="0 0 24 24" class="crayons-icon" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="a17qec5pfhrwzk9w4kg0tp62v27qqu9t"><title id="a17qec5pfhrwzk9w4kg0tp62v27qqu9t">Upload image</title><path d="M20 5H4v14l9.292-9.294a1 1 0 011.414 0L20 15.01V5zM2 3.993A1 1 0 012.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 01-.992.993H2.992A.993.993 0 012 20.007V3.993zM8 11a2 2 0 110-4 2 2 0 010 4z"></path></svg>Upload image<input type="file" id="image-upload-field" class="w-100 h-100 absolute left-0 right-0 top-0 bottom-0 overflow-hidden opacity-0 cursor-pointer"
-                             multiple="" accept="image/*" data-max-file-size-mb="25" aria-label="Upload an image"></button></div>
+                       
                         <div class="text-right">
                             <a href="<% if(timeline) { %>/timeline <%} else {%>/users/profile/<%= userid %> <%}%>" class="btn btn-outline-dark">Back</a>
                             <button type="submit" class="btn btn-primary">Edit</button>
