@@ -33,3 +33,7 @@ h3{
 .container form{
     max-width: 1000px;
 }
+.btn-block {
+    display: block;
+    width: 80px;
+}
