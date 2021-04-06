@@ -213,11 +213,23 @@ exports.postSearchPosts = async (req, res) => {
 // };
 
 const generateCriteriaObject = obj => {
+	let data = {};
 	// delete all properties that have values of 'any'
 	for (let prop in obj) {
-		obj[prop] === 'any' && delete obj[prop];
+		// if the property is empty string or 'any' or skills array is empty delete them
+		if (obj[prop] === 'any' || obj[prop] === '' || obj[prop].length === 0) {
+			delete obj[prop];
+		}
+		// lw el prop = name w el name msh empty 7ott el query bta3t el search f el obj data
+		if (prop === 'name' && obj[prop] !== '') {
+			data[prop] = { $text: { $search: `${obj[prop]}` } };
+		} else if (prop === 'skills' && obj[prop]?.length > 0) {
+			data[prop] = { skills: { $in: `${obj[prop]}` } };
+		} else if (obj[prop] !== undefined) {
+			data[prop] = obj[prop];
+		}
 	}
-	return obj;
+	return data;
 };
 
 exports.postSearch = async (req, res, next) => {
@@ -230,107 +242,120 @@ exports.postSearch = async (req, res, next) => {
 
 	let name, year, language, country, gender, skills, body;
 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-		allData = generateCriteriaObject(req.body.allData);
-		name = allData?.name;
-		country = allData?.country;
-		year = allData?.year;
-		language = allData?.language;
-		gender = allData?.gender;
-		skills = allData?.skills;
-		console.log(req?.body?.allData, 'alldata');
-		console.log(name, 'name');
-		console.log(country, 'country');
-		console.log(year, 'year');
-		console.log(gender, 'gender');
-		console.log(skills, 'skills');
+		allData = req.body.allData;
 	} else {
-		body = generateCriteriaObject(req.body);
+		allData = req.body;
 		// console.log(req.body, 'body');
 		// if skills length is 1 that means it has one value which will be string
-		if (typeof body.skills === 'string') {
+		if (typeof allData.skills === 'string') {
 			body.skills = [body.skills];
 		}
-		if (body.skills === undefined) {
-			body.skills = [];
+		if (allData.skills === undefined) {
+			allData.skills = [];
 		}
-		console.log(body, 'All BODY DATA');
 	}
+	console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
+	allData = generateCriteriaObject(allData);
+	console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
 
-	// format incoming object to the criteria query
-	const criteria = generateCriteriaObject();
-
-	// console.log(body.skills, 'skills after modifications');
 	try {
-		const users = await User.aggregate([
-			{
-				$match: {
-					$or: [
-						{
-							name: {
-								$regex: new RegExp(`^${name}`),
-								$options: 'i',
-							},
-						},
-						{
-							country: {
-								$regex: new RegExp(`^${country}`),
-								$options: 'i',
-							},
-						},
-						{
-							yearOfBirth: {
-								$regex: new RegExp(`^${year}`),
-								$options: 'i',
-							},
-						},
-						{
-							nativeLang: {
-								$regex: new RegExp(`^${language}`),
-								$options: 'i',
-							},
-						},
-						// {
-						// 	skills: {
-						// 		$regex: query,
-						// 		$options: 'i',
-						// 	},
-						// },
-					],
-				},
-			},
-		]);
-
-		console.log(users, 'users');
-		// const defaultImage = 'assets/img/default.png';
-		// const modifiedUsers = users
-		// 	.map(
-		// 		match =>
-		// 			`
-
-		// 		<div class="card card-body mb-1">
-		// 			<div>
-		// 				<a href="/users/profile/${match.username}">
-		// 					<img class="rounded-circle avatar-xs rounded float-left" src="/${
-		// 						match.Image || defaultImage
-		// 					}" width="100" height="75">
-		// 				</a>
-		// 			</div>
-		// 			<a href="/users/profile/${match.username}">
-		//       <h4>${match.name} (${match.email})<span class="text-primary">${
-		// 				match.username
-		// 			}</span></h4>
-		// 			</a>
-		//     </div>
-		//   `
-		// 	)
-		// 	.join('');
-		// console.log(modifiedUsers);
-		// res.send({ modifiedUsers });
+		const users = await User.find(allData);
+		console.log(users);
 		res.redirect('/search');
-		// res.send({modifiedUsers})
 	} catch (e) {
 		console.log(e);
 	}
+	// name = allData?.name;
+	// country = allData?.country;
+	// year = allData?.year;
+	// language = allData?.language;
+	// gender = allData?.gender;
+	// skills = allData?.skills;
+	// console.log(req?.body?.allData, 'alldata');
+	// console.log(name, 'name');
+	// console.log(country, 'country');
+	// console.log(year, 'year');
+	// console.log(gender, 'gender');
+	// console.log(skills, 'skills');
+
+	// console.log(body, 'All BODY DATA');
+	// console.log(allData, 'All BODY allData DATA');
+
+	// format incoming object to the criteria query
+	// const criteria = generateCriteriaObject();
+
+	// console.log(body.skills, 'skills after modifications');
+	// try {
+	// 	const users = await User.aggregate([
+	// 		{
+	// 			$match: {
+	// 				$or: [
+	// 					{
+	// 						name: {
+	// 							$regex: new RegExp(`^${name}`),
+	// 							$options: 'i',
+	// 						},
+	// 					},
+	// 					{
+	// 						country: {
+	// 							$regex: new RegExp(`^${country}`),
+	// 							$options: 'i',
+	// 						},
+	// 					},
+	// 					{
+	// 						yearOfBirth: {
+	// 							$regex: new RegExp(`^${year}`),
+	// 							$options: 'i',
+	// 						},
+	// 					},
+	// 					{
+	// 						nativeLang: {
+	// 							$regex: new RegExp(`^${language}`),
+	// 							$options: 'i',
+	// 						},
+	// 					},
+	// 					// {
+	// 					// 	skills: {
+	// 					// 		$regex: query,
+	// 					// 		$options: 'i',
+	// 					// 	},
+	// 					// },
+	// 				],
+	// 			},
+	// 		},
+	// 	]);
+
+	// 	console.log(users, 'users');
+	// const defaultImage = 'assets/img/default.png';
+	// const modifiedUsers = users
+	// 	.map(
+	// 		match =>
+	// 			`
+
+	// 		<div class="card card-body mb-1">
+	// 			<div>
+	// 				<a href="/users/profile/${match.username}">
+	// 					<img class="rounded-circle avatar-xs rounded float-left" src="/${
+	// 						match.Image || defaultImage
+	// 					}" width="100" height="75">
+	// 				</a>
+	// 			</div>
+	// 			<a href="/users/profile/${match.username}">
+	//       <h4>${match.name} (${match.email})<span class="text-primary">${
+	// 				match.username
+	// 			}</span></h4>
+	// 			</a>
+	//     </div>
+	//   `
+	// 	)
+	// 	.join('');
+	// console.log(modifiedUsers);
+	// res.send({ modifiedUsers });
+	// res.redirect('/search');
+	// res.send({modifiedUsers})
+	// } catch (e) {
+	// 	console.log(e);
+	// }
 };
 
 //! partial search working
