@@ -222,7 +222,7 @@ const generateCriteriaObject = obj => {
 		}
 		// lw el prop = name w el name msh empty 7ott el query bta3t el search f el obj data
 		if (prop === 'name' && obj[prop] !== '') {
-			data[prop] = { $text: { $search: `${obj[prop]}` } };
+			data['$text'] = { $search: `${obj[prop]}` };
 		} else if (prop === 'skills' && obj[prop]?.length > 0) {
 			data[prop] = { skills: { $in: `${obj[prop]}` } };
 		} else if (obj[prop] !== undefined) {
