@@ -224,7 +224,11 @@ const generateCriteriaObject = obj => {
 		if (prop === 'name' && obj[prop] !== '') {
 			data['$text'] = { $search: `${obj[prop]}` };
 		} else if (prop === 'skills' && obj[prop]?.length > 0) {
-			data[prop] = { skills: { $in: `${obj[prop]}` } };
+			if (obj[prop].length === 1) {
+				data['skills'] = { $in: `${obj[prop].concat([])}` };
+			} else {
+				data['skills'] = { $in: obj[prop] };
+			}
 		} else if (obj[prop] !== undefined) {
 			data[prop] = obj[prop];
 		}
