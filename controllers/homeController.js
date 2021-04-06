@@ -213,11 +213,33 @@ exports.postSearchAjax = (req, res, next) => {
 };
 
 exports.postSearch = async (req, res, next) => {
+	let name, year, lanuage, country, gender, skills, body;
 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-		next();
+		allData = req.body.allData;
+		name = allData.name;
+		country = allData.country;
+		year = allData.year;
+		gender = allData.gender;
+		skills = allData.skills;
+		console.log(req?.body?.allData, 'alldata');
+		console.log(name, 'name');
+		console.log(country, 'country');
+		console.log(year, 'year');
+		console.log(gender, 'gender');
+		console.log(skills, 'skills');
+	} else {
+		body = req.body;
+		// console.log(req.body, 'body');
+		// if skills length is 1 that means it has one value which will be string
+		if (typeof body.skills === 'string') {
+			body.skills = [body.skills];
+		}
+		if (body.skills === undefined) {
+			body.skills = [];
+		}
 	}
-	const { body } = req;
-	console.log(body);
+	// console.log(body.skills, 'skills after modifications');
+	console.log(body, 'All BODY DATA');
 	try {
 		// const users = await User.aggregate([
 		// 	{

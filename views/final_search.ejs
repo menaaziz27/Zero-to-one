@@ -677,7 +677,7 @@
                     console.log('test')
                     wireFrames();
 
-                    let name = $('#name').val();
+                    let name;
                     let country = 'any';
                     let year = 'any';
                     let gender = 'any';
@@ -721,6 +721,7 @@
                         function findUser(searchQuery) {
                             // add event listeners to all inputs
                             // get all values from all inputs and send them as an object to the server
+                            name = $('#name').val()
                             let allData = {};
                             allData['name'] = name;
                             allData['country'] = country;
