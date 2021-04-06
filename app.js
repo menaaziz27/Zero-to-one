@@ -8,22 +8,23 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('ejs');
-
 // ============ Core-Modules ============
 const path = require('path');
 
 // ============ My-Modules ============
-require('./utils/db');
+// require('./utils/db');
+const run = require('./utils/db');
 const { findUser } = require('./middleware/helper');
 // Routes
 const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
+const roadmapRoutes = require('./routes/roadmap');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
-// const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
 
@@ -95,6 +96,7 @@ app.use(homeRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
+app.use('/roadmaps', roadmapRoutes);
 // app.use('/admin', adminRoutes)
 app.use((req, res) => {
 	res.render('404.ejs');
@@ -102,5 +104,8 @@ app.use((req, res) => {
 // app.use((error, req, res, next) => {
 // 	res.redirect("/500");
 // });
+
+// Admin route Options
+run();
 
 app.listen(3000);
