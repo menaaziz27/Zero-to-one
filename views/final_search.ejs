@@ -293,7 +293,7 @@
 
                         <!-- begin year of birth -->
                         <label for="yearOfBirth">year of birth</label>
-                        <select name="year" id="year" class="form-control form-select-sm selectpicker"
+                        <select name="yearOfBirth" id="yearOfBirth" class="form-control form-select-sm selectpicker"
                             aria-label=".form-select-sm example">
                             <option selected value="any">any</option>
                             <option value="1960">1960</option>
@@ -513,9 +513,9 @@
                     </div>
                     <!-- cards -->
                     <!-- card1 -->
-                    <div class="mt-4">
 
 
+                    <div id="match-list" class="mt-4">
                         <% if (users) { %>
                             <% users.forEach(function(user) { %>
 
@@ -602,7 +602,7 @@
 
                     let name;
                     let country = 'any';
-                    let year = 'any';
+                    let yearOfBirth = 'any';
                     let gender = 'any';
                     let language = 'any';
                     let skills = [];
@@ -612,8 +612,8 @@
                             console.log($(this).val());
                             findUser();
                         })
-                        $('#year').on('change keyup paste', function (e) {
-                            year = $(this).val();
+                        $('#yearOfBirth').on('change keyup paste', function (e) {
+                            yearOfBirth = $(this).val();
                             console.log($(this).val());
                             findUser();
                         })
@@ -648,7 +648,7 @@
                             let allData = {};
                             allData['name'] = name;
                             allData['country'] = country;
-                            allData['year'] = year;
+                            allData['yearOfBirth'] = yearOfBirth;
                             allData['gender'] = gender;
                             allData['language'] = language;
                             allData['skills'] = skills;
@@ -659,8 +659,9 @@
                                 contentType: 'application/json',
                                 data: JSON.stringify({ allData }),
                                 success: function (response) {
+                                    console.info(response.users);
                                     // console.log(response, 'from UI');
-                                    //$('#match-list').html(response.query);
+                                    $('#match-list').html(response.users);
                                 },
                             });
                         }
