@@ -58,9 +58,7 @@ exports.getSearch = (req, res) => {
 exports.getSearchPosts = (req,res) => {
 	res.render('searchPosts.ejs')
 }
-exports.getDashboard = (req,res) => {
-	res.render('dashboard/dashboard.ejs')
-}
+
 
 exports.postSearchPosts = async (req,res) => {
 		const { query } = req.body;

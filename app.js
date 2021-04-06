@@ -20,6 +20,8 @@ const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
+const adminRoutes = require('./routes/admin');
+
 
 // ============ constant vars ============
 // const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
@@ -95,6 +97,7 @@ app.use(homeRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
+app.use('/admin',adminRoutes)
 // app.use('/admin', adminRoutes)
 app.use((req, res) => {
 	res.render('404.ejs');
