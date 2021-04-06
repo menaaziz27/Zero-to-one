@@ -63,7 +63,9 @@ exports.getRoadmaps = async (req, res, next) => {
 // };
 
 exports.getSearch = (req, res) => {
-	res.render('final_search.ejs');
+	res.render('final_search.ejs', {
+		users: [],
+	});
 };
 
 exports.getSearchPosts = (req, res) => {
@@ -192,26 +194,6 @@ exports.postSearchPosts = async (req, res) => {
 // 	}
 // }
 
-//! lessa ha3melha
-// exports.postSearchAjax = (req, res, next) => {
-// 	// if it's not an ajax request go to the next middleware
-// 	if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
-// 		return next();
-// 	}
-// 	const { name, country, year, gender, language, skills } = req.body.allData;
-// 	console.log(req.body.allData, 'alldata');
-// 	console.log(name, 'name');
-// 	console.log(country, 'country');
-// 	console.log(year, 'year');
-// 	console.log(gender, 'gender');
-// 	console.log(skills, 'skills');
-// 	try {
-// 		res.redirect('/search');
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };
-
 const generateCriteriaObject = obj => {
 	let data = {};
 	// delete all properties that have values of 'any'
@@ -221,7 +203,7 @@ const generateCriteriaObject = obj => {
 			delete obj[prop];
 		}
 		// lw el prop = name w el name msh empty 7ott el query bta3t el search f el obj data
-		if (prop === 'name' && obj[prop] !== '') {
+		if (prop === 'name' && obj[prop] !== '' && obj[prop] !== undefined) {
 			data['$text'] = { $search: `${obj[prop]}` };
 		} else if (prop === 'skills' && obj[prop]?.length > 0) {
 			if (obj[prop].length === 1) {
@@ -252,7 +234,7 @@ exports.postSearch = async (req, res, next) => {
 		// console.log(req.body, 'body');
 		// if skills length is 1 that means it has one value which will be string
 		if (typeof allData.skills === 'string') {
-			body.skills = [body.skills];
+			allData.skills = [allData.skills];
 		}
 		if (allData.skills === undefined) {
 			allData.skills = [];
@@ -265,101 +247,12 @@ exports.postSearch = async (req, res, next) => {
 	try {
 		const users = await User.find(allData);
 		console.log(users);
-		res.redirect('/search');
+		res.render('final_search.ejs', {
+			users,
+		});
 	} catch (e) {
 		console.log(e);
 	}
-	// name = allData?.name;
-	// country = allData?.country;
-	// year = allData?.year;
-	// language = allData?.language;
-	// gender = allData?.gender;
-	// skills = allData?.skills;
-	// console.log(req?.body?.allData, 'alldata');
-	// console.log(name, 'name');
-	// console.log(country, 'country');
-	// console.log(year, 'year');
-	// console.log(gender, 'gender');
-	// console.log(skills, 'skills');
-
-	// console.log(body, 'All BODY DATA');
-	// console.log(allData, 'All BODY allData DATA');
-
-	// format incoming object to the criteria query
-	// const criteria = generateCriteriaObject();
-
-	// console.log(body.skills, 'skills after modifications');
-	// try {
-	// 	const users = await User.aggregate([
-	// 		{
-	// 			$match: {
-	// 				$or: [
-	// 					{
-	// 						name: {
-	// 							$regex: new RegExp(`^${name}`),
-	// 							$options: 'i',
-	// 						},
-	// 					},
-	// 					{
-	// 						country: {
-	// 							$regex: new RegExp(`^${country}`),
-	// 							$options: 'i',
-	// 						},
-	// 					},
-	// 					{
-	// 						yearOfBirth: {
-	// 							$regex: new RegExp(`^${year}`),
-	// 							$options: 'i',
-	// 						},
-	// 					},
-	// 					{
-	// 						nativeLang: {
-	// 							$regex: new RegExp(`^${language}`),
-	// 							$options: 'i',
-	// 						},
-	// 					},
-	// 					// {
-	// 					// 	skills: {
-	// 					// 		$regex: query,
-	// 					// 		$options: 'i',
-	// 					// 	},
-	// 					// },
-	// 				],
-	// 			},
-	// 		},
-	// 	]);
-
-	// 	console.log(users, 'users');
-	// const defaultImage = 'assets/img/default.png';
-	// const modifiedUsers = users
-	// 	.map(
-	// 		match =>
-	// 			`
-
-	// 		<div class="card card-body mb-1">
-	// 			<div>
-	// 				<a href="/users/profile/${match.username}">
-	// 					<img class="rounded-circle avatar-xs rounded float-left" src="/${
-	// 						match.Image || defaultImage
-	// 					}" width="100" height="75">
-	// 				</a>
-	// 			</div>
-	// 			<a href="/users/profile/${match.username}">
-	//       <h4>${match.name} (${match.email})<span class="text-primary">${
-	// 				match.username
-	// 			}</span></h4>
-	// 			</a>
-	//     </div>
-	//   `
-	// 	)
-	// 	.join('');
-	// console.log(modifiedUsers);
-	// res.send({ modifiedUsers });
-	// res.redirect('/search');
-	// res.send({modifiedUsers})
-	// } catch (e) {
-	// 	console.log(e);
-	// }
 };
 
 //! partial search working
