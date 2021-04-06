@@ -213,8 +213,9 @@ exports.postSearchPosts = async (req, res) => {
 // };
 
 const generateCriteriaObject = obj => {
+	// delete all properties that have values of 'any'
 	for (let prop in obj) {
-		obj.prop === 'any' && delete obj.prop;
+		obj[prop] === 'any' && delete obj[prop];
 	}
 	return obj;
 };
@@ -229,13 +230,13 @@ exports.postSearch = async (req, res, next) => {
 
 	let name, year, language, country, gender, skills, body;
 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-		allData = req.body.allData;
-		name = allData.name;
-		country = allData.country;
-		year = allData.year;
-		language = allData.language;
-		gender = allData.gender;
-		skills = allData.skills;
+		allData = generateCriteriaObject(req.body.allData);
+		name = allData?.name;
+		country = allData?.country;
+		year = allData?.year;
+		language = allData?.language;
+		gender = allData?.gender;
+		skills = allData?.skills;
 		console.log(req?.body?.allData, 'alldata');
 		console.log(name, 'name');
 		console.log(country, 'country');
@@ -243,7 +244,7 @@ exports.postSearch = async (req, res, next) => {
 		console.log(gender, 'gender');
 		console.log(skills, 'skills');
 	} else {
-		body = req.body;
+		body = generateCriteriaObject(req.body);
 		// console.log(req.body, 'body');
 		// if skills length is 1 that means it has one value which will be string
 		if (typeof body.skills === 'string') {
