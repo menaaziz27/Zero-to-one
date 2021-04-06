@@ -193,32 +193,47 @@ exports.postSearchPosts = async (req, res) => {
 // }
 
 //! lessa ha3melha
-exports.postSearchAjax = (req, res, next) => {
-	// if it's not an ajax request go to the next middleware
-	if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
-		return next();
+// exports.postSearchAjax = (req, res, next) => {
+// 	// if it's not an ajax request go to the next middleware
+// 	if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
+// 		return next();
+// 	}
+// 	const { name, country, year, gender, language, skills } = req.body.allData;
+// 	console.log(req.body.allData, 'alldata');
+// 	console.log(name, 'name');
+// 	console.log(country, 'country');
+// 	console.log(year, 'year');
+// 	console.log(gender, 'gender');
+// 	console.log(skills, 'skills');
+// 	try {
+// 		res.redirect('/search');
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// };
+
+const generateCriteriaObject = obj => {
+	for (let prop in obj) {
+		obj.prop === 'any' && delete obj.prop;
 	}
-	const { name, country, year, gender, language, skills } = req.body.allData;
-	console.log(req.body.allData, 'alldata');
-	console.log(name, 'name');
-	console.log(country, 'country');
-	console.log(year, 'year');
-	console.log(gender, 'gender');
-	console.log(skills, 'skills');
-	try {
-		res.redirect('/search');
-	} catch (e) {
-		console.log(e);
-	}
+	return obj;
 };
 
 exports.postSearch = async (req, res, next) => {
-	let name, year, lanuage, country, gender, skills, body;
+	//TODO-1: extract both data from ajax and from the form
+	//TODO-2: format both objects to match each others
+	//TODO-3: format the query that gonna undergoes to the search in DB
+	//TODO-4: get the list of users that match this query or criteria
+	//TODO-5: adjust the ejs cards for users
+	//TODO-6: make a loading spinner that loads before rendering users to the client
+
+	let name, year, language, country, gender, skills, body;
 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
 		allData = req.body.allData;
 		name = allData.name;
 		country = allData.country;
 		year = allData.year;
+		language = allData.language;
 		gender = allData.gender;
 		skills = allData.skills;
 		console.log(req?.body?.allData, 'alldata');
@@ -237,48 +252,54 @@ exports.postSearch = async (req, res, next) => {
 		if (body.skills === undefined) {
 			body.skills = [];
 		}
+		console.log(body, 'All BODY DATA');
 	}
+
+	// format incoming object to the criteria query
+	const criteria = generateCriteriaObject();
+
 	// console.log(body.skills, 'skills after modifications');
-	console.log(body, 'All BODY DATA');
 	try {
-		// const users = await User.aggregate([
-		// 	{
-		// 		$match: {
-		// 			$or: [
-		// 				{
-		// 					name: {
-		// 						$regex: query,
-		// 						$options: 'i',
-		// 					},
-		// 				},
-		// 				{
-		// 					email: {
-		// 						$regex: query,
-		// 						$options: 'i',
-		// 					},
-		// 				},
-		// 				{
-		// 					username: {
-		// 						$regex: query,
-		// 						$options: 'i',
-		// 					},
-		// 				},
-		// 				{
-		// 					bio: {
-		// 						$regex: query,
-		// 						$options: 'i',
-		// 					},
-		// 				},
-		// 				{
-		// 					country: {
-		// 						$regex: query,
-		// 						$options: 'i',
-		// 					},
-		// 				},
-		// 			],
-		// 		},
-		// 	},
-		// ]);
+		const users = await User.aggregate([
+			{
+				$match: {
+					$or: [
+						{
+							name: {
+								$regex: new RegExp(`^${name}`),
+								$options: 'i',
+							},
+						},
+						{
+							country: {
+								$regex: new RegExp(`^${country}`),
+								$options: 'i',
+							},
+						},
+						{
+							yearOfBirth: {
+								$regex: new RegExp(`^${year}`),
+								$options: 'i',
+							},
+						},
+						{
+							nativeLang: {
+								$regex: new RegExp(`^${language}`),
+								$options: 'i',
+							},
+						},
+						// {
+						// 	skills: {
+						// 		$regex: query,
+						// 		$options: 'i',
+						// 	},
+						// },
+					],
+				},
+			},
+		]);
+
+		console.log(users, 'users');
 		// const defaultImage = 'assets/img/default.png';
 		// const modifiedUsers = users
 		// 	.map(
