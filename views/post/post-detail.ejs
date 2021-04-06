@@ -33,7 +33,7 @@
                     <% if(userid==post.user._id ) { %>
                         <div class="form-group">
                             <textarea style="resize: none;" class="form-control" name="description" id="post"
-                                rows="3"><%= post.description %></textarea>
+                                rows="3"><%= post.user.name %></textarea>
                             <input type="hidden" name="userid" value="<%= userid %>">
                         </div>
                         <% } else { %>

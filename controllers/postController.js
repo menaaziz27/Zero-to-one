@@ -54,7 +54,7 @@ exports.getPostDetail = async (req, res) => {
 
 	try {
 		const post = await Post.findById(postId).populate('user');
-		res.render('post/post-detail', {
+		res.render('post/details-post', {
 			post,
 			timeline,
 		});

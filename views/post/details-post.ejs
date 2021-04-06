@@ -10,7 +10,7 @@
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <link rel="stylesheet" href="/public/assets/css/edit-post.css">
+    <link rel="stylesheet" href="/assets/css/edit-post.css">
 
 </head>
 <body>
@@ -30,14 +30,14 @@
             <div class="col-md-6 offset-md-3  border border-primary rounded py-4-center">
                 <h3 style="text-align: center;">Post details</h3>
                 <!-- FORM -->
-                <form action="" method="POST" style="margin-top: 20px;">
+                <form action="<% if(timeline){%>/posts/<%= post._id %>/edit?timeline=true<%} else  {%> /posts/<%= post._id %>/edit<%}%>" method="POST" style="margin-top: 20px;">
                     <!-- TEXT FIELD GROUPS -->
                     <label class="small text-secondary m-0 mt-1" for="name">
-                        By guest6789
+                        By <%= post.user.name %>
                     </label>
                     <div class="form-group" style="margin-top: 20px;">
                         <textarea style="resize: none;" class="form-control" name="description" id="post"
-                            rows="3">Voila!! it works!</textarea>
+                            rows="3"><%= post.description %></textarea>
                         <input type="hidden" name="userid" value="<%= userid %>">
                     </div>
                     <p>
@@ -52,15 +52,16 @@
                         <div class="col-4">
                             <button class="btn btn-success btn-block mx-auto" type="submit">Update</button>
                         </div>
-                        <form
-                    action="<% if(timeline){%>/posts/<%= post._id %>/delete?timeline=true<%}else {%> /posts/<%= post._id %>/delete <%}%>"
-                    method="POST">
-                    <div class="col-4">
-                        <button class="btn btn-success btn-block mx-auto" type="submit">Delete</button>
+                        
+                    </form>
+                    <form action="<% if(timeline){%>/posts/<%= post._id %>/delete?timeline=true<%}else {%> /posts/<%= post._id %>/delete <%}%>" 
+                method="POST">
+                <div class="col-4">
+                    <button class="btn btn-success btn-block mx-auto" type="submit">Delete</button>
+                </div>
+            </form>
+
                     </div>
-                </form>
-                    </div>
-                </form>
                 
             </div>
         </div>
