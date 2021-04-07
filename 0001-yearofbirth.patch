@@ -1,0 +1,176 @@
+From a9026617a4ea50a728b57e0971aa4a09413194fd Mon Sep 17 00:00:00 2001
+From: menaaziz27 <menaaziz27@gmail.com>
+Date: Tue, 6 Apr 2021 09:10:11 +0200
+Subject: [PATCH] yearofbirth
+
+---
+ controllers/homeController.js | 74 +++++++++++++++++++++++++++++++++--
+ views/final_search.ejs        | 15 +++----
+ 2 files changed, 78 insertions(+), 11 deletions(-)
+
+diff --git a/controllers/homeController.js b/controllers/homeController.js
+index 908fb65..100e232 100644
+--- a/controllers/homeController.js
++++ b/controllers/homeController.js
+@@ -194,6 +194,61 @@ exports.postSearchPosts = async (req, res) => {
+ // 	}
+ // }
+ 
++const renderUsers = user =>
++	`<div class="mb-3 card">
++<div class="row g-0">
++<div class="row">
++<div class="col-md-2">
++<a href="#"> <img
++src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
++alt="..."> </a>
++</div>
++<div class="col-md-10">
++<div class="btncard card-body">
++<a href="#">
++<h5 class="card-title">
++${user.name}
++</h5>
++</a>
++<div class="social">
++<a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
++<a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
++<a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
++
++</div>
++<p class="card-text">
++${user.bio ? user.bio : ''}
++</p>
++<hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
++<a href="/users/profile/${user.username}" class="btn">visit</a>
++</div>
++<div class="container-fluid">
++<div class="mt-4 row justify-content-center">
++<div class="col col-md-offset-2 "><span>Country</span>
++<p>
++${user.country}
++</p>
++</div>
++<div class="col col-md-offset-2 "> <span>Gender</span>
++<p>
++${user.gender}
++</p>
++</div>
++<div class="col col-md-offset-2 "><span>year of birth</span>
++<p class="w-100">1999</p>
++</div>
++<div class="col col-md-offset-2 "> <span>Language</span>
++<p>
++${user.gender}
++</p>
++</div>
++</div>
++</div>
++</div>
++</div>
++</div>
++</div>`;
++
+ const generateCriteriaObject = obj => {
+ 	let data = {};
+ 	// delete all properties that have values of 'any'
+@@ -226,7 +281,7 @@ exports.postSearch = async (req, res, next) => {
+ 	//TODO-5: adjust the ejs cards for users
+ 	//TODO-6: make a loading spinner that loads before rendering users to the client
+ 
+-	let name, year, language, country, gender, skills, body;
++	let name, yearOfBirth, language, country, gender, skills, body;
+ 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
+ 		allData = req.body.allData;
+ 	} else {
+@@ -247,9 +302,20 @@ exports.postSearch = async (req, res, next) => {
+ 	try {
+ 		const users = await User.find(allData);
+ 		console.log(users);
+-		res.render('final_search.ejs', {
+-			users,
+-		});
++
++		//TODO-1: check if the  request is ajax create string of matched elements in backticks string
++		//TODO-2: send users back to ajax and target the DOM element and replace it's HTML with the string
++		//TODO-3: if the request not ajax just res.render with the list of returning users
++		let matchedUsers;
++		if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
++			matchedUsers = users.map(renderUsers).join('');
++			console.log(matchedUsers);
++			res.send({ users: matchedUsers });
++		} else {
++			res.render('final_search.ejs', {
++				users,
++			});
++		}
+ 	} catch (e) {
+ 		console.log(e);
+ 	}
+diff --git a/views/final_search.ejs b/views/final_search.ejs
+index 9a70399..8358542 100644
+--- a/views/final_search.ejs
++++ b/views/final_search.ejs
+@@ -293,7 +293,7 @@
+ 
+                         <!-- begin year of birth -->
+                         <label for="yearOfBirth">year of birth</label>
+-                        <select name="year" id="year" class="form-control form-select-sm selectpicker"
++                        <select name="yearOfBirth" id="yearOfBirth" class="form-control form-select-sm selectpicker"
+                             aria-label=".form-select-sm example">
+                             <option selected value="any">any</option>
+                             <option value="1960">1960</option>
+@@ -513,9 +513,9 @@
+                     </div>
+                     <!-- cards -->
+                     <!-- card1 -->
+-                    <div class="mt-4">
+ 
+ 
++                    <div id="match-list" class="mt-4">
+                         <% if (users) { %>
+                             <% users.forEach(function(user) { %>
+ 
+@@ -602,7 +602,7 @@
+ 
+                     let name;
+                     let country = 'any';
+-                    let year = 'any';
++                    let yearOfBirth = 'any';
+                     let gender = 'any';
+                     let language = 'any';
+                     let skills = [];
+@@ -612,8 +612,8 @@
+                             console.log($(this).val());
+                             findUser();
+                         })
+-                        $('#year').on('change keyup paste', function (e) {
+-                            year = $(this).val();
++                        $('#yearOfBirth').on('change keyup paste', function (e) {
++                            yearOfBirth = $(this).val();
+                             console.log($(this).val());
+                             findUser();
+                         })
+@@ -648,7 +648,7 @@
+                             let allData = {};
+                             allData['name'] = name;
+                             allData['country'] = country;
+-                            allData['year'] = year;
++                            allData['yearOfBirth'] = yearOfBirth;
+                             allData['gender'] = gender;
+                             allData['language'] = language;
+                             allData['skills'] = skills;
+@@ -659,8 +659,9 @@
+                                 contentType: 'application/json',
+                                 data: JSON.stringify({ allData }),
+                                 success: function (response) {
++                                    console.info(response.users);
+                                     // console.log(response, 'from UI');
+-                                    //$('#match-list').html(response.query);
++                                    $('#match-list').html(response.users);
+                                 },
+                             });
+                         }
+-- 
+2.30.1.windows.1
+

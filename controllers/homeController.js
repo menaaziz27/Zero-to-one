@@ -297,7 +297,7 @@ exports.postSearch = async (req, res, next) => {
 	}
 	console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
 	allData = generateCriteriaObject(allData);
-	console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
+	console.log(allData, 'QUERY DATAAAAAAA');
 
 	try {
 		const users = await User.find(allData);
@@ -308,8 +308,13 @@ exports.postSearch = async (req, res, next) => {
 		//TODO-3: if the request not ajax just res.render with the list of returning users
 		let matchedUsers;
 		if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-			matchedUsers = users.map(renderUsers).join('');
-			console.log(matchedUsers);
+			// TODO-1: chck if the users array is empty => let matchedList = ''
+			// TODO-1: if it's not empty loop with map() and send matched
+			if (users.length !== 0) {
+				matchedUsers = users.map(renderUsers).join('');
+			} else {
+				matchedUsers = '';
+			}
 			res.send({ users: matchedUsers });
 		} else {
 			res.render('final_search.ejs', {

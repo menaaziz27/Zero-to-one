@@ -1,0 +1,667 @@
+From 9fa81963a53d006981b23e4b9ccec3503eb7b884 Mon Sep 17 00:00:00 2001
+From: menaaziz27 <menaaziz27@gmail.com>
+Date: Tue, 6 Apr 2021 07:32:12 +0200
+Subject: [PATCH 1/3] skills query done
+
+---
+ controllers/homeController.js |  6 +++++-
+ views/final_search.ejs        | 16 ++++++++--------
+ 2 files changed, 13 insertions(+), 9 deletions(-)
+
+diff --git a/controllers/homeController.js b/controllers/homeController.js
+index d81a008..af4107d 100644
+--- a/controllers/homeController.js
++++ b/controllers/homeController.js
+@@ -224,7 +224,11 @@ const generateCriteriaObject = obj => {
+ 		if (prop === 'name' && obj[prop] !== '') {
+ 			data['$text'] = { $search: `${obj[prop]}` };
+ 		} else if (prop === 'skills' && obj[prop]?.length > 0) {
+-			data[prop] = { skills: { $in: `${obj[prop]}` } };
++			if (obj[prop].length === 1) {
++				data['skills'] = { $in: `${obj[prop].concat([])}` };
++			} else {
++				data['skills'] = { $in: obj[prop] };
++			}
+ 		} else if (obj[prop] !== undefined) {
+ 			data[prop] = obj[prop];
+ 		}
+diff --git a/views/final_search.ejs b/views/final_search.ejs
+index 51afeaa..be2a53e 100644
+--- a/views/final_search.ejs
++++ b/views/final_search.ejs
+@@ -456,17 +456,17 @@
+                                 <div class="form-check w-100">
+                                     <div class="d-block">
+                                         <input name="skills" class="form-check-input skills" type="checkbox"
+-                                            id="web-devlopment" value="web devlopment">
++                                            id="web-devlopment" value="Web development">
+                                         <label class="form-check-label" for="web-devlopment">web
+                                             devlopment</label>
+                                     </div>
+                                     <input name="skills" class="form-check-input skills" type="checkbox"
+-                                        id="cyper-security" value="cypersecurity">
++                                        id="cyper-security" value="Cyper Security">
+                                     <label class="form-check-label skills" for="cyper-security">Cyper
+                                         Security</label>
+                                     <div class="d-block">
+                                         <input name="skills" class="form-check-input skills" type="checkbox"
+-                                            id="mobile-application" value="mobile application">
++                                            id="mobile-application" value="Mobile application">
+                                         <label class="form-check-label" for="mobile-application">mobile
+                                             application</label>
+                                     </div>
+@@ -476,18 +476,18 @@
+                                 <div class="form-check w-100">
+                                     <div class="d-block">
+                                         <input name="skills" class="form-check-input skills" type="checkbox"
+-                                            id="machine-learning" value="machine learning">
++                                            id="machine-learning" value="Machine learning">
+                                         <label class="form-check-label" for="machine-learning">machine
+                                             learning</label>
+                                     </div>
+                                     <input name="skills" class="form-check-input skills" type="checkbox"
+-                                        id="artificial-intellegence" value="artificial intellegence">
+-                                    <label class="form-check-label" for="artificial-intellegence">Artificial
++                                        id="artificial-intellegence" value="Bioinformatics">
++                                    <label class="form-check-label" for="artificial-intellegence">Bioinformatics
+                                         Intellegence</label>
+                                     <div class="d-block">
+                                         <input name="skills" class="form-check-input skills" type="checkbox"
+-                                            id="web-design" value="web design">
+-                                        <label class="form-check-label" for="web-design">Web Design</label>
++                                            id="web-design" value="IT engineer">
++                                        <label class="form-check-label" for="web-design">IT engineer</label>
+                                     </div>
+                                 </div>
+                             </div>
+-- 
+2.30.1.windows.1
+
+
+From 328d2d6d3d4461798a94e5592f3145c77ae9c551 Mon Sep 17 00:00:00 2001
+From: menaaziz27 <menaaziz27@gmail.com>
+Date: Tue, 6 Apr 2021 08:43:04 +0200
+Subject: [PATCH 2/3] rendering users
+
+---
+ controllers/homeController.js | 123 ++-------------------
+ views/final_search.ejs        | 197 +++++++++++-----------------------
+ 2 files changed, 68 insertions(+), 252 deletions(-)
+
+diff --git a/controllers/homeController.js b/controllers/homeController.js
+index af4107d..908fb65 100644
+--- a/controllers/homeController.js
++++ b/controllers/homeController.js
+@@ -63,7 +63,9 @@ exports.getRoadmaps = async (req, res, next) => {
+ // };
+ 
+ exports.getSearch = (req, res) => {
+-	res.render('final_search.ejs');
++	res.render('final_search.ejs', {
++		users: [],
++	});
+ };
+ 
+ exports.getSearchPosts = (req, res) => {
+@@ -192,26 +194,6 @@ exports.postSearchPosts = async (req, res) => {
+ // 	}
+ // }
+ 
+-//! lessa ha3melha
+-// exports.postSearchAjax = (req, res, next) => {
+-// 	// if it's not an ajax request go to the next middleware
+-// 	if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
+-// 		return next();
+-// 	}
+-// 	const { name, country, year, gender, language, skills } = req.body.allData;
+-// 	console.log(req.body.allData, 'alldata');
+-// 	console.log(name, 'name');
+-// 	console.log(country, 'country');
+-// 	console.log(year, 'year');
+-// 	console.log(gender, 'gender');
+-// 	console.log(skills, 'skills');
+-// 	try {
+-// 		res.redirect('/search');
+-// 	} catch (e) {
+-// 		console.log(e);
+-// 	}
+-// };
+-
+ const generateCriteriaObject = obj => {
+ 	let data = {};
+ 	// delete all properties that have values of 'any'
+@@ -221,7 +203,7 @@ const generateCriteriaObject = obj => {
+ 			delete obj[prop];
+ 		}
+ 		// lw el prop = name w el name msh empty 7ott el query bta3t el search f el obj data
+-		if (prop === 'name' && obj[prop] !== '') {
++		if (prop === 'name' && obj[prop] !== '' && obj[prop] !== undefined) {
+ 			data['$text'] = { $search: `${obj[prop]}` };
+ 		} else if (prop === 'skills' && obj[prop]?.length > 0) {
+ 			if (obj[prop].length === 1) {
+@@ -252,7 +234,7 @@ exports.postSearch = async (req, res, next) => {
+ 		// console.log(req.body, 'body');
+ 		// if skills length is 1 that means it has one value which will be string
+ 		if (typeof allData.skills === 'string') {
+-			body.skills = [body.skills];
++			allData.skills = [allData.skills];
+ 		}
+ 		if (allData.skills === undefined) {
+ 			allData.skills = [];
+@@ -265,101 +247,12 @@ exports.postSearch = async (req, res, next) => {
+ 	try {
+ 		const users = await User.find(allData);
+ 		console.log(users);
+-		res.redirect('/search');
++		res.render('final_search.ejs', {
++			users,
++		});
+ 	} catch (e) {
+ 		console.log(e);
+ 	}
+-	// name = allData?.name;
+-	// country = allData?.country;
+-	// year = allData?.year;
+-	// language = allData?.language;
+-	// gender = allData?.gender;
+-	// skills = allData?.skills;
+-	// console.log(req?.body?.allData, 'alldata');
+-	// console.log(name, 'name');
+-	// console.log(country, 'country');
+-	// console.log(year, 'year');
+-	// console.log(gender, 'gender');
+-	// console.log(skills, 'skills');
+-
+-	// console.log(body, 'All BODY DATA');
+-	// console.log(allData, 'All BODY allData DATA');
+-
+-	// format incoming object to the criteria query
+-	// const criteria = generateCriteriaObject();
+-
+-	// console.log(body.skills, 'skills after modifications');
+-	// try {
+-	// 	const users = await User.aggregate([
+-	// 		{
+-	// 			$match: {
+-	// 				$or: [
+-	// 					{
+-	// 						name: {
+-	// 							$regex: new RegExp(`^${name}`),
+-	// 							$options: 'i',
+-	// 						},
+-	// 					},
+-	// 					{
+-	// 						country: {
+-	// 							$regex: new RegExp(`^${country}`),
+-	// 							$options: 'i',
+-	// 						},
+-	// 					},
+-	// 					{
+-	// 						yearOfBirth: {
+-	// 							$regex: new RegExp(`^${year}`),
+-	// 							$options: 'i',
+-	// 						},
+-	// 					},
+-	// 					{
+-	// 						nativeLang: {
+-	// 							$regex: new RegExp(`^${language}`),
+-	// 							$options: 'i',
+-	// 						},
+-	// 					},
+-	// 					// {
+-	// 					// 	skills: {
+-	// 					// 		$regex: query,
+-	// 					// 		$options: 'i',
+-	// 					// 	},
+-	// 					// },
+-	// 				],
+-	// 			},
+-	// 		},
+-	// 	]);
+-
+-	// 	console.log(users, 'users');
+-	// const defaultImage = 'assets/img/default.png';
+-	// const modifiedUsers = users
+-	// 	.map(
+-	// 		match =>
+-	// 			`
+-
+-	// 		<div class="card card-body mb-1">
+-	// 			<div>
+-	// 				<a href="/users/profile/${match.username}">
+-	// 					<img class="rounded-circle avatar-xs rounded float-left" src="/${
+-	// 						match.Image || defaultImage
+-	// 					}" width="100" height="75">
+-	// 				</a>
+-	// 			</div>
+-	// 			<a href="/users/profile/${match.username}">
+-	//       <h4>${match.name} (${match.email})<span class="text-primary">${
+-	// 				match.username
+-	// 			}</span></h4>
+-	// 			</a>
+-	//     </div>
+-	//   `
+-	// 	)
+-	// 	.join('');
+-	// console.log(modifiedUsers);
+-	// res.send({ modifiedUsers });
+-	// res.redirect('/search');
+-	// res.send({modifiedUsers})
+-	// } catch (e) {
+-	// 	console.log(e);
+-	// }
+ };
+ 
+ //! partial search working
+diff --git a/views/final_search.ejs b/views/final_search.ejs
+index be2a53e..9a70399 100644
+--- a/views/final_search.ejs
++++ b/views/final_search.ejs
+@@ -6,11 +6,11 @@
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Search</title>
+-    <link href="./assets/css/navbar.css" rel="stylesheet">
++    <link href="/assets/css/navbar.css" rel="stylesheet">
+     <link rel="stylesheet" href="/assets/css/user_search.css">
+     <link href="/assets/css/navbar.css" rel="stylesheet">
+     <!-- <link rel="stylesheet" href="/assets/css/scrollbar.css"> -->
+-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
++    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+     <link href="/assets/img/logo-white.png" rel="icon">
+ 
+ </head>
+@@ -511,155 +511,78 @@
+                         <div class="col-md-6"> <a href="#">Search by User</a></div>
+                         <div class="col-md-6"> <a href="#"> Search by Posts</a></div>
+                     </div>
++                    <!-- cards -->
++                    <!-- card1 -->
+                     <div class="mt-4">
+-                        <!-- cards -->
+-                        <!-- card1 -->
+-                        <div class="mb-3 card">
+-                            <div class="row g-0">
+-                                <div class="row">
+-                                    <div class="col-md-2">
+-                                        <a href="#"> <img
+-                                                src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
+-                                                alt="..."> </a>
+-                                    </div>
+-                                    <div class="col-md-10">
+-                                        <div class="btncard card-body">
+-                                            <a href="#">
+-                                                <h5 class="card-title">Mina Aziz</h5>
+-                                            </a>
+-                                            <div class="social">
+-                                                <a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
+-                                                <a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
+-                                                <a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
+ 
+-                                            </div>
+-                                            <p class="card-text">This is a wider card with supporting text below as a
+-                                                natural lead-in to
+-                                                additional content. This content is a little bit longer.</p>
+-                                            <hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
+-                                            <button class="btn">visit</button>
+-                                        </div>
+-                                        <div class="container-fluid">
+-                                            <div class="mt-4 row justify-content-center">
+-                                                <div class="col col-md-offset-2 "><span>Countary</span>
+-                                                    <p>Egypt</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "> <span>Gender</span>
+-                                                    <p>Female</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "><span>year of birth</span>
+-                                                    <p class="w-100">1999</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "> <span>Language</span>
+-                                                    <p>Arabic</p>
+-                                                </div>
+-                                            </div>
+-                                        </div>
+-                                    </div>
+-                                </div>
+-                            </div>
+-                        </div>
+-                        <!-- card5 -->
+-                        <div class="mb-3 card">
+-                            <div class="row g-0">
+-                                <div class="row">
+-                                    <div class="col-md-2">
+-                                        <a href="#"> <img
+-                                                src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
+-                                                alt="..."> </a>
+-                                    </div>
+-                                    <div class="col-md-10">
+-                                        <div class=" btncard card-body">
+-                                            <a href="#">
+-                                                <h5 class="card-title">Mina Aziz</h5>
+-                                            </a>
+-                                            <div class="social">
+-                                                <a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
+-                                                <a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
+-                                                <a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
+ 
+-                                            </div>
++                        <% if (users) { %>
++                            <% users.forEach(function(user) { %>
+ 
+-                                            <p class="card-text">This is a wider card with supporting text below as a
+-                                                natural lead-in to
+-                                                additional content. This content is a little bit longer.</p>
+-                                            <hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
+-                                            <button class="btn btncard">visit</button>
+-                                        </div>
+-                                        <div class="container-fluid">
+-                                            <div class="mt-4 row justify-content-center">
+-                                                <div class="col col-md-offset-2 "><span>Countary</span>
+-                                                    <p>Egypt</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "> <span>Gender</span>
+-                                                    <p>Female</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "><span>Age</span>
+-                                                    <p class="w-100">27 Year</p>
++                                <!-- begin card -->
++                                <div class="mb-3 card">
++                                    <div class="row g-0">
++                                        <div class="row">
++                                            <div class="col-md-2">
++                                                <a href="#"> <img
++                                                        src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
++                                                        alt="..."> </a>
++                                            </div>
++                                            <div class="col-md-10">
++                                                <div class="btncard card-body">
++                                                    <a href="#">
++                                                        <h5 class="card-title">
++                                                            <%= user.name %>
++                                                        </h5>
++                                                    </a>
++                                                    <div class="social">
++                                                        <a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
++                                                        <a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
++                                                        <a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
++
++                                                    </div>
++                                                    <p class="card-text">
++                                                        <% if(user.bio) { %>
++                                                            <%= user.bio %>
++                                                                <% } else { %> '' <% } %>
++                                                    </p>
++                                                    <hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
++                                                    <a href="/users/profile/<%= user.username %>" class="btn">visit</a>
+                                                 </div>
+-                                                <div class="col col-md-offset-2 "> <span>Language</span>
+-                                                    <p>Arabic</p>
++                                                <div class="container-fluid">
++                                                    <div class="mt-4 row justify-content-center">
++                                                        <div class="col col-md-offset-2 "><span>Country</span>
++                                                            <p>
++                                                                <%= user.country %>
++                                                            </p>
++                                                        </div>
++                                                        <div class="col col-md-offset-2 "> <span>Gender</span>
++                                                            <p>
++                                                                <%= user.gender %>
++                                                            </p>
++                                                        </div>
++                                                        <div class="col col-md-offset-2 "><span>year of birth</span>
++                                                            <p class="w-100">1999</p>
++                                                        </div>
++                                                        <div class="col col-md-offset-2 "> <span>Language</span>
++                                                            <p>
++                                                                <%= user.country %>
++                                                            </p>
++                                                        </div>
++                                                    </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+-
+-
+                                 </div>
+-                            </div>
+-                        </div>
++                                <% }) %>
++                                    <% } %>
++                                        <!-- end card -->
+ 
+ 
+-                        <!-- card6 -->
+-                        <div class="mb-3 card">
+-                            <div class="row g-0">
+-                                <div class="row">
+-                                    <div class="col-md-2">
+-                                        <a href="#"> <img
+-                                                src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
+-                                                alt="..."> </a>
+-                                    </div>
+-                                    <div class="col-md-10">
+-                                        <div class="btncard card-body">
+-                                            <a href="#">
+-                                                <h5 class="card-title">Mina Aziz</h5>
+-                                            </a>
+-                                            <div class="social">
+-                                                <a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
+-                                                <a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
+-                                                <a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
+ 
+-                                            </div>
+ 
+-                                            <p class="card-text">This is a wider card with supporting text below as a
+-                                                natural lead-in to
+-                                                additional content. This content is a little bit longer.</p>
+-                                            <hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
+-                                            <button class="btn">visit</button>
+-                                        </div>
+-                                        <div class="container-fluid">
+-                                            <div class="mt-4 row justify-content-center">
+-                                                <div class="col col-md-offset-2 "><span>Countary</span>
+-                                                    <p>Egypt</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "> <span>Gender</span>
+-                                                    <p>Female</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "><span>Age</span>
+-                                                    <p class="w-100">27 Year</p>
+-                                                </div>
+-                                                <div class="col col-md-offset-2 "> <span>Language</span>
+-                                                    <p>Arabic</p>
+-                                                </div>
+-                                            </div>
+-                                        </div>
+-                                    </div>
+-
+-
+-                                </div>
+-                            </div>
+-                        </div>
+-                        <!-- end of card6 -->
++                                        <!-- end of card6 -->
+ 
+                     </div>
+                     <!-- end col-9 -->
+-- 
+2.30.1.windows.1
+
+
+From a9026617a4ea50a728b57e0971aa4a09413194fd Mon Sep 17 00:00:00 2001
+From: menaaziz27 <menaaziz27@gmail.com>
+Date: Tue, 6 Apr 2021 09:10:11 +0200
+Subject: [PATCH 3/3] yearofbirth
+
+---
+ controllers/homeController.js | 74 +++++++++++++++++++++++++++++++++--
+ views/final_search.ejs        | 15 +++----
+ 2 files changed, 78 insertions(+), 11 deletions(-)
+
+diff --git a/controllers/homeController.js b/controllers/homeController.js
+index 908fb65..100e232 100644
+--- a/controllers/homeController.js
++++ b/controllers/homeController.js
+@@ -194,6 +194,61 @@ exports.postSearchPosts = async (req, res) => {
+ // 	}
+ // }
+ 
++const renderUsers = user =>
++	`<div class="mb-3 card">
++<div class="row g-0">
++<div class="row">
++<div class="col-md-2">
++<a href="#"> <img
++src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
++alt="..."> </a>
++</div>
++<div class="col-md-10">
++<div class="btncard card-body">
++<a href="#">
++<h5 class="card-title">
++${user.name}
++</h5>
++</a>
++<div class="social">
++<a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
++<a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
++<a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
++
++</div>
++<p class="card-text">
++${user.bio ? user.bio : ''}
++</p>
++<hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
++<a href="/users/profile/${user.username}" class="btn">visit</a>
++</div>
++<div class="container-fluid">
++<div class="mt-4 row justify-content-center">
++<div class="col col-md-offset-2 "><span>Country</span>
++<p>
++${user.country}
++</p>
++</div>
++<div class="col col-md-offset-2 "> <span>Gender</span>
++<p>
++${user.gender}
++</p>
++</div>
++<div class="col col-md-offset-2 "><span>year of birth</span>
++<p class="w-100">1999</p>
++</div>
++<div class="col col-md-offset-2 "> <span>Language</span>
++<p>
++${user.gender}
++</p>
++</div>
++</div>
++</div>
++</div>
++</div>
++</div>
++</div>`;
++
+ const generateCriteriaObject = obj => {
+ 	let data = {};
+ 	// delete all properties that have values of 'any'
+@@ -226,7 +281,7 @@ exports.postSearch = async (req, res, next) => {
+ 	//TODO-5: adjust the ejs cards for users
+ 	//TODO-6: make a loading spinner that loads before rendering users to the client
+ 
+-	let name, year, language, country, gender, skills, body;
++	let name, yearOfBirth, language, country, gender, skills, body;
+ 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
+ 		allData = req.body.allData;
+ 	} else {
+@@ -247,9 +302,20 @@ exports.postSearch = async (req, res, next) => {
+ 	try {
+ 		const users = await User.find(allData);
+ 		console.log(users);
+-		res.render('final_search.ejs', {
+-			users,
+-		});
++
++		//TODO-1: check if the  request is ajax create string of matched elements in backticks string
++		//TODO-2: send users back to ajax and target the DOM element and replace it's HTML with the string
++		//TODO-3: if the request not ajax just res.render with the list of returning users
++		let matchedUsers;
++		if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
++			matchedUsers = users.map(renderUsers).join('');
++			console.log(matchedUsers);
++			res.send({ users: matchedUsers });
++		} else {
++			res.render('final_search.ejs', {
++				users,
++			});
++		}
+ 	} catch (e) {
+ 		console.log(e);
+ 	}
+diff --git a/views/final_search.ejs b/views/final_search.ejs
+index 9a70399..8358542 100644
+--- a/views/final_search.ejs
++++ b/views/final_search.ejs
+@@ -293,7 +293,7 @@
+ 
+                         <!-- begin year of birth -->
+                         <label for="yearOfBirth">year of birth</label>
+-                        <select name="year" id="year" class="form-control form-select-sm selectpicker"
++                        <select name="yearOfBirth" id="yearOfBirth" class="form-control form-select-sm selectpicker"
+                             aria-label=".form-select-sm example">
+                             <option selected value="any">any</option>
+                             <option value="1960">1960</option>
+@@ -513,9 +513,9 @@
+                     </div>
+                     <!-- cards -->
+                     <!-- card1 -->
+-                    <div class="mt-4">
+ 
+ 
++                    <div id="match-list" class="mt-4">
+                         <% if (users) { %>
+                             <% users.forEach(function(user) { %>
+ 
+@@ -602,7 +602,7 @@
+ 
+                     let name;
+                     let country = 'any';
+-                    let year = 'any';
++                    let yearOfBirth = 'any';
+                     let gender = 'any';
+                     let language = 'any';
+                     let skills = [];
+@@ -612,8 +612,8 @@
+                             console.log($(this).val());
+                             findUser();
+                         })
+-                        $('#year').on('change keyup paste', function (e) {
+-                            year = $(this).val();
++                        $('#yearOfBirth').on('change keyup paste', function (e) {
++                            yearOfBirth = $(this).val();
+                             console.log($(this).val());
+                             findUser();
+                         })
+@@ -648,7 +648,7 @@
+                             let allData = {};
+                             allData['name'] = name;
+                             allData['country'] = country;
+-                            allData['year'] = year;
++                            allData['yearOfBirth'] = yearOfBirth;
+                             allData['gender'] = gender;
+                             allData['language'] = language;
+                             allData['skills'] = skills;
+@@ -659,8 +659,9 @@
+                                 contentType: 'application/json',
+                                 data: JSON.stringify({ allData }),
+                                 success: function (response) {
++                                    console.info(response.users);
+                                     // console.log(response, 'from UI');
+-                                    //$('#match-list').html(response.query);
++                                    $('#match-list').html(response.users);
+                                 },
+                             });
+                         }
+-- 
+2.30.1.windows.1
+

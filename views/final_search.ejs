@@ -627,6 +627,9 @@
                             if (skills !== undefined) {
                                 if (!skills.includes($(this).val())) {
                                     skills.push($(this).val())
+                                } else if (skills.includes($(this).val())) {
+                                    skills = skills.filter(el => el !== $(this).val())
+                                    //skills.pop(`${$(this).val()}`)
                                 }
                             } else {
                                 skills = [$(this).val()];
@@ -657,9 +660,13 @@
                                 contentType: 'application/json',
                                 data: JSON.stringify({ allData }),
                                 success: function (response) {
-                                    console.info(response.users);
+                                    let users = response.users;
+                                    console.info(users);
                                     // console.log(response, 'from UI');
-                                    $('#match-list').html(response.users);
+                                    if (users.length === 0) {
+                                        $('#match-list').html('');
+                                    }
+                                    $('#match-list').html(users);
                                 },
                             });
                         }
