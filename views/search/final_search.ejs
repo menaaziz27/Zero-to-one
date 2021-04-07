@@ -16,12 +16,12 @@
 </head>
 
 <body>
-    <%- include('./layouts/navbar.ejs') %>
+    <%- include('../layouts/navbar.ejs') %>
 
         <!-- layout begin -->
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4 pl-0 pr-4">
 
                     <form action="/search/users" method="POST">
                         <!-- Name field -->
@@ -500,7 +500,7 @@
                 <!-- end col-3 -->
 
                 <!-- begin col-9 -->
-                <div class="mt-4 col-md-9">
+                <div class="mt-4 col-md-8">
 
                     <!--  -->
                     <form action="/search/users" method="POST" class="d-flex">
@@ -508,8 +508,8 @@
                         <button class="btn btn-outline-success sub" type="submit">Search</button>
                     </form>
                     <div class="mt-3 row">
-                        <div class="col-md-6"> <a href="#">Search by User</a></div>
-                        <div class="col-md-6"> <a href="#"> Search by Posts</a></div>
+                        <div class="col-md-6"> <a href="/search">Search by User</a></div>
+                        <div class="col-md-6"> <a href="/search/posts"> Search by Posts</a></div>
                     </div>
                     <!-- cards -->
                     <!-- card1 -->

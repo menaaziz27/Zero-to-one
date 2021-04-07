@@ -63,18 +63,18 @@ exports.getRoadmaps = async (req, res, next) => {
 // };
 
 exports.getSearch = (req, res) => {
-	res.render('final_search.ejs', {
+	res.render('search/final_search.ejs', {
 		users: [],
 	});
 };
 
 exports.getSearchPosts = (req, res) => {
-	res.render('searchPosts.ejs');
+	res.render('search/searchPosts.ejs');
 };
 
 exports.postSearchPosts = async (req, res) => {
 	const { query } = req.body;
-	console.log(query);
+	console.log(req.body);
 	try {
 		const posts = await Post.aggregate([
 			{
@@ -93,9 +93,8 @@ exports.postSearchPosts = async (req, res) => {
 							},
 						},
 						{
-							user: {
-								$regex: query,
-								$options: 'i',
+							hashtag: {
+								$in: [query],
 							},
 						},
 					],
@@ -130,8 +129,11 @@ exports.postSearchPosts = async (req, res) => {
       `
 			)
 			.join('');
-		// console.log(modifiedUsers);
-		res.send({ modifiedPosts });
+		console.log(modifiedPosts);
+		// res.send({ modifiedPosts });
+		res.render('search/searchPosts.ejs', {
+			modifiedPosts: modifiedPosts,
+		});
 	} catch (e) {
 		console.log(e);
 	}
@@ -317,7 +319,7 @@ exports.postSearch = async (req, res, next) => {
 			}
 			res.send({ users: matchedUsers });
 		} else {
-			res.render('final_search.ejs', {
+			res.render('search/final_search.ejs', {
 				users,
 			});
 		}

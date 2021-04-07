@@ -16,18 +16,33 @@
 
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
 
+    <style>
+        .form-search input {
+            width: 90%;
+        }
+
+        #match-list {
+            width: 70%;
+        }
+    </style>
+
 </head>
 
 <body>
-    <%- include('./layouts/navbar.ejs') %>
+    <%- include('../layouts/navbar.ejs') %>
 
         <!-- partial:index.partial.html -->
-        <form class="mt-4 form-search" method="POST" action="/search/posts">
-            <input id="search" type="search" name="search" placeholder="find your needs here">
-            <button type="submit">Search</button>
-        </form>
-        <a href="/search">want to search for users ?</a>
-        <div id="match-list" class="container"></div>
+        <div class="container">
+            <form class="mt-4 form-search" method="POST" action="/search/posts">
+                <input class="form-control me-2" name="query" type="text" placeholder="Search for posts"
+                    aria-label="Search">
+            </form>
+
+            <a href="/search">want to search for users ?</a>
+            <div id="match-list" class="container">
+                <%- modifiedPosts %>
+            </div>
+        </div>
 
         <!--===================================== profile test ====================================-->
         <!-- <div class="container">
