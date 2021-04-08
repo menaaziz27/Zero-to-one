@@ -28,10 +28,11 @@
 - [x] hide user password from publicity
 - [x] add default pic in user posts if it not provided
 - [x] nativeLang is provided in user model but not in edit profile form
+- [x] navbar layout
 - [x] fix back button in user profile (if we in any user profile -not mine - if i click back it will redirect me to my profile)
 - [] separate each file with its CSS file
 - [] smooth scrolling & change scrollbar color ans shape
-- [] add validation to edit profile form
+- [x] add validation to edit profile form
 - [] option to delete websites
 - [] add see more button to the post description
 - [] edit & delete post ajax
@@ -45,10 +46,10 @@
 - [] navbar bug while redirecting from profile to roadmaps (getting smaller)
 - [] alert message in profile page to complete user data if it's not provided yet
 - [] website locally only or globally only
-- [] navbar layout
 - [] automatically generate user age after adding birth of year
 - [] pagination and limiting for search page
 - [] adjust db schema
 - [] adjust roadmaps controller and rounting
 - [] if there's no users in the search query return No users found .. the same in posts
-- [] adjust post card
+- [x] adjust post card
+- [] auto initialize the default image path for newly created user

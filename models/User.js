@@ -27,6 +27,7 @@ const userSchema = new Schema({
 	nativeLang: String,
 	resetToken: String,
 	resetTokenExpiration: Date,
+	posts: [postSchema],
 });
 
 userSchema.methods.hidePrivateData = function () {
