@@ -51,3 +51,4 @@
 - [] adjust db schema
 - [] adjust roadmaps controller and rounting
 - [] if there's no users in the search query return No users found .. the same in posts
+- [] adjust post card

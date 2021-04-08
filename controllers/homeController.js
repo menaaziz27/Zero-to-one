@@ -3,6 +3,7 @@ const moment = require('moment');
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
+const { renderUsers, generateCriteriaObject } = require('../middleware/helper');
 
 exports.getHome = async (req, res, next) => {
 	let userid;
@@ -71,14 +72,15 @@ exports.getSearch = (req, res) => {
 exports.getSearchPosts = (req, res) => {
 	res.render('search/searchPosts.ejs', {
 		modifiedPosts: '',
+		posts: [],
+		moment,
 	});
 };
 
 exports.postSearchPosts = async (req, res) => {
 	const { query } = req.body;
-	console.log(req.body);
 	try {
-		const posts = await Post.aggregate([
+		const allPosts = await Post.aggregate([
 			{
 				$match: {
 					$or: [
@@ -104,177 +106,14 @@ exports.postSearchPosts = async (req, res) => {
 			},
 		]);
 		//! this line is tricky :D
-		const populatedPosts = await Post.populate(posts, { path: 'user' });
-		console.log(populatedPosts);
-		const defaultImage = 'assets/img/default.png';
-		const modifiedPosts = populatedPosts
-			.map(
-				match =>
-					`
-				
-				<div class="card card-body mb-1">
-					<div>
-						<a href="/users/profile/${match.user.username}">
-							<img class="rounded-circle avatar-xs rounded float-left" src="/${
-								match.user.Image || defaultImage
-							}" width="100" height="75">
-						</a>
-					</div>
-					<a href="/users/profile/${match.user.username}">
-          <h4>${match.description} (${
-						match.user.email
-					})<span class="text-primary">${match.readingTime} ${
-						match.hashtags[0]
-					}</span></h4>
-					</a>
-        </div>
-      `
-			)
-			.join('');
-		console.log(modifiedPosts);
-		// res.send({ modifiedPosts });
+		const posts = await Post.populate(allPosts, { path: 'user' });
 		res.render('search/searchPosts.ejs', {
-			modifiedPosts: modifiedPosts,
+			posts,
+			moment,
 		});
 	} catch (e) {
 		console.log(e);
 	}
-};
-
-// $lookup is the same as populate but used with aggregate
-// exports.postSearchPosts = async (req,res) => {
-// 	const { query } = req.body;
-// 	console.log(query)
-// 		try {
-// 			const posts = await Post.aggregate(
-// 			[{
-// 				$match: {
-// 					$or: [{
-// 						description: {
-// 						$regex: query,
-// 						'$options': 'i'
-// 					}}, {
-// 						hashtags: {
-// 							$regex: query,
-// 							'$options': 'i'
-// 						}
-// 					}]
-// 					}
-// 			}, {
-//         $lookup: {
-//             from: "User",
-//             localField: "user",
-//             foreignField: "_id",
-//             as: "userdoc"
-//         }
-//     }]
-// 		);
-// 		// console.log(posts)
-// 		const defaultImage = "assets/img/default.png"
-// 		//! response is being sent before the function finish execution
-// 		let modifiedPosts = await posts.map(async (post) => {
-// 			let postOwner, markup;
-// 			const pickedPost = await Post.findOne({user: post.user}).populate('user');
-// 				console.log(pickedPost.user)
-// 				markup = `<div class="card card-body mb-1">
-// 						<div>
-// 							<a href="/users/profile/${pickedPost.user.username}">
-// 								<img class="rounded-circle avatar-xs rounded float-left" src="/" width="100" height="75">
-// 							</a>
-// 						</div>
-// 						<a href="/users/profile/${pickedPost.user.username}">
-// 						<h4>${post.description} (${pickedPost.user.username})<span class="text-primary">${post.readingTime}</span></h4>
-// 						</a>
-// 					</div>
-// 				`
-// 			// console.log(postOwner)
-// 		return markup;
-// 		});
-// 		modifiedPosts = await modifiedPosts.join('');
-// 		console.log(modifiedPosts, '1111111111111111111111111111111115')
-// 		res.send({modifiedPosts})
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// }
-
-const renderUsers = user =>
-	`<div class="mb-3 card">
-<div class="row g-0">
-<div class="row">
-<div class="col-md-2">
-<a href="#"> <img
-src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
-alt="..."> </a>
-</div>
-<div class="col-md-10">
-<div class="btncard card-body">
-<a href="#">
-<h5 class="card-title">
-${user.name}
-</h5>
-</a>
-<div class="social">
-<a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
-<a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
-<a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
-
-</div>
-<p class="card-text">
-${user.bio ? user.bio : ''}
-</p>
-<hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
-<a href="/users/profile/${user.username}" class="btn">visit</a>
-</div>
-<div class="container-fluid">
-<div class="mt-4 row justify-content-center">
-<div class="col col-md-offset-2 "><span>Country</span>
-<p>
-${user.country}
-</p>
-</div>
-<div class="col col-md-offset-2 "> <span>Gender</span>
-<p>
-${user.gender}
-</p>
-</div>
-<div class="col col-md-offset-2 "><span>year of birth</span>
-<p class="w-100">1999</p>
-</div>
-<div class="col col-md-offset-2 "> <span>Language</span>
-<p>
-${user.nativeLang}
-</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>`;
-
-const generateCriteriaObject = obj => {
-	let data = {};
-	// delete all properties that have values of 'any'
-	for (let prop in obj) {
-		// if the property is empty string or 'any' or skills array is empty delete them
-		if (obj[prop] === 'any' || obj[prop] === '' || obj[prop].length === 0) {
-			delete obj[prop];
-		}
-		// lw el prop = name w el name msh empty 7ott el query bta3t el search f el obj data
-		if (prop === 'name' && obj[prop] !== '' && obj[prop] !== undefined) {
-			data['$text'] = { $search: `${obj[prop]}` };
-		} else if (prop === 'skills' && obj[prop]?.length > 0) {
-			if (obj[prop].length === 1) {
-				data['skills'] = { $in: `${obj[prop].concat([])}` };
-			} else {
-				data['skills'] = { $in: obj[prop] };
-			}
-		} else if (obj[prop] !== undefined) {
-			data[prop] = obj[prop];
-		}
-	}
-	return data;
 };
 
 exports.postSearch = async (req, res, next) => {
@@ -330,84 +169,20 @@ exports.postSearch = async (req, res, next) => {
 	}
 };
 
-//! partial search working
-// exports.postSearch = async (req, res) => {
-// 	const query = req.body.search;
-// 	try {
-// 		const users = await User.aggregate(
-// 			[{
-// 				$match: {
-// 					$or: [{
-// 						name: {
-// 						$regex: query,
-// 						'$options': 'i'
-// 					}}, {
-// 						email: {
-// 							$regex: query,
-// 							'$options': 'i'
-// 						}
-// 					},{
-// 						username: {
-// 							$regex: query,
-// 							'$options': 'i'
-// 						}
-// 					},{
-// 						bio: {
-// 							$regex: query,
-// 							'$options': 'i'
-// 						}
-// 					},{
-// 						country: {
-// 							$regex: query,
-// 							'$options': 'i'
-// 						}
-// 					}]
-// 					}
-// 			}]
-// 		);
-// 		console.log(users);
-// 		res.redirect('/search');
-// 		// console.log(users);
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };
-
-// partial search regex
-
-// exports.postSearch = async (req, res) => {
-// 	const query = req.body.search;
-// 	try {
-// 		const users = await User.find({ name: {$regex: new RegExp(query) }},
-// 		{
-// 			_id:0,
-// 			__v:0
-// 		}, function(err, users) {
-// 			if(err) return console.log(err);
-// 			console.log(users)
-// 		}
-// 		);
-// 		// console.log(users);
-// 		res.redirect('/search');
-// 		// console.log(users);
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };
-
-exports.getHtml = (req, res) => {
-	res.render('html.ejs');
-};
-exports.getCss = (req, res) => {
-	res.render('css.ejs');
-};
-
 exports.getDiagram = (req, res) => {
 	res.render('roadmaps/diagram.ejs');
 };
-exports.getBackDiagram = (req, res) => {
-	res.render('roadmaps/backend.ejs');
-};
-exports.getBioDiagram = (req, res) => {
-	res.render('roadmaps/Bioinformatics.ejs');
-};
+
+// exports.getHtml = (req, res) => {
+// 	res.render('html.ejs');
+// };
+// exports.getCss = (req, res) => {
+// 	res.render('css.ejs');
+// };
+
+// exports.getBackDiagram = (req, res) => {
+// 	res.render('roadmaps/backend.ejs');
+// };
+// exports.getBioDiagram = (req, res) => {
+// 	res.render('roadmaps/Bioinformatics.ejs');
+// };
