@@ -21,7 +21,7 @@
         <!-- layout begin -->
         <div class="container">
             <div class="row">
-                <div class="col-md-4 pl-0 pr-4">
+                <div class="pl-0 pr-4 col-md-4">
 
                     <form action="/search/users" method="POST">
                         <!-- Name field -->
@@ -370,7 +370,7 @@
                         <!-- begin of tounge language -->
                         <div class="mt-3">
                             <label for="language">tounge language</label>
-                            <select name="language" id="language" class="form-select form-select-sm selectpicker"
+                            <select name="nativeLang" id="language" class="form-select form-select-sm selectpicker"
                                 aria-label="">
                                 <option selected>any</option>
                                 <option value="Afrikaans">Afrikaans</option>
@@ -451,8 +451,8 @@
 
                         <!-- begin Skills & interested in -->
                         <label class="mt-3" for="">Skills</label>
-                        <div class="row d-flex justify-content-between">
-                            <div class="p-0 m-0 col-4">
+                        <div class="row ">
+                            <div class="p-0 m-0 col">
                                 <div class="form-check w-100">
                                     <div class="d-block">
                                         <input name="skills" class="form-check-input skills" type="checkbox"
@@ -472,7 +472,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-0 m-0 col-4">
+                            <div class="p-0 m-0 col">
                                 <div class="form-check w-100">
                                     <div class="d-block">
                                         <input name="skills" class="form-check-input skills" type="checkbox"
@@ -482,8 +482,7 @@
                                     </div>
                                     <input name="skills" class="form-check-input skills" type="checkbox"
                                         id="artificial-intellegence" value="Bioinformatics">
-                                    <label class="form-check-label" for="artificial-intellegence">Bioinformatics
-                                        Intellegence</label>
+                                    <label class="form-check-label" for="artificial-intellegence">Bioinformatics</label>
                                     <div class="d-block">
                                         <input name="skills" class="form-check-input skills" type="checkbox"
                                             id="web-design" value="IT engineer">
@@ -494,7 +493,7 @@
                         </div>
                         <!-- end of skills -->
 
-                        <input class="d-block form-control mt-3 btn btn-dark" type="submit" value="Submit">
+                        <input class="mt-3 d-block form-control btn btn-dark" type="submit" value="Submit">
                     </form>
                 </div>
                 <!-- end col-3 -->
@@ -651,7 +650,7 @@
                             allData['country'] = country;
                             allData['yearOfBirth'] = yearOfBirth;
                             allData['gender'] = gender;
-                            allData['language'] = language;
+                            allData['nativeLang'] = language;
                             allData['skills'] = skills;
                             console.log(allData);
                             $.ajax({

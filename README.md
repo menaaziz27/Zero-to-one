@@ -24,11 +24,11 @@
 - [x] if user pick a skill this skill will be checked in edit profile
 - [x] add default name, bio and profile picture in profile view
 - [x] Github api in user profile (render projects sections if the user has provided its github account url in edit form)
-- [X] forms user experince by providing them their old input if there was an error while redirecting
-- [X] hide user password from publicity
+- [x] forms user experince by providing them their old input if there was an error while redirecting
+- [x] hide user password from publicity
 - [x] add default pic in user posts if it not provided
 - [x] nativeLang is provided in user model but not in edit profile form
-- [x] fix back button in user profile (if we in any user profile -not mine - if i click back it will redirect me to my profile)  
+- [x] fix back button in user profile (if we in any user profile -not mine - if i click back it will redirect me to my profile)
 - [] separate each file with its CSS file
 - [] smooth scrolling & change scrollbar color ans shape
 - [] add validation to edit profile form
@@ -50,3 +50,4 @@
 - [] pagination and limiting for search page
 - [] adjust db schema
 - [] adjust roadmaps controller and rounting
+- [] if there's no users in the search query return No users found .. the same in posts

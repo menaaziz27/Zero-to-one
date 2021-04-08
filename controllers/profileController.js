@@ -84,7 +84,7 @@ exports.getUpdateProfile = (req, res) => {
 exports.validateProfile = [
 	body('name', 'Name must be at least 4 characters in text or numbers only.')
 		.exists()
-		.isLength({ min: 4 })
+		.isLength({ min: 4 }),
 ];
 
 exports.postUpdateProfile = async (req, res) => {
@@ -96,7 +96,7 @@ exports.postUpdateProfile = async (req, res) => {
 	const BirthDate = req.body.date_of_birth;
 	const gender = req.body.gender;
 	const skills = req.body.skills;
-	const nativeLang = req.body.nativeLang;
+	const nativeLang = req.body.language;
 	const github = req.body.github;
 	const linkedin = req.body.linkedin;
 	const instagram = req.body.instagram;
@@ -110,7 +110,7 @@ exports.postUpdateProfile = async (req, res) => {
 	if (image !== undefined) {
 		Image = image.path;
 	}
-
+	console.log(nativeLang);
 	//!Validaton block ===============================
 	let websites = req.user.websites;
 	let websitesObj = {};

@@ -69,7 +69,9 @@ exports.getSearch = (req, res) => {
 };
 
 exports.getSearchPosts = (req, res) => {
-	res.render('search/searchPosts.ejs');
+	res.render('search/searchPosts.ejs', {
+		modifiedPosts: '',
+	});
 };
 
 exports.postSearchPosts = async (req, res) => {
@@ -241,7 +243,7 @@ ${user.gender}
 </div>
 <div class="col col-md-offset-2 "> <span>Language</span>
 <p>
-${user.gender}
+${user.nativeLang}
 </p>
 </div>
 </div>

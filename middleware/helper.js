@@ -21,4 +21,5 @@ module.exports = {
 				console.log(err);
 			});
 	},
+	renderUsers: users => {},
 };
