@@ -38,7 +38,20 @@
             color: red;
         }
     </style>
-   
+    <script>
+        var id = 0;
+var newinput = function() {
+  var parent = document.querySelector('.steps')
+  var field = document.createElement("input")
+  field.className = "form-control"
+  field.style = "display:block;"
+  field.id = "input" + id;
+  field.name = "references";
+  field.type="text" ;
+  parent.appendChild(field);
+  id += 1;
+}
+    </script>
 </head>
 
 <body>
@@ -75,10 +88,15 @@
                             <label for="password">routeName</label>
                             <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName">
                         </div>
+                        <div class="form-group steps">
+                            <label for="password">References</label>
+                            <button type="button" name="button" onclick="newinput()">+</button>
+
+                        </div>
                      
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Roadmaps reference</label>
-                                <select name="reference" class="form-control" id="exampleFormControlSelect1">
+                                <label for="exampleFormControlSelect1">Roadmap</label>
+                                <select name="roadmap" class="form-control" id="exampleFormControlSelect1">
                                     <% roadmaps.forEach(function (roadmap) { %>
                                         <option value="<%=roadmap.routeName%>"> 
                                             <%=roadmap.title%>

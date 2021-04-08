@@ -250,7 +250,7 @@ exports.getTopicDashboard = async (req,res) => {
 
   try {
 	
-		const topics = await Topic.find({}).populate('references');
+		const topics = await Topic.find({}).populate('roadmap');
     const roadmaps = await Roadmap.find({});
     // console.log(topics)
 
@@ -284,7 +284,8 @@ exports.postCreateTopicDashboard = async(req,res) => {
 	const summary = req.body.summary;
 	const description = req.body.description;
 	const routeName = req.body.routeName;
-	let reference = req.body.reference;
+	let references = req.body.references;
+  const roadmaproute = req.body.roadmap
   
    try {
 		const topic = await new Topic()
@@ -292,8 +293,9 @@ exports.postCreateTopicDashboard = async(req,res) => {
     topic.summary= summary
     topic.description= description
     topic.routeName= routeName
-    const roadmap = await Roadmap.findOne({routeName :reference})
-    topic.references= roadmap
+    topic.references= references
+    const roadmap = await Roadmap.findOne({routeName :roadmaproute})
+    topic.roadmap= roadmap
     topic.save()
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {
@@ -317,12 +319,13 @@ exports.getEditTopicDashboard = async (req,res) => {
   try {
 		const topic = await Topic.findById({_id : topicId});
     const roadmaps = await Roadmap.find({});
-
-    // console.log(post)
+    references = topic.references
+    // console.log(topic.references)
 		res.render('dashboard/editTopic.ejs', {
 			topic,
       errorMassage: null,
-      roadmaps
+      roadmaps,
+      references
 		});
 	} catch (e) {
 		console.log(e);
@@ -334,7 +337,9 @@ exports.postEditTopicDashboard = async(req,res) => {
 	const summary = req.body.summary;
 	const description = req.body.description;
 	const routeName = req.body.routeName;
-	let reference = req.body.reference;
+	let references = req.body.references;
+  let roadmaproute = req.body.roadmap;
+
   const topicId = req.body.id
 
    try {
@@ -343,8 +348,9 @@ exports.postEditTopicDashboard = async(req,res) => {
     topic.summary= summary
     topic.description= description
     topic.routeName= routeName
-    const roadmap = await Roadmap.findOne({routeName :reference})
-    topic.references= roadmap
+    topic.references= references
+    const roadmap = await Roadmap.findOne({routeName :roadmaproute})
+    topic.roadmap= roadmap
     topic.save()
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {
