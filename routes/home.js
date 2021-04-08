@@ -13,8 +13,8 @@ const {
 	getHtml,
 	getDiagram,
 	getCss,
-	getBackDiagram,
-	getBioDiagram,
+	// getBackDiagram,
+	// getBioDiagram,
 } = require('../controllers/homeController');
 
 const { isAuthenticated } = require('../middleware/isAuthenticated');

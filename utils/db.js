@@ -16,9 +16,9 @@ const run = async () => {
 	// const options = {
 	//   databases: [database],
 	// };
-	const admin = new AdminBro(options);
-	const router = buildAdminRouter(admin);
-	app.use(admin.options.rootPath, router);
+	// const admin = new AdminBro(options);
+	// const router = buildAdminRouter(admin);
+	// app.use(admin.options.rootPath, router);
 	app.listen(8080);
 };
 

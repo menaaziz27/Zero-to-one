@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -7,20 +7,21 @@ const roadmapSchema = new Schema({
 		type: String,
 		required: true,
 	},
-  summary:{
-    type:String,
-    required: [true, 'summary required']
-  },
+	summary: {
+		type: String,
+		required: [true, 'summary required'],
+	},
 	description: {
 		type: String,
-		required: [true, "Please enter the description"]
+		required: [true, 'Please enter the description'],
 	},
-  routeName:{
-    type:String,
-    required: [true, 'url required']
-  },
-  steps: [{type: Schema.Types.ObjectId, ref:'topic'}]
+	routeName: {
+		type: String,
+		required: [true, 'url required'],
+	},
+	// steps: [{type: Schema.Types.ObjectId, ref:'topic'}]
+	steps: [String],
 });
 
-const Roadmap = mongoose.model("roadmap", roadmapSchema);
-module.exports = Roadmap
+const Roadmap = mongoose.model('roadmap', roadmapSchema);
+module.exports = Roadmap;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -7,22 +7,21 @@ const topicSchema = new Schema({
 		type: String,
 		required: true,
 	},
-  summary:{
-    type:String,
-    required: [true, 'summary required']
-  },
+	summary: {
+		type: String,
+		required: [true, 'summary required'],
+	},
 	description: {
 		type: String,
-		required: [true, "Please enter the description"]
+		required: [true, 'Please enter the description'],
 	},
-  routeName:{
-    type:String,
-    required: [true, 'url required']
-  },
-  references: [String],
-  roadmap:{type:Schema.Types.ObjectId, ref:'roadmap'}
-
+	routeName: {
+		type: String,
+		required: [true, 'url required'],
+	},
+	references: [{ type: Schema.Types.ObjectId, ref: 'roadmap' }],
+	// roadmap:{type:Schema.Types.ObjectId, ref:'roadmap'}
 });
 
-const Topic = mongoose.model("topic", topicSchema);
+const Topic = mongoose.model('topic', topicSchema);
 module.exports = Topic;
