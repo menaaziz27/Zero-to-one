@@ -318,7 +318,7 @@
 </head>
 
 <body>
-    <%- include('../layouts/navbar.ejs') %>
+    <%- include('../../layouts/navbar.ejs') %>
 
         <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
         <!-- GRID SYSTEM -->
@@ -379,6 +379,7 @@
                                     </span>
                                 </a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -386,32 +387,31 @@
                 <div class="col">
 
                     <!--- Post Form Begins -->
-                  
+                    
                     <!--- Post Form Ends -->
 
                     <!-- begginning of rendering all posts -->
                     <!-- begginning of rendering all posts -->
                       <!-- begginning of rendering all posts -->
-                     <a href="/admin/dashboard/roadmaps/create">
-                         <button class="btn btn-outline-info scrollto">Add roadmap</button>
-
-                     </a>
-                     <br><br><br>
-                      <% if (roadmaps !==undefined || roadmaps !==null) { %>
-                        <% roadmaps.forEach(function(roadmap) { %>
+                      <% if (users !==undefined || users !==null) { %>
+                        <% users.forEach(function(user) { %>
                             <div class="crayons-story " data-content-user-id="219080">
                                 <div class="crayons-story__body">
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
-                                            <!-- <div class="crayons-story__author-pic">
+                                            <div class="crayons-story__author-pic">
 
-                                                
-                                            </div> -->
+                                                <a href=""
+                                                    class="crayons-avatar crayons-avatar--l ">
+                                                    <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/assets/img/default.png <%}%>"
+                                                        alt="aemiej profile" class="crayons-avatar__image" />
+                                                </a>
+                                            </div>
                                             <div>
                                                 <p>
                                                     <a href=""
                                                         class="crayons-story__secondary fw-medium">
-                                                        <%=roadmap.title%>
+                                                        <%=user.username%>
                                                     </a>
                                                 </p>
                                                 
@@ -422,7 +422,7 @@
                                     <div class="crayons-story__indention">
                                         <h2 class="crayons-story__title">
                                             <p>
-                                                <%=roadmap.summary%>
+                                                <%=user.name%>
                                             </p>
                                         </h2>
                                         <div class="crayons-story__tags">
@@ -430,11 +430,24 @@
                                                 <a href="" class="crayons-tag"><span
                                                         class="crayons-tag__prefix"></span>
                                                         skils :
-                                                        <% roadmap.steps.forEach(function (step) { %>
-                                                     <%= step %> , <% })  %>
+                                                        <% user.skills.forEach(function (skill) { %>
+                                                     <%= skill %> , <% }) %>
                                                 </a>
                                                 <br>
-                                     
+                                                <a href="" class="crayons-tag"><span
+                                                    class="crayons-tag__prefix"></span>
+                                                year of birth : <%=user.yearOfBirth%>
+                                            </a>
+                                            <br>
+                                            <a href="" class="crayons-tag"><span
+                                                class="crayons-tag__prefix"></span>
+                                                Country : <%= user.country %>
+                                        </a>
+                                        <br>
+                                        <a href="" class="crayons-tag"><span
+                                            class="crayons-tag__prefix"></span>
+                                            Gender : <%= user.gender %>
+                                    </a>
                                         </div>
                                         <div class="crayons-story__bottom">
                                             <div class="crayons-story__details">
@@ -442,16 +455,16 @@
                                                
                                             </div>
                                             <div class="crayons-story__save">
-                                                    <a type="button" href="/admin/dashboard/roadmaps/edit/<%=roadmap._id%>"
+                                                    <a type="button" href="/admin/dashboard/users/edit/<%=user._id%>"
                                                         id="article-save-button-421966"
                                                         class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
                                                         data-reactable-id="421966" aria-label="Save to reading list"
                                                         title="Save to reading list">
                                                         <span class="bm-initial">edit</span>
                                                     </a>
-                                                    <form method="POST" action="/admin/dashboard/roadmaps/delete">
+                                                    <form method="POST" action="/admin/dashboard/users/delete">
                                                         <button style="color: #000;" class="btn btn-outline-danger scrollto">Delete</button>
-                                                        <input name="id" type="hidden" value="<%=roadmap._id%>">
+                                                        <input name="id" type="hidden" value="<%=user._id%>">
                                                     </form>
                                                     
                                             </div>

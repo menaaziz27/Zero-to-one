@@ -38,28 +38,11 @@
             color: red;
         }
     </style>
-    <script>
-        var id = 0;
-var newinput = function() {
-  var parent = document.querySelector('.steps')
-  var field = document.createElement("select")
-  field.className = "form-control"
-  field.style = "display:block;"
-  field.id = "input" + id;
-  field.name = "steps";
-  field.type="text" ;
-  console.log(parent)
-  parent.appendChild(field);
-  id += 1;
-}
-    </script>
 </head>
 
 <body>
-    <%- include('../layouts/navbar.ejs') %>
-
+    <%- include('../../layouts/navbar.ejs') %>
         <div class="container">
-
             <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
                 <div class="py-4 rounded col-md-6 offset-md-3">
                     <h3 style="text-align: center;">Add roadmap</h3>
@@ -90,23 +73,14 @@ var newinput = function() {
                             <label for="password">routeName</label>
                             <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName">
                         </div>
-                        <div class="form-group steps">
-                            <label for="password">Steps</label>
-                            <button type="button" name="button" onclick="newinput()">+</button>
-
-                        </div>
-                       
-                       
                         <br>
-                       
-                      
                         <div class="row">
                             <div class="col-6">
                                 <a class="mx-auto btn btn-outline-dark btn-block"
                                     href="/admin/dashboard/roadmaps">BACK</a>
                             </div>
                             <div class="col-6">
-                                <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>
+                                <button class="mx-auto btn btn-success btn-block" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -114,7 +88,7 @@ var newinput = function() {
             </div>
 
         </div>
-        <%- include('../layouts/footer.ejs') %>
+        <%- include('../../layouts/footer.ejs') %>
 
             <!-- <script>
                 const element = document.querySelector('#submit');

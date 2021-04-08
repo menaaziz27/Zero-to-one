@@ -38,9 +38,10 @@
             color: red;
         }
     </style>
-    <script>
-        var id = 0;
-var newinput = function() {
+   <script>
+               var id = 0;
+
+       var newinput = function() {
   var parent = document.querySelector('.steps')
   var field = document.createElement("input")
   field.className = "form-control"
@@ -52,10 +53,11 @@ var newinput = function() {
   id += 1;
 }
     </script>
+   </script>
 </head>
 
 <body>
-    <%- include('../layouts/navbar.ejs') %>
+    <%- include('../../layouts/navbar.ejs') %>
 
         <div class="container">
 
@@ -64,38 +66,45 @@ var newinput = function() {
                     <h3 style="text-align: center;">Add Topic</h3>
                     <!-- FORM -->
                     <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
-                    <form action="/admin/dashboard/topics/create" method="POST" enctype="multipart/form-data" id="submit">
+                    <form action="/admin/dashboard/topics/edit" method="POST" enctype="multipart/form-data" id="submit">
                         <!-- TEXT FIELD GROUPS -->
                         <div class="form-group">
                             <h3>Info</h3>
                             <label for="name">title</label>
-                            <input class="form-control" type="text" name="title" id="title" placeholder="Enter title">
+                            <input class="form-control" type="text" name="title" id="title" placeholder="<%=topic.title%>" value="<%=topic.title%>">
                             <% if (errorMassage) { %>
                                 <small class="text-danger">
                                     <%= errorMassage %>
                                 </small>
                                 <% } %>
                         </div>
+                        <input type="hidden" name="id" value="<%=topic._id%>">
                         <div class="form-group">
                             <label for="password">summary</label>
-                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary">
+                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary" value="<%=topic.summary%>">
                         </div>
+                      
                         <div class="form-group">
                             <label for="password">description</label>
-                            <input class="form-control" type="text" id="address" placeholder="description" name="description">
+                            <input class="form-control" type="text" id="address" placeholder="description" name="description" value="<%=topic.description%>" >
                         </div>
                         <div class="form-group">
                             <label for="password">routeName</label>
-                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName">
+                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName" value="<%=topic.routeName%>">
                         </div>
                         <div class="form-group steps">
                             <label for="password">References</label>
                             <button type="button" name="button" onclick="newinput()">+</button>
+                            <% if (topic.references) { %>
+                                <% for (let reference of references) { %>
+                                    <input class="form-control" name="references" type="text" value="<%= reference%>">
+                                    <%}%>
+                                    <%}%>
 
                         </div>
-                     
+                        
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Roadmap</label>
+                                <label for="exampleFormControlSelect1">Roadmaps</label>
                                 <select name="roadmap" class="form-control" id="exampleFormControlSelect1">
                                     <% roadmaps.forEach(function (roadmap) { %>
                                         <option value="<%=roadmap.routeName%>"> 
@@ -111,7 +120,7 @@ var newinput = function() {
                                     href="/admin/dashboard/topics">BACK</a>
                             </div>
                             <div class="col-6">
-                                <button class="mx-auto btn btn-success btn-block" type="submit">SUBMIT</button>
+                                <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>
                             </div>
                         </div>
                     </form>
@@ -119,7 +128,7 @@ var newinput = function() {
             </div>
 
         </div>
-        <%- include('../layouts/footer.ejs') %>
+        <%- include('../../layouts/footer.ejs') %>
             <!-- bootstrap scripts -->
             <script src="/assets/vendor/jquery/jquery.min.js"></script>
             <script src="/bootstrap/js/bootstrap.min.js"></script>
