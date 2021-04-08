@@ -383,45 +383,136 @@
                     </div>
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
-                <div class="col-md-8">
+                <div class="col">
 
                     <!--- Post Form Begins -->
-                    <section class="mb-2 card">
-                        <div class="card-body " >
-                            <div class="row d-flex  mt-100">
-                                <div class="col-md-12">
-                                    <div  class="progress blue "> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                                        <div class="progress-value"><%=roadmaps.length %> Roadmaps</div>
-                                    </div>
-                                    <div class="progress yellow "> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                                        <div class="progress-value"><%=topics.length %> Topic</div>
-                                    </div>
-                                    <div class="progress yellow "> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                                        <div class="progress-value"><%=posts.length %> Post</div>
-                                    </div>
-                                    <div class="progress blue "> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                           <%=users.length %> Users
-                                        </div>
-                                    </div> 
-                                </div>
-                               
-                            </div>
-                            
-                        </div>
-                    </section>
+                  
                     <!--- Post Form Ends -->
 
                     <!-- begginning of rendering all posts -->
                     <!-- begginning of rendering all posts -->
-                  
-                         
+                      <!-- begginning of rendering all posts -->
+                     <a href="/admin/dashboard/roadmaps/create">
+                         <button class="btn btn-outline-info scrollto">Add roadmap</button>
+
+                     </a>
+                     <br><br><br>
+                      <% if (roadmaps !==undefined || roadmaps !==null) { %>
+                        <% roadmaps.forEach(function(roadmap) { %>
+                            <div class="crayons-story " data-content-user-id="219080">
+                                <div class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <!-- <div class="crayons-story__author-pic">
+
+                                                
+                                            </div> -->
+                                            <div>
+                                                <p>
+                                                    <a href=""
+                                                        class="crayons-story__secondary fw-medium">
+                                                        <%=roadmap.title%>
+                                                    </a>
+                                                </p>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <p>
+                                                <%=roadmap.summary%>
+                                            </p>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+
+                                                <a href="" class="crayons-tag"><span
+                                                        class="crayons-tag__prefix"></span>
+                                                        skils :
+                                                        <% roadmap.steps.forEach(function (step) { %>
+                                                     <%= step %> , <% })  %>
+                                                </a>
+                                                <br>
+                                     
+                                        </div>
+                                        <div class="crayons-story__bottom">
+                                            <div class="crayons-story__details">
+                                               
+                                               
+                                            </div>
+                                            <div class="crayons-story__save">
+                                                    <a type="button" href="/admin/dashboard/roadmaps/edit/<%=roadmap._id%>"
+                                                        id="article-save-button-421966"
+                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                        data-reactable-id="421966" aria-label="Save to reading list"
+                                                        title="Save to reading list">
+                                                        <span class="bm-initial">edit</span>
+                                                    </a>
+                                                    <form method="POST" action="/admin/dashboard/roadmaps/delete">
+                                                        <button style="color: #000;" class="btn btn-outline-danger scrollto">Delete</button>
+                                                        <input name="id" type="hidden" value="<%=roadmap._id%>">
+                                                    </form>
+                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                            <% } %>
                       
                                     <!-- Post Ends -->
                                     <!-- endpost -->
                                     <!-- Post Ends -->
                 </div>
-            
+                <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
+                    <!-- aside latest news -->
+                    <aside class="widget">
+                        <div class="widget blog-widget">
+                            <h2 class="widget-header">
+                              
+                            </h2>
+                            <!-- beginning of first news -->
+                            <!-- beginning of first news -->
+                      
+                                     
+                                        <!-- ending of first news -->
+                                     
+
+                                                    <!-- ending of first news -->
+                        </div>
+                        <!-- friends menu -->
+                        <!-- <div class="card">
+					<div class="p-3 card-body">
+						<h5 class="m-0 card-title">Friends</h5>
+						<div class="list-group list-group-flush">
+							<a href="#" class="list-group-item list-group-item-action text-primary">
+							Justo moto pani
+							</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Harry consectetur</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Dobi leo risus</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Gadot facilisis in</a>
+							<a href="#" class="btn btn-sm btn-primary">View All</a>
+						</div>
+					</div>
+                </div> -->
+                        <!-- users menu -->
+                        <!-- <div class="mt-4 card">
+					<div class="p-3 card-body">
+						<h5 class="m-0 card-title">Users</h5>
+						<div class="list-group list-group-flush">
+							<a href="#" class="list-group-item list-group-item-action text-primary">
+							Cras justo odio
+							</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Dapibus ac facilisis in</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Morbi leo risus</a>
+							<a href="#" class="list-group-item list-group-item-action text-primary">Porta ac consectetur ac</a>
+							<a href="#" class="btn btn-sm btn-primary">View All</a>
+						</div>
+					</div>
+				</div> -->
+                </div>
             </div>
         </div>
 

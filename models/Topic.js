@@ -19,8 +19,8 @@ const topicSchema = new Schema({
     type:String,
     required: [true, 'url required']
   },
-  references: [String],
-  roadmap:{type:Schema.Types.ObjectId, ref:'roadmap'}
+  references: [{type:Schema.Types.ObjectId, ref:'roadmap'}],
+  // roadmap:{type:Schema.Types.ObjectId, ref:'roadmap'}
 
 });
 
