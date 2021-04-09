@@ -21,61 +21,71 @@ module.exports = {
 				console.log(err);
 			});
 	},
-	renderUsers: user =>
-		`
-		<div class="mb-3 card">
-			<div class="row g-0">
-				<div class="row">
-					<div class="col-md-2">
-						<a href="#"> <img
-						src="/images/121808452_3657192080969511_4470454584173775372_n.jpg"
-						alt="..."> </a>
-					</div>
-				<div class="col-md-10">
-			<div class="btncard card-body">
-				<a href="#">
-					<h5 class="card-title">
-						${user.name}
-					</h5>
-				</a>
-			<div class="social">
-			<a href="#"><i class="fab fa-instagram fa-xl"></i> </a>
-			<a href="#"><i class="fab fa-facebook fa-xl"></i> </a>
-			<a href="#"> <i class="fab fa-twitter-square fa-xl"></i> </a>
+	renderUsers: user => {
+		let = skills = user.skills
+			? user.skills.map(skill => skill + ',').join(' ')
+			: '';
+		return `
+		<div class="crayons-story " data-content-user-id="219080">
+                                    <div class="crayons-story__body">
+                                        <div class="crayons-story__top">
+                                            <div class="crayons-story__meta">
+                                                <div class="crayons-story__author-pic">
 
-			</div>
-			<p class="card-text">
-			${user.bio ? user.bio : ''}
-			</p>
-			<hr style="width: 90%; position: absolute; top: 130px; left: 20px;">
-			<a href="/users/profile/${user.username}" class="btn">visit</a>
-			</div>
-			<div class="container-fluid">
-			<div class="mt-4 row justify-content-center">
-			<div class="col col-md-offset-2 "><span>Country</span>
-			<p>
-			${user.country}
-			</p>
-			</div>
-			<div class="col col-md-offset-2 "> <span>Gender</span>
-			<p>
-			${user.gender}
-			</p>
-			</div>
-			<div class="col col-md-offset-2 "><span>year of birth</span>
-			<p class="w-100">1999</p>
-			</div>
-			<div class="col col-md-offset-2 "> <span>Language</span>
-			<p>
-			${user.nativeLang}
-			</p>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
-			</div>
-		</div>`,
+                                                    <a href="" class="crayons-avatar crayons-avatar--l ">
+                                                        <img src="${
+																													user.Image
+																														? '/' + user.Image
+																														: '/assets/img/default.png'
+																												}"
+                                                            alt="aemiej profile" class="crayons-avatar__image" />
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <p>
+                                                        <a href="" class="crayons-story__secondary fw-medium">
+                                                            ${user.username}
+                                                        </a>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="crayons-story__indention">
+                                            <h2 class="crayons-story__title">
+                                                <p>
+                                                    ${user.name}
+                                                </p>
+                                            </h2>
+                                            <div class="crayons-story__tags">
+
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    skills : ${skills}
+                                                </a>
+                                                <br>
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    year of birth : ${
+																											user.yearOfBirth
+																										}
+                                                </a>
+                                                <br>
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    Country : ${user.country}
+                                                </a>
+                                                <br>
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    Gender : ${user.gender}
+                                                </a>
+                                            </div>
+                                            <div class="crayons-story__bottom">
+                                                <div class="crayons-story__details">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+	},
 	generateCriteriaObject: obj => {
 		let data = {};
 		// delete all properties that have values of 'any'
