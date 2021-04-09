@@ -53,7 +53,7 @@ exports.deleteUser = async (req, res) => {
 exports.getEditUserDashboard = async (req, res) => {
 	const UserId = req.params.id;
 	try {
-		const user = await User.findOne({ _id: UserId });
+		const user = await User.findById(UserId);
 
 		res.render('dashboard/user/userEdit.ejs', {
 			user,

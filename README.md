@@ -58,3 +58,4 @@
 - [] 404 page style
 - [] what if the user enter a post with 100000 characters ? we want a see more button that goes to post details
 - [] change font style
+- [] what if the admin deletes the user account he logged from
