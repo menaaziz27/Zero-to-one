@@ -80,7 +80,7 @@ exports.deletePost = async (req, res) => {
 // localhost:3000/posts/create?timeline=true
 exports.createPost = async (req, res) => {
 	const { post } = req.body;
-
+	console.log(findHashtags(post));
 	try {
 		const newPost = new Post({
 			user: req.session.user,

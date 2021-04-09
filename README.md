@@ -53,3 +53,4 @@
 - [] if there's no users in the search query return No users found .. the same in posts
 - [x] adjust post card
 - [] auto initialize the default image path for newly created user
+- [] delete hashtags from post description and leave them only in the hashtags
