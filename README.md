@@ -38,8 +38,8 @@
 - [] edit & delete post ajax
 - [x] change profile route (username unique in model, adjust ajax validation, ajust res.locals and render functions)
 - [] side menu bar for navigating in home
-- [] search page for users and posts with specific tags
-- [] search functionality by post (words - hashtags - usernames - skills - languages)
+- [x] search page for users and posts with specific tags
+- [x] search functionality by post (words - hashtags - usernames - skills - languages)
 - [] restricted words in any post before creating it (npm bad-words)
 - [] Likes and comments system
 - [] every skill in user profile will be a link to its roadmap in the website
@@ -49,9 +49,9 @@
 - [] automatically generate user age after adding birth of year
 - [] pagination and limiting for search page
 - [] adjust db schema
-- [] adjust roadmaps controller and rounting
+- [x] adjust roadmaps controller and rounting
 - [] if there's no users in the search query return No users found .. the same in posts
 - [x] adjust post card
-- [] auto initialize the default image path for newly created user
+- [x] auto initialize the default image path for newly created user
 - [] delete hashtags from post description and leave them only in the hashtags
-- [] if the user submitted edit profile with no bio so don't save bio property in the record
+- [x] if the user submitted edit profile with no bio so don't save bio property in the record

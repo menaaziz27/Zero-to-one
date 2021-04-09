@@ -18,8 +18,8 @@ exports.getHome = async (req, res, next) => {
 };
 
 exports.getTimeline = async (req, res, next) => {
-	// const data = await axios.get('https://dev.to/api/articles');
-	// const news = data.data;
+	const data = await axios.get('https://dev.to/api/articles');
+	const news = data.data;
 	let userid;
 	if (req.user) {
 		userid = req.user._id.toString();
@@ -33,7 +33,7 @@ exports.getTimeline = async (req, res, next) => {
 			userid: userid,
 			posts,
 			moment,
-			news: '',
+			news,
 			postCount,
 		});
 	} catch (e) {
@@ -41,15 +41,15 @@ exports.getTimeline = async (req, res, next) => {
 	}
 };
 
-// exports.getNews = async (req, res) => {
-// 	const data = await axios.get('https://dev.to/api/articles');
+exports.getNews = async (req, res) => {
+	const data = await axios.get('https://dev.to/api/articles');
 
-// 	const news = data.data;
-// 	res.render('news', {
-// 		title: 'News',
-// 		news: news,
-// 	});
-// };
+	const news = data.data;
+	res.render('news', {
+		title: 'News',
+		news: news,
+	});
+};
 
 exports.getSearch = (req, res) => {
 	res.render('search/final_search.ejs', {

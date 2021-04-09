@@ -21,7 +21,7 @@ const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 router.get('/', getHome);
 router.get('/timeline', isAuthenticated, getTimeline);
-// router.get('/news', getNews);
+router.get('/news', getNews);
 router.get('/search', getSearch);
 router.get('/search/posts', getSearchPosts);
 router.post('/search/posts', postSearchPosts);
