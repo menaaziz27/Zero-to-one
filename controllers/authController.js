@@ -118,6 +118,8 @@ exports.postRegister = async (req, res, next) => {
 	}
 	try {
 		let user = await User.findOne({ email: email });
+		// save the default image for the newly created user
+		let Image = 'assets/img/default.png';
 		// if there's no user
 		const hashedpass = await bcrypt.hash(password, 12);
 		user = new User({
@@ -125,6 +127,7 @@ exports.postRegister = async (req, res, next) => {
 			email: email,
 			password: hashedpass,
 			username,
+			Image,
 		});
 
 		user.save();

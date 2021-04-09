@@ -195,7 +195,7 @@
                                     </path>
                                 </svg>
 
-                                5 posts published
+                                <%= postCount %> posts published
                             </div>
                             <div class="flex items-center mb-4">
                                 <span style="display: inline-block; margin-right: 3px;"><i style="margin-right: 16px;"
@@ -258,8 +258,8 @@
 
                                                 <a href="users/profile/<%= post.user.username %>"
                                                     class="crayons-avatar crayons-avatar--l ">
-                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
-                                                        alt="aemiej profile" class="crayons-avatar__image" />
+                                                    <img src="/<%= post.user.Image %>" alt="aemiej profile"
+                                                        class="crayons-avatar__image" />
                                                 </a>
                                             </div>
                                             <div>

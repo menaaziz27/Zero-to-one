@@ -146,7 +146,9 @@ exports.postUpdateProfile = async (req, res) => {
 	try {
 		const user = await User.findOne({ _id: userid });
 		user.name = name;
-		user.bio = bio === '' ? null : bio;
+		if (bio !== '') {
+			user.bio = bio;
+		}
 		user.country = country;
 		user.yearOfBirth = BirthDate;
 		user.gender = gender;

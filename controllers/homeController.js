@@ -28,12 +28,13 @@ exports.getTimeline = async (req, res, next) => {
 	}
 	try {
 		const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
-
+		const postCount = posts.length;
 		res.render('home/timeline', {
 			userid: userid,
 			posts,
 			moment,
 			news: '',
+			postCount,
 		});
 	} catch (e) {
 		console.log(e);
