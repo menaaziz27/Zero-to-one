@@ -59,7 +59,6 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-// ==== middlewares which will be executed before every incoming request ====
 // app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));

@@ -206,7 +206,7 @@ exports.postlogin = async (req, res, next) => {
 				password: password,
 			},
 			validationErrors: errors.array(),
-			query,
+			redirectTo: '',
 		});
 	}
 	try {
