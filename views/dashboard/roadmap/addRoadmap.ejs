@@ -38,64 +38,49 @@
             color: red;
         }
     </style>
-   
 </head>
 
 <body>
-    <%- include('../layouts/navbar.ejs') %>
-
+    <%- include('../../layouts/navbar.ejs') %>
         <div class="container">
-
             <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
                 <div class="py-4 rounded col-md-6 offset-md-3">
-                    <h3 style="text-align: center;">Add Topic</h3>
+                    <h3 style="text-align: center;">Add roadmap</h3>
                     <!-- FORM -->
                     <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
-                    <form action="/admin/dashboard/topics/edit" method="POST" enctype="multipart/form-data" id="submit">
+                    <form action="/admin/dashboard/roadmaps/create" method="POST" enctype="multipart/form-data" id="submit">
                         <!-- TEXT FIELD GROUPS -->
                         <div class="form-group">
                             <h3>Info</h3>
                             <label for="name">title</label>
-                            <input class="form-control" type="text" name="title" id="title" placeholder="<%=topic.title%>" value="<%=topic.title%>">
+                            <input class="form-control" type="text" name="title" id="title" placeholder="Enter title">
                             <% if (errorMassage) { %>
                                 <small class="text-danger">
                                     <%= errorMassage %>
                                 </small>
                                 <% } %>
                         </div>
-                        <input type="hidden" name="id" value="<%=topic._id%>">
                         <div class="form-group">
                             <label for="password">summary</label>
-                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary" value="<%=topic.summary%>">
+                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary">
                         </div>
                       
                         <div class="form-group">
                             <label for="password">description</label>
-                            <input class="form-control" type="text" id="address" placeholder="description" name="description" value="<%=topic.description%>" >
+                            <input class="form-control" type="text" id="address" placeholder="description" name="description">
                         </div>
                         <div class="form-group">
                             <label for="password">routeName</label>
-                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName" value="<%=topic.routeName%>">
+                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName">
                         </div>
-                     
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Roadmaps reference</label>
-                                <select name="reference" class="form-control" id="exampleFormControlSelect1">
-                                    <% roadmaps.forEach(function (roadmap) { %>
-                                        <option value="<%=roadmap.routeName%>"> 
-                                            <%=roadmap.title%>
-                                        </option>
-                                        <% }) %>
-                                </select>
-                            </div>
                         <br>
                         <div class="row">
                             <div class="col-6">
                                 <a class="mx-auto btn btn-outline-dark btn-block"
-                                    href="/admin/dashboard/topics">BACK</a>
+                                    href="/admin/dashboard/roadmaps">BACK</a>
                             </div>
                             <div class="col-6">
-                                <button class="mx-auto btn btn-success btn-block" type="submit">SUBMIT</button>
+                                <button class="mx-auto btn btn-success btn-block" type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -103,7 +88,14 @@
             </div>
 
         </div>
-        <%- include('../layouts/footer.ejs') %>
+        <%- include('../../layouts/footer.ejs') %>
+
+            <!-- <script>
+                const element = document.querySelector('#submit');
+                element.addEventListener('submit', event => {
+                    event.preventDefault();
+                });
+            </script> -->
             <!-- bootstrap scripts -->
             <script src="/assets/vendor/jquery/jquery.min.js"></script>
             <script src="/bootstrap/js/bootstrap.min.js"></script>

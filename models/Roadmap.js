@@ -19,8 +19,12 @@ const roadmapSchema = new Schema({
 		type: String,
 		required: [true, 'url required'],
 	},
-	// steps: [{type: Schema.Types.ObjectId, ref:'topic'}]
-	steps: [String],
+	routeName: {
+		type: String,
+		required: [true, 'url required'],
+	},
+	steps: [{ type: Schema.Types.ObjectId, ref: 'topic' }],
+	// steps:[String]
 });
 
 const Roadmap = mongoose.model('roadmap', roadmapSchema);

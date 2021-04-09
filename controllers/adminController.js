@@ -24,7 +24,7 @@ exports.getDashboard =  async (req,res) => {
 		console.log(e);
 	}
 }
-// USer Dashboard
+// =====================USer Dashboard========================
 
 exports.getUserDashboard = async (req,res) => {
 
@@ -35,7 +35,7 @@ exports.getUserDashboard = async (req,res) => {
     const topics = await Topic.find({});
 
 
-		res.render('dashboard/userdashboard.ejs', {
+		res.render('dashboard/user/userdashboard.ejs', {
 			users,
       posts,
       roadmaps,
@@ -60,7 +60,7 @@ exports.getEditUserDashboard = async (req,res) => {
   try {
 		const user = await User.findOne({_id : UserId});
 
-		res.render('dashboard/userEdit.ejs', {
+		res.render('dashboard/user/userEdit.ejs', {
 			user,
       errorMassage: null
 		});
@@ -105,8 +105,6 @@ exports.postEditUserDashboard = async (req,res) => {
 			user.skills = skills;
 		}
 		user.nativeLang = nativeLang;
-
-		//  console.log(image)
 		if (image !== undefined) {
 			user.Image = Image;
 		}
@@ -118,14 +116,14 @@ exports.postEditUserDashboard = async (req,res) => {
 
 }
 
-//Post Dashboard
+//=========================Post Dashboard ==========================
 exports.getPostDashboard = async (req,res) => {
 
   try {
 		const users = await User.find({});
     const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');;
 		const roadmaps = await Roadmap.find({});
-		res.render('dashboard/postsdashboard.ejs', {
+		res.render('dashboard/posts/postsdashboard.ejs', {
 			users,
       posts,
       roadmaps,
@@ -151,9 +149,7 @@ exports.getEditPostDashboard = async (req,res) => {
   const postId = req.params.id
   try {
 		const post = await Post.findById({_id : postId});
-    console.log(post)
-
-		res.render('dashboard/postEdit.ejs', {
+		res.render('dashboard/posts/postEdit.ejs', {
 			post,
       errorMassage: null
 		});
@@ -177,17 +173,15 @@ exports.postEditPostDashboard = async (req,res) => {
 }
 
 
-//Roadmaps
+//=====================Roadmaps =======================
 
 exports.getRoadmapDashboard = async (req,res) => {
 
   try {
 		const users = await User.find({});
     const posts = await Post.find({});
-		const roadmaps = await Roadmap.find({});
-
-
-		res.render('dashboard/roadmapDashboard.ejs', {
+		const roadmaps = await Roadmap.find({}).populate('steps');
+		res.render('dashboard/roadmap/roadmapDashboard.ejs', {
 			users,
       posts,
       roadmaps
@@ -199,7 +193,7 @@ exports.getRoadmapDashboard = async (req,res) => {
 }
 
 exports.getCreateRoadmapDashboard =  (req,res) => {
-		res.render('dashboard/addRoadmap.ejs',{
+		res.render('dashboard/roadmap/addRoadmap.ejs',{
       errorMassage: null
 
     });
@@ -212,11 +206,6 @@ exports.postCreateRoadmapDashboard = async(req,res) => {
 	const description = req.body.description;
 	const routeName = req.body.routeName;
 	const steps = req.body.steps;
-  //  console.log(title)
-  //  console.log(summary)
-  //  console.log(description)
-  //  console.log(routeName)
-  //  console.log(steps)
 
    try {
 		const roadmap = await new Roadmap()
@@ -242,19 +231,49 @@ exports.deleteRoadmap = async (req, res) => {
 		console.log(e);
 	}
 };
+exports.getEditRoadmapDashboard = async (req,res) => {
+  const roadmapId = req.params.id
+  try {
+		const roadmap = await Roadmap.findById({_id : roadmapId});
+		res.render('dashboard/roadmap/roadmapEdit.ejs', {
+      errorMassage: null,
+      roadmap,
+		});
+	} catch (e) {
+		console.log(e);
+	}
+
+}
+exports.postEditroadmapDashboard = async (req,res) => {
+  const title = req.body.title;
+	const summary = req.body.summary;
+	const description = req.body.description;
+	const routeName = req.body.routeName;
+  const roadmapId = req.body.id
+  try {
+		const roadmap = await Roadmap.findById({_id : roadmapId});
+    roadmap.title= title
+    roadmap.summary= summary
+    roadmap.description= description
+    roadmap.routeName= routeName
+    roadmap.save()
+		res.redirect('/admin/dashboard/roadmaps');
+	} catch (e) {
+		console.log(e);
+	}
+
+}
 
 
-//Topic dashboard
+//================Topic dashboard======================
 
 exports.getTopicDashboard = async (req,res) => {
 
   try {
 	
-		const topics = await Topic.find({}).populate('references');
+		const topics = await Topic.find({}).populate('roadmap');
     const roadmaps = await Roadmap.find({});
-    // console.log(topics)
-
-		res.render('dashboard/topicDashboard.ejs', {
+		res.render('dashboard/topic/topicDashboard.ejs', {
       topics,
       roadmaps
 		});
@@ -266,7 +285,7 @@ exports.getTopicDashboard = async (req,res) => {
 exports.getCreateTopicDashboard =  async (req,res) => {
   try{
     const roadmaps = await Roadmap.find({});
-    res.render('dashboard/addTopic.ejs',{
+    res.render('dashboard/topic/addTopic.ejs',{
       errorMassage: null,
       roadmaps
   
@@ -284,7 +303,8 @@ exports.postCreateTopicDashboard = async(req,res) => {
 	const summary = req.body.summary;
 	const description = req.body.description;
 	const routeName = req.body.routeName;
-	let reference = req.body.reference;
+	let references = req.body.references;
+  const roadmaproute = req.body.roadmap
   
    try {
 		const topic = await new Topic()
@@ -292,9 +312,12 @@ exports.postCreateTopicDashboard = async(req,res) => {
     topic.summary= summary
     topic.description= description
     topic.routeName= routeName
-    const roadmap = await Roadmap.findOne({routeName :reference})
-    topic.references= roadmap
-    topic.save()
+    topic.references= references
+    const roadmap = await Roadmap.findOne({routeName :roadmaproute})
+    roadmap.steps.push(topic)
+    await roadmap.save()
+    topic.roadmap= roadmap
+    await topic.save()
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {
 		console.log(e);
@@ -317,12 +340,12 @@ exports.getEditTopicDashboard = async (req,res) => {
   try {
 		const topic = await Topic.findById({_id : topicId});
     const roadmaps = await Roadmap.find({});
-
-    // console.log(post)
-		res.render('dashboard/editTopic.ejs', {
+    references = topic.references
+		res.render('dashboard/topic/editTopic.ejs', {
 			topic,
       errorMassage: null,
-      roadmaps
+      roadmaps,
+      references
 		});
 	} catch (e) {
 		console.log(e);
@@ -334,7 +357,9 @@ exports.postEditTopicDashboard = async(req,res) => {
 	const summary = req.body.summary;
 	const description = req.body.description;
 	const routeName = req.body.routeName;
-	let reference = req.body.reference;
+	let references = req.body.references;
+  let roadmaproute = req.body.roadmap;
+
   const topicId = req.body.id
 
    try {
@@ -343,8 +368,9 @@ exports.postEditTopicDashboard = async(req,res) => {
     topic.summary= summary
     topic.description= description
     topic.routeName= routeName
-    const roadmap = await Roadmap.findOne({routeName :reference})
-    topic.references= roadmap
+    topic.references= references
+    const roadmap = await Roadmap.findOne({routeName :roadmaproute})
+    topic.roadmap= roadmap
     topic.save()
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {
