@@ -10,7 +10,7 @@ exports.getEdit = async (req, res) => {
 	let userid = req.user._id || null;
 	try {
 		const post = await Post.findById(postId);
-		res.render('post/post-edit', {
+		res.render('post/edit-post', {
 			post,
 			userid,
 			timeline,
@@ -54,7 +54,7 @@ exports.getPostDetail = async (req, res) => {
 
 	try {
 		const post = await Post.findById(postId).populate('user');
-		res.render('post/post-detail', {
+		res.render('post/details-post', {
 			post,
 			timeline,
 		});
