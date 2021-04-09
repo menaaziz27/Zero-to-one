@@ -506,8 +506,8 @@
                                                 learning</label>
                                     </div>
                                     <input name="skills" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" value="IT engineer" <%if
-                                        (user.skills.includes("IT engineer")) {%> checked <%}%>>
+                                        id="flexSwitchCheckDefault" value="IT engineer" <%if (user.skills.includes("IT
+                                        engineer")) {%> checked <%}%>>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">IT
                                             engineer</label>
                                 </div>
@@ -527,11 +527,10 @@
                                 <input name="nativeLang" class="form-control" type="text" id="Native language"
                                     placeholder="Native language" value="<%=currentUser.nativeLang%>">
                             </div> -->
-                      
+
                         <div class="row">
                             <div class="col-6">
-                                <a class="mx-auto btn btn-outline-dark btn-block"
-                                    href="/admin/dashboard/users">BACK</a>
+                                <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/users">BACK</a>
                             </div>
                             <div class="col-6">
                                 <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>

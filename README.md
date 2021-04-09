@@ -54,3 +54,4 @@
 - [x] adjust post card
 - [] auto initialize the default image path for newly created user
 - [] delete hashtags from post description and leave them only in the hashtags
+- [] if the user submitted edit profile with no bio so don't save bio property in the record

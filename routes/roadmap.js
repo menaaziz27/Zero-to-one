@@ -1,12 +1,14 @@
-const router = require("express").Router();
-
+const router = require('express').Router();
 
 const {
 	createRoadmap,
-  getRoadmap
-} = require("../controllers/roadmapscontroller");
+	getRoadmap,
+	getRoadmaps,
+} = require('../controllers/roadmapscontroller');
+const { isAuthenticated } = require('../middleware/isAuthenticated');
 
-router.post("/createe", createRoadmap);
-router.get("/:roadmap", getRoadmap)
+router.get('/', getRoadmaps);
+router.post('/createe', createRoadmap);
+router.get('/:roadmap', isAuthenticated, getRoadmap);
 
 module.exports = router;

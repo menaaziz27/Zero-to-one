@@ -143,17 +143,12 @@ exports.postRegister = async (req, res, next) => {
 };
 
 //Get login page
+// /auth/users?redirectTo=/roadmaps/ai
 exports.getLogin = (req, res, next) => {
-	let query;
-	if (req.query.index) {
-		console.log(req.query.index);
-		query =
-			req.query.index === 'webdevelopment'
-				? 'webdevelopment'
-				: 'bioinformatics';
-	} else {
-		query = false;
-	}
+	let redirectTo = req.query.redirectTo;
+	console.log(req.query, 'query');
+	console.log(req.params, 'params');
+	console.log(redirectTo, 'in get login');
 
 	// const query = req.query.index || null;
 	res.render('auth/login', {
@@ -164,7 +159,7 @@ exports.getLogin = (req, res, next) => {
 			password: '',
 		},
 		validationErrors: [],
-		query,
+		redirectTo,
 	});
 };
 
@@ -192,12 +187,8 @@ exports.validateLogin = [
 //Post Login
 exports.postlogin = async (req, res, next) => {
 	// const query = req.body.query === 'webdevelop' ? false : true;
-	let query;
-	if (req.body.query) {
-		query = req.body.query;
-	} else {
-		query = false;
-	}
+	let redirectTo = req.body.redirectTo;
+	console.log(redirectTo, 'in post login');
 	const email = req.body.email;
 	const password = req.body.password;
 
@@ -229,10 +220,8 @@ exports.postlogin = async (req, res, next) => {
 				if (err) {
 					console.log(err);
 				}
-				if (query === 'webdevelopment') {
-					res.redirect('/diagram');
-				} else if (query === 'bioinformatics') {
-					res.redirect('/bioinformatics');
+				if (redirectTo) {
+					res.redirect(redirectTo);
 				} else {
 					res.redirect('/timeline');
 				}

@@ -17,6 +17,7 @@ exports.getUserProfile = async (req, res) => {
 			.sort({ createdAt: 'desc' })
 			.populate('user');
 		// fetch first five repose from user's github account to show them in projects section
+		const postsCount = posts.length;
 		if (userDoc.websites.length > 0) {
 			let userGithubUrl = userDoc.websites[0];
 			const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
@@ -46,6 +47,7 @@ exports.getUserProfile = async (req, res) => {
 			posts,
 			moment,
 			userRepos,
+			postsCount,
 		});
 	} catch (e) {
 		console.log(e);
@@ -85,6 +87,7 @@ exports.validateProfile = [
 	body('name', 'Name must be at least 4 characters in text or numbers only.')
 		.exists()
 		.isLength({ min: 4 }),
+	body('bio', 'bio must be less than 120 characters').isLength({ max: 120 }),
 ];
 
 exports.postUpdateProfile = async (req, res) => {
@@ -130,8 +133,9 @@ exports.postUpdateProfile = async (req, res) => {
 	}
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
+		console.log(errors.array());
 		return res.status(422).render('profile/edit-profile', {
-			errorMassage: errors.array()[0].msg,
+			errorMassage: errors.array(),
 			name,
 			userid: userid,
 			websitesObj,
@@ -142,7 +146,7 @@ exports.postUpdateProfile = async (req, res) => {
 	try {
 		const user = await User.findOne({ _id: userid });
 		user.name = name;
-		user.bio = bio;
+		user.bio = bio === '' ? null : bio;
 		user.country = country;
 		user.yearOfBirth = BirthDate;
 		user.gender = gender;

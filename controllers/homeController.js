@@ -40,19 +40,6 @@ exports.getTimeline = async (req, res, next) => {
 	}
 };
 
-exports.getRoadmaps = async (req, res, next) => {
-	try {
-		const roadmaps = await Roadmap.find({});
-		console.log(roadmaps);
-
-		res.render('roadmaps/roadmaps', {
-			roadmaps,
-		});
-	} catch (e) {
-		console.log(e);
-	}
-};
-
 // exports.getNews = async (req, res) => {
 // 	const data = await axios.get('https://dev.to/api/articles');
 
@@ -172,17 +159,3 @@ exports.postSearch = async (req, res, next) => {
 exports.getDiagram = (req, res) => {
 	res.render('roadmaps/diagram.ejs');
 };
-
-// exports.getHtml = (req, res) => {
-// 	res.render('html.ejs');
-// };
-// exports.getCss = (req, res) => {
-// 	res.render('css.ejs');
-// };
-
-// exports.getBackDiagram = (req, res) => {
-// 	res.render('roadmaps/backend.ejs');
-// };
-// exports.getBioDiagram = (req, res) => {
-// 	res.render('roadmaps/Bioinformatics.ejs');
-// };

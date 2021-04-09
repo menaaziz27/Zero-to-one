@@ -22,7 +22,7 @@
 
 
     <style>
-         a {
+        a {
             text-decoration: none;
             color: #06A763;
         }
@@ -55,6 +55,7 @@
                 height: 400px;
             }
         }
+
         @media (max-width: 430px) {
             .section-title h1 {
                 font-size: 30px !important;
@@ -68,6 +69,7 @@
                 height: 500px !important;
             }
         }
+
         @media (max-width: 1100px) {
             .section-title h1 {
                 font-size: 30px !important;
@@ -78,8 +80,8 @@
             }
 
             .section-title {
-                height: 600px; 
- 
+                height: 600px;
+
             }
         }
     </style>
@@ -92,104 +94,115 @@
     <%- include('../layouts/navbar.ejs') %>
 
 
-    <section id="experience" class="section">
-        <div class="container">
-            <!-- SECTION TITLE -->
-            <div class="section-title" style="height: 300px;">
-                <h1 style="text-align: center; font-size: 50px; color: #06A763;"><%= roadmap.title %></h1>
-                <P style="font-size: 25px;text-align: justify; margin-bottom: 20px;"><%= roadmap.description %></P>
-            </div>
-            <a href="/backend">
-                <h6 class="timeline-title head">Back-End Development</h6>
-            </a>
-            <h1 style="text-align: center; font-size: 50px; color: #06A763;">Front-End Development</h1> <br>
-            <div id="timeline-experience">
+        <section id="experience" class="section">
+            <div class="container">
+                <!-- SECTION TITLE -->
+                <div class="section-title" style="height: 300px;">
+                    <h1 style="text-align: center; font-size: 50px; color: #06A763;">
+                        <%= roadmap.title %>
+                    </h1>
+                    <P style="font-size: 25px;text-align: justify; margin-bottom: 20px;">
+                        <%= roadmap.description %>
+                    </P>
+                </div>
+                <a href="/backend">
+                    <h6 class="timeline-title head">Back-End Development</h6>
+                </a>
+                <h1 style="text-align: center; font-size: 50px; color: #06A763;">Front-End Development</h1> <br>
+                <div id="timeline-experience">
 
-                <!-- FIRST TIMELINE -->
-                <div class="timeline-block">
-                    <!-- DOT -->
-                    <a href="html.html">
-                        <div class="timeline-dot">
-                            <h6>1</h6>
-                        </div>
-                    </a>
-                    <!-- TIMELINE CONTENT -->
-                    
-                    <% for(let topic of steps){ %>
-                        <% var count = 1 %>
-                        <% if(count % 2 !== 0) { %>
-                            <!-- THIRD TIMELINE -->
-                            <div class="timeline-block">
-                                <!-- DOT -->
-                                <div class="timeline-dot">
-                                    <h6><%= count %></h6>
-                                </div>
-                                <!-- TIMELINE CONTENT -->
-                                <div class="card timeline-content">
-            
-                                    <a>
-                                        <div class="card-content">
-                                            <!-- TIMELINE TITLE -->
-                                            <a href="topic.html">
-                                                <h6 class="timeline-title head"><%= topic.title %></h6>
-                                            </a>
-                                            
-                                            <!-- TIMELINE TITLE INFO -->
-                                            <div class="timeline-info">
-            
-                                            </div>
-                                            <!-- TIMELINE PARAGRAPH -->
-                                            <p>
-                                               <%= topic.description %>
-                                            </p>
-            
-                                        </div>
-                                    </a>
-                                </div>
+                    <!-- FIRST TIMELINE -->
+                    <div class="timeline-block">
+                        <!-- DOT -->
+                        <a href="html.html">
+                            <div class="timeline-dot">
+                                <h6>1</h6>
                             </div>
-                            <% } else { %>
-                            <!-- FOURTH TIMELINE -->
-                            <div class="timeline-block">
-                                <!-- DOT -->
-                                <div class="timeline-dot">
-                                    <h6>4</h6>
-                                </div>
-                                <!-- TIMELINE CONTENT -->
-                                <div class="card timeline-content">
-                                    <a>
-                                        <div class="card-content">
-                                            <!-- TIMELINE TITLE -->
-            
-                                            <a href="topic.html">
-                                                <h6 class="timeline-title head">Dom</h6>
-                                            </a>
-                                       
-                                            <!-- TIMELINE TITLE INFO -->
-                                            <div class="timeline-info">
-            
+                        </a>
+                        <!-- TIMELINE CONTENT -->
+                        <% if(steps !==undefined || steps.length !==0) {%>
+                            <% for(let topic of steps){ %>
+                                <% var count=1 %>
+                                    <% if(count % 2 !==0) { %>
+                                        <!-- THIRD TIMELINE -->
+                                        <div class="timeline-block">
+                                            <!-- DOT -->
+                                            <div class="timeline-dot">
+                                                <h6>
+                                                    <%= count %>
+                                                </h6>
                                             </div>
-                                            <!-- TIMELINE PARAGRAPH -->
-                                            <p>
-                                                I recently joined here, currently working on various development
-                                                aspects. I already worked on about..
-                                            </p>
-                                            <!-- BUTTON TRIGGER MODAL -->
-                                            <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-5">
-                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                            </a>
+                                            <!-- TIMELINE CONTENT -->
+                                            <div class="card timeline-content">
+
+                                                <a>
+                                                    <div class="card-content">
+                                                        <!-- TIMELINE TITLE -->
+                                                        <a href="topic.html">
+                                                            <h6 class="timeline-title head">
+                                                                <%= topic.title %>
+                                                            </h6>
+                                                        </a>
+
+                                                        <!-- TIMELINE TITLE INFO -->
+                                                        <div class="timeline-info">
+
+                                                        </div>
+                                                        <!-- TIMELINE PARAGRAPH -->
+                                                        <p>
+                                                            <%= topic.description %>
+                                                        </p>
+
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <%= count = count + 1 %>
-                            <% } %>
-                            <% } %>
-                        
-                
+                                        <% } else { %>
+                                            <!-- FOURTH TIMELINE -->
+                                            <div class="timeline-block">
+                                                <!-- DOT -->
+                                                <div class="timeline-dot">
+                                                    <h6>4</h6>
+                                                </div>
+                                                <!-- TIMELINE CONTENT -->
+                                                <div class="card timeline-content">
+                                                    <a>
+                                                        <div class="card-content">
+                                                            <!-- TIMELINE TITLE -->
+
+                                                            <a href="topic.html">
+                                                                <h6 class="timeline-title head">Dom</h6>
+                                                            </a>
+
+                                                            <!-- TIMELINE TITLE INFO -->
+                                                            <div class="timeline-info">
+
+                                                            </div>
+                                                            <!-- TIMELINE PARAGRAPH -->
+                                                            <p>
+                                                                I recently joined here, currently working on various
+                                                                development
+                                                                aspects. I already worked on about..
+                                                            </p>
+                                                            <!-- BUTTON TRIGGER MODAL -->
+                                                            <a href="#" class="modal-dot" data-toggle="modal"
+                                                                data-target="#myModal-5">
+                                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <%= count=count + 1 %>
+                                                <% } %>
+                                                    <% } %>
+                                                        <% } %>
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <%- include('../layouts/footer.ejs') %>
 
