@@ -239,7 +239,7 @@ exports.postlogin = async (req, res, next) => {
 				password: password,
 			},
 			validationErrors: [{ param: 'notMatched' }],
-			query,
+			redirectTo: '',
 		});
 	} catch (e) {
 		console.log(e);

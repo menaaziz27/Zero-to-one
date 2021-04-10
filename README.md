@@ -59,3 +59,5 @@
 - [] what if the user enter a post with 100000 characters ? we want a see more button that goes to post details
 - [] change font style
 - [] what if the admin deletes the user account he logged from
+- [] handle errors rather than logging them to the console
+- [] option for user to change his password inside the app

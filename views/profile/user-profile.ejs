@@ -374,7 +374,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="text-right">
-                                                    <button type="submit" class="btn btn-outline-success">share</button>
+                                                    <input type="submit" value="share" class="btn btn-outline-success">
                                                 </div>
                                             </div>
                                         </form>
@@ -520,5 +520,14 @@
 
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $("#post").keypress(function (e) {
+        if (e.which === 13 && !e.shiftKey) {
+            e.preventDefault();
+
+            $(this).closest("form").submit();
+        }
+    });
+</script>
 
 </html>

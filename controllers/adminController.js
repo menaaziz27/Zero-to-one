@@ -43,8 +43,19 @@ exports.getUserDashboard = async (req, res) => {
 };
 exports.deleteUser = async (req, res) => {
 	const userId = req.body.id.toString();
+	console.log(userId);
 	try {
-		await User.findByIdAndDelete(userId);
+		// if the deleted user is the currently logged in delete the session then delete user and redirect to home
+		if (req.user._id.toString() === userId) {
+			return req.session.destroy(async err => {
+				console.log(err);
+				await req.user.remove();
+				res.redirect('/');
+			});
+		}
+		// if the deleted user was the current logged in just redirect me to home page and delete it's session
+		const user = await User.findById(userId);
+		await user.remove();
 		res.redirect('/admin/dashboard/users');
 	} catch (e) {
 		console.log(e);
