@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Topic = require('./Topic');
 const Schema = mongoose.Schema;
 
 const roadmapSchema = new Schema({
@@ -25,6 +25,13 @@ const roadmapSchema = new Schema({
 	},
 	steps: [{ type: Schema.Types.ObjectId, ref: 'topic' }],
 	// steps:[String]
+});
+
+roadmapSchema.pre('remove', async function (next) {
+	const roadmap = this;
+
+	await Topic.deleteMany({ roadmap });
+	next();
 });
 
 const Roadmap = mongoose.model('roadmap', roadmapSchema);

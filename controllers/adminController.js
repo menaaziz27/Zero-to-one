@@ -219,7 +219,8 @@ exports.deleteRoadmap = async (req, res) => {
 	const roadmapId = req.body.id;
 
 	try {
-		await Roadmap.findByIdAndDelete(roadmapId);
+		const roadmap = await Roadmap.findById(roadmapId);
+		await roadmap.remove();
 		res.redirect('/admin/dashboard/roadmaps');
 	} catch (e) {
 		console.log(e);
