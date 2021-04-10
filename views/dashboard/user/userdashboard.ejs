@@ -404,14 +404,16 @@
                                         <div class="crayons-story__meta">
                                             <div class="crayons-story__author-pic">
 
-                                                <a href="" class="crayons-avatar crayons-avatar--l ">
+                                                <a href="/users/profile/<%=user.username%>"
+                                                    class="crayons-avatar crayons-avatar--l ">
                                                     <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/assets/img/default.png <%}%>"
                                                         alt="aemiej profile" class="crayons-avatar__image" />
                                                 </a>
                                             </div>
                                             <div>
                                                 <p>
-                                                    <a href="" class="crayons-story__secondary fw-medium">
+                                                    <a href="/users/profile/<%=user.username%>"
+                                                        class="crayons-story__secondary fw-medium">
                                                         <%=user.username%>
                                                     </a>
                                                 </p>

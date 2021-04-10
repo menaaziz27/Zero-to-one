@@ -4,7 +4,7 @@ const moment = require('moment');
 const axios = require('axios');
 const { body, validationResult } = require('express-validator');
 
-exports.getUserProfile = async (req, res) => {
+exports.getUserProfile = async (req, res, next) => {
 	// const userId = req.params.id;
 	const username = req.params.username;
 
@@ -12,7 +12,12 @@ exports.getUserProfile = async (req, res) => {
 
 	try {
 		const userDoc = await User.findOne({ username: username });
+		if (userDoc === null) {
+			res.locals.error = 'this user is deleted recently';
+			next();
+		}
 		userId = userDoc._id;
+		console.log(userDoc.websites);
 		const posts = await Post.find({ user: userId })
 			.sort({ createdAt: 'desc' })
 			.populate('user');
@@ -174,7 +179,7 @@ exports.postUpdateProfile = async (req, res) => {
 			// pop them from the websites array
 			websites = websites.filter(link => link !== '');
 		}
-
+		console.log(websites);
 		user.websites = websites;
 		user.save();
 		res.redirect('/users/profile/' + username);

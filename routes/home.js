@@ -11,12 +11,8 @@ const {
 	postSearchPosts,
 	postSearch,
 	getHtml,
-	getDiagram,
 	getCss,
-	// getBackDiagram,
-	// getBioDiagram,
 } = require('../controllers/homeController');
-
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 router.get('/', getHome);
@@ -25,9 +21,9 @@ router.get('/news', getNews);
 router.get('/search', getSearch);
 router.get('/search/posts', getSearchPosts);
 router.post('/search/posts', postSearchPosts);
-// router.post('/search/users', postSearch);
 router.post('/search/users', postSearch);
-router.get('/diagram', isAuthenticated, getDiagram);
+// router.post('/search/users', postSearch);
+// router.get('/diagram', isAuthenticated, getDiagram);
 // router.get('/html', isAuthenticated, getHtml);
 // router.get('/css', isAuthenticated, getCss);
 // router.get('/backend', isAuthenticated, getBackDiagram);

@@ -28,6 +28,8 @@ exports.getTimeline = async (req, res, next) => {
 	}
 	try {
 		const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
+		const usersCount = await User.find({}).count();
+		const roadmapsCount = await Roadmap.find({}).count();
 		const postCount = posts.length;
 		res.render('home/timeline', {
 			userid: userid,
@@ -35,6 +37,8 @@ exports.getTimeline = async (req, res, next) => {
 			moment,
 			news,
 			postCount,
+			usersCount,
+			roadmapsCount,
 		});
 	} catch (e) {
 		console.log(e);
@@ -131,7 +135,7 @@ exports.postSearch = async (req, res, next) => {
 	console.log(allData, 'QUERY DATAAAAAAA');
 
 	try {
-		const users = await User.find(allData);
+		const users = await User.find(allData, { password: 0 });
 		console.log(users);
 
 		//TODO-1: check if the  request is ajax create string of matched elements in backticks string
@@ -155,8 +159,4 @@ exports.postSearch = async (req, res, next) => {
 	} catch (e) {
 		console.log(e);
 	}
-};
-
-exports.getDiagram = (req, res) => {
-	res.render('roadmaps/diagram.ejs');
 };

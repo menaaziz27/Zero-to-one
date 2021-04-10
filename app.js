@@ -100,6 +100,9 @@ app.use('/admin', adminRoutes);
 app.use('/roadmaps', roadmapsRoutes);
 // app.use('/admin', adminRoutes)
 app.use((req, res) => {
+	if (!res.locals.error) {
+		res.locals.error = 'This page is not found.';
+	}
 	res.render('404.ejs');
 });
 // app.use((error, req, res, next) => {

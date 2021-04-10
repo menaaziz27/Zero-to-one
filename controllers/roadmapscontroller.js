@@ -30,13 +30,17 @@ exports.createRoadmap = async (req, res) => {
 };
 
 // roadmaps/:roadmap
-exports.getRoadmap = async (req, res) => {
+exports.getRoadmap = async (req, res, next) => {
 	const roadmapName = req.params.roadmap;
 
 	try {
 		const roadmap = await Roadmap.findOne({ routeName: roadmapName }).populate(
 			'steps'
 		);
+		if (roadmap === null) {
+			res.locals.error = 'this roadmap is deleted since a while.';
+			next();
+		}
 		console.log(roadmap);
 		const steps = roadmap?.steps;
 		console.log(steps[0]?.title);
@@ -47,4 +51,8 @@ exports.getRoadmap = async (req, res) => {
 	} catch (e) {
 		console.log(e);
 	}
+};
+
+exports.getDiagram = (req, res) => {
+	res.render('roadmaps/diagram.ejs');
 };

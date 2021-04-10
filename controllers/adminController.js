@@ -26,7 +26,7 @@ exports.getDashboard = async (req, res) => {
 
 exports.getUserDashboard = async (req, res) => {
 	try {
-		const users = await User.find({});
+		const users = await User.find({}, { password: 0 });
 		const posts = await Post.find({});
 		const roadmaps = await Roadmap.find({});
 		const topics = await Topic.find({});
@@ -64,7 +64,7 @@ exports.deleteUser = async (req, res) => {
 exports.getEditUserDashboard = async (req, res) => {
 	const UserId = req.params.id;
 	try {
-		const user = await User.findById(UserId);
+		const user = await User.findById(UserId, { password: 0 });
 
 		res.render('dashboard/user/userEdit.ejs', {
 			user,

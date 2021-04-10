@@ -58,6 +58,12 @@
 - [] 404 page style
 - [] what if the user enter a post with 100000 characters ? we want a see more button that goes to post details
 - [] change font style
-- [] what if the admin deletes the user account he logged from
+- [x] what if the admin deletes the user account he logged from
+- [x] proper handling of 404 pages
+- [] hide user sensitive data
 - [] handle errors rather than logging them to the console
 - [] option for user to change his password inside the app
+- [] validation for roadmaps form
+- [] validation for topics form
+- [] dynamically render skills in forms
+- [] edit profile gender fix

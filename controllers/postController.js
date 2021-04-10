@@ -48,17 +48,24 @@ exports.postEdit = async (req, res) => {
 };
 
 // /posts/:id
-exports.getPostDetail = async (req, res) => {
+exports.getPostDetail = async (req, res, next) => {
 	let timeline = req.query.timeline || false;
 	const postId = req.params.id;
 
 	try {
 		const post = await Post.findById(postId).populate('user');
+		// if the post is deleted go to the 404 page
+		if (post === null) {
+			res.locals.error = 'This post is deleted recently';
+			next();
+		}
 		res.render('post/details-post', {
-			post,
+			post: post || '',
 			timeline,
 		});
-	} catch (e) {}
+	} catch (e) {
+		console.log(e);
+	}
 };
 // posts/:id/delete
 exports.deletePost = async (req, res) => {

@@ -24,7 +24,6 @@ const roadmapSchema = new Schema({
 		required: [true, 'url required'],
 	},
 	steps: [{ type: Schema.Types.ObjectId, ref: 'topic' }],
-	// steps:[String]
 });
 
 roadmapSchema.pre('remove', async function (next) {
