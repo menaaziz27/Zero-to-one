@@ -23,7 +23,7 @@ exports.getUserProfile = async (req, res, next) => {
 			.populate('user');
 		// fetch first five repose from user's github account to show them in projects section
 		const postsCount = posts.length;
-		if (userDoc.websites.length > 0) {
+		if (userDoc.websites.length > 0 && userDoc.websites[0].includes('github')) {
 			let userGithubUrl = userDoc.websites[0];
 			const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
 			// substract username after the last backslash and to the last index of the string
