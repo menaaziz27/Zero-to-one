@@ -166,7 +166,75 @@ exports.getLogin = (req, res, next) => {
 	});
 };
 
+// Admin login 
+exports.getAdminLogin = (req, res, next) => {
+	// console.log(req.query, 'query');
+	// console.log(req.params, 'params');
+	// console.log(redirectTo, 'in get login');
 
+	// const query = req.query.index || null;
+	res.render('auth/adminlogin', {
+		pageTitle: 'Administrarion',
+		errorMassage: null,
+		oldInput: {
+			email: '',
+			password: '',
+		},
+		validationErrors: [],
+	});
+};
+
+
+exports.postAdminlogin = async (req, res, next) => {
+	// const query = req.body.query === 'webdevelop' ? false : true;
+	const email = req.body.email;
+	const password = req.body.password;
+
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(422).render('auth/login', {
+			path: '/login',
+			pageTitle: 'Login',
+			errorMassage: errors.array()[0].msg,
+			oldInput: {
+				email: email,
+				password: password,
+			},
+			validationErrors: errors.array(),
+		});
+	}
+	try {
+		const user = await User.findOne({ email: email });
+		const doMatch = await bcrypt.compare(password, user.password); //true or false
+		if (doMatch) {
+			// if email exists and password matches
+			// save the user object without his password in the session
+			req.session.user = user.hidePrivateData();
+			req.session.isLoggedin = true;
+      req.session.isAdmin = true;
+			return req.session.save(err => {
+				if (err) {
+					console.log(err);
+        }
+					res.redirect('/admin/dashboard');
+			});
+		}
+		res.status(422).render('auth/adminlogin', {
+			path: '/adminlogin',
+			pageTitle: 'Administration',
+			errorMassage: "Password don't match!",
+			oldInput: {
+				email: email,
+				password: password,
+			},
+			validationErrors: [{ param: 'notMatched' }],
+      redirectTo: '',
+
+		});
+	} catch (e) {
+		console.log(e);
+	}
+};
 
 exports.validateLogin = [
 	check('email')
