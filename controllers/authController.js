@@ -18,7 +18,9 @@ const transporter = nodemailer.createTransport(
 // =========== Registeration ============
 
 //get register page
+// auth/register?redirectTo=roadmaps/webdev
 exports.getRegister = (req, res, next) => {
+	let redirectTo = req.query.redirectTo;
 	res.render('auth/register', {
 		pageTitle: 'Registeration',
 		errorMassage: null,
@@ -28,6 +30,7 @@ exports.getRegister = (req, res, next) => {
 			confirmPassword: '',
 		},
 		validationErrors: [],
+		redirectTo,
 	});
 };
 
@@ -94,6 +97,8 @@ exports.postRegister = async (req, res, next) => {
 	const email = req.body.email;
 	const name = req.body.name;
 	const password = req.body.password;
+	const redirectTo = req.body.redirectTo;
+	console.log(redirectTo, 'post register');
 
 	// ensure of username uniqueness
 	username = await ensureUsernameUniqueness(name);
@@ -132,7 +137,7 @@ exports.postRegister = async (req, res, next) => {
 
 		user.save();
 
-		res.redirect('/auth/login');
+		res.redirect(`/auth/login?redirectTo=${redirectTo}`);
 
 		transporter.sendMail({
 			to: email,
@@ -190,7 +195,7 @@ exports.validateLogin = [
 //Post Login
 exports.postlogin = async (req, res, next) => {
 	// const query = req.body.query === 'webdevelop' ? false : true;
-	let redirectTo = req.body.redirectTo;
+	let redirectTo = req.body.redirectTo || req.query.redirectTo;
 	console.log(redirectTo, 'in post login');
 	const email = req.body.email;
 	const password = req.body.password;
@@ -206,7 +211,7 @@ exports.postlogin = async (req, res, next) => {
 				password: password,
 			},
 			validationErrors: errors.array(),
-			redirectTo: '',
+			redirectTo,
 		});
 	}
 	try {

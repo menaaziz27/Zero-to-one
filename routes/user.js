@@ -11,10 +11,8 @@ const {
 
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
-router.get('/updateProfile', isAuthenticated, getUpdateProfile);
-
-router.post('/profile', isAuthenticated, validateProfile, postUpdateProfile);
-
 router.get('/profile/:username', isAuthenticated, getUserProfile);
+router.get('/updateProfile', isAuthenticated, getUpdateProfile);
+router.post('/profile', isAuthenticated, validateProfile, postUpdateProfile);
 
 module.exports = router;
