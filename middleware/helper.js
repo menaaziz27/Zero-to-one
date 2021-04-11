@@ -21,4 +21,92 @@ module.exports = {
 				console.log(err);
 			});
 	},
+	renderUsers: user => {
+		let = skills = user.skills
+			? user.skills.map(skill => skill + ',').join(' ')
+			: '';
+		return `
+		<div class="crayons-story " data-content-user-id="219080">
+                                    <div class="crayons-story__body">
+                                        <div class="crayons-story__top">
+                                            <div class="crayons-story__meta">
+                                                <div class="crayons-story__author-pic">
+
+                                                    <a href="" class="crayons-avatar crayons-avatar--l ">
+                                                        <img src="${
+																													user.Image
+																														? '/' + user.Image
+																														: '/assets/img/default.png'
+																												}"
+                                                            alt="aemiej profile" class="crayons-avatar__image" />
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <p>
+                                                        <a href="" class="crayons-story__secondary fw-medium">
+                                                            ${user.username}
+                                                        </a>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="crayons-story__indention">
+                                            <h2 class="crayons-story__title">
+                                                <p>
+                                                    ${user.name}
+                                                </p>
+                                            </h2>
+                                            <div class="crayons-story__tags">
+
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    skills : ${skills}
+                                                </a>
+                                                <br>
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    year of birth : ${
+																											user.yearOfBirth
+																										}
+                                                </a>
+                                                <br>
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    Country : ${user.country}
+                                                </a>
+                                                <br>
+                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    Gender : ${user.gender}
+                                                </a>
+                                            </div>
+                                            <div class="crayons-story__bottom">
+                                                <div class="crayons-story__details">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+	},
+	generateCriteriaObject: obj => {
+		let data = {};
+		// delete all properties that have values of 'any'
+		for (let prop in obj) {
+			// if the property is empty string or 'any' or skills array is empty delete them
+			if (obj[prop] === 'any' || obj[prop] === '' || obj[prop].length === 0) {
+				delete obj[prop];
+			}
+			// lw el prop = name w el name msh empty 7ott el query bta3t el search f el obj data
+			if (prop === 'name' && obj[prop] !== '' && obj[prop] !== undefined) {
+				data['$text'] = { $search: `${obj[prop]}` };
+			} else if (prop === 'skills' && obj[prop]?.length > 0) {
+				if (obj[prop].length === 1) {
+					data['skills'] = { $in: `${obj[prop].concat([])}` };
+				} else {
+					data['skills'] = { $in: obj[prop] };
+				}
+			} else if (obj[prop] !== undefined) {
+				data[prop] = obj[prop];
+			}
+		}
+		return data;
+	},
 };

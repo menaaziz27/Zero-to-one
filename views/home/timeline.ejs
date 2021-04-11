@@ -195,17 +195,19 @@
                                     </path>
                                 </svg>
 
-                                5 posts published
+                                <%= postCount %> posts published
                             </div>
                             <div class="flex items-center mb-4">
                                 <span style="display: inline-block; margin-right: 3px;"><i style="margin-right: 16px;"
-                                        class="far fa-user"></i>126
-                                    users in the website</span>
+                                        class="far fa-user"></i>
+                                    <%= usersCount %>
+                                        users in the website
+                                </span>
                             </div>
                             <div class="flex items-center">
                                 <span style="display: inline-block; margin-right: 3px;">
                                     <i style="margin-right: 16px;" class="fas fa-road"></i>
-                                    6 roadmaps
+                                    <%= roadmapsCount %> roadmaps
                                 </span>
                             </div>
                         </div>
@@ -232,7 +234,8 @@
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <button type="submit" class="btn btn-outline-info">share</button>
+                                        <!-- <button type="submit" class="btn btn-outline-info">share</button> -->
+                                        <input type="submit" value="share" class="btn btn-outline-info">
                                     </div>
                                 </div>
                             </form>
@@ -258,8 +261,8 @@
 
                                                 <a href="users/profile/<%= post.user.username %>"
                                                     class="crayons-avatar crayons-avatar--l ">
-                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
-                                                        alt="aemiej profile" class="crayons-avatar__image" />
+                                                    <img src="/<%= post.user.Image %>" alt="aemiej profile"
+                                                        class="crayons-avatar__image" />
                                                 </a>
                                             </div>
                                             <div>
@@ -431,12 +434,15 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script src="./bootstrap/js/bootstrap.min.js"></script>
-        <!-- <script>
-            const element = document.querySelector('#submit');
-            element.addEventListener('submit', event => {
-                event.preventDefault();
+        <script>
+            $("#post").keypress(function (e) {
+                if (e.which === 13 && !e.shiftKey) {
+                    e.preventDefault();
+
+                    $(this).closest("form").submit();
+                }
             });
-        </script> -->
+        </script>
 
 </body>
 

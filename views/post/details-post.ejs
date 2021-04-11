@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="/assets/css/edit-post.css">
+
+</head>
+<body>
+
+
+    <!-- NAVBAR -->
+    <%- include('../layouts/navbar.ejs') %>
+
+
+    <!-- End of NAVBAR -->
+
+
+
+   
+    <div class="container">
+        <div class="row align-items-center" style="height: 600px;">
+            <div class="col-md-6 offset-md-3  border border-primary rounded py-4-center">
+                <h3 style="text-align: center;">Post details</h3>
+                <!-- FORM -->
+                <form action="<% if(timeline){%>/posts/<%= post._id %>/edit?timeline=true<%} else  {%> /posts/<%= post._id %>/edit<%}%>" method="POST" style="margin-top: 20px;">
+                    <!-- TEXT FIELD GROUPS -->
+                    <label class="small text-secondary m-0 mt-1" for="name">
+                        By <%= post.user.name %>
+                    </label>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <textarea style="resize: none;" class="form-control" name="description" id="post"
+                            rows="3"><%= post.description %></textarea>
+                        <input type="hidden" name="userid" value="<%= userid %>">
+                    </div>
+                    <p>
+                    </p>
+                    <span id="likes-count-<%= post._id %>">
+                    </span>
+                    <div class="row">
+                        <div class="col-4">
+                            <a class="btn btn-outline-dark btn-block mx-auto"
+                                href="<% if(timeline) { %>/timeline <%} else {%>/users/profile/<%= post.user._id %> <%}%>">Back</a>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-success btn-block mx-auto" type="submit">Update</button>
+                        </div>
+                        
+                </form> 
+                <div class="col-4">
+                    <form action="<% if(timeline){%>/posts/<%= post._id %>/delete?timeline=true<%}else {%> /posts/<%= post._id %>/delete <%}%>" 
+                       method="POST">
+                       <div class="col-4">
+                       <button class="btn btn-danger btn-block mx-auto" type="submit">Delete</button>
+                       </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+
+<!--FOOTER-->
+<%- include('../layouts/footer.ejs') %>
+
+    
+    <!-- bootstrap scripts -->
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

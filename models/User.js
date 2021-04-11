@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-
+const Post = require('./Post');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
 	username: {
 		type: String,
 		required: true,
-    unique:true
+		unique: true,
 	},
 	email: {
 		type: String,
@@ -27,6 +27,7 @@ const userSchema = new Schema({
 	nativeLang: String,
 	resetToken: String,
 	resetTokenExpiration: Date,
+	// posts: [postSchema],
 });
 
 userSchema.methods.hidePrivateData = function () {
@@ -37,5 +38,12 @@ userSchema.methods.hidePrivateData = function () {
 	delete userObject.password;
 	return userObject;
 };
+
+userSchema.pre('remove', async function (next) {
+	const user = this;
+
+	await Post.deleteMany({ user: user._id });
+	next();
+});
 
 module.exports = mongoose.model('User', userSchema);

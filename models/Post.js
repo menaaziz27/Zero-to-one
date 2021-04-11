@@ -1,23 +1,23 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "User",
+		ref: 'User',
 		required: true,
 	},
 	description: {
 		type: String,
-		required: [true, "Please enter the description"],
+		required: [true, 'Please enter the description'],
 		trim: true,
 	},
 	readingTime: Number,
 	hashtags: [String],
 	likes: {
 		type: Number,
-		default: 0
+		default: 0,
 	},
 	createdAt: {
 		type: Date,
@@ -35,4 +35,10 @@ const postSchema = new Schema({
 	//   },
 });
 
-module.exports = mongoose.model("Post", postSchema);
+postSchema.virtual('postCount').get(function () {
+	return Post.findByIdy({ user: this._id }).count;
+});
+
+const Post = mongoose.model('Post', postSchema);
+
+module.exports = Post;

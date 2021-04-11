@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link href="/assets/img/logo-white.png" rel="icon">
+
+    <!-- bootstrap css -->
+
+    <!-- <link href="/assets/css/errormessages.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"> -->
+
+
+    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+    <link href="/assets/css/navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/errormessages.css" rel="stylesheet">
+
+    <style>
+        label {
+            color: #009961;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../../layouts/navbar.ejs') %>
+        <div class="container">
+            <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
+                <div class="py-4 rounded col-md-6 offset-md-3">
+                    <h3 style="text-align: center;">Add roadmap</h3>
+                    <!-- FORM -->
+                    <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
+                    <form action="/admin/dashboard/roadmaps/create" method="POST" enctype="multipart/form-data" id="submit">
+                        <!-- TEXT FIELD GROUPS -->
+                        <div class="form-group">
+                            <h3>Info</h3>
+                            <label for="name">title</label>
+                            <input class="form-control" type="text" name="title" id="title" placeholder="Enter title">
+                            <% if (errorMassage) { %>
+                                <small class="text-danger">
+                                    <%= errorMassage %>
+                                </small>
+                                <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">summary</label>
+                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary">
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="password">description</label>
+                            <input class="form-control" type="text" id="address" placeholder="description" name="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">routeName</label>
+                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="mx-auto btn btn-outline-dark btn-block"
+                                    href="/admin/dashboard/roadmaps">BACK</a>
+                            </div>
+                            <div class="col-6">
+                                <button class="mx-auto btn btn-success btn-block" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <%- include('../../layouts/footer.ejs') %>
+
+            <!-- <script>
+                const element = document.querySelector('#submit');
+                element.addEventListener('submit', event => {
+                    event.preventDefault();
+                });
+            </script> -->
+            <!-- bootstrap scripts -->
+            <script src="/assets/vendor/jquery/jquery.min.js"></script>
+            <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

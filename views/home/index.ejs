@@ -88,7 +88,7 @@
                 <!-- <li><i class="ri-check-double-line"></i></li> -->
               </ul>
             </div>
-            <div class="col-lg-6 pt-4 pt-lg-0">
+            <div class="pt-4 col-lg-6 pt-lg-0">
               <% if(!isAuthenticated ) { %>
                 <p>
                   Your're a huge part of our community, beleive that you have an imapct on the tech field,
@@ -105,7 +105,7 @@
       <br>
       <br>
       <!-- ======= Services Section ======= -->
-      <section id="services" class="services mb-5">
+      <section id="services" class="mb-5 services">
         <div class="container">
 
           <div class="section-title">
@@ -114,52 +114,30 @@
           </div>
 
           <div class="row">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <% for (let i=0; i < roadmaps.length; i++) { %>
+              <div class="mt-4 col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-md-0">
+                <div class="icon-box">
+                  <div class="icon"><i class="bx bx-window-alt"></i></div>
+                  <% if(!isAuthenticated) { %>
+                    <a href="/roadmaps/<%= roadmaps[i].routeName %>?redirectTo=/roadmaps/<%= roadmaps[i].routeName %>">
+                      <% }else { %>
+                        <a href="/roadmaps/<%= roadmaps[i].routeName %>">
+                          <% } %>
+                            <h4>
+                              <%= roadmaps[i].title %>
+                            </h4>
+                        </a>
+                        <p>
+                          <%= roadmaps[i].summary %>
+                        </p>
 
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-window-alt"></i></div>
-                <a href="/diagram?index=webdevelopment">
-                  <h4 class="hoover">Web Development</h4>
-                </a>
-                <p>Web development is the work involved in developing a Web site for the Internet (World
-                  Wide Web) or an intranet (a private network).</p>
-                <!-- <span class="button2">view more &rarr;</span> -->
+                </div>
               </div>
-            </div>
+              <% } %>
 
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-dna"></i></div>
-                <a href="/bioinformatics?index=bioinformatics">
-                  <h4>Bioinformatics</h4>
-                </a>
-                <p>Bioinformatics is an interdisciplinary field that develops methods and software
-                  tools
-                  for understanding biological data, in particular when the data sets are large
-                  and
-                  complex.</p>
-                <!-- <span class="button2">view more &rarr;</span> -->
-              </div>
-            </div>
-
-            </a>
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-game"></i></div>
-                <a href="">
-                  <h4>Game Development</h4>
-                </a>
-                <p>Game development is the process of developing a video game. The effort is
-                  undertaken
-                  by a developer, ranging from a single person to an international team dispersed
-                  across
-                  the globe.</p>
-                <!-- <span class="button2">view more &rarr;</span> -->
-
-              </div>
-            </div>
-            </a>
-            <a href="/roadmaps" class="btn-learn-more" style="margin-left: 45%;">View More</a>
+                <% if(roadmaps.length !==1) { %>
+                  <a href="/roadmaps" class="btn-learn-more" style="margin-left: 45%;">View More</a>
+                  <% } %>
           </div>
 
       </section>
@@ -231,7 +209,7 @@
 
             </div>
 
-            <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
+            <div class="order-1 col-lg-5 align-items-stretch order-lg-2 img"
               style='background-image: url("assets/img/faq.jpg");'>&nbsp;</div>
           </div>
         </div>
@@ -250,7 +228,7 @@
 
 
         <div class="container">
-          <div class="row mt-5">
+          <div class="mt-5 row">
             <div class="col-lg-4">
               <div class="info">
                 <div class="address">
@@ -270,7 +248,7 @@
                         </div>-->
               </div>
             </div>
-            <div class="col-lg-8 mt-5 mt-lg-0">
+            <div class="mt-5 col-lg-8 mt-lg-0">
               <form id="submit" class="php-email-form">
                 <div class="form-row">
                   <div class="col-md-6 form-group">

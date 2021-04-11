@@ -1,6 +1,6 @@
 // ============ Node-Packages ============
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
@@ -8,22 +8,24 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('ejs');
-
 // ============ Core-Modules ============
 const path = require('path');
 
 // ============ My-Modules ============
-require('./utils/db');
+// require('./utils/db');
+const run = require('./utils/db');
 const { findUser } = require('./middleware/helper');
 // Routes
 const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
+const adminRoutes = require('./routes/admin');
+const roadmapsRoutes = require('./routes/roadmap');
 
 // ============ constant vars ============
-const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
-// const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
 
@@ -57,7 +59,6 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-// ==== middlewares which will be executed before every incoming request ====
 // app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -95,12 +96,20 @@ app.use(homeRoutes);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
+app.use('/admin', adminRoutes);
+app.use('/roadmaps', roadmapsRoutes);
 // app.use('/admin', adminRoutes)
 app.use((req, res) => {
+	if (!res.locals.error) {
+		res.locals.error = 'This page is not found.';
+	}
 	res.render('404.ejs');
 });
 // app.use((error, req, res, next) => {
 // 	res.redirect("/500");
 // });
+
+// Admin route Options
+run();
 
 app.listen(3000);

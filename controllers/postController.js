@@ -10,7 +10,7 @@ exports.getEdit = async (req, res) => {
 	let userid = req.user._id || null;
 	try {
 		const post = await Post.findById(postId);
-		res.render('post/post-edit', {
+		res.render('post/edit-post', {
 			post,
 			userid,
 			timeline,
@@ -48,17 +48,24 @@ exports.postEdit = async (req, res) => {
 };
 
 // /posts/:id
-exports.getPostDetail = async (req, res) => {
+exports.getPostDetail = async (req, res, next) => {
 	let timeline = req.query.timeline || false;
 	const postId = req.params.id;
 
 	try {
 		const post = await Post.findById(postId).populate('user');
-		res.render('post/post-detail', {
-			post,
+		// if the post is deleted go to the 404 page
+		if (post === null) {
+			res.locals.error = 'This post is deleted recently';
+			next();
+		}
+		res.render('post/details-post', {
+			post: post || '',
 			timeline,
 		});
-	} catch (e) {}
+	} catch (e) {
+		console.log(e);
+	}
 };
 // posts/:id/delete
 exports.deletePost = async (req, res) => {
@@ -80,7 +87,7 @@ exports.deletePost = async (req, res) => {
 // localhost:3000/posts/create?timeline=true
 exports.createPost = async (req, res) => {
 	const { post } = req.body;
-
+	console.log(findHashtags(post));
 	try {
 		const newPost = new Post({
 			user: req.session.user,

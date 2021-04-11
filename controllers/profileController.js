@@ -4,7 +4,7 @@ const moment = require('moment');
 const axios = require('axios');
 const { body, validationResult } = require('express-validator');
 
-exports.getUserProfile = async (req, res) => {
+exports.getUserProfile = async (req, res, next) => {
 	// const userId = req.params.id;
 	const username = req.params.username;
 
@@ -12,12 +12,18 @@ exports.getUserProfile = async (req, res) => {
 
 	try {
 		const userDoc = await User.findOne({ username: username });
+		if (userDoc === null) {
+			res.locals.error = 'this user is deleted recently';
+			next();
+		}
 		userId = userDoc._id;
+		console.log(userDoc.websites);
 		const posts = await Post.find({ user: userId })
 			.sort({ createdAt: 'desc' })
 			.populate('user');
 		// fetch first five repose from user's github account to show them in projects section
-		if (userDoc.websites.length > 0) {
+		const postsCount = posts.length;
+		if (userDoc.websites.length > 0 && userDoc.websites[0].includes('github')) {
 			let userGithubUrl = userDoc.websites[0];
 			const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
 			// substract username after the last backslash and to the last index of the string
@@ -46,6 +52,7 @@ exports.getUserProfile = async (req, res) => {
 			posts,
 			moment,
 			userRepos,
+			postsCount,
 		});
 	} catch (e) {
 		console.log(e);
@@ -84,7 +91,8 @@ exports.getUpdateProfile = (req, res) => {
 exports.validateProfile = [
 	body('name', 'Name must be at least 4 characters in text or numbers only.')
 		.exists()
-		.isLength({ min: 4 })
+		.isLength({ min: 4 }),
+	body('bio', 'bio must be less than 120 characters').isLength({ max: 120 }),
 ];
 
 exports.postUpdateProfile = async (req, res) => {
@@ -96,7 +104,7 @@ exports.postUpdateProfile = async (req, res) => {
 	const BirthDate = req.body.date_of_birth;
 	const gender = req.body.gender;
 	const skills = req.body.skills;
-	const nativeLang = req.body.nativeLang;
+	const nativeLang = req.body.language;
 	const github = req.body.github;
 	const linkedin = req.body.linkedin;
 	const instagram = req.body.instagram;
@@ -110,7 +118,7 @@ exports.postUpdateProfile = async (req, res) => {
 	if (image !== undefined) {
 		Image = image.path;
 	}
-
+	console.log(nativeLang);
 	//!Validaton block ===============================
 	let websites = req.user.websites;
 	let websitesObj = {};
@@ -130,8 +138,9 @@ exports.postUpdateProfile = async (req, res) => {
 	}
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
+		console.log(errors.array());
 		return res.status(422).render('profile/edit-profile', {
-			errorMassage: errors.array()[0].msg,
+			errorMassage: errors.array(),
 			name,
 			userid: userid,
 			websitesObj,
@@ -142,7 +151,9 @@ exports.postUpdateProfile = async (req, res) => {
 	try {
 		const user = await User.findOne({ _id: userid });
 		user.name = name;
-		user.bio = bio;
+		if (bio !== '') {
+			user.bio = bio;
+		}
 		user.country = country;
 		user.yearOfBirth = BirthDate;
 		user.gender = gender;
@@ -168,7 +179,7 @@ exports.postUpdateProfile = async (req, res) => {
 			// pop them from the websites array
 			websites = websites.filter(link => link !== '');
 		}
-
+		console.log(websites);
 		user.websites = websites;
 		user.save();
 		res.redirect('/users/profile/' + username);
