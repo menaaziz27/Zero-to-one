@@ -228,8 +228,6 @@ exports.postAdminlogin = async (req, res, next) => {
 				password: password,
 			},
 			validationErrors: [{ param: 'notMatched' }],
-      redirectTo: '',
-
 		});
 	} catch (e) {
 		console.log(e);
@@ -288,8 +286,12 @@ exports.postlogin = async (req, res, next) => {
 			// if email exists and password matches
 			// save the user object without his password in the session
 			req.session.user = user.hidePrivateData();
-			req.session.isLoggedin = true;
-      // req.session.isAdmin = true;
+      if(!user.role){
+        req.session.isLoggedin = true;
+      }else{
+        req.session.isLoggedin = true;
+        req.session.isAdmin = true;
+      }
 			return req.session.save(err => {
 				if (err) {
 					console.log(err);

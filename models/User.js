@@ -23,6 +23,7 @@ const userSchema = new Schema({
 	gender: String,
 	skills: [],
 	websites: [String],
+  role : String,
 	country: String,
 	nativeLang: String,
 	resetToken: String,

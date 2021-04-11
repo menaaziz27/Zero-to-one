@@ -7,7 +7,6 @@ const { body, validationResult } = require('express-validator');
 exports.getUserProfile = async (req, res, next) => {
 	// const userId = req.params.id;
 	const username = req.params.username;
-
 	let userRepos = [];
 
 	try {
