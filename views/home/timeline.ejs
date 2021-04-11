@@ -24,6 +24,7 @@
     <link href="assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="assets/css/sidebar.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" /> -->
@@ -180,37 +181,35 @@
 
         <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
         <!-- GRID SYSTEM -->
+
+
+
         <div class="my-2 container-fluid">
             <div class="row">
-                <div class="mb-2 col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                    class="mr-3 crayons-icon color-base-50">
-                                    <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
-                                    <path
-                                        d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
-                                    </path>
-                                </svg>
-
-                                5 posts published
-                            </div>
-                            <div class="flex items-center mb-4">
-                                <span style="display: inline-block; margin-right: 3px;"><i style="margin-right: 16px;"
-                                        class="far fa-user"></i>126
-                                    users in the website</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span style="display: inline-block; margin-right: 3px;">
-                                    <i style="margin-right: 16px;" class="fas fa-road"></i>
-                                    6 roadmaps
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+              <div class="col-3">
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav" >
+                            <li>
+                                <div class="crayons-avatar__image ">
+                                    <a class="img" href="profile.html"><img class="profile" src="images/default.png" alt=""></a>
+                                </div>
+                            </li>
+                        <li class="index">
+                            <a href="#">
+                            <span >Home</span></a>
+                        </li>
+                        <li class="index">
+                            <a href="#"> <span> Roadmaps</span> </a>
+                        </li>
+                        <li class="index">
+                            <a href="#"><span >News </span> </a>
+                        </li>
+                        <li class="index">
+                            <a href="#"> <span>Search</span> </a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
                 <div class="col">
 
@@ -439,5 +438,4 @@
         </script> -->
 
 </body>
-
 </html>
