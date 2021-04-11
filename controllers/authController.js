@@ -166,6 +166,8 @@ exports.getLogin = (req, res, next) => {
 	});
 };
 
+
+
 exports.validateLogin = [
 	check('email')
 		.isEmail()
@@ -219,6 +221,7 @@ exports.postlogin = async (req, res, next) => {
 			// save the user object without his password in the session
 			req.session.user = user.hidePrivateData();
 			req.session.isLoggedin = true;
+      // req.session.isAdmin = true;
 			return req.session.save(err => {
 				if (err) {
 					console.log(err);

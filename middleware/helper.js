@@ -14,6 +14,7 @@ module.exports = {
 				res.locals.currentUser = currentUser;
 				res.locals.userid = userid;
 				res.locals.isAuthenticated = req.session.isLoggedin;
+        res.locals.isAdmin = req.session.isAdmin;
 				res.locals.name = req.session.user.name;
 				next();
 			})

@@ -106,9 +106,7 @@
                     </P>
                 </div>
                 <a href="/backend">
-                    <h6 class="timeline-title head">Back-End Development</h6>
                 </a>
-                <h1 style="text-align: center; font-size: 50px; color: #06A763;">Front-End Development</h1> <br>
                 <div id="timeline-experience">
 
                     <!-- FIRST TIMELINE -->
@@ -122,19 +120,16 @@
                         <!-- TIMELINE CONTENT -->
                         <% if(steps !==undefined || steps.length !==0) {%>
                             <% for(let topic of steps){ %>
-                                <% var count=1 %>
-                                    <% if(count % 2 !==0) { %>
                                         <!-- THIRD TIMELINE -->
                                         <div class="timeline-block">
                                             <!-- DOT -->
                                             <div class="timeline-dot">
                                                 <h6>
-                                                    <%= count %>
+                                                    <%= count  %>
                                                 </h6>
                                             </div>
                                             <!-- TIMELINE CONTENT -->
                                             <div class="card timeline-content">
-
                                                 <a>
                                                     <div class="card-content">
                                                         <!-- TIMELINE TITLE -->
@@ -143,7 +138,6 @@
                                                                 <%= topic.title %>
                                                             </h6>
                                                         </a>
-
                                                         <!-- TIMELINE TITLE INFO -->
                                                         <div class="timeline-info">
 
@@ -152,51 +146,15 @@
                                                         <p>
                                                             <%= topic.description %>
                                                         </p>
-
                                                     </div>
                                                 </a>
                                             </div>
-                                        </div>
-                                        <% } else { %>
-                                            <!-- FOURTH TIMELINE -->
-                                            <div class="timeline-block">
-                                                <!-- DOT -->
-                                                <div class="timeline-dot">
-                                                    <h6>4</h6>
-                                                </div>
-                                                <!-- TIMELINE CONTENT -->
-                                                <div class="card timeline-content">
-                                                    <a>
-                                                        <div class="card-content">
-                                                            <!-- TIMELINE TITLE -->
+                                        </div>                                
+                                         <% count =   count+1 %>
 
-                                                            <a href="topic.html">
-                                                                <h6 class="timeline-title head">Dom</h6>
-                                                            </a>
-
-                                                            <!-- TIMELINE TITLE INFO -->
-                                                            <div class="timeline-info">
-
-                                                            </div>
-                                                            <!-- TIMELINE PARAGRAPH -->
-                                                            <p>
-                                                                I recently joined here, currently working on various
-                                                                development
-                                                                aspects. I already worked on about..
-                                                            </p>
-                                                            <!-- BUTTON TRIGGER MODAL -->
-                                                            <a href="#" class="modal-dot" data-toggle="modal"
-                                                                data-target="#myModal-5">
-                                                                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <%= count=count + 1 %>
-                                                <% } %>
                                                     <% } %>
                                                         <% } %>
+
 
 
                     </div>

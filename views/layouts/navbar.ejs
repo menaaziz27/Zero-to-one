@@ -26,13 +26,16 @@
                     <a class="nav-link" href="/roadmaps">Roadmaps</a>
                 </li>
 
-                <% if(isAuthenticated && userid !==null) { %>
+                <% if(isAuthenticated && userid !==null ) { %>
                     <li class="hvr-underline-from-center">
                         <a class="nav-link" href="/users/profile/<%= currentUser.username%>">Profile</a>
                     </li>
+                    <%if (isAdmin) {%>
                     <li class="hvr-underline-from-center">
                         <a class="nav-link" href="/admin/dashboard">Dashboard</a>
                     </li>
+                    <% } %>
+
                     <li class="">
                         <form method="POST" action="/auth/logout">
                             <button class="btn btn-outline-danger scrollto">Logout</button>
