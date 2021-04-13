@@ -24,6 +24,7 @@
     <link href="assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="/assets/css/button.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" /> -->
@@ -33,6 +34,13 @@
 
 
     <style>
+        textarea {
+            border: none;
+            background-color: transparent;
+            resize: none;
+            outline: none;
+        }
+
         .h7 {
             font-size: 0.9rem
         }
@@ -182,9 +190,9 @@
         <!-- GRID SYSTEM -->
         <div class="my-2 container-fluid">
             <div class="row">
-                <div class="mb-2 col-md-3">
+                <div class="mb-2 col-md-2">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body m-0 p-0">
                             <div class="flex items-center mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
@@ -214,14 +222,14 @@
                     </div>
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
-                <div class="col">
+                <div class="col-lg-6 col-md-10">
 
                     <!--- Post Form Begins -->
                     <section class="mb-2 card">
 
                         <div class="card-body">
                             <form action="/posts/create?timeline=true" method="POST" id="submit">
-                                <div class="card-body">
+                                <div class="card-body m-0 p-0">
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="posts" role="tabpanel"
                                             aria-labelledby="posts-tab">
@@ -229,13 +237,14 @@
                                                 <label class="sr-only" for="post">post</label>
                                                 <textarea style="resize: none;height:100px" class="form-control"
                                                     name="post" id="post" rows="3"
-                                                    placeholder="What are you thinking..."></textarea>
+                                                    placeholder="What are you thinking..." required></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <!-- <button type="submit" class="btn btn-outline-info">share</button> -->
-                                        <input type="submit" value="share" class="btn btn-outline-info">
+                                        <button type="submit" class="button3">share</button>
+                                        <!-- <input type="submit" value="share" class="btn btn-outline-info"> -->
                                     </div>
                                 </div>
                             </form>
@@ -354,7 +363,7 @@
                                     <!-- endpost -->
                                     <!-- Post Ends -->
                 </div>
-                <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
+                <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
                     <!-- aside latest news -->
                     <aside class="widget">
                         <div class="widget blog-widget">
@@ -438,10 +447,27 @@
             $("#post").keypress(function (e) {
                 if (e.which === 13 && !e.shiftKey) {
                     e.preventDefault();
-
                     $(this).closest("form").submit();
                 }
             });
+
+            $('.button3').click(function (e) {
+                let content = $('#post').val().trim()
+                if (content === '') {
+                    return false
+                }
+                $(this).closest("form").submit();
+            })
+
+            $('form').submit(function (e) {
+                let content = $('#post').val().trim()
+                if (content === '') {
+                    return false
+                }
+                return true
+                //$(this).closest("form").submit();
+            })
+
         </script>
 
 </body>

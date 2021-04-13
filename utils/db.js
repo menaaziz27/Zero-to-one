@@ -12,6 +12,7 @@ const run = async () => {
 	await mongoose.connect('mongodb://localhost:27017/zerotoone', {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+		useFindAndModify: false,
 	});
 	// const options = {
 	//   databases: [database],

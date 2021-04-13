@@ -67,3 +67,5 @@
 - [] validation for topics form
 - [] dynamically render skills in forms
 - [] edit profile gender fix
+- [] what if i posted empty post
+- [] upload image field with preview

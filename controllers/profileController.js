@@ -17,7 +17,6 @@ exports.getUserProfile = async (req, res, next) => {
 			next();
 		}
 		userId = userDoc._id;
-		console.log(userDoc.websites);
 		const posts = await Post.find({ user: userId })
 			.sort({ createdAt: 'desc' })
 			.populate('user');

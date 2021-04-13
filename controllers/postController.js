@@ -88,6 +88,10 @@ exports.deletePost = async (req, res) => {
 exports.createPost = async (req, res) => {
 	const { post } = req.body;
 	console.log(findHashtags(post));
+	const description = post.trim();
+	// if(description === '') {
+	// 	return res.render()
+	// }
 	try {
 		const newPost = new Post({
 			user: req.session.user,

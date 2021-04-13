@@ -22,12 +22,21 @@
     <link href="/assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
     <link href="/assets/img/logo-white.png" rel="icon">
+    <link rel="stylesheet" href="/assets/css/button.css">
+
     <!-- <link href="/assets/css/style.css" rel="stylesheet"> -->
 
     <style>
         :root {
-            --profile-brand-color: #8bdbb3;
+            --profile-brand-color: #145374;
 
+        }
+
+        textarea {
+            border: none;
+            background-color: transparent;
+            resize: none;
+            outline: none;
         }
     </style>
 </head>
@@ -44,7 +53,7 @@
             <div id="page-content-inner">
                 <style>
                     :root {
-                        --profile-brand-color: #8bdbb3;
+                        --profile-brand-color: #145374;
                     }
                 </style>
                 <div class="brand-bg">
@@ -361,20 +370,23 @@
                                 <section class="mb-2 card">
                                     <div class="card-body">
                                         <form action="/posts/create" method="POST">
-                                            <div class="card-body">
+                                            <div class="card-body m-0 p-0">
                                                 <div class="tab-content" id="myTabContent">
                                                     <div class="tab-pane fade show active" id="posts" role="tabpanel"
                                                         aria-labelledby="posts-tab">
                                                         <div class="form-group">
                                                             <label class="sr-only" for="post">post</label>
-                                                            <textarea style="resize: none;height:100px"
+                                                            <textarea style="resize: none;height:100px; border:none"
                                                                 class="form-control" name="post" id="post" rows="3"
-                                                                placeholder="What are you thinking..."></textarea>
+                                                                placeholder="What are you thinking..."
+                                                                required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="text-right">
-                                                    <input type="submit" value="share" class="btn btn-outline-success">
+                                                    <!-- <input type="submit" value="share" class="btn btn-outline-success"> -->
+                                                    <button type="submit" class="button3">share</button>
+
                                                 </div>
                                             </div>
                                         </form>
@@ -528,6 +540,23 @@
             $(this).closest("form").submit();
         }
     });
+    $('.button3').click(function (e) {
+        let content = $('#post').val().trim()
+        if (content === '') {
+            return false
+        }
+        $(this).closest("form").submit();
+    })
+
+    $('form').submit(function (e) {
+        let content = $('#post').val().trim()
+        if (content === '') {
+            return false
+        }
+        return true
+        //$(this).closest("form").submit();
+    })
+
 </script>
 
 </html>
