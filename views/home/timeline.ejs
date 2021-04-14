@@ -213,6 +213,11 @@
             color: #666666;
             cursor: not-allowed;
         }
+
+        button svg,
+        button span {
+            pointer-events: none;
+        }
     </style>
 
     <!-- ================== END ====================== -->
@@ -340,8 +345,12 @@
                                         <% } %>
                                             <% }) %>
                                                 <% } %>
-
-                                                    <!-- ending of first news -->
+                                                    <% if (user) { %>
+                                                        <script>
+                                                            var getUser = '<%= user %>'
+                                                        </script>
+                                                        <% } %>
+                                                            <!-- ending of first news -->
                         </div>
                 </div>
             </div>
@@ -355,6 +364,9 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
+        <script>
+            var userLoggedIn = <%- JSON.stringify(user) %>
+        </script>
         <script src="js/common.js"></script>
         <script src="js/timeline.js"></script>
 

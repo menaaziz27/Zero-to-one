@@ -9,7 +9,7 @@ AdminBro.registerAdapter(AdminBroMongoose);
 const options = require('./admin_Options');
 
 const run = async () => {
-	await mongoose.connect('mongodb://localhost:27017/zerotoone', {
+	let db = await mongoose.connect('mongodb://localhost:27017/zerotoone', {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 		useFindAndModify: false,

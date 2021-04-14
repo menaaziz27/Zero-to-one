@@ -39,6 +39,7 @@ exports.getTimeline = async (req, res, next) => {
 			postCount,
 			usersCount,
 			roadmapsCount,
+			user: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);

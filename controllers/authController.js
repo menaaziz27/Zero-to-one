@@ -30,7 +30,7 @@ exports.getRegister = (req, res, next) => {
 			confirmPassword: '',
 		},
 		validationErrors: [],
-		redirectTo,
+		redirectTo: redirectTo || '',
 	});
 };
 
@@ -97,7 +97,7 @@ exports.postRegister = async (req, res, next) => {
 	const email = req.body.email;
 	const name = req.body.name;
 	const password = req.body.password;
-	const redirectTo = req.body.redirectTo;
+	const redirectTo = req.body.redirectTo || '';
 	console.log(redirectTo, 'post register');
 
 	// ensure of username uniqueness
@@ -119,6 +119,7 @@ exports.postRegister = async (req, res, next) => {
 			},
 			// for displaying the red border in error's fields
 			validationErrors: errors.array(),
+			redirectTo,
 		});
 	}
 	try {
@@ -136,8 +137,11 @@ exports.postRegister = async (req, res, next) => {
 		});
 
 		user.save();
-
-		res.redirect(`/auth/login?redirectTo=${redirectTo}`);
+		if (redirectTo) {
+			res.redirect(`/auth/login?redirectTo=${redirectTo}`);
+		} else {
+			res.redirect(`/auth/login`);
+		}
 
 		transporter.sendMail({
 			to: email,
@@ -170,8 +174,6 @@ exports.getLogin = (req, res, next) => {
 		redirectTo,
 	});
 };
-
-
 
 exports.validateLogin = [
 	check('email')
@@ -226,7 +228,7 @@ exports.postlogin = async (req, res, next) => {
 			// save the user object without his password in the session
 			req.session.user = user.hidePrivateData();
 			req.session.isLoggedin = true;
-      // req.session.isAdmin = true;
+			// req.session.isAdmin = true;
 			return req.session.save(err => {
 				if (err) {
 					console.log(err);
