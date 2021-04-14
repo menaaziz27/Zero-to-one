@@ -369,34 +369,34 @@
                                 <!-- ================ beginning of post form -->
                                 <section class="mb-2 card">
                                     <div class="card-body">
-                                        <form action="/posts" method="POST">
-                                            <div class="p-0 m-0 card-body">
-                                                <div class="tab-content" id="myTabContent">
-                                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                                        aria-labelledby="posts-tab">
-                                                        <div class="form-group">
-                                                            <label class="sr-only" for="post">post</label>
-                                                            <textarea style="resize: none;height:100px; border:none"
-                                                                class="form-control" name="post" id="post" rows="3"
-                                                                placeholder="What are you thinking..."
-                                                                required></textarea>
-                                                        </div>
+                                        <!-- <form action="/posts" method="POST"> -->
+                                        <div class="p-0 m-0 card-body">
+                                            <div class="tab-content" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                                    aria-labelledby="posts-tab">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="post">post</label>
+                                                        <textarea style="resize: none;height:100px; border:none"
+                                                            class="form-control" name="post" id="post" rows="3"
+                                                            placeholder="What are you thinking..." required></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="text-right">
-                                                    <!-- <input type="submit" value="share" class="btn btn-outline-success"> -->
-                                                    <button type="submit" class="button3">share</button>
-
-                                                </div>
                                             </div>
-                                        </form>
+                                            <div class="text-right">
+                                                <!-- <input type="submit" value="share" class="btn btn-outline-success"> -->
+                                                <button type="submit" id="submitPostButton"
+                                                    class="button3">share</button>
+
+                                            </div>
+                                        </div>
+                                        <!-- </form> -->
                                     </div>
                                 </section>
                                 <% } %>
 
                                     <!-- ============= end of post form =============== -->
 
-
+                                    <div class="postContent"></div>
 
                                     <% if (posts !==undefined || posts !==null) { %>
                                         <% posts.forEach(function(post) { %>
@@ -532,7 +532,11 @@
 
 <script src="/assets/vendor/jquery/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+<script src="/js/common.js"></script>
+
+<!-- <script>
     $("#post").keypress(function (e) {
         if (e.which === 13 && !e.shiftKey) {
             e.preventDefault();
@@ -557,6 +561,6 @@
         //$(this).closest("form").submit();
     })
 
-</script>
+</script> -->
 
 </html>
