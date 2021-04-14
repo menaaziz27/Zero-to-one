@@ -72,3 +72,5 @@
 - [] limit post characters
 - [] fix scrollbar
 - [] hide update and delete button for posts that the user don't owe
+- [] search index problem (auto index when creating db)
+- []

@@ -43,6 +43,12 @@
         button span {
             pointer-events: none;
         }
+
+        .postButtonContainer.red button.active{
+            color: red;
+        }
+
+        button:focus { outline: none; }
     </style>
 </head>
 
@@ -540,32 +546,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
 <script src="/js/common.js"></script>
-
-<!-- <script>
-    $("#post").keypress(function (e) {
-        if (e.which === 13 && !e.shiftKey) {
-            e.preventDefault();
-
-            $(this).closest("form").submit();
-        }
-    });
-    $('.button3').click(function (e) {
-        let content = $('#post').val().trim()
-        if (content === '') {
-            return false
-        }
-        $(this).closest("form").submit();
-    })
-
-    $('form').submit(function (e) {
-        let content = $('#post').val().trim()
-        if (content === '') {
-            return false
-        }
-        return true
-        //$(this).closest("form").submit();
-    })
-
-</script> -->
+<script src="/js/timeline.js"></script>
+<script>
+            /* eslint-disable */
+var userLoggedIn = <%- JSON.stringify(user) %>
+</script>
 
 </html>
