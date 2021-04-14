@@ -69,3 +69,5 @@
 - [] edit profile gender fix
 - [] what if i posted empty post
 - [] upload image field with preview
+- [] limit post characters
+- [] fix scrollbar

@@ -87,6 +87,7 @@ exports.deletePost = async (req, res) => {
 // localhost:3000/posts/create?timeline=true
 exports.createPost = async (req, res) => {
 	const { post } = req.body;
+	console.log(req.body);
 	console.log(findHashtags(post));
 	const description = post.trim();
 	// if(description === '') {
@@ -104,12 +105,12 @@ exports.createPost = async (req, res) => {
 		});
 
 		await newPost.save();
-
-		if (req.query.timeline) {
-			res.redirect('/timeline');
-		} else {
-			res.redirect('/users/profile/' + req.session.user.username);
-		}
+		return res.send(newPost);
+		// if (req.query.redirectTo) {
+		// 	res.redirect(req.query.redirectTo);
+		// } else {
+		// 	res.redirect('/users/profile/' + req.session.user.username);
+		// }
 	} catch (e) {
 		console.log(e);
 	}

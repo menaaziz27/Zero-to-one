@@ -28,8 +28,8 @@ exports.getTimeline = async (req, res, next) => {
 	}
 	try {
 		const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
-		const usersCount = await User.find({}).count();
-		const roadmapsCount = await Roadmap.find({}).count();
+		const usersCount = await User.find({}).countDocuments();
+		const roadmapsCount = await Roadmap.find({}).countDocuments();
 		const postCount = posts.length;
 		res.render('home/timeline', {
 			userid: userid,

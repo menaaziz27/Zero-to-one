@@ -178,6 +178,41 @@
             text-decoration: none;
             color: inherit;
         }
+
+        /*nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            height: 100%;
+        }*/
+
+        nav.sidebar a {
+            padding: 10px;
+            font-size: 30px;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #212529;
+        }
+
+        nav.sidebar a.blue {
+            color: var(--blue);
+        }
+
+        nav.sidebar a:hover {
+            background-color: var(--buttonHoverBg);
+            color: var(--blue);
+            border-radius: 50%;
+        }
+
+        #submitPostButton:disabled {
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
     </style>
 
     <!-- ================== END ====================== -->
@@ -191,7 +226,16 @@
         <div class="my-2 container-fluid">
             <div class="row">
                 <div class="mb-2 col-md-2">
-                    <div class="card">
+                    <nav class="col-2 sidebar">
+                        <!-- <a class="blue" href="/"><i class="fas fa-dove"></i></a> -->
+                        <a href="/"><i class="fas fa-home"></i></a>
+                        <a href="/search"><i class="fas fa-search"></i></a>
+                        <a href="/notifications"><i class="fas fa-bell"></i></a>
+                        <a href="/messages"><i class="fas fa-envelope"></i></a><a href="/profile"><i
+                                class="fas fa-user"></i></a>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+                    </nav>
+                    <!-- <div class="card">
                         <div class="card-body m-0 p-0">
                             <div class="flex items-center mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -219,7 +263,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
                 <div class="col-lg-6 col-md-10">
@@ -228,7 +272,7 @@
                     <section class="mb-2 card">
 
                         <div class="card-body">
-                            <form action="/posts/create?timeline=true" method="POST" id="submit">
+                            <form if="form" action="/posts/create?redirectTo=/timeline" method="POST" id="submit">
                                 <div class="card-body m-0 p-0">
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="posts" role="tabpanel"
@@ -243,7 +287,8 @@
                                     </div>
                                     <div class="text-right">
                                         <!-- <button type="submit" class="btn btn-outline-info">share</button> -->
-                                        <button type="submit" class="button3">share</button>
+                                        <button type="submit" id="submitPostButton" class="button3"
+                                            disabled>share</button>
                                         <!-- <input type="submit" value="share" class="btn btn-outline-info"> -->
                                     </div>
                                 </div>
@@ -444,29 +489,56 @@
         <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script src="./bootstrap/js/bootstrap.min.js"></script>
         <script>
-            $("#post").keypress(function (e) {
-                if (e.which === 13 && !e.shiftKey) {
-                    e.preventDefault();
-                    $(this).closest("form").submit();
-                }
-            });
+            $('#post').keyup(e => {
+                var textbox = $(e.target);
+                var value = textbox.val().trim();
+                var submitPostButton = $('#submitPostButton')
 
-            $('.button3').click(function (e) {
-                let content = $('#post').val().trim()
-                if (content === '') {
-                    return false
-                }
-                $(this).closest("form").submit();
-            })
+                if (submitPostButton.length == 0) return alert('no submit button found')
 
-            $('form').submit(function (e) {
-                let content = $('#post').val().trim()
-                if (content === '') {
-                    return false
+                if (value == '') {
+                    submitPostButton.prop('disabled', true)
+                    return;
                 }
-                return true
-                //$(this).closest("form").submit();
+
+                submitPostButton.prop('disabled', false)
+
             })
+            $('#submitPostButton').click(e => {
+                var button = $(e.target);
+                var textbox = $('#post');
+
+                var data = {
+                    content: textbox.val()
+                }
+
+                $.post('/posts/create', data, (postData, status, xhr) => {
+                    console.log(postData);
+                })
+            })
+            /* $("#post").keypress(function (e) {
+                            if (e.which === 13 && !e.shiftKey) {
+                                e.preventDefault();
+                                $(this).closest("form").submit();
+                            }
+                        });
+
+                        $('.button3').click(function (e) {
+                            let content = $('#post').val().trim()
+                            if (content === '') {
+                                return false
+                            }
+                            $(this).closest("form").submit();
+                        })
+
+                        $('form').submit(function (e) {
+                            let content = $('#post').val().trim()
+                            if (content === '') {
+                                return false
+                            }
+                            return true
+                            //$(this).closest("form").submit();
+                        })*/
 
         </script>
 
