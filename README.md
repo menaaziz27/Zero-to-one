@@ -71,3 +71,4 @@
 - [] upload image field with preview
 - [] limit post characters
 - [] fix scrollbar
+- [] hide update and delete button for posts that the user don't owe

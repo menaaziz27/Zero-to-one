@@ -33,9 +33,9 @@ exports.getTimeline = async (req, res, next) => {
 		const postCount = posts.length;
 		res.render('home/timeline', {
 			userid: userid,
-			posts,
 			moment,
 			news,
+			posts,
 			postCount,
 			usersCount,
 			roadmapsCount,

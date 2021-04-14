@@ -25,6 +25,7 @@ const userSchema = new Schema({
 	websites: [String],
 	country: String,
 	nativeLang: String,
+	likes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 	resetToken: String,
 	resetTokenExpiration: Date,
 	// posts: [postSchema],
@@ -46,4 +47,5 @@ userSchema.pre('remove', async function (next) {
 	next();
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+module.exports = User;

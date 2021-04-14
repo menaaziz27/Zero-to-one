@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-
+const User = require('../models/User');
 const findHashtags = require('find-hashtags');
 
 // /posts/:id/details
@@ -102,4 +102,48 @@ exports.createPost = async (req, res) => {
 	} catch (e) {
 		console.log(e);
 	}
+};
+
+exports.getPosts = async (req, res) => {
+	try {
+		const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
+		return res.status(200).send({ posts, userId: req.session.user._id });
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+// !
+// PUT /posts/:id/like
+exports.postLike = async (req, res) => {
+	var postId = req.params.id;
+	var userId = req.session.user._id;
+
+	var isLiked = req.user.likes.length > 0 && req.user.likes.includes(postId);
+
+	console.log(isLiked);
+
+	var option = isLiked ? '$pull' : '$addToSet';
+
+	// Insert user like
+	req.session.user = await User.findByIdAndUpdate(
+		userId,
+		{ [option]: { likes: postId } },
+		{ new: true }
+	).catch(error => {
+		console.log(error);
+		res.sendStatus(400);
+	});
+
+	// Insert post like
+	var post = await Post.findByIdAndUpdate(
+		postId,
+		{ [option]: { likes: userId } },
+		{ new: true }
+	).catch(error => {
+		console.log(error);
+		res.sendStatus(400);
+	});
+
+	res.status(200).send(post);
 };
