@@ -84,33 +84,21 @@ exports.deletePost = async (req, res) => {
 };
 
 // Create
-// localhost:3000/posts/create?timeline=true
+// localhost:3000/posts?timeline=true
 exports.createPost = async (req, res) => {
 	const { post } = req.body;
-	console.log(req.body);
-	console.log(findHashtags(post));
-	const description = post.trim();
-	// if(description === '') {
-	// 	return res.render()
-	// }
-	try {
-		const newPost = new Post({
-			user: req.session.user,
-			description: post,
-			readingTime:
-				Math.floor(post.split(' ').length / 100) === 0
-					? 1
-					: Math.floor(post.split(' ').length / 100),
-			hashtags: findHashtags(post),
-		});
+	let userId = req.session.user._id;
 
-		await newPost.save();
-		return res.send(newPost);
-		// if (req.query.redirectTo) {
-		// 	res.redirect(req.query.redirectTo);
-		// } else {
-		// 	res.redirect('/users/profile/' + req.session.user.username);
-		// }
+	const data = {
+		user: req.session.user,
+		description: post.trim(),
+		hashtags: findHashtags(post),
+	};
+
+	try {
+		let newPost = await Post.create(data);
+		newPost = await Post.populate(newPost, { path: 'user' });
+		return res.status(201).send({ newPost, userId });
 	} catch (e) {
 		console.log(e);
 	}

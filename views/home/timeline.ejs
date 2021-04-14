@@ -236,7 +236,7 @@
                         <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
                     </nav>
                     <!-- <div class="card">
-                        <div class="card-body m-0 p-0">
+                        <div class="p-0 m-0 card-body">
                             <div class="flex items-center mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
@@ -272,32 +272,34 @@
                     <section class="mb-2 card">
 
                         <div class="card-body">
-                            <form if="form" action="/posts/create?redirectTo=/timeline" method="POST" id="submit">
-                                <div class="card-body m-0 p-0">
-                                    <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                            aria-labelledby="posts-tab">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="post">post</label>
-                                                <textarea style="resize: none;height:100px" class="form-control"
-                                                    name="post" id="post" rows="3"
-                                                    placeholder="What are you thinking..." required></textarea>
-                                            </div>
+                            <!-- <form if="form" id="submit"> -->
+                            <div class="p-0 m-0 card-body">
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                        aria-labelledby="posts-tab">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="post">post</label>
+                                            <textarea style="resize: none;height:100px" class="form-control" name="post"
+                                                id="post" rows="3" placeholder="What are you thinking..."
+                                                required></textarea>
                                         </div>
                                     </div>
-                                    <div class="text-right">
-                                        <!-- <button type="submit" class="btn btn-outline-info">share</button> -->
-                                        <button type="submit" id="submitPostButton" class="button3"
-                                            disabled>share</button>
-                                        <!-- <input type="submit" value="share" class="btn btn-outline-info"> -->
-                                    </div>
                                 </div>
-                            </form>
+                                <div class="text-right">
+                                    <!-- <button type="submit" class="btn btn-outline-info">share</button> -->
+                                    <button type="submit" id="submitPostButton" class="button3" disabled>share</button>
+                                    <!-- <input type="submit" value="share" class="btn btn-outline-info"> -->
+                                </div>
+                            </div>
+                            <!-- </form> -->
                         </div>
                     </section>
                     <!--- Post Form Ends -->
 
-                    <!-- begginning of rendering all posts -->
+
+                    <!-- for ajax call -->
+                    <div class="postContent"></div>
+
                     <!-- begginning of rendering all posts -->
                     <% if (posts !==undefined || posts !==null) { %>
                         <% posts.forEach(function(post) { %>
@@ -448,36 +450,6 @@
 
                                                     <!-- ending of first news -->
                         </div>
-                        <!-- friends menu -->
-                        <!-- <div class="card">
-					<div class="p-3 card-body">
-						<h5 class="m-0 card-title">Friends</h5>
-						<div class="list-group list-group-flush">
-							<a href="#" class="list-group-item list-group-item-action text-primary">
-							Justo moto pani
-							</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Harry consectetur</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Dobi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Gadot facilisis in</a>
-							<a href="#" class="btn btn-sm btn-primary">View All</a>
-						</div>
-					</div>
-                </div> -->
-                        <!-- users menu -->
-                        <!-- <div class="mt-4 card">
-					<div class="p-3 card-body">
-						<h5 class="m-0 card-title">Users</h5>
-						<div class="list-group list-group-flush">
-							<a href="#" class="list-group-item list-group-item-action text-primary">
-							Cras justo odio
-							</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Dapibus ac facilisis in</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Morbi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Porta ac consectetur ac</a>
-							<a href="#" class="btn btn-sm btn-primary">View All</a>
-						</div>
-					</div>
-				</div> -->
                 </div>
             </div>
         </div>
@@ -488,6 +460,8 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script src="./bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
         <script>
             $('#post').keyup(e => {
                 var textbox = $(e.target);
@@ -509,12 +483,130 @@
                 var textbox = $('#post');
 
                 var data = {
-                    content: textbox.val()
+                    post: textbox.val()
                 }
 
-                $.post('/posts/create', data, (postData, status, xhr) => {
-                    console.log(postData);
+                $.post('/posts', data, allData => {
+                    let userId = allData.userId
+                    let postData = allData.newPost
+                    const html = createPostHtml(postData, userId);
+                    $('.postContent').prepend(html);
+                    textbox.val('');
+                    button.prop('disabled', true)
                 })
+
+                function createPostHtml(post, userId) {
+
+                    let hashtagsHtml; console.log(post, 'posttttttt')
+                    if (post.hashtags) {
+                        hashtagsHtml = post.hashtags.map(hashtag => {
+                            return `
+                                <a href="" class="crayons-tag"><span
+                                                        class="crayons-tag__prefix">#</span>
+                                                    ${hashtag}
+                                                </a>
+                            `;
+                        }).join('')
+                    }
+
+                    return `
+                        <div class="crayons-story " data-content-user-id="219080">
+                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                    aria-labelledby="article-link-421966"
+                                    class="crayons-story__hidden-navigation-link">Use
+                                    Github Real-Time Status to Improve Your Profile</a>
+
+
+                                <div class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <div class="crayons-story__author-pic">
+
+                                                <a href="users/profile/${post.user.username}"
+                                                    class="crayons-avatar crayons-avatar--l ">
+                                                    <img src="/${post.user.Image}" alt="aemiej profile"
+                                                        class="crayons-avatar__image" />
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a href="users/profile/${post.user.username}"
+                                                        class="crayons-story__secondary fw-medium">
+                                                        ${post.user.name}
+                                                    </a>
+                                                </p>
+                                                <a href="/posts/${post._id}?timeline=true"
+                                                    class="crayons-story__tertiary fs-xs"><time
+                                                        datetime="2020-08-08T06:46:08Z">
+                                                        ${moment(post.createdAt).fromNow()}
+                                                    </time><span class="time-ago-indicator-initial-placeholder"
+                                                        data-seconds="1596869168"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <p>
+                                                ${post.description}
+                                            </p>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+                                            ${post.hashtags ? hashtagsHtml : ''}
+                                        </div>
+                                        <div class="crayons-story__bottom">
+                                            <div class="crayons-story__details">
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
+                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
+                                                    data-reaction-count data-reactable-id="421966">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
+                                                        class="crayons-icon">
+                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
+                                                        </title>
+                                                        <path
+                                                            d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                                                        </path>
+                                                    </svg>
+
+                                                    60
+                                                    <span class="hidden s:inline">&nbsp;reactions</span>
+                                                </a>
+                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
+                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
+                                                        class="crayons-icon">
+                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
+                                                        </title>
+                                                        <path
+                                                            d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
+                                                        </path>
+                                                    </svg>
+
+                                                    1
+                                                    <span class="hidden s:inline">&nbsp;comments</span>
+                                                </a>
+                                            </div>
+                                            <div class="crayons-story__save">
+                                                <small class="mr-2 crayons-story__tertiary fs-xs">
+                                                </small>
+                                                ${userId == post.user._id ?
+                            `<a type="button" href="/posts/${post._id}/edit?timeline=true"
+                                                        id="article-save-button-421966"
+                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                        data-reactable-id="421966" aria-label="Save to reading list"
+                                                        title="Save to reading list">
+                                                        <span class="bm-initial">edit</span>
+                                                        </a>` : ''
+                        }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    `;
+                }
             })
             /* $("#post").keypress(function (e) {
                             if (e.which === 13 && !e.shiftKey) {
