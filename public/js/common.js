@@ -114,7 +114,7 @@ function createPostHtml(post, userId) {
                                     </button>
                                 </div>
                                 <div class="postButtonContainer green">
-                                    <button href=""
+                                    <button data-toggle="modal" data-target="#replyModal"
                                         class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left anchor">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
