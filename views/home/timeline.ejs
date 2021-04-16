@@ -224,6 +224,10 @@
         }
 
         button:focus { outline: none; }
+
+        .replyFlag a {
+            color: blue
+        }
     </style>
 
     <!-- ================== END ====================== -->
@@ -326,14 +330,15 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                        aria-labelledby="posts-tab">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="post">post</label>
-                                            <textarea style="resize: none;height:100px" class="form-control" name="post"
-                                                id="post" rows="3" placeholder="What are you thinking..."
-                                                required></textarea>
-                                        </div>
+                                <div id="originalPostContainer"></div>
+                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                            aria-labelledby="posts-tab">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="post">post</label>
+                                                <textarea style="resize: none;height:100px" class="form-control" name="reply"
+                                                    id="reply" rows="3" placeholder="What are you thinking..."
+                                                    required></textarea>
+                                            </div>
                                     </div>
                             </div>
                             <div class="modal-footer">

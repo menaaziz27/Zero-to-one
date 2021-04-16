@@ -4,7 +4,7 @@ const router = require('express').Router();
 // ============ My-Modules ============
 const {
 	getEdit,
-	getPostDetail,
+	getPost,
 	createPost,
 	postEdit,
 	deletePost,
@@ -12,7 +12,7 @@ const {
 	postLike,
 } = require('../controllers/postController');
 
-router.get('/:id', getPostDetail);
+router.get('/:id', getPost);
 router.put('/:id/like', postLike);
 router.get('/:id/edit', getEdit);
 router.post('/:id/edit', postEdit);

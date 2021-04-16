@@ -15,6 +15,7 @@ const postSchema = new Schema({
 	},
 	hashtags: [String],
 	likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+	replyTo: { type: Schema.Types.ObjectId, ref: 'Post' },
 	createdAt: {
 		type: Date,
 		default: Date.now,

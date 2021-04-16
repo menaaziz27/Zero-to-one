@@ -1,7 +1,13 @@
-$('#post').keyup(e => {
+$('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
 	var value = textbox.val().trim();
-	var submitPostButton = $('#submitPostButton');
+
+	// check if the ecent fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
+	let isModal = textbox.parents('.modal').length == 1;
+
+	var submitPostButton = isModal
+		? $('#submitReplyButton')
+		: $('#submitPostButton');
 
 	if (submitPostButton.length == 0) return alert('no submit button found');
 
@@ -12,21 +18,56 @@ $('#post').keyup(e => {
 
 	submitPostButton.prop('disabled', false);
 });
-$('#submitPostButton').click(e => {
+
+$('#replyModal').on('show.bs.modal', e => {
+	var button = $(e.relatedTarget);
+	var postId = getPostIdFromElement(button);
+	$('#submitReplyButton').data('id', postId);
+
+	$.get(`/posts/${postId}`, postsAndUserId => {
+		let post = postsAndUserId.post;
+		userId = postsAndUserId.userId;
+		console.log(post);
+		outputPosts(post, $('#originalPostContainer'));
+	});
+});
+
+$('#replyModal').on('hidden.bs.modal', e => {
+	$('#originalPostContainer').html('');
+});
+
+$('#submitPostButton, #submitReplyButton').click(e => {
 	var button = $(e.target);
-	var textbox = $('#post');
+
+	let isModal = button.parents('.modal').length == 1;
+
+	var textbox = isModal ? $('#reply') : $('#post');
 
 	var data = {
 		post: textbox.val(),
 	};
 
+	if (isModal) {
+		console.log(true, 'modal');
+		//! undefined id
+		let id = button.data().id;
+		if (id === null) return alert('button id is null');
+		data.replyTo = id;
+	}
+	console.log(data);
+
 	$.post('/posts', data, allData => {
 		userId = allData.userId;
 		let postData = allData.newPost;
-		const html = createPostHtml(postData, userId);
-		$('.postContent').prepend(html);
-		textbox.val('');
-		button.prop('disabled', true);
+
+		if (postData.replyTo) {
+			location.reload();
+		} else {
+			const html = createPostHtml(postData, userId);
+			$('.postContent').prepend(html);
+			textbox.val('');
+			button.prop('disabled', true);
+		}
 	});
 });
 
@@ -45,6 +86,19 @@ function createPostHtml(post, userId) {
                             `;
 			})
 			.join('');
+	}
+	var replyFlag = '';
+	if (post.replyTo) {
+		if (!post.replyTo._id) {
+			return alert('Reply to is not populated');
+		} else if (!post.replyTo.user._id) {
+			return alert('Posted by is not populated');
+		}
+
+		var replyToUsername = post.replyTo.user.username;
+		replyFlag = `<div class='replyFlag'>
+                        Replying to <a href='/users/profile/${replyToUsername}'>@${replyToUsername}<a>
+                    </div>`;
 	}
 
 	return `
@@ -83,6 +137,7 @@ function createPostHtml(post, userId) {
                             </div>
                         </div>
                     </div>
+										${replyFlag}
                     <div class="crayons-story__indention">
                         <h2 class="crayons-story__title">
                             <p>
@@ -179,4 +234,20 @@ function getPostIdFromElement(element) {
 	var postId = rootElement.data().id;
 	if (postId === undefined) return alert('Post id undefined');
 	return postId;
+}
+
+function outputPosts(posts, container) {
+	container.html('');
+
+	if (!Array.isArray(posts)) {
+		posts = [posts];
+	}
+	posts.forEach(post => {
+		var html = createPostHtml(post, userId);
+		container.append(html);
+	});
+
+	if (posts.length == 0) {
+		container.append("<span class='noResults'>Nothing to show.</span>");
+	}
 }

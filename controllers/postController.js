@@ -48,25 +48,26 @@ exports.postEdit = async (req, res) => {
 };
 
 // /posts/:id
-exports.getPostDetail = async (req, res, next) => {
-	let timeline = req.query.timeline || false;
-	const postId = req.params.id;
+// exports.getPostDetail = async (req, res, next) => {
+// 	let timeline = req.query.timeline || false;
+// 	const postId = req.params.id;
 
-	try {
-		const post = await Post.findById(postId).populate('user');
-		// if the post is deleted go to the 404 page
-		if (post === null) {
-			res.locals.error = 'This post is deleted recently';
-			next();
-		}
-		res.render('post/details-post', {
-			post: post || '',
-			timeline,
-		});
-	} catch (e) {
-		console.log(e);
-	}
-};
+// 	try {
+// 		const post = await Post.findById(postId).populate('user');
+// 		// if the post is deleted go to the 404 page
+// 		if (post === null) {
+// 			res.locals.error = 'This post is deleted recently';
+// 			next();
+// 		}
+// 		res.render('post/details-post', {
+// 			post: post || '',
+// 			timeline,
+// 		});
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// };
+
 // posts/:id/delete
 exports.deletePost = async (req, res) => {
 	const postId = req.params.id;
@@ -86,6 +87,7 @@ exports.deletePost = async (req, res) => {
 // Create
 // localhost:3000/posts?timeline=true
 exports.createPost = async (req, res) => {
+	console.log(req.body.replyTo);
 	const { post } = req.body;
 	let userId = req.session.user._id;
 
@@ -94,6 +96,10 @@ exports.createPost = async (req, res) => {
 		description: post.trim(),
 		hashtags: findHashtags(post),
 	};
+
+	if (req.body.replyTo) {
+		data.replyTo = req.body.replyTo;
+	}
 
 	try {
 		let newPost = await Post.create(data);
@@ -105,12 +111,9 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getPosts = async (req, res) => {
-	try {
-		const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
-		return res.status(200).send({ posts, userId: req.session.user._id });
-	} catch (e) {
-		console.log(e);
-	}
+	var userId = req.session.user._id;
+	var posts = await getPosts({});
+	return res.status(200).send({ posts, userId });
 };
 
 // !
@@ -147,3 +150,25 @@ exports.postLike = async (req, res) => {
 
 	res.status(200).send(post);
 };
+
+// GET posts/:id
+exports.getPost = async (req, res) => {
+	var userId = req.session.user._id;
+	var post = await getPosts({ _id: req.params.id });
+	post = post[0];
+	return res.status(200).send({ post, userId });
+};
+
+async function getPosts(criteria) {
+	try {
+		let results = await Post.find(criteria)
+			.sort({ createdAt: -1 })
+			.populate('user')
+			.populate('replyTo');
+
+		return await User.populate(results, { path: 'replyTo.user' });
+		// return res.status(200).send({ posts, userId: req.session.user._id });
+	} catch (e) {
+		console.log(e);
+	}
+}
