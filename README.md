@@ -74,3 +74,4 @@
 - [] hide update and delete button for posts that the user don't owe
 - [] search index problem (auto index when creating db)
 - [] remove border from textarea
+- [] we're not using moment.js anymore now

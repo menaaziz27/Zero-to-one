@@ -2,7 +2,7 @@ $('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
 	var value = textbox.val().trim();
 
-	// check if the ecent fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
+	// check if the event fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
 	let isModal = textbox.parents('.modal').length == 1;
 
 	var submitPostButton = isModal
@@ -25,6 +25,7 @@ $('#replyModal').on('show.bs.modal', e => {
 	$('#submitReplyButton').data('id', postId);
 
 	$.get(`/posts/${postId}`, postsAndUserId => {
+		console.log(postsAndUserId);
 		let post = postsAndUserId.post;
 		userId = postsAndUserId.userId;
 		console.log(post);
@@ -49,7 +50,6 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 
 	if (isModal) {
 		console.log(true, 'modal');
-		//! undefined id
 		let id = button.data().id;
 		if (id === null) return alert('button id is null');
 		data.replyTo = id;
@@ -73,6 +73,8 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 
 function createPostHtml(post, userId) {
 	let hashtagsHtml;
+
+	var timestamp = timeDifference(new Date(), new Date(post.createdAt));
 
 	let isActive = post.likes.includes(userId) ? 'active' : '';
 	if (post.hashtags) {
@@ -131,7 +133,7 @@ function createPostHtml(post, userId) {
                                 <a href="/posts/${post._id}?timeline=true"
                                     class="crayons-story__tertiary fs-xs"><time
                                         datetime="2020-08-08T06:46:08Z">
-                                        ${moment(post.createdAt).fromNow()}
+                                        ${timestamp}
                                     </time><span class="time-ago-indicator-initial-placeholder"
                                         data-seconds="1596869168"></span></a>
                             </div>
@@ -228,6 +230,15 @@ $(document).on('click', '.likeButton', function (e) {
 	});
 });
 
+$(document).on('click', '.post', function (e) {
+	let element = $(e.target);
+	let postId = getPostIdFromElement(element);
+
+	if (postId !== undefined && !element.is('button')) {
+		window.location.href = `/posts/${postId}/details`;
+	}
+});
+
 function getPostIdFromElement(element) {
 	var isRoot = element.hasClass('post');
 	var rootElement = isRoot ? element : element.closest('.post');
@@ -249,5 +260,31 @@ function outputPosts(posts, container) {
 
 	if (posts.length == 0) {
 		container.append("<span class='noResults'>Nothing to show.</span>");
+	}
+}
+
+function timeDifference(current, previous) {
+	var msPerMinute = 60 * 1000;
+	var msPerHour = msPerMinute * 60;
+	var msPerDay = msPerHour * 24;
+	var msPerMonth = msPerDay * 30;
+	var msPerYear = msPerDay * 365;
+
+	var elapsed = current - previous;
+
+	if (elapsed < msPerMinute) {
+		if (elapsed / 1000 < 30) return 'Just now';
+
+		return Math.round(elapsed / 1000) + ' seconds ago';
+	} else if (elapsed < msPerHour) {
+		return Math.round(elapsed / msPerMinute) + ' minutes ago';
+	} else if (elapsed < msPerDay) {
+		return Math.round(elapsed / msPerHour) + ' hours ago';
+	} else if (elapsed < msPerMonth) {
+		return Math.round(elapsed / msPerDay) + ' days ago';
+	} else if (elapsed < msPerYear) {
+		return Math.round(elapsed / msPerMonth) + ' months ago';
+	} else {
+		return Math.round(elapsed / msPerYear) + ' years ago';
 	}
 }

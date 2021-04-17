@@ -10,9 +10,11 @@ const {
 	deletePost,
 	getPosts,
 	postLike,
+	getPostDetails,
 } = require('../controllers/postController');
 
 router.get('/:id', getPost);
+router.get('/:id/details', getPostDetails);
 router.put('/:id/like', postLike);
 router.get('/:id/edit', getEdit);
 router.post('/:id/edit', postEdit);

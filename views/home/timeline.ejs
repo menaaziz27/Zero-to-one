@@ -282,7 +282,7 @@
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
                 <div class="col-lg-6 col-md-10">
-
+                    <% if(!postDetail) {%>
                     <!--- Post Form Begins -->
                     <section class="mb-2 card">
 
@@ -310,7 +310,7 @@
                         </div>
                     </section>
                     <!--- Post Form Ends -->
-
+                    <% } %>
 <!-- ================================= twitter clone =================================================== -->
                     <!-- for ajax call -->
                     <div class="postContent"></div>
@@ -389,11 +389,7 @@
                                         <% } %>
                                             <% }) %>
                                                 <% } %>
-                                                    <% if (user) { %>
-                                                        <script>
-                                                            var getUser = '<%= user %>'
-                                                        </script>
-                                                        <% } %>
+                                                    
                                                             <!-- ending of first news -->
                         </div>
                 </div>

@@ -156,7 +156,37 @@ exports.getPost = async (req, res) => {
 	var userId = req.session.user._id;
 	var post = await getPosts({ _id: req.params.id });
 	post = post[0];
-	return res.status(200).send({ post, userId });
+
+	let results = {
+		post,
+		postId: req.params.id,
+		userId,
+		user: req.session.user,
+		postDetail: true,
+	};
+
+	if (post.replyTo !== undefined) {
+		results.replyTo = post.replyTo;
+	}
+
+	results.replies = await getPosts({ replyTo: req.params.id });
+
+	return res.status(200).send(results);
+};
+
+// /posts/:id/details
+exports.getPostDetails = async (req, res) => {
+	var userId = req.session.user._id;
+	// var post = await getPosts({ _id: req.params.id });
+	// post = post[0];
+
+	let payload = {
+		postId: req.params.id,
+		userId,
+		user: req.session.user,
+	};
+
+	return res.status(200).render('post/post-details.ejs', payload);
 };
 
 async function getPosts(criteria) {
