@@ -4,6 +4,6 @@ $(document).ready(function () {
 		let post = results.post;
 		console.log(post);
 		userId = results.userId;
-		outputPosts(post, $('.postContent'));
+		outputPostsWithReplies(results, $('.postContent'));
 	});
 });

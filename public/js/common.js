@@ -90,7 +90,7 @@ function createPostHtml(post, userId) {
 			.join('');
 	}
 	var replyFlag = '';
-	if (post.replyTo) {
+	if (post.replyTo && post.replyTo._id) {
 		if (!post.replyTo._id) {
 			return alert('Reply to is not populated');
 		} else if (!post.replyTo.user._id) {
@@ -245,6 +245,24 @@ function getPostIdFromElement(element) {
 	var postId = rootElement.data().id;
 	if (postId === undefined) return alert('Post id undefined');
 	return postId;
+}
+
+function outputPostsWithReplies(results, container) {
+	console.log('results.post', results);
+	container.html('');
+
+	if (results.replyTo !== undefined && results.replyTo._id !== undefined) {
+		var html = createPostHtml(results.replyTo);
+		container.append(html);
+	}
+
+	var mainPostHtml = createPostHtml(results.post, true);
+	container.append(mainPostHtml);
+
+	results.replies.forEach(result => {
+		var html = createPostHtml(result);
+		container.append(html);
+	});
 }
 
 function outputPosts(posts, container) {
