@@ -25,11 +25,11 @@
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
     <link rel="stylesheet" href="/assets/css/button.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" /> -->
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <title>Test2</title>
 
 
@@ -228,6 +228,8 @@
         .replyFlag a {
             color: blue
         }
+
+        button { outline: none; }
     </style>
 
     <!-- ================== END ====================== -->
@@ -349,6 +351,28 @@
                         </div>
                     </div>
 
+
+                    <!-- post delete modal -->
+                    <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deletePostModalLabel">Delete the post?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>You won't be able to delete this.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button id="deletePostButton" type="button" class="btn btn-primary">Delete</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- begginning of rendering all posts -->
                     <!-- Post Ends -->
                 </div>
@@ -403,6 +427,7 @@
         <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
         <script>
             /* eslint-disable */

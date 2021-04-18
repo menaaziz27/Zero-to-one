@@ -14,11 +14,12 @@ const {
 } = require('../controllers/postController');
 
 router.get('/:id', getPost);
+router.delete('/:id', deletePost);
 router.get('/:id/details', getPostDetails);
 router.put('/:id/like', postLike);
 router.get('/:id/edit', getEdit);
 router.post('/:id/edit', postEdit);
-router.post('/:id/delete', deletePost);
+// router.post('/:id/delete', deletePost);
 router.post('/', createPost);
 router.get('/', getPosts);
 

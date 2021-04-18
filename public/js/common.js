@@ -37,6 +37,24 @@ $('#replyModal').on('hidden.bs.modal', e => {
 	$('#originalPostContainer').html('');
 });
 
+$('#deletePostModal').on('show.bs.modal', e => {
+	var button = $(e.relatedTarget);
+	var postId = getPostIdFromElement(button);
+	$('#deletePostButton').data('id', postId);
+});
+
+$('#deletePostButton').click(e => {
+	let postId = $(e.target).data('id');
+
+	$.ajax({
+		url: `/posts/${postId}`,
+		type: 'DELETE',
+		success: postData => {
+			location.reload();
+		},
+	});
+});
+
 $('#submitPostButton, #submitReplyButton').click(e => {
 	var button = $(e.target);
 
@@ -103,8 +121,14 @@ function createPostHtml(post, userId) {
                     </div>`;
 	}
 
+	let buttons = '';
+	if (post.user._id === userId) {
+		buttons = `<button data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal"><i class='fas fa-times'></i></button>`;
+	}
+
 	return `
         <div class="crayons-story post" data-id=${post._id}>
+										${buttons}
                 <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
                     aria-labelledby="article-link-421966"
                     class="crayons-story__hidden-navigation-link">Use
@@ -113,13 +137,11 @@ function createPostHtml(post, userId) {
                     <div class="crayons-story__top">
                         <div class="crayons-story__meta">
                             <div class="crayons-story__author-pic">
-                                <a href="users/profile/${post.user.username}"
-                                    class="crayons-avatar crayons-avatar--l ">
-                                    <img src="/${
-																			post.user.Image
-																		}" alt="aemiej profile"
-                                    class="crayons-avatar__image" />
-                                </a>
+														<a href="users/profile/${post.user.username}"
+														class="crayons-avatar crayons-avatar--l ">
+														<img src="/${post.user.Image}" alt="aemiej profile"
+														class="crayons-avatar__image" />
+														</a>
                             </div>
                             <div>
                                 <p>
@@ -130,12 +152,15 @@ function createPostHtml(post, userId) {
                                         ${post.user.name}
                                     </a>
                                 </p>
-                                <a href="/posts/${post._id}?timeline=true"
+                                <a href="/posts/${
+																	post._id
+																}/details?timeline=true"
                                     class="crayons-story__tertiary fs-xs"><time
                                         datetime="2020-08-08T06:46:08Z">
                                         ${timestamp}
                                     </time><span class="time-ago-indicator-initial-placeholder"
                                         data-seconds="1596869168"></span></a>
+																				
                             </div>
                         </div>
                     </div>

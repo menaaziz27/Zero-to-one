@@ -69,16 +69,28 @@ exports.postEdit = async (req, res) => {
 // };
 
 // posts/:id/delete
+// exports.deletePost = async (req, res) => {
+// 	const postId = req.params.id;
+
+// 	try {
+// 		await Post.findByIdAndDelete(postId);
+// 		if (req.query.timeline) {
+// 			res.redirect('/timeline');
+// 		} else {
+// 			res.redirect('/users/profile/' + req.session.user._id.toString());
+// 		}
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// };
+
+// DELETE /posts/:id
 exports.deletePost = async (req, res) => {
 	const postId = req.params.id;
 
 	try {
 		await Post.findByIdAndDelete(postId);
-		if (req.query.timeline) {
-			res.redirect('/timeline');
-		} else {
-			res.redirect('/users/profile/' + req.session.user._id.toString());
-		}
+		res.sendStatus(202);
 	} catch (e) {
 		console.log(e);
 	}
