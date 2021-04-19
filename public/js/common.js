@@ -25,10 +25,8 @@ $('#replyModal').on('show.bs.modal', e => {
 	$('#submitReplyButton').data('id', postId);
 
 	$.get(`/posts/${postId}`, postsAndUserId => {
-		console.log(postsAndUserId);
 		let post = postsAndUserId.post;
 		userId = postsAndUserId.userId;
-		console.log(post);
 		outputPosts(post, $('#originalPostContainer'));
 	});
 });
@@ -67,12 +65,10 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 	};
 
 	if (isModal) {
-		console.log(true, 'modal');
 		let id = button.data().id;
 		if (id === null) return alert('button id is null');
 		data.replyTo = id;
 	}
-	console.log(data);
 
 	$.post('/posts', data, allData => {
 		userId = allData.userId;
@@ -244,7 +240,6 @@ $(document).on('click', '.likeButton', function (e) {
 		url: `/posts/${postId}/like`,
 		type: 'PUT',
 		success: postData => {
-			console.log(userLoggedIn);
 			button.find('span').text(postData.likes.length || '');
 			if (postData.likes.includes(userLoggedIn._id)) {
 				button.addClass('active');

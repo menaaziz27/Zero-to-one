@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
     <link href="/assets/img/logo-white.png" rel="icon">
 
     <title>post Details</title>
-<link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
     <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
@@ -36,16 +37,16 @@
             resize: none;
             outline: none;
         }
-
+        
         .h7 {
             font-size: 0.9rem
         }
-
+        
         .sectional-wrapper {
             margin-bottom: 80px;
             padding-top: 20px;
         }
-
+        
         .sectional-wrapper .sub-header h1 {
             font-family: 'Open Sans', sans-serif;
             font-size: 35px;
@@ -53,25 +54,25 @@
             padding-bottom: 20px;
             text-transform: uppercase;
         }
-
+        
         .h2,
         h2 {
             font-size: 30px;
             font-family: 'Open Sans', sans-serif;
         }
-
+        
         p {
             min-height: 21px;
         }
-
+        
         .aside-section {
             padding-top: 6px;
         }
-
+        
         .widget {
             padding-top: 0px;
         }
-
+        
         .widget-header {
             font-family: 'Open Sans', sans-serif;
             font-weight: 400;
@@ -80,19 +81,19 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
-
+        
         .widget {
             padding-top: 0px;
         }
-
+        
         .widget+.widget {
             padding-top: 0px;
         }
-
+        
         .widget {
             padding-top: 0px;
         }
-
+        
         .widget-header {
             font-family: 'Open Sans', sans-serif;
             font-weight: 400;
@@ -101,11 +102,11 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
-
+        
         .ct-latest {
             cursor: pointer;
         }
-
+        
         .ct-latest {
             padding: 15px 10px;
             border-top: 1px solid #e1e1e1;
@@ -114,33 +115,33 @@
             transition: all .25s ease-in-out;
             margin-top: -1px !important;
         }
-
+        
         .ct-latest .media-left {
             padding-right: 15px;
         }
-
+        
         .media-body,
         .media-left,
         .media-right {
             display: table-cell;
             vertical-align: top;
         }
-
+        
         .media img {
             max-width: none;
         }
-
+        
         .media-body,
         .media-left,
         .media-right {
             display: table-cell;
             vertical-align: top;
         }
-
+        
         .media-body {
             width: 10000px;
         }
-
+        
         .ct-latest-header {
             font-family: 'Open Sans', sans-serif;
             font-weight: 400;
@@ -149,24 +150,24 @@
             font-weight: 600;
             margin-bottom: 12px;
         }
-
+        
         .media-heading {
             margin-top: 0;
             margin-bottom: 5px;
         }
-
+        
         .ct-latest p {
             font-size: 13px;
         }
-
+        
         .ct-latest:hover {
             background-color: #e1e1e1;
         }
-
+        
         a {
             color: #4F4F99;
         }
-
+        
         a,
         a:hover,
         a:focus,
@@ -174,14 +175,13 @@
             text-decoration: none;
             color: inherit;
         }
-
         /*nav {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
             height: 100%;
         }*/
-
+        
         nav.sidebar a {
             padding: 10px;
             font-size: 30px;
@@ -192,35 +192,37 @@
             justify-content: center;
             color: #212529;
         }
-
+        
         nav.sidebar a.blue {
             color: var(--blue);
         }
-
+        
         nav.sidebar a:hover {
             background-color: var(--buttonHoverBg);
             color: var(--blue);
             border-radius: 50%;
         }
-
+        
         #submitPostButton:disabled {
             border: 1px solid #999999;
             background-color: #cccccc;
             color: #666666;
             cursor: not-allowed;
         }
-
+        
         button svg,
         button span {
             pointer-events: none;
         }
-
-        .postButtonContainer.red button.active{
+        
+        .postButtonContainer.red button.active {
             color: red;
         }
-
-        button:focus { outline: none; }
-
+        
+        button:focus {
+            outline: none;
+        }
+        
         .replyFlag a {
             color: blue
         }
@@ -247,92 +249,81 @@
                         <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
                     </nav>
 
-                <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                    <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                </div>
+                <div class="col-lg-6 col-md-10 postContent">
+                    <!-- post detail -->
+                </div>
+                <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
+                    <!-- maybe latest news -->
+                </div>
             </div>
-            <div class="col-lg-6 col-md-10 postContent">
-                <!-- post detail -->
-            </div>
-            <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
-                <!-- maybe latest news -->
-            </div>
-        </div>
 
-        <!-- post comments modal -->
-                    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="replyModalLabel">Reply</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <!-- post comments modal -->
+            <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="replyModalLabel">Reply</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="originalPostContainer"></div>
-                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                            aria-labelledby="posts-tab">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="post">post</label>
-                                                <textarea style="resize: none;height:100px" class="form-control" name="reply"
-                                                    id="reply" rows="3" placeholder="What are you thinking..."
-                                                    required></textarea>
-                                            </div>
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
-                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div id="originalPostContainer"></div>
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                <div class="form-group">
+                                    <label class="sr-only" for="post">post</label>
+                                    <textarea style="resize: none;height:100px" class="form-control" name="reply" id="reply" rows="3" placeholder="What are you thinking..." required></textarea>
+                                </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
+                        </div>
                     </div>
+                </div>
+            </div>
 
 
-                    <!-- post delete modal -->
-                    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="replyModalLabel">Reply</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <!-- post delete modal -->
+            <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deletePostModalLabel">Delete the post?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="originalPostContainer"></div>
-                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                            aria-labelledby="posts-tab">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="post">post</label>
-                                                <textarea style="resize: none;height:100px" class="form-control" name="reply"
-                                                    id="reply" rows="3" placeholder="What are you thinking..."
-                                                    required></textarea>
-                                            </div>
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
-                            </div>
-                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <p>You won't be able to delete this.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button id="deletePostButton" type="button" class="btn btn-primary">Delete</button>
                         </div>
                     </div>
+                </div>
+            </div>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="/assets/vendor/jquery/jquery.min.js"></script>
+            <script src="/bootstrap/js/bootstrap.min.js"></script>
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-        <!-- <script src="/https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
+            <!-- <script src="/https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
 
-        <script>
-            /* eslint-disable */
-            var postId = <%- JSON.stringify(postId) %>
-            var userLoggedIn = <%- JSON.stringify(user) %>
-        </script>
-        <script src="/js/common.js"></script>
-        <script src="/js/postPage.js"></script>
-    
+            <script>
+                /* eslint-disable */
+                var postId = <%- JSON.stringify(postId) %>
+                var userLoggedIn = <%- JSON.stringify(user) %>
+            </script>
+            <script src="/js/common.js"></script>
+            <script src="/js/postPage.js"></script>
+
 </body>
+
 </html>
