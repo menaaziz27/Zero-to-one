@@ -394,8 +394,8 @@
                       <!-- begginning of rendering all posts -->
                       <% if (posts !==undefined || posts !==null) { %>
                         <% posts.forEach(function(post) { %>
-                            <div class="crayons-story " data-content-user-id="219080">
-                                <div class="crayons-story__body">
+                            <div  class="crayons-story " data-content-user-id="219080">
+                                <div id="post" class="crayons-story__body">
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
                                             <div class="crayons-story__author-pic">
@@ -452,10 +452,8 @@
                                                         title="Save to reading list">
                                                         <span class="bm-initial">edit</span>
                                                     </a>
-                                                    <form method="POST" action="/admin/dashboard/posts/delete">
-                                                        <button style="color: #000;" class="btn btn-outline-danger scrollto">Delete</button>
-                                                        <input name="id" type="hidden" value="<%=post._id%>">
-                                                    </form>
+                                                    <input name="postId" type="hidden" value="<%=post._id%>">
+                                                    <button type="button" style="color: #000;" onclick="deletePost(this)" class="btn btn-outline-danger">Delete</button>
                                                     
                                             </div>
                                         </div>
@@ -476,61 +474,20 @@
                             <h2 class="widget-header">
                               
                             </h2>
-                            <!-- beginning of first news -->
-                            <!-- beginning of first news -->
-                      
-                                     
-                                        <!-- ending of first news -->
-                                     
-
-                                                    <!-- ending of first news -->
+                          
                         </div>
-                        <!-- friends menu -->
-                        <!-- <div class="card">
-					<div class="p-3 card-body">
-						<h5 class="m-0 card-title">Friends</h5>
-						<div class="list-group list-group-flush">
-							<a href="#" class="list-group-item list-group-item-action text-primary">
-							Justo moto pani
-							</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Harry consectetur</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Dobi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Gadot facilisis in</a>
-							<a href="#" class="btn btn-sm btn-primary">View All</a>
-						</div>
-					</div>
-                </div> -->
-                        <!-- users menu -->
-                        <!-- <div class="mt-4 card">
-					<div class="p-3 card-body">
-						<h5 class="m-0 card-title">Users</h5>
-						<div class="list-group list-group-flush">
-							<a href="#" class="list-group-item list-group-item-action text-primary">
-							Cras justo odio
-							</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Dapibus ac facilisis in</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Morbi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Porta ac consectetur ac</a>
-							<a href="#" class="btn btn-sm btn-primary">View All</a>
-						</div>
-					</div>
-				</div> -->
+                       
                 </div>
             </div>
         </div>
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      
         <script src="/assets/vendor/jquery/jquery.min.js"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
-        <!-- <script>
-            const element = document.querySelector('#submit');
-            element.addEventListener('submit', event => {
-                event.preventDefault();
-            });
-        </script> -->
+        <script src="/assets/js/admin.js"></script>
+    
 
 </body>
 
