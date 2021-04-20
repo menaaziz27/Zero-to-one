@@ -130,7 +130,6 @@ exports.getPosts = async(req, res) => {
         let isReply = searchObj.isReply == 'true';
         searchObj.replyTo = { $exists: isReply };
         delete searchObj.isReply;
-        console.log(searchObj);
     }
 
     var posts = await getPosts(searchObj);

@@ -52,6 +52,21 @@
         button:focus {
             outline: none;
         }
+        
+        .followButton {
+            border: 1px solid rgb(rgb(30, 181, 252), green, blue);
+            color: rgb(rgb(81, 159, 211), green, blue);
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 60px;
+            display: inline-block;
+            margin-left: var(--spacing);
+        }
+        
+        .followButton.following {
+            background-color: rgb(0, 110, 184);
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -77,13 +92,14 @@
                             <div class="relative profile-header__top">
                                 <span class="crayons-avatar crayons-avatar--3xl">
                                     <img src="/<%= user.Image %>" width="128" height="128"
-                                        alt="<%= user.name %> profile picture" class="crayons-avatar__image">
+                                    alt="<%= user.name %> profile picture" class="crayons-avatar__image">
                                 </span>
                             </div>
                             <div class="profile-header__details">
                                 <h1 class="mb-2 crayons-title fw-heavy">
                                     <%= user.name %>
                                 </h1>
+                                <button class="<%= isFollowing ? 'followButton following' : 'followButton' %>" data-user="<%= user.id %>"><%= isFollowing ? 'following' : 'follow' %></button>
                                 <p class="mx-auto mb-4 fs-base m:fs-l color-base-90 max-w-100 m:max-w-75">
                                     <% if (user.bio) { %>
                                         <%=user.bio%>

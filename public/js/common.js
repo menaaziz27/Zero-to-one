@@ -1,128 +1,128 @@
 $('#post, #reply').keyup(e => {
-	var textbox = $(e.target);
-	var value = textbox.val().trim();
+    var textbox = $(e.target);
+    var value = textbox.val().trim();
 
-	// check if the event fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
-	let isModal = textbox.parents('.modal').length == 1;
+    // check if the event fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
+    let isModal = textbox.parents('.modal').length == 1;
 
-	var submitPostButton = isModal
-		? $('#submitReplyButton')
-		: $('#submitPostButton');
+    var submitPostButton = isModal ?
+        $('#submitReplyButton') :
+        $('#submitPostButton');
 
-	if (submitPostButton.length == 0) return alert('no submit button found');
+    if (submitPostButton.length == 0) return alert('no submit button found');
 
-	if (value == '') {
-		submitPostButton.prop('disabled', true);
-		return;
-	}
+    if (value == '') {
+        submitPostButton.prop('disabled', true);
+        return;
+    }
 
-	submitPostButton.prop('disabled', false);
+    submitPostButton.prop('disabled', false);
 });
 
 $('#replyModal').on('show.bs.modal', e => {
-	var button = $(e.relatedTarget);
-	var postId = getPostIdFromElement(button);
-	$('#submitReplyButton').data('id', postId);
+    var button = $(e.relatedTarget);
+    var postId = getPostIdFromElement(button);
+    $('#submitReplyButton').data('id', postId);
 
-	$.get(`/posts/${postId}`, postsAndUserId => {
-		let post = postsAndUserId.post;
-		userId = postsAndUserId.userId;
-		outputPosts(post, $('#originalPostContainer'));
-	});
+    $.get(`/posts/${postId}`, postsAndUserId => {
+        let post = postsAndUserId.post;
+        userId = postsAndUserId.userId;
+        outputPosts(post, $('#originalPostContainer'));
+    });
 });
 
 $('#replyModal').on('hidden.bs.modal', e => {
-	$('#originalPostContainer').html('');
+    $('#originalPostContainer').html('');
 });
 
 $('#deletePostModal').on('show.bs.modal', e => {
-	var button = $(e.relatedTarget);
-	var postId = getPostIdFromElement(button);
-	$('#deletePostButton').data('id', postId);
+    var button = $(e.relatedTarget);
+    var postId = getPostIdFromElement(button);
+    $('#deletePostButton').data('id', postId);
 });
 
 $('#deletePostButton').click(e => {
-	let postId = $(e.target).data('id');
+    let postId = $(e.target).data('id');
 
-	$.ajax({
-		url: `/posts/${postId}`,
-		type: 'DELETE',
-		success: postData => {
-			location.reload();
-		},
-	});
+    $.ajax({
+        url: `/posts/${postId}`,
+        type: 'DELETE',
+        success: postData => {
+            location.reload();
+        },
+    });
 });
 
 $('#submitPostButton, #submitReplyButton').click(e => {
-	var button = $(e.target);
+    var button = $(e.target);
 
-	let isModal = button.parents('.modal').length == 1;
+    let isModal = button.parents('.modal').length == 1;
 
-	var textbox = isModal ? $('#reply') : $('#post');
+    var textbox = isModal ? $('#reply') : $('#post');
 
-	var data = {
-		post: textbox.val(),
-	};
+    var data = {
+        post: textbox.val(),
+    };
 
-	if (isModal) {
-		let id = button.data().id;
-		if (id === null) return alert('button id is null');
-		data.replyTo = id;
-	}
+    if (isModal) {
+        let id = button.data().id;
+        if (id === null) return alert('button id is null');
+        data.replyTo = id;
+    }
 
-	$.post('/posts', data, allData => {
-		userId = allData.userId;
-		let postData = allData.newPost;
+    $.post('/posts', data, allData => {
+        userId = allData.userId;
+        let postData = allData.newPost;
 
-		if (postData.replyTo) {
-			location.reload();
-		} else {
-			const html = createPostHtml(postData, userId);
-			$('.postContent').prepend(html);
-			textbox.val('');
-			button.prop('disabled', true);
-		}
-	});
+        if (postData.replyTo) {
+            location.reload();
+        } else {
+            const html = createPostHtml(postData, userId);
+            $('.postContent').prepend(html);
+            textbox.val('');
+            button.prop('disabled', true);
+        }
+    });
 });
 
 function createPostHtml(post, userId) {
-	let hashtagsHtml;
+    let hashtagsHtml;
 
-	var timestamp = timeDifference(new Date(), new Date(post.createdAt));
+    var timestamp = timeDifference(new Date(), new Date(post.createdAt));
 
-	let isActive = post.likes.includes(userId) ? 'active' : '';
-	if (post.hashtags) {
-		hashtagsHtml = post.hashtags
-			.map(hashtag => {
-				return `
+    let isActive = post.likes.includes(userId) ? 'active' : '';
+    if (post.hashtags) {
+        hashtagsHtml = post.hashtags
+            .map(hashtag => {
+                return `
                                 <a href="" class="crayons-tag"><span
                                                         class="crayons-tag__prefix">#</span>
                                                     ${hashtag}
                                                 </a>
                             `;
-			})
-			.join('');
-	}
-	var replyFlag = '';
-	if (post.replyTo && post.replyTo._id) {
-		if (!post.replyTo._id) {
-			return alert('Reply to is not populated');
-		} else if (!post.replyTo.user._id) {
-			return alert('Posted by is not populated');
-		}
+            })
+            .join('');
+    }
+    var replyFlag = '';
+    if (post.replyTo && post.replyTo._id) {
+        if (!post.replyTo._id) {
+            return alert('Reply to is not populated');
+        } else if (!post.replyTo.user._id) {
+            return alert('Posted by is not populated');
+        }
 
-		var replyToUsername = post.replyTo.user.username;
-		replyFlag = `<div class='replyFlag'>
+        var replyToUsername = post.replyTo.user.username;
+        replyFlag = `<div class='replyFlag'>
                         Replying to <a href='/users/profile/${replyToUsername}'>@${replyToUsername}<a>
                     </div>`;
-	}
+    }
 
-	let buttons = '';
-	if (post.user._id === userId) {
-		buttons = `<button data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal"><i class='fas fa-times'></i></button>`;
-	}
+    let buttons = '';
+    if (post.user._id === userId) {
+        buttons = `<button data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal"><i class='fas fa-times'></i></button>`;
+    }
 
-	return `
+    return `
         <div class="crayons-story post" data-id=${post._id}>
 										${buttons}
                 <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
@@ -259,6 +259,27 @@ $(document).on('click', '.post', function (e) {
 	}
 });
 
+$(document).on('click', '.followButton', function (e) {
+	let button = $(e.target);
+	let userId = button.data().user;
+
+	$.ajax({
+		url: `/users/${userId}/follow`,
+		type: 'PUT',
+		success: (userLoggedIn, status, xhr) => {
+			if (xhr.status === '404') return alert('no user found');
+
+			if (userLoggedIn.following && userLoggedIn.following.includes(userId)) {
+				button.addClass('following');
+				button.text('following');
+			} else {
+				button.removeClass('following');
+				button.text('follow');
+			}
+		},
+	});
+});
+
 function getPostIdFromElement(element) {
 	var isRoot = element.hasClass('post');
 	var rootElement = isRoot ? element : element.closest('.post');
@@ -268,7 +289,7 @@ function getPostIdFromElement(element) {
 }
 
 function outputPostsWithReplies(results, container) {
-	console.log('results.post', results);
+	// console.log('results.post', results);
 	container.html('');
 
 	if (results.replyTo !== undefined && results.replyTo._id !== undefined) {

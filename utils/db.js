@@ -1,26 +1,17 @@
 //================ admin bro ====================
 const mongoose = require('mongoose');
 const buildAdminRouter = require('../routes/admin');
-const { default: AdminBro } = require('admin-bro');
 const express = require('express');
 const app = express();
-const AdminBroMongoose = require('admin-bro-mongoose');
-AdminBro.registerAdapter(AdminBroMongoose);
-const options = require('./admin_Options');
 
-const run = async () => {
-	let db = await mongoose.connect('mongodb://localhost:27017/zerotoone', {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-	});
-	// const options = {
-	//   databases: [database],
-	// };
-	// const admin = new AdminBro(options);
-	// const router = buildAdminRouter(admin);
-	// app.use(admin.options.rootPath, router);
-	app.listen(8080);
-};
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
-module.exports = run;
+mongoose
+    .connect('mongodb://localhost:27017/zerotoone')
+    .then(client => {
+        console.log('connected to db');
+    })
+    .catch(e => console.log('error connecting to db' + e));
