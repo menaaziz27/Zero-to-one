@@ -269,12 +269,21 @@ $(document).on('click', '.followButton', function (e) {
 		success: (userLoggedIn, status, xhr) => {
 			if (xhr.status === '404') return alert('no user found');
 
+			let difference = 1;
 			if (userLoggedIn.following && userLoggedIn.following.includes(userId)) {
 				button.addClass('following');
 				button.text('following');
 			} else {
 				button.removeClass('following');
 				button.text('follow');
+				difference = -1;
+			}
+
+			let followersLabel = $('#followerValue');
+			if (followersLabel.length !== 0) {
+				let followersText = followersLabel.text();
+				followersText = parseInt(followersText);
+				followersLabel.text(followersText + difference);
 			}
 		},
 	});
@@ -289,7 +298,6 @@ function getPostIdFromElement(element) {
 }
 
 function outputPostsWithReplies(results, container) {
-	// console.log('results.post', results);
 	container.html('');
 
 	if (results.replyTo !== undefined && results.replyTo._id !== undefined) {

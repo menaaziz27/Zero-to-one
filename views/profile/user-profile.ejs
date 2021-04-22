@@ -67,6 +67,10 @@
             background-color: rgb(0, 110, 184);
             color: #fff;
         }
+        
+        .noResults {
+            padding: var(--spacing);
+        }
     </style>
 </head>
 
@@ -80,11 +84,7 @@
         </style>
         <div id="page-content" class="wrapper stories stories-index" data-current-page="stories-index">
             <div id="page-content-inner">
-                <style>
-                     :root {
-                        --profile-brand-color: #145374;
-                    }
-                </style>
+
                 <div class="brand-bg">
 
                     <div class="crayons-layout crayons-layout--limited-l pt-7 m:pt-9">
@@ -99,17 +99,19 @@
                                 <h1 class="mb-2 crayons-title fw-heavy">
                                     <%= user.name %>
                                 </h1>
-                                <button class="<%= isFollowing ? 'followButton following' : 'followButton' %>" data-user="<%= user.id %>"><%= isFollowing ? 'following' : 'follow' %></button>
-                                <p class="mx-auto mb-4 fs-base m:fs-l color-base-90 max-w-100 m:max-w-75">
-                                    <% if (user.bio) { %>
-                                        <%=user.bio%>
-                                            <% } else { %>
-                                                please complete your profile
-                                                <%}%>
-                                </p>
-                                <div class="profile-header__meta">
-                                    <% if(user.country) { %>
-                                        <span class="profile-header__meta__item">
+                                <% if (user._id.toString() !== currentUser._id.toString()) { %>
+                                    <button class="<%= isFollowing ? 'followButton following' : 'followButton' %>" data-user="<%= user.id %>"><%= isFollowing ? 'following' : 'follow' %></button>
+                                    <% } %>
+                                        <p class="mx-auto mb-4 fs-base m:fs-l color-base-90 max-w-100 m:max-w-75">
+                                            <% if (user.bio) { %>
+                                                <%=user.bio%>
+                                                    <% } else { %>
+                                                        please complete your profile
+                                                        <%}%>
+                                        </p>
+                                        <div class="profile-header__meta">
+                                            <% if(user.country) { %>
+                                                <span class="profile-header__meta__item">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" role="img"
                                                 aria-labelledby="ajrrqijsqelmczu6fuyonzk2o2aipwjf"
@@ -124,9 +126,9 @@
                                                 <%= user.country %>
                                             </a>
                                         </span>
-                                        <% } %>
-                                            <% if(user.yearOfBirth) { %>
-                                                <span class="profile-header__meta__item">
+                                                <% } %>
+                                                    <% if(user.yearOfBirth) { %>
+                                                        <span class="profile-header__meta__item">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" role="img"
                                                         aria-labelledby="anjkwa5vdl5arp7w1vfot5espto7wmqu"
@@ -141,11 +143,11 @@
                                                         Born in <%= user.yearOfBirth %>
                                                     </time>
                                                 </span>
-                                                <% } %>
+                                                        <% } %>
 
 
-                                                    <!-- ===================== BEGINNING OF USER ICONS =================== -->
-                                                    <span class="-ml-1 profile-header__meta__item">
+                                                            <!-- ===================== BEGINNING OF USER ICONS =================== -->
+                                                            <span class="-ml-1 profile-header__meta__item">
                                                         <!-- if twitter -->
                                                         <% user.websites.forEach( function(link) { %>
                                                             <% if(link.includes("twitter")) { %>
@@ -262,20 +264,20 @@
                                                                                                     <% }) %>
                                                     </span>
 
-                                                    <!-- ========================= END OF USER ICONS FOR WEBSITES ======================  -->
-                                                    <% if(userid==user._id ) { %>
+                                                            <!-- ========================= END OF USER ICONS FOR WEBSITES ======================  -->
+                                                            <% if(userid==user._id ) { %>
 
-                                                        <span>
+                                                                <span>
                                                             <a href="/users/updateProfile"
                                                                 class="btn btn-outline-info">Edit
                                                                 Profile</a>
                                                         </span>
-                                                        <% } %>
-                                </div>
+                                                                <% } %>
+                                        </div>
                             </div>
                             <div class="profile-header__bottom fs-base">
-                                <a href=""><span>0 </span>following</a>
-                                <a href=""><span>0 </span>followers</a>
+                                <a href="/users/<%= user.username %>/following"><span id="followingValue"><%= user.following.length %></span> following</a>
+                                <a href="/users/<%= user.username %>/followers"><span id="followerValue"><%= user.followers.length %></span> followers</a>
                                 <!-- <div class="crayons-definition">
                                     <strong class="crayons-definition__title">Education</strong>
                                     <p class="crayons-definition__value">FCI, Egypt</p>
@@ -417,9 +419,6 @@
                                     <!-- =============================== twitter clone ================================= -->
                                     <div class="postContent"></div>
 
-
-                                    <!-- post comment modal -->
-                                    <!-- post comments modal -->
                                     <!-- post comments modal -->
                                     <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -428,7 +427,7 @@
                                                     <h5 class="modal-title" id="replyModalLabel">Reply</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                                </button>
+                                    </button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div id="originalPostContainer"></div>
@@ -448,8 +447,6 @@
                                     </div>
 
 
-
-                                    <!-- post delete modal -->
                                     <!-- post delete modal -->
                                     <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -470,110 +467,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-                                    <% if (posts !==undefined || posts !==null) { %>
-                                        <% posts.forEach(function(post) { %>
-                                            <!-- =================== beginning of the post ======================== -->
-
-                                            <div class="crayons-story " data-content-user-id="219080">
-                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html" aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
-                                                    Github Real-Time Status to Improve Your Profile</a>
-
-
-                                                <div class="mt-3 crayons-story__body">
-                                                    <div class="crayons-story__top">
-                                                        <div class="crayons-story__meta">
-                                                            <div class="crayons-story__author-pic">
-
-                                                                <a href="/users/profile/<%=user._id%>" class="crayons-avatar crayons-avatar--l ">
-                                                                    <img src="/<%= post.user.Image%>" alt=""
-                                                                        class="crayons-avatar__image" />
-                                                                </a>
-                                                            </div>
-                                                            <div>
-                                                                <p>
-                                                                    <a href="/users/profile/<%=user._id%>" class="crayons-story__secondary fw-medium">
-                                                                        <%=post.user.name%>
-                                                                    </a>
-                                                                </p>
-                                                                <a href="/posts/<%=post._id %>" class="crayons-story__tertiary fs-xs"><time
-                                                                        datetime="2020-08-08T06:46:08Z">
-                                                                        <%= moment(post.createdAt).fromNow() %>
-                                                                    </time><span
-                                                                        class="time-ago-indicator-initial-placeholder"
-                                                                        data-seconds="1596869168"></span></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="crayons-story__indention">
-                                                        <h2 class="crayons-story__title">
-                                                            <p>
-                                                                <%= post.description %>
-                                                            </p>
-                                                        </h2>
-                                                        <div class="crayons-story__tags">
-                                                            <% post.hashtags.forEach(function (tag) { %>
-                                                                <a href="" class="crayons-tag"><span
-                                                                        class="crayons-tag__prefix">#</span>
-                                                                    <%= tag %>
-                                                                </a>
-                                                                <% }) %>
-                                                                    <!-- <a href="t/productivity.html" class="crayons-tag"><span
-                                                                class="crayons-tag__prefix">#</span>productivity</a>
-                                                        <a href="t/webdev.html" class="crayons-tag"><span
-                                                                class="crayons-tag__prefix">#</span>webdev</a>
-                                                        <a href="t/codenewbie.html" class="crayons-tag"><span
-                                                                class="crayons-tag__prefix">#</span>codenewbie</a> -->
-                                                        </div>
-                                                        <div class="crayons-story__bottom">
-                                                            <div class="crayons-story__details">
-                                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html" class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left" data-reaction-count data-reactable-id="421966">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol" class="crayons-icon">
-                                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">
-                                                                            Reactions
-                                                                        </title>
-                                                                        <path
-                                                                            d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                                        </path>
-                                                                    </svg> 60
-                                                                    <span class="hidden s:inline">&nbsp;reactions</span>
-                                                                </a>
-                                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments" class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y" class="crayons-icon">
-                                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">
-                                                                            Comments
-                                                                        </title>
-                                                                        <path
-                                                                            d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                                        </path>
-                                                                    </svg> 1
-                                                                    <span class="hidden s:inline">&nbsp;comments</span>
-                                                                </a>
-                                                            </div>
-                                                            <div class="crayons-story__save">
-                                                                <small class="mr-2 crayons-story__tertiary fs-xs">
-                                                                    <%= post.readingTime %> min read
-                                                                </small>
-                                                                <% if(userid==post.user._id ) { %>
-                                                                    <a type="button" href="/posts/<%= post._id %>/edit" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
-                                                                        <span class="bm-initial">edit</span>
-                                                                    </a>
-                                                                    <% } %>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <% }) %>
-                                                <% } %>
-                                                    <!-- =================== end of the post =================== -->
-
-                                                    <!-- ===================== beginning of the post ======================= -->
-
-                                                    <div class="placeholder-div"></div>
                         </div>
                     </main>
                 </div>

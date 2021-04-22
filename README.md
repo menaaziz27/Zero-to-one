@@ -78,3 +78,4 @@
 - [] style delete button in posts
 - [] delete button in posts fire event on the button only and not the span or icon tags
 - [] replies route
+- [] likes not working properly in any user's profile

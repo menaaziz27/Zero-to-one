@@ -35,7 +35,6 @@ exports.postEdit = async(req, res) => {
             hashtags: findHashtags(description),
         });
         // await editPost.save()
-        // console.log(req.query.timeline,'39')
         if (req.query.timeline) {
             res.redirect('/timeline');
         } else {
@@ -98,7 +97,6 @@ exports.deletePost = async(req, res) => {
 // Create
 // localhost:3000/posts?timeline=true
 exports.createPost = async(req, res) => {
-    console.log(req.body.replyTo);
     const { post } = req.body;
     let userId = req.session.user._id;
 
@@ -143,8 +141,6 @@ exports.postLike = async(req, res) => {
     var userId = req.session.user._id;
 
     var isLiked = req.user.likes.length > 0 && req.user.likes.includes(postId);
-
-    console.log(isLiked);
 
     var option = isLiked ? '$pull' : '$addToSet';
 

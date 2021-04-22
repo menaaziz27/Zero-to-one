@@ -125,8 +125,7 @@ exports.postUpdateProfile = async(req, res) => {
     if (image !== undefined) {
         Image = image.path;
     }
-    console.log(nativeLang);
-    //!Validaton block ===============================
+    //Validaton block ===============================
     let websites = req.user.websites;
     let websitesObj = {};
     // convert the array of websites to object of all websites
@@ -169,7 +168,6 @@ exports.postUpdateProfile = async(req, res) => {
         }
         user.nativeLang = nativeLang;
 
-        //  console.log(image)
         if (image !== undefined) {
             user.Image = Image;
         }
@@ -186,7 +184,6 @@ exports.postUpdateProfile = async(req, res) => {
             // pop them from the websites array
             websites = websites.filter(link => link !== '');
         }
-        console.log(websites);
         user.websites = websites;
         user.save();
         res.redirect('/users/profile/' + username);
@@ -224,3 +221,75 @@ exports.postFollow = async(req, res) => {
 
     res.status(200).send(req.session.user);
 };
+
+// users/:username:/followers
+exports.getFollowers = async(req, res) => {
+    try {
+        var payload = await getPayload(req.params.username, req.session.user);
+        payload.selectedTab = 'followers';
+        res.status(200).render('profile/followersAndFollowing', payload);
+    } catch (e) {
+        console.log(e);
+    }
+};
+// users/:username:/following
+exports.getFollowing = async(req, res) => {
+    try {
+        var payload = await getPayload(req.params.username, req.session.user);
+        payload.selectedTab = 'following';
+
+        res.status(200).render('profile/followersAndFollowing', payload);
+    } catch (e) {
+        console.log(e);
+    }
+};
+// users/:userId:/followers
+exports.getFollowersData = async(req, res) => {
+    User.findById(req.params.userId)
+        .populate('followers')
+        .then(results => {
+            res.status(200).send(results);
+        })
+        .catch(error => {
+            console.log(error);
+            res.sendStatus(400);
+        });
+};
+
+// !
+// users/:userId/following
+exports.getFollowingData = async(req, res) => {
+    User.findById(req.params.userId)
+        .populate('following')
+        .then(results => {
+            res.status(200).send(results);
+        })
+        .catch(error => {
+            console.log(error);
+            res.sendStatus(400);
+        });
+};
+
+async function getPayload(username, userLoggedIn) {
+    var user = await User.findOne({ username: username });
+
+    if (user == null) {
+        user = await User.findById(username);
+
+        if (user == null) {
+            return {
+                pageTitle: 'User not found',
+                userLoggedIn: userLoggedIn,
+                userLoggedInJs: JSON.stringify(userLoggedIn),
+            };
+        }
+    }
+
+    return {
+        pageTitle: user.username,
+        userLoggedIn: userLoggedIn,
+        userLoggedInJs: JSON.stringify(userLoggedIn),
+        profileUser: user,
+        profileUserId: user._id,
+    };
+}
