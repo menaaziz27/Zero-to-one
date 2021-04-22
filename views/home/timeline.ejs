@@ -8,244 +8,19 @@
 
     <title>zero to one</title>
 
-
-
-    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="/assets/css/timeline.css">
     <link rel="stylesheet" href="/assets/css/button.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" /> -->
-
-    <title>Test2</title>
-
-
-    <style>
-        textarea {
-            border: none;
-            background-color: transparent;
-            resize: none;
-            outline: none;
-        }
-        
-        .h7 {
-            font-size: 0.9rem
-        }
-        
-        .sectional-wrapper {
-            margin-bottom: 80px;
-            padding-top: 20px;
-        }
-        
-        .sectional-wrapper .sub-header h1 {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 35px;
-            font-weight: bold;
-            padding-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        .h2,
-        h2 {
-            font-size: 30px;
-            font-family: 'Open Sans', sans-serif;
-        }
-        
-        p {
-            min-height: 21px;
-        }
-        
-        .aside-section {
-            padding-top: 6px;
-        }
-        
-        .widget {
-            padding-top: 0px;
-        }
-        
-        .widget-header {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            text-transform: uppercase;
-            font-size: 35px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .widget {
-            padding-top: 0px;
-        }
-        
-        .widget+.widget {
-            padding-top: 0px;
-        }
-        
-        .widget {
-            padding-top: 0px;
-        }
-        
-        .widget-header {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            text-transform: uppercase;
-            font-size: 35px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .ct-latest {
-            cursor: pointer;
-        }
-        
-        .ct-latest {
-            padding: 15px 10px;
-            border-top: 1px solid #e1e1e1;
-            border-bottom: 1px solid #e1e1e1;
-            -webkit-transition: all .25s ease-in-out;
-            transition: all .25s ease-in-out;
-            margin-top: -1px !important;
-        }
-        
-        .ct-latest .media-left {
-            padding-right: 15px;
-        }
-        
-        .media-body,
-        .media-left,
-        .media-right {
-            display: table-cell;
-            vertical-align: top;
-        }
-        
-        .media img {
-            max-width: none;
-        }
-        
-        .media-body,
-        .media-left,
-        .media-right {
-            display: table-cell;
-            vertical-align: top;
-        }
-        
-        .media-body {
-            width: 10000px;
-        }
-        
-        .ct-latest-header {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            font-size: 17px;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        
-        .media-heading {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-        
-        .ct-latest p {
-            font-size: 13px;
-        }
-        
-        .ct-latest:hover {
-            background-color: #e1e1e1;
-        }
-        
-        a {
-            color: #4F4F99;
-        }
-        
-        a,
-        a:hover,
-        a:focus,
-        a:active {
-            text-decoration: none;
-            color: inherit;
-        }
-        /*nav {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            height: 100%;
-        }*/
-        
-        nav.sidebar a {
-            padding: 10px;
-            font-size: 30px;
-            width: 55px;
-            height: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #212529;
-        }
-        
-        nav.sidebar a.blue {
-            color: var(--blue);
-        }
-        
-        nav.sidebar a:hover {
-            background-color: var(--buttonHoverBg);
-            color: var(--blue);
-            border-radius: 50%;
-        }
-        
-        #submitPostButton:disabled {
-            border: 1px solid #999999;
-            background-color: #cccccc;
-            color: #666666;
-            cursor: not-allowed;
-        }
-        
-        button svg,
-        button span {
-            pointer-events: none;
-        }
-        
-        .postButtonContainer.red button.active {
-            color: red;
-        }
-        
-        button:focus {
-            outline: none;
-        }
-        
-        .replyFlag a {
-            color: blue
-        }
-        
-        button {
-            outline: none;
-        }
-        
-        .noResults {
-            padding: var(--spacing);
-        }
-    </style>
-
-    <!-- ================== END ====================== -->
 </head>
 
 <body>
     <%- include('../layouts/navbar.ejs') %>
-
-        <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
         <!-- GRID SYSTEM -->
         <div class="my-2 container-fluid">
             <div class="row">
@@ -259,35 +34,6 @@
                                 class="fas fa-user"></i></a>
                         <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
                     </nav>
-                    <!-- <div class="card">
-                        <div class="p-0 m-0 card-body">
-                            <div class="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                    class="mr-3 crayons-icon color-base-50">
-                                    <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
-                                    <path
-                                        d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
-                                    </path>
-                                </svg>
-
-                                <%= postCount %> posts published
-                            </div>
-                            <div class="flex items-center mb-4">
-                                <span style="display: inline-block; margin-right: 3px;"><i style="margin-right: 16px;"
-                                        class="far fa-user"></i>
-                                    <%= usersCount %>
-                                        users in the website
-                                </span>
-                            </div>
-                            <div class="flex items-center">
-                                <span style="display: inline-block; margin-right: 3px;">
-                                    <i style="margin-right: 16px;" class="fas fa-road"></i>
-                                    <%= roadmapsCount %> roadmaps
-                                </span>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
                 <div class="col-lg-6 col-md-10">
@@ -317,12 +63,11 @@
                         </section>
                         <!--- Post Form Ends -->
                         <% } %>
+
+
                             <!-- ================================= twitter clone =================================================== -->
                             <!-- for ajax call -->
                             <div class="postContent"></div>
-
-
-
 
 
                             <!-- post comments modal -->
@@ -373,9 +118,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- begginning of rendering all posts -->
-                            <!-- Post Ends -->
                 </div>
                 <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
                     <!-- aside latest news -->
@@ -384,7 +126,6 @@
                             <h2 class="widget-header">
                                 Latest News
                             </h2>
-                            <!-- beginning of first news -->
                             <!-- beginning of first news -->
                             <% if (news) { %>
                                 <% news.forEach(function(article, index) { %>
@@ -412,7 +153,6 @@
                                         <% } %>
                                             <% }) %>
                                                 <% } %>
-
                                                     <!-- ending of first news -->
                         </div>
                 </div>
@@ -425,16 +165,13 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="assets/vendor/jquery/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
         <script>
             /* eslint-disable */
             var userLoggedIn = <%- JSON.stringify(user) %>
         </script>
         <script src="js/common.js"></script>
         <script src="js/timeline.js"></script>
-
 </body>
 
 </html>

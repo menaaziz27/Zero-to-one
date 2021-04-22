@@ -45,43 +45,6 @@ exports.postEdit = async(req, res) => {
     }
 };
 
-// /posts/:id
-// exports.getPostDetail = async (req, res, next) => {
-// 	let timeline = req.query.timeline || false;
-// 	const postId = req.params.id;
-
-// 	try {
-// 		const post = await Post.findById(postId).populate('user');
-// 		// if the post is deleted go to the 404 page
-// 		if (post === null) {
-// 			res.locals.error = 'This post is deleted recently';
-// 			next();
-// 		}
-// 		res.render('post/details-post', {
-// 			post: post || '',
-// 			timeline,
-// 		});
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };
-
-// posts/:id/delete
-// exports.deletePost = async (req, res) => {
-// 	const postId = req.params.id;
-
-// 	try {
-// 		await Post.findByIdAndDelete(postId);
-// 		if (req.query.timeline) {
-// 			res.redirect('/timeline');
-// 		} else {
-// 			res.redirect('/users/profile/' + req.session.user._id.toString());
-// 		}
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };
-
 // DELETE /posts/:id
 exports.deletePost = async(req, res) => {
     const postId = req.params.id;
@@ -218,3 +181,40 @@ async function getPosts(criteria) {
         console.log(e);
     }
 }
+
+// /posts/:id
+// exports.getPostDetail = async (req, res, next) => {
+// 	let timeline = req.query.timeline || false;
+// 	const postId = req.params.id;
+
+// 	try {
+// 		const post = await Post.findById(postId).populate('user');
+// 		// if the post is deleted go to the 404 page
+// 		if (post === null) {
+// 			res.locals.error = 'This post is deleted recently';
+// 			next();
+// 		}
+// 		res.render('post/details-post', {
+// 			post: post || '',
+// 			timeline,
+// 		});
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// };
+
+// posts/:id/delete
+// exports.deletePost = async (req, res) => {
+// 	const postId = req.params.id;
+
+// 	try {
+// 		await Post.findByIdAndDelete(postId);
+// 		if (req.query.timeline) {
+// 			res.redirect('/timeline');
+// 		} else {
+// 			res.redirect('/users/profile/' + req.session.user._id.toString());
+// 		}
+// 	} catch (e) {
+// 		console.log(e);
+// 	}
+// };

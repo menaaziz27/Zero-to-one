@@ -304,7 +304,7 @@ function outputPostsWithReplies(results, container) {
 		var html = createPostHtml(results.replyTo);
 		container.append(html);
 	}
-	// ! createposthtml was taking post and true boolean value idk why
+
 	var mainPostHtml = createPostHtml(results.post, userLoggedIn._id);
 	container.append(mainPostHtml);
 

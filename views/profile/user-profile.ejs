@@ -3,17 +3,11 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
 <head>
     <meta charset="utf-8">
     <title>
         <%= user.name %>'s | Profile
     </title>
-    <!-- <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
@@ -21,67 +15,15 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link href="/assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="/assets/css/userProfile.css">
     <link href="/assets/img/logo-white.png" rel="icon">
     <link rel="stylesheet" href="/assets/css/button.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-
-    <!-- <link href="/assets/css/style.css" rel="stylesheet"> -->
-
-    <style>
-         :root {
-            --profile-brand-color: #145374;
-        }
-        
-        textarea {
-            border: none !important;
-            background-color: transparent;
-            resize: none;
-            outline: none !important;
-        }
-        
-        button svg,
-        button span {
-            pointer-events: none;
-        }
-        
-        .postButtonContainer.red button.active {
-            color: red;
-        }
-        
-        button:focus {
-            outline: none;
-        }
-        
-        .followButton {
-            border: 1px solid rgb(rgb(30, 181, 252), green, blue);
-            color: rgb(rgb(81, 159, 211), green, blue);
-            font-weight: bold;
-            padding: 5px 15px;
-            border-radius: 60px;
-            display: inline-block;
-            margin-left: var(--spacing);
-        }
-        
-        .followButton.following {
-            background-color: rgb(0, 110, 184);
-            color: #fff;
-        }
-        
-        .noResults {
-            padding: var(--spacing);
-        }
-    </style>
 </head>
 
 <body>
     <%- include('../layouts/navbar.ejs') %>
         <div id="base-payment-pointer" data-payment-pointer="$ilp.uphold.com/24HhrUGG7ekn"></div>
-        <style>
-            .app-shell-loader {
-                display: none;
-            }
-        </style>
         <div id="page-content" class="wrapper stories stories-index" data-current-page="stories-index">
             <div id="page-content-inner">
 
@@ -399,7 +341,7 @@
                                             </div>
                                             <div class="text-right">
                                                 <!-- <input type="submit" value="share" class="btn btn-outline-success"> -->
-                                                <button type="submit" id="submitPostButton" class="button3">share</button>
+                                                <button type="submit" id="submitPostButton" class="button3" disabled>share</button>
 
                                             </div>
                                         </div>
@@ -407,13 +349,6 @@
                                     </div>
                                 </section>
                                 <% } %>
-
-
-
-                                    <!-- user tabs -->
-
-
-
 
                                     <!-- ============= end of post form =============== -->
                                     <!-- =============================== twitter clone ================================= -->
@@ -473,17 +408,16 @@
             </div>
         </div>
 
+        <script src="/assets/vendor/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+        <script src="/js/common.js"></script>
+        <script src="/js/profile.js"></script>
+        <script>
+            /* eslint-disable */
+            var userLoggedIn = <%- JSON.stringify(user) %>
+        </script>
 </body>
 
-<script src="/assets/vendor/jquery/jquery.min.js"></script>
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
-<script src="/js/common.js"></script>
-<script src="/js/profile.js"></script>
-<script>
-    /* eslint-disable */
-    var userLoggedIn = <%- JSON.stringify(user) %>
-</script>
 
 </html>

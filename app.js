@@ -1,6 +1,6 @@
 // ============ Node-Packages ============
-const express = require('express');
 // const morgan = require('morgan');
+const express = require('express');
 const bodyparser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
@@ -12,7 +12,6 @@ require('ejs');
 const path = require('path');
 
 // ============ My-Modules ============
-// require('./utils/db');
 require('./utils/db');
 const { findUser } = require('./middleware/helper');
 
@@ -30,7 +29,6 @@ const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 
 const app = express();
 
-// storing sessions in DB
 const store = new MongoDBStore({
     uri: MongoDB_URI,
     collection: 'sessions',
@@ -38,7 +36,6 @@ const store = new MongoDBStore({
 
 app.set('view engine', 'ejs');
 
-//set upload image settings
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'images');
@@ -69,8 +66,6 @@ app.use(
 );
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-// for attaching session object in every request and connect the cookie id with its
-// appropriate user session
 app.use(
     session({
         secret: 'my secret',
@@ -80,13 +75,8 @@ app.use(
     })
 );
 
-// settings currentUser and userId in the locals
 app.use(findUser);
-
-// const csrfProtection = csrf();
-// app.use(csrfProtection)
 app.use(flash());
-
 app.use((req, res, next) => {
     res.locals.isAuthenticated = req.session.isLoggedin;
     next();

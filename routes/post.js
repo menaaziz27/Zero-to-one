@@ -3,14 +3,14 @@ const router = require('express').Router();
 
 // ============ My-Modules ============
 const {
-	getEdit,
-	getPost,
-	createPost,
-	postEdit,
-	deletePost,
-	getPosts,
-	postLike,
-	getPostDetails,
+    getEdit,
+    getPost,
+    createPost,
+    postEdit,
+    deletePost,
+    getPosts,
+    postLike,
+    getPostDetails,
 } = require('../controllers/postController');
 
 router.get('/:id', getPost);
@@ -19,8 +19,8 @@ router.get('/:id/details', getPostDetails);
 router.put('/:id/like', postLike);
 router.get('/:id/edit', getEdit);
 router.post('/:id/edit', postEdit);
-// router.post('/:id/delete', deletePost);
 router.post('/', createPost);
 router.get('/', getPosts);
+// router.post('/:id/delete', deletePost);
 
 module.exports = router;
