@@ -67,3 +67,15 @@
 - [] validation for topics form
 - [] dynamically render skills in forms
 - [] edit profile gender fix
+- [] what if i posted empty post
+- [] upload image field with preview
+- [] limit post characters
+- [] fix scrollbar
+- [] hide update and delete button for posts that the user don't owe
+- [] search index problem (auto index when creating db)
+- [] remove border from textarea
+- [] we're not using moment.js anymore now
+- [] style delete button in posts
+- [] delete button in posts fire event on the button only and not the span or icon tags
+- [] replies route
+- [] likes not working properly in any user's profile

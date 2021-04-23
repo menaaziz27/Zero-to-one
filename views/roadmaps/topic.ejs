@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Topic</title>
+
+    <!-- Google Fonts -->
+    <link href="/img/logo-white.png" rel="icon">
+
+
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- <link href="assets/css/slider.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link href="/assets/css/navbar.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/scrollbar.css">
+
+
+    <style>
+        pre code {
+            background-color: rgb(195, 243, 177);
+            border: 1px solid #999;
+            display: block;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+   <!-- ============================ IF THE USER IS NOTTT AUTHENTICATED -->
+    <!-- carousel -->
+    <!-- SLIDER WITH CAPTIONS -->
+
+    <!-- </div> -->
+
+    <!-- beginning of main section -->
+    <main id="main">
+
+
+        <section id="services" class="services mb-5">
+            <div class="container">
+
+                <div class="section-title">
+                    <br>
+                    <h2><%=topic.title%></h2>
+                    <h4><%=topic.description%></h4>
+                </div>
+                <!-- <pre>
+                    <code>
+                        
+                            body
+                            {
+                             &nbsp;&nbsp;background-color: lightblue;
+                            }
+                            h1
+                            {
+                            &nbsp;&nbsp;color: white;
+                            &nbsp;&nbsp;text-align: center;
+                            }
+                            p
+                            { 
+                            &nbsp;&nbsp;font-family: verdana;
+                            &nbsp;&nbsp;font-size: 20px;
+                            }
+
+                    </code>
+                </pre> -->
+                <div class="section-title">
+                    <h2>Refernces</h2>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            HTML Cheat Sheet
+                        </a>
+                    </div>
+
+                </div>
+
+        </section>
+
+
+
+        <!-- End Services Section -->
+        <!-- ======= Faq Section ======= -->
+
+        <!-- End Faq Section -->
+
+        <!-- ======= Contact Section ======= -->
+
+    </main>
+    <!-- footer -->
+    <%- include('../layouts/footer.ejs') %>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

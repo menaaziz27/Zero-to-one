@@ -30,23 +30,25 @@
                     <li class="hvr-underline-from-center">
                         <a class="nav-link" href="/users/profile/<%= currentUser.username%>">Profile</a>
                     </li>
-                    <li class="hvr-underline-from-center">
-                        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
-                    </li>
-
-                    <li class="">
-                        <form method="POST" action="/auth/logout">
-                            <button class="btn btn-outline-danger scrollto">Logout</button>
-                        </form>
-                    </li>
-                    <% } else { %>
+                    <%if (isAdmin) {%>
                         <li class="hvr-underline-from-center">
-                            <a class="nav-link" href="auth/login">Login</a>
-                        </li>
-                        <li class="hvr-underline-from-center">
-                            <a class="nav-link" href="auth/register">Get Started</a>
+                            <a class="nav-link" href="/admin/dashboard">Dashboard</a>
                         </li>
                         <% } %>
+
+                            <li class="">
+                                <form method="POST" action="/auth/logout">
+                                    <button class="btn btn-outline-danger scrollto">Logout</button>
+                                </form>
+                            </li>
+                            <% } else { %>
+                                <li class="hvr-underline-from-center">
+                                    <a class="nav-link" href="auth/login">Login</a>
+                                </li>
+                                <li class="hvr-underline-from-center">
+                                    <a class="nav-link" href="auth/register">Get Started</a>
+                                </li>
+                                <% } %>
             </ul>
         </div>
     </div>

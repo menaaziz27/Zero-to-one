@@ -403,7 +403,7 @@
                     <% if (roadmaps !==undefined || roadmaps !==null) { %>
                         <% roadmaps.forEach(function(roadmap) { %>
                             <div class="crayons-story " data-content-user-id="219080">
-                                <div class="crayons-story__body">
+                                <div id="roadmap" class="crayons-story__body">
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
                                             <div class="mt-3 text-center">
@@ -451,11 +451,8 @@
                                                     title="Save to reading list">
                                                     <span class="bm-initial">edit</span>
                                                 </a>
-                                                <form method="POST" action="/admin/dashboard/roadmaps/delete">
-                                                    <button style="color: #000;"
-                                                        class="btn btn-outline-danger scrollto">Delete</button>
-                                                    <input name="id" type="hidden" value="<%=roadmap._id%>">
-                                                </form>
+                                                <input name="roadmapId" type="hidden" value="<%=roadmap._id%>">
+                                                <button style="color: #000;"class="btn btn-outline-danger scrollto" onclick="deleteRoadmap(this)">Delete</button>
 
                                             </div>
                                         </div>
@@ -525,6 +522,8 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="/assets/vendor/jquery/jquery.min.js"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/js/admin.js"></script>
+
         <!-- <script>
             const element = document.querySelector('#submit');
             element.addEventListener('submit', event => {

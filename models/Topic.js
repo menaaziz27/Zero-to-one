@@ -20,7 +20,7 @@ const topicSchema = new Schema({
 		required: [true, 'url required'],
 	},
 	references: [String],
-	roadmap: { type: Schema.Types.ObjectId, ref: 'roadmap' },
+	roadmaps: [{ type: Schema.Types.ObjectId, ref: 'roadmap' }],
 });
 
 const Topic = mongoose.model('topic', topicSchema);

@@ -2,366 +2,131 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="assets/img/logo-white.png" rel="icon">
+    <%- include('../layouts/head.ejs') %>
 
-    <title>zero to one</title>
+        <title>zero to one</title>
 
-
-
-    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" /> -->
-
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <title>Test2</title>
-
-
-    <style>
-        .h7 {
-            font-size: 0.9rem
-        }
-
-        .sectional-wrapper {
-            margin-bottom: 80px;
-            padding-top: 20px;
-        }
-
-        .sectional-wrapper .sub-header h1 {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 35px;
-            font-weight: bold;
-            padding-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .h2,
-        h2 {
-            font-size: 30px;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        p {
-            min-height: 21px;
-        }
-
-        .aside-section {
-            padding-top: 6px;
-        }
-
-        .widget {
-            padding-top: 0px;
-        }
-
-        .widget-header {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            text-transform: uppercase;
-            font-size: 35px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .widget {
-            padding-top: 0px;
-        }
-
-        .widget+.widget {
-            padding-top: 0px;
-        }
-
-        .widget {
-            padding-top: 0px;
-        }
-
-        .widget-header {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            text-transform: uppercase;
-            font-size: 35px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .ct-latest {
-            cursor: pointer;
-        }
-
-        .ct-latest {
-            padding: 15px 10px;
-            border-top: 1px solid #e1e1e1;
-            border-bottom: 1px solid #e1e1e1;
-            -webkit-transition: all .25s ease-in-out;
-            transition: all .25s ease-in-out;
-            margin-top: -1px !important;
-        }
-
-        .ct-latest .media-left {
-            padding-right: 15px;
-        }
-
-        .media-body,
-        .media-left,
-        .media-right {
-            display: table-cell;
-            vertical-align: top;
-        }
-
-        .media img {
-            max-width: none;
-        }
-
-        .media-body,
-        .media-left,
-        .media-right {
-            display: table-cell;
-            vertical-align: top;
-        }
-
-        .media-body {
-            width: 10000px;
-        }
-
-        .ct-latest-header {
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 400;
-            font-size: 17px;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .media-heading {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-
-        .ct-latest p {
-            font-size: 13px;
-        }
-
-        .ct-latest:hover {
-            background-color: #e1e1e1;
-        }
-
-        a {
-            color: #4F4F99;
-        }
-
-        a,
-        a:hover,
-        a:focus,
-        a:active {
-            text-decoration: none;
-            color: inherit;
-        }
-    </style>
-
-    <!-- ================== END ====================== -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/timeline.css">
+        <link rel="stylesheet" href="/assets/css/button.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
     <%- include('../layouts/navbar.ejs') %>
-
-        <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
         <!-- GRID SYSTEM -->
         <div class="my-2 container-fluid">
             <div class="row">
-                <div class="mb-2 col-md-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                    class="mr-3 crayons-icon color-base-50">
-                                    <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
-                                    <path
-                                        d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
-                                    </path>
-                                </svg>
-
-                                <%= postCount %> posts published
-                            </div>
-                            <div class="flex items-center mb-4">
-                                <span style="display: inline-block; margin-right: 3px;"><i style="margin-right: 16px;"
-                                        class="far fa-user"></i>
-                                    <%= usersCount %>
-                                        users in the website
-                                </span>
-                            </div>
-                            <div class="flex items-center">
-                                <span style="display: inline-block; margin-right: 3px;">
-                                    <i style="margin-right: 16px;" class="fas fa-road"></i>
-                                    <%= roadmapsCount %> roadmaps
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-2 col-md-2 d-none d-md-block ">
+                    <nav class="col-2 sidebar">
+                        <!-- <a class="blue" href="/"><i class="fas fa-dove"></i></a> -->
+                        <a href="/"><i class="fas fa-home"></i></a>
+                        <a href="/search"><i class="fas fa-search"></i></a>
+                        <a href="/notifications"><i class="fas fa-bell"></i></a>
+                        <a href="/messages"><i class="fas fa-envelope"></i></a><a href="/profile"><i
+                                class="fas fa-user"></i></a>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+                    </nav>
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
-                <div class="col">
+                <div class="col-lg-6 col-md-10">
+                    <% if(!postDetail) {%>
+                        <!--- Post Form Begins -->
+                        <section class="mb-2 card">
 
-                    <!--- Post Form Begins -->
-                    <section class="mb-2 card">
-
-                        <div class="card-body">
-                            <form action="/posts/create?timeline=true" method="POST" id="submit">
-                                <div class="card-body">
+                            <div class="card-body">
+                                <!-- <form if="form" id="submit"> -->
+                                <div class="p-0 m-0 card-body">
                                     <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                            aria-labelledby="posts-tab">
+                                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                             <div class="form-group">
                                                 <label class="sr-only" for="post">post</label>
-                                                <textarea style="resize: none;height:100px" class="form-control"
-                                                    name="post" id="post" rows="3"
-                                                    placeholder="What are you thinking..."></textarea>
+                                                <textarea style="resize: none;height:100px" class="form-control" name="post" id="post" rows="3" placeholder="What are you thinking..." required></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <!-- <button type="submit" class="btn btn-outline-info">share</button> -->
-                                        <input type="submit" value="share" class="btn btn-outline-info">
+                                        <button type="submit" id="submitPostButton" class="button3" disabled>share</button>
+                                        <!-- <input type="submit" value="share" class="btn btn-outline-info"> -->
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </section>
-                    <!--- Post Form Ends -->
-
-                    <!-- begginning of rendering all posts -->
-                    <!-- begginning of rendering all posts -->
-                    <% if (posts !==undefined || posts !==null) { %>
-                        <% posts.forEach(function(post) { %>
-                            <div class="crayons-story " data-content-user-id="219080">
-                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                    aria-labelledby="article-link-421966"
-                                    class="crayons-story__hidden-navigation-link">Use
-                                    Github Real-Time Status to Improve Your Profile</a>
+                                <!-- </form> -->
+                            </div>
+                        </section>
+                        <!--- Post Form Ends -->
+                        <% } %>
 
 
-                                <div class="crayons-story__body">
-                                    <div class="crayons-story__top">
-                                        <div class="crayons-story__meta">
-                                            <div class="crayons-story__author-pic">
+                            <!-- ================================= twitter clone =================================================== -->
+                            <!-- for ajax call -->
+                            <div class="postContent"></div>
 
-                                                <a href="users/profile/<%= post.user.username %>"
-                                                    class="crayons-avatar crayons-avatar--l ">
-                                                    <img src="/<%= post.user.Image %>" alt="aemiej profile"
-                                                        class="crayons-avatar__image" />
-                                                </a>
-                                            </div>
-                                            <div>
-                                                <p>
-                                                    <a href="users/profile/<%=post.user.username%>"
-                                                        class="crayons-story__secondary fw-medium">
-                                                        <%=post.user.name%>
-                                                    </a>
-                                                </p>
-                                                <a href="/posts/<%=post._id %>?timeline=true"
-                                                    class="crayons-story__tertiary fs-xs"><time
-                                                        datetime="2020-08-08T06:46:08Z">
-                                                        <%= moment(post.createdAt).fromNow() %>
-                                                    </time><span class="time-ago-indicator-initial-placeholder"
-                                                        data-seconds="1596869168"></span></a>
+
+                            <!-- post comments modal -->
+                            <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="replyModalLabel">Reply</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="originalPostContainer"></div>
+                                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;height:100px" class="form-control" name="reply" id="reply" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="crayons-story__indention">
-                                        <h2 class="crayons-story__title">
-                                            <p>
-                                                <%= post.description %>
-                                            </p>
-                                        </h2>
-                                        <div class="crayons-story__tags">
-                                            <% post.hashtags.forEach(function (tag) { %>
-                                                <a href="" class="crayons-tag"><span
-                                                        class="crayons-tag__prefix">#</span>
-                                                    <%= tag %>
-                                                </a>
-                                                <% }) %>
-                                        </div>
-                                        <div class="crayons-story__bottom">
-                                            <div class="crayons-story__details">
-                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
-                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left"
-                                                    data-reaction-count data-reactable-id="421966">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        role="img" aria-labelledby="al1d5uvy9oyhvuvdwqy2p05movla8vol"
-                                                        class="crayons-icon">
-                                                        <title id="al1d5uvy9oyhvuvdwqy2p05movla8vol">Reactions
-                                                        </title>
-                                                        <path
-                                                            d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
-                                                        </path>
-                                                    </svg>
-
-                                                    60
-                                                    <span class="hidden s:inline">&nbsp;reactions</span>
-                                                </a>
-                                                <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html#comments"
-                                                    class="crayons-btn crayons-btn--s crayons-btn--ghost crayons-btn--icon-left">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        role="img" aria-labelledby="ad9em4d60sxys3w6ddrpoouqjxuw2d4y"
-                                                        class="crayons-icon">
-                                                        <title id="ad9em4d60sxys3w6ddrpoouqjxuw2d4y">Comments
-                                                        </title>
-                                                        <path
-                                                            d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
-                                                        </path>
-                                                    </svg>
-
-                                                    1
-                                                    <span class="hidden s:inline">&nbsp;comments</span>
-                                                </a>
-                                            </div>
-                                            <div class="crayons-story__save">
-                                                <small class="mr-2 crayons-story__tertiary fs-xs">
-                                                    <%= post.readingTime %> min read
-                                                </small>
-                                                <% if(userid==post.user._id ) { %>
-                                                    <a type="button" href="/posts/<%= post._id %>/edit?timeline=true"
-                                                        id="article-save-button-421966"
-                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                                        data-reactable-id="421966" aria-label="Save to reading list"
-                                                        title="Save to reading list">
-                                                        <span class="bm-initial">edit</span>
-                                                    </a>
-                                                    <% } %>
-                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button id="submitReplyButton" type="button" class="btn btn-primary" disabled>Reply</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <% }) %>
-                                <% } %>
-                                    <!-- Post Ends -->
-                                    <!-- endpost -->
-                                    <!-- Post Ends -->
+
+
+                            <!-- post delete modal -->
+                            <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deletePostModalLabel">Delete the post?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>You won't be able to delete this.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button id="deletePostButton" type="button" class="btn btn-primary">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Post Ends -->
+                            <!-- endpost -->
+                            <!-- Post Ends -->
                 </div>
-                <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
+                <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
                     <!-- aside latest news -->
                     <aside class="widget">
                         <div class="widget blog-widget">
                             <h2 class="widget-header">
                                 Latest News
                             </h2>
-                            <!-- beginning of first news -->
                             <!-- beginning of first news -->
                             <% if (news) { %>
                                 <% news.forEach(function(article, index) { %>
@@ -370,9 +135,7 @@
                                         <div class="ct-latest media">
                                             <div class="media-left">
                                                 <% if (article.cover_image !==null) { %>
-                                                    <img alt="widget image" class="media-object"
-                                                        src="<%= article.cover_image %>"
-                                                        style="max-width: 90px; user-select: auto;">
+                                                    <img alt="widget image" class="media-object" src="<%= article.cover_image %>" style="max-width: 90px; user-select: auto;">
                                                     <% } %>
                                             </div>
                                             <div class="media-body">
@@ -391,59 +154,22 @@
                                         <% } %>
                                             <% }) %>
                                                 <% } %>
-
                                                     <!-- ending of first news -->
                         </div>
-                        <!-- friends menu -->
-                        <!-- <div class="card">
-					<div class="p-3 card-body">
-						<h5 class="m-0 card-title">Friends</h5>
-						<div class="list-group list-group-flush">
-							<a href="#" class="list-group-item list-group-item-action text-primary">
-							Justo moto pani
-							</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Harry consectetur</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Dobi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Gadot facilisis in</a>
-							<a href="#" class="btn btn-sm btn-primary">View All</a>
-						</div>
-					</div>
-                </div> -->
-                        <!-- users menu -->
-                        <!-- <div class="mt-4 card">
-					<div class="p-3 card-body">
-						<h5 class="m-0 card-title">Users</h5>
-						<div class="list-group list-group-flush">
-							<a href="#" class="list-group-item list-group-item-action text-primary">
-							Cras justo odio
-							</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Dapibus ac facilisis in</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Morbi leo risus</a>
-							<a href="#" class="list-group-item list-group-item-action text-primary">Porta ac consectetur ac</a>
-							<a href="#" class="btn btn-sm btn-primary">View All</a>
-						</div>
-					</div>
-				</div> -->
                 </div>
             </div>
         </div>
 
-
-
         <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="assets/vendor/jquery/jquery.min.js"></script>
-        <script src="./bootstrap/js/bootstrap.min.js"></script>
-        <script>
-            $("#post").keypress(function (e) {
-                if (e.which === 13 && !e.shiftKey) {
-                    e.preventDefault();
+        <%- include('../layouts/strapAndJQuery.ejs') %>
 
-                    $(this).closest("form").submit();
-                }
-            });
-        </script>
-
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <script>
+                /* eslint-disable */
+                var userLoggedIn = <%- JSON.stringify(user) %>
+            </script>
+            <script src="js/common.js"></script>
+            <script src="js/timeline.js"></script>
 </body>
 
 </html>

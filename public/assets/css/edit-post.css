@@ -1,6 +1,7 @@
-body{
+body {
     background-color: #fff;
 }
+
 .form-control {
     display: block;
     width: 100%;
@@ -16,24 +17,35 @@ body{
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .py-4-center {
     background-color: #f4f7f8;
     height: 500px;
 }
-h3{
+
+h3 {
     color: #009961;
     margin-top: 20px;
 }
 
-@media (min-width: 768px){
-.offset-md-3{
-    margin-left: 25%;
+@media (min-width: 768px) {
+    .offset-md-3 {
+        margin-left: 25%;
+    }
 }
-}
-.container form{
+
+.container form {
     max-width: 1000px;
 }
+
 .btn-block {
     display: block;
     width: 80px;
+}
+
+textarea {
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
 }

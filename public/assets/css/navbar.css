@@ -1,5 +1,5 @@
 .bg-darkk {
-	background-color: #131212;
+	background-color: #00334e;
 }
 .bg-darkk .navbar-nav .nav-link:hover {
 	color: #f3f5f7 !important;
@@ -10,7 +10,6 @@
 }
 .bg-darkk .navbar-nav .nav-link:focus {
 	color: #f3f5f7 !important;
-
 }
 
 .bg-darkk .navbar-nav .nav-link {
@@ -38,7 +37,7 @@
 	overflow: hidden;
 }
 .hvr-underline-from-center:before {
-	content: "";
+	content: '';
 	position: absolute;
 	z-index: -1;
 	left: 51%;
@@ -61,7 +60,6 @@
 }
 .row p {
 	color: rgb(12, 12, 12);
-	
 }
 /* .row h4{
   color:#009961;
@@ -73,3 +71,25 @@
 /* #about {
 	background-color: #f6f5f2;
 } */
+
+
+.pagination {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .pagination a {
+    text-decoration: none;
+    color: #00695c;
+    padding: 0.5rem;
+    border: 1px solid #00695c;
+    margin: 0 1rem;
+  }
+  
+  .pagination a:hover,
+  .pagination a:active,
+  .pagination a.active {
+    background: #00695c;
+    color: white;
+  }
+  

@@ -2,42 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
-    <link href="/assets/img/logo-white.png" rel="icon">
+    <%- include('../layouts/head.ejs') %>
 
-    <!-- bootstrap css -->
-
-    <!-- <link href="/assets/css/errormessages.css" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"> -->
-
-
-    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/errormessages.css" rel="stylesheet">
-
-    <style>
-        label {
-            color: #009961;
-        }
-
-        .error-message {
-            color: red;
-        }
-    </style>
+        <title>Edit Profile</title>
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <style>
+            label {
+                color: #009961;
+            }
+            
+            .error-message {
+                color: red;
+            }
+        </style>
 </head>
 
 <body>
@@ -55,8 +35,7 @@
                         <div class="form-group">
                             <h3>Info</h3>
                             <label for="name">Name</label>
-                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter name"
-                                value="<% if(name) {%><%=name%><% } else { %><%= currentUser.name %><% } %>">
+                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" value="<% if(name) {%><%=name%><% } else { %><%= currentUser.name %><% } %>">
                             <% if (errorMassage) { %>
                                 <% errorMassage.forEach(function(error) { %>
                                     <% if(error.param==='name' ) { %>
@@ -69,8 +48,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password">Bio</label>
-                            <input class="form-control" type="text" id="address" placeholder="Bio" name="bio"
-                                value="<%=currentUser.bio%>">
+                            <input class="form-control" type="text" id="address" placeholder="Bio" name="bio" value="<%=currentUser.bio%>">
                             <% if (errorMassage) { %>
                                 <% errorMassage.forEach(function(error) { %>
                                     <% if(error.param==='bio' ) { %>
@@ -91,8 +69,7 @@
                         </div>
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select class="form-control" id="country" name="country" id="country"
-                                value="<%=currentUser.country%>">
+                            <select class="form-control" id="country" name="country" id="country" value="<%=currentUser.country%>">
                                 <% if( currentUser.country ) { %>
                                     <option value="<%=currentUser.country%>">
                                         <%=currentUser.country%>
@@ -355,8 +332,7 @@
                     </div> -->
                         <div class="form-group">
                             <label for="year">Date f birth</label>
-                            <select class="form-control" name="date_of_birth" tabindex="9" id="year"
-                                value="<%=currentUser.yearOfBirth%>">
+                            <select class="form-control" name="date_of_birth" tabindex="9" id="year" value="<%=currentUser.yearOfBirth%>">
                                 <% if( currentUser.yearOfBirth ) { %>
                                     <option value="<%=currentUser.yearOfBirth%>">
                                         <%=currentUser.yearOfBirth%>
@@ -463,8 +439,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Gender</label>
-                            <select name="gender" class="form-control" id="exampleFormControlSelect1"
-                                value="<%=currentUser.gender%>">
+                            <select name="gender" class="form-control" id="exampleFormControlSelect1" value="<%=currentUser.gender%>">
                                 <% if( currentUser.gender) { %>
                                     <option value="<%=currentUser.gender%>">
                                         <%=currentUser.gender%>
@@ -477,8 +452,7 @@
                         <!-- begin of tounge language -->
                         <div class="mt-3">
                             <label for="language">tounge language</label>
-                            <select name="language" id="language" class="form-control form-select-sm selectpicker"
-                                aria-label="">
+                            <select name="language" id="language" class="form-control form-select-sm selectpicker" aria-label="">
                                 <% if( currentUser.nativeLang) { %>
                                     <option value="<%=currentUser.nativeLang%>">
                                         <%=currentUser.nativeLang%>
@@ -566,15 +540,12 @@
                             <div class="col-4">
                                 <div class="form-check">
                                     <div class="d-block">
-                                        <input name="skills" class="form-check-input" type="checkbox"
-                                            id="flexSwitchCheckDefault" value="Bioinformatics" <%if
-                                            (currentUser.skills.includes("Bioinformatics")) {%> checked <%}%> >
-                                            <label class="form-check-label"
-                                                for="flexSwitchCheckDefault">Bioinformatics</label>
+                                        <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="Bioinformatics" <%if (currentUser.skills.includes( "Bioinformatics")) {%> checked
+                                        <%}%> >
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Bioinformatics</label>
                                     </div>
-                                    <input name="skills" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" value="Cyper Security" <%if
-                                        (currentUser.skills.includes("Cyper Security")) {%> checked <%}%>>
+                                    <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="Cyper Security" <%if (currentUser.skills.includes( "Cyper Security")) {%> checked
+                                    <%}%>>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Cyper
                                             Security</label>
                                 </div>
@@ -582,15 +553,13 @@
                             <div class="col-4">
                                 <div class="form-check">
                                     <div class="d-block">
-                                        <input name="skills" class="form-check-input" type="checkbox"
-                                            id="flexSwitchCheckDefault" value="Web development" <%if
-                                            (currentUser.skills.includes("Web development")) {%> checked <%}%> >
+                                        <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="Web development" <%if (currentUser.skills.includes( "Web development")) {%> checked
+                                        <%}%> >
                                             <label class="form-check-label" for="flexSwitchCheckDefault">Web
                                                 development</label>
                                     </div>
-                                    <input name="skills" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" value="Mobile application" <%if
-                                        (currentUser.skills.includes("Mobile application")) {%> checked <%}%>>
+                                    <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="Mobile application" <%if (currentUser.skills.includes( "Mobile application")) {%> checked
+                                    <%}%>>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Mobile
                                             application</label>
                                 </div>
@@ -598,15 +567,13 @@
                             <div class="col-4">
                                 <div class="form-check">
                                     <div class="d-block">
-                                        <input name="skills" class="form-check-input" type="checkbox"
-                                            id="flexSwitchCheckDefault" value="Machine learning" <%if
-                                            (currentUser.skills.includes("Machine learning")) {%> checked <%}%>>
+                                        <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="Machine learning" <%if (currentUser.skills.includes( "Machine learning")) {%> checked
+                                        <%}%>>
                                             <label class="form-check-label" for="flexSwitchCheckDefault">Machine
                                                 learning</label>
                                     </div>
-                                    <input name="skills" class="form-check-input" type="checkbox"
-                                        id="flexSwitchCheckDefault" value="IT engineer" <%if
-                                        (currentUser.skills.includes("IT engineer")) {%> checked <%}%>>
+                                    <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="IT engineer" <%if (currentUser.skills.includes( "IT engineer")) {%> checked
+                                    <%}%>>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">IT
                                             engineer</label>
                                 </div>
@@ -631,51 +598,36 @@
                             <label class="crayons-field__label" for="github">
                                 Github URL
                             </label>
-                            <input value="<% if (websitesObj.github) { %><%= websitesObj.github %><% } else {%><% } %>"
-                                class="mb-2 form-control" placeholder="https://github.com/..." class="crayons-textfield"
-                                type="text" name="github" id="github">
+                            <input value="<% if (websitesObj.github) { %><%= websitesObj.github %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://github.com/..." class="crayons-textfield" type="text" name="github" id="github">
 
 
                             <label class="crayons-field__label" for="stackoverflow">
                                 StackOverflow URL
                             </label>
-                            <input
-                                value="<% if (websitesObj.stackoverflow) { %><%= websitesObj.stackoverflow %><% } else {%><% } %>"
-                                class="mb-2 form-control" placeholder="https://stackoverflow.com/users/..."
-                                class="crayons-textfield" type="text" name="stackoverflow" id="stackoverflow">
+                            <input value="<% if (websitesObj.stackoverflow) { %><%= websitesObj.stackoverflow %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://stackoverflow.com/users/..." class="crayons-textfield" type="text" name="stackoverflow" id="stackoverflow">
 
 
                             <label class="crayons-field__label" for="linkedin">
                                 LinkedIn URL
                             </label>
-                            <input
-                                value="<% if (websitesObj.linkedin) { %><%= websitesObj.linkedin %><% } else {%><% } %>"
-                                class="mb-2 form-control" placeholder="https://www.linkedin.com/in/..."
-                                class="crayons-textfield" type="text" name="linkedin" id="linkedin">
+                            <input value="<% if (websitesObj.linkedin) { %><%= websitesObj.linkedin %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.linkedin.com/in/..." class="crayons-textfield" type="text" name="linkedin" id="linkedin">
 
 
                             <label class="crayons-field__label" for="twitter">
                                 Twitter URL
                             </label>
-                            <input
-                                value="<% if (websitesObj.twitter) { %><%= websitesObj.twitter %><% } else {%><% } %>"
-                                class="mb-2 form-control" placeholder="https://www.twitter.com/in/..."
-                                class="crayons-textfield" type="text" name="twitter" id="twitter">
+                            <input value="<% if (websitesObj.twitter) { %><%= websitesObj.twitter %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.twitter.com/in/..." class="crayons-textfield" type="text" name="twitter" id="twitter">
 
 
                             <label class="crayons-field__label" for="instagram">
                                 Instagram URL
                             </label>
-                            <input
-                                value="<% if (websitesObj.instagram) { %><%= websitesObj.instagram %><% } else {%><% } %>"
-                                class="mb-2 form-control" placeholder="https://www.instagram.com/in/..."
-                                class="crayons-textfield" type="text" name="instagram" id="instagram">
+                            <input value="<% if (websitesObj.instagram) { %><%= websitesObj.instagram %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.instagram.com/in/..." class="crayons-textfield" type="text" name="instagram" id="instagram">
 
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <a class="mx-auto btn btn-outline-dark btn-block"
-                                    href="/users/profile/<%= currentUser.username %>">BACK</a>
+                                <a class="mx-auto btn btn-outline-dark btn-block" href="/users/profile/<%= currentUser.username %>">BACK</a>
                             </div>
                             <div class="col-6">
                                 <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>
@@ -688,15 +640,7 @@
         </div>
         <%- include('../layouts/footer.ejs') %>
 
-            <!-- <script>
-                const element = document.querySelector('#submit');
-                element.addEventListener('submit', event => {
-                    event.preventDefault();
-                });
-            </script> -->
-            <!-- bootstrap scripts -->
-            <script src="/assets/vendor/jquery/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
 
 </body>
 

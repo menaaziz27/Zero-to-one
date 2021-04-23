@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { isAdmin } = require('../middleware/isAuthenticated');
 
 const {
 	getDashboard,
@@ -22,38 +23,40 @@ const {
 	deleteTopic,
 	getEditTopicDashboard,
 	postEditTopicDashboard,
+  getRoadmapTopicsDashboard
 } = require('../controllers/adminController');
 
-router.get('/dashboard', getDashboard);
+router.get('/dashboard',isAdmin, getDashboard);
 // =====================USer Dashboard========================
 
-router.get('/dashboard/users', getUserDashboard);
-router.get('/dashboard/users/edit/:id', getEditUserDashboard);
-router.post('/dashboard/users/delete', deleteUser);
+router.get('/dashboard/users',isAdmin, getUserDashboard);
+router.get('/dashboard/users/edit/:id',isAdmin, getEditUserDashboard);
+router.delete('/dashboard/users/delete/:id', deleteUser);
 router.post('/dashboard/users/edit', postEditUserDashboard);
 
 // =====================Post Dashboard========================
 
-router.get('/dashboard/posts', getPostDashboard);
-router.post('/dashboard/posts/delete', deletePost);
-router.get('/dashboard/posts/edit/:id', getEditPostDashboard);
+router.get('/dashboard/posts',isAdmin, getPostDashboard);
+router.delete('/dashboard/posts/delete/:id', deletePost);
+router.get('/dashboard/posts/edit/:id',isAdmin, getEditPostDashboard);
 router.post('/dashboard/posts/edit', postEditPostDashboard);
 
 // =====================Roadmap Dashboard========================
 
-router.get('/dashboard/roadmaps', getRoadmapDashboard);
-router.get('/dashboard/roadmaps/create', getCreateRoadmapDashboard);
+router.get('/dashboard/roadmaps',isAdmin, getRoadmapDashboard);
+router.get('/dashboard/roadmaps/create',isAdmin, getCreateRoadmapDashboard);
 router.post('/dashboard/roadmaps/create', postCreateRoadmapDashboard);
-router.post('/dashboard/roadmaps/delete', deleteRoadmap);
-router.get('/dashboard/roadmaps/edit/:id', getEditRoadmapDashboard);
+router.delete('/dashboard/roadmaps/delete/:id', deleteRoadmap);
+router.get('/dashboard/roadmaps/edit/:id',isAdmin, getEditRoadmapDashboard);
 router.post('/dashboard/roadmaps/edit', postEditroadmapDashboard);
 
 // =====================Topic Dashboard========================
-router.get('/dashboard/topics', getTopicDashboard);
-router.get('/dashboard/topics/create', getCreateTopicDashboard);
+router.get('/dashboard/topics',isAdmin, getTopicDashboard);
+router.get('/dashboard/topics/create',isAdmin, getCreateTopicDashboard);
 router.post('/dashboard/topics/create', postCreateTopicDashboard);
-router.post('/dashboard/topics/delete', deleteTopic);
-router.get('/dashboard/topics/edit/:id', getEditTopicDashboard);
+router.delete('/dashboard/topics/delete/:id', deleteTopic);
+router.get('/dashboard/topics/edit/:id',isAdmin, getEditTopicDashboard);
 router.post('/dashboard/topics/edit', postEditTopicDashboard);
+router.get('/dashboard/topics/:roadmap',isAdmin, getRoadmapTopicsDashboard);
 
 module.exports = router;

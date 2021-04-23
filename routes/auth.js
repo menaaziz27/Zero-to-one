@@ -15,6 +15,7 @@ const {
 	postRegister,
 	validateRegister,
 	validateLogin,
+  
 } = require('../controllers/authController');
 
 router.get('/register', getRegister);
