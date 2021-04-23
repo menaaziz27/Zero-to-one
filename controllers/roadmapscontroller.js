@@ -1,4 +1,6 @@
 const Roadmap = require('../models/Roadmap');
+const Topic = require('../models/Topic');
+
 
 exports.getRoadmaps = async (req, res, next) => {
 	try {
@@ -54,6 +56,23 @@ exports.getRoadmap = async (req, res, next) => {
 	}
 };
 
-exports.getDiagram = (req, res) => {
-	res.render('roadmaps/diagram.ejs');
+exports.gettopic = async (req, res) => {
+  const topicName = req.params.topic;
+
+  try {
+		const topic = await Topic.findOne({ routeName: topicName }).populate('roadmaps');
+		if (topic === null) {
+			res.locals.error = 'this topic is deleted since a while.';
+			next();
+		}
+		// console.log(roadmap);
+		const roadmaps = topic?.roadmaps;
+		console.log(roadmaps[0]?.title);
+		res.render('roadmaps/topic', {
+			topic,
+			roadmaps,
+		});
+	} catch (e) {
+		console.log(e);
+	}
 };

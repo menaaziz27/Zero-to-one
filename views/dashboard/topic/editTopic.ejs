@@ -105,14 +105,15 @@
                         
                         <div class="form-check">
                             <label for="roadmaps">Roadmaps</label>
-                            <% roadmaps.forEach(function (roadmap) { %>
+                         <%   for (var i = 0; i < roadmaps.length; i++) {%>
                             <div class="d-block">
+                                
                                 <input name="roadmaps" class="form-check-input" type="checkbox"
-                                    id="flexSwitchCheckDefault" value="<%=roadmap.routeName%>" >
+                                    id="flexSwitchCheckDefault" value="<%=roadmaps[i].routeName%>"<% if(topic.roadmaps.some(road =>  road.title ===roadmaps[i].title)) {%> checked <%}%>>
                                     <label class="form-check-label"
-                                        for="flexSwitchCheckDefault"><%=roadmap.title%></label>
+                                        for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>      
                                     </div>
-                                    <% }) %>
+                         <% } %>
                         </div>
                         <br>
                         <div class="row">

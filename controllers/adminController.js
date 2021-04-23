@@ -287,12 +287,14 @@ exports.postCreateTopicDashboard = async (req, res) => {
 	const description = req.body.description;
 	const routeName = req.body.routeName;
 	let references = req.body.references;
+  let roadmaproute
   if(typeof req.body.roadmaps == 'object') {
  roadmaproute = req.body.roadmaps;
-  }else{
+  }else if (typeof req.body.roadmaps == 'string'){
     roadmaproute = [req.body.roadmaps]
+  }else{
+    roadmaproute =[]
   }
-  console.log(roadmaproute ,"291")
 	try {
     const topic = await new Topic();
 		topic.title = title;
@@ -307,9 +309,7 @@ exports.postCreateTopicDashboard = async (req, res) => {
       topic.roadmaps.push(roadmap);
     };
     await topic.save();
-     
-    // console.log(roadmap ,'306')
-		res.redirect('/admin/dashboard/topics');
+    res.redirect('/admin/dashboard/topics');
 	} catch (e) {
 		console.log(e);
 	}
@@ -328,7 +328,7 @@ exports.deleteTopic = async (req, res) => {
 exports.getEditTopicDashboard = async (req, res) => {
 	const topicId = req.params.id;
 	try {
-		const topic = await Topic.findById({ _id: topicId });
+		const topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
 		const roadmaps = await Roadmap.find({});
 		references = topic.references;
 		res.render('dashboard/topic/editTopic.ejs', {
@@ -347,26 +347,31 @@ exports.postEditTopicDashboard = async (req, res) => {
 	const description = req.body.description;
 	const routeName = req.body.routeName;
 	let references = req.body.references;
+  let roadmaproute
 	if(typeof req.body.roadmaps == 'object') {
     roadmaproute = req.body.roadmaps;
-     }else{
-       roadmaproute = [req.body.roadmaps]
-     }
-
+    }else if (typeof req.body.roadmaps == 'string'){
+      roadmaproute = [req.body.roadmaps]
+    }else{
+      roadmaproute =[]
+    }
 	const topicId = req.body.id;
-
 	try {
-		const topic = await Topic.findById({ _id: topicId });
+		const topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
 		topic.title = title;
 		topic.summary = summary;
 		topic.description = description;
 		topic.routeName = routeName;
 		topic.references = references;
     for (var i = 0; i < roadmaproute.length; i++) {
-      const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] });
-       roadmap.steps.push(topic);
-       await roadmap.save();
-       topic.roadmaps.push(roadmap);
+      const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] }).populate('steps');
+      if(!topic.roadmaps.some(road =>  road.title ===roadmap.title)){
+        topic.roadmaps.push(roadmap)
+      }
+      if(!roadmap.steps.some(step => step.title ===topic.title)){
+        roadmap.steps.push(topic);
+        await roadmap.save();
+      }
      };
 		topic.save();
 		res.redirect('/admin/dashboard/topics');
