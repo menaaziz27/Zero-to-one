@@ -52,6 +52,7 @@ exports.getUserProfile = async(req, res, next) => {
             moment,
             userRepos,
             postsCount,
+            isFollowing: '',
         });
     } catch (e) {
         console.log(e);

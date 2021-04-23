@@ -119,7 +119,7 @@ function createPostHtml(post, userId) {
 
     let buttons = '';
     if (post.user._id === userId) {
-        buttons = `<button data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal"><i class='fas fa-times'></i></button>`;
+        buttons = `<button class="btn btn-dark" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">x</button>`;
     }
 
     return `
