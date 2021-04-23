@@ -94,21 +94,16 @@
                 </div>
             </div>
 
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="/assets/vendor/jquery/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
-            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
 
-            <!-- <script src="/https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
-
-            <script>
-                /* eslint-disable */
-                var postId = <%- JSON.stringify(postId) %>
-                var userLoggedIn = <%- JSON.stringify(user) %>
-            </script>
-            <script src="/js/common.js"></script>
-            <script src="/js/postPage.js"></script>
+                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+                <script>
+                    /* eslint-disable */
+                    var postId = <%- JSON.stringify(postId) %>
+                    var userLoggedIn = <%- JSON.stringify(user) %>
+                </script>
+                <script src="/js/common.js"></script>
+                <script src="/js/postPage.js"></script>
 
 </body>
 

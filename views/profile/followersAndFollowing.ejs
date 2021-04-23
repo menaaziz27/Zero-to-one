@@ -2,23 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/assets/img/logo-white.png" rel="icon">
-
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <link rel="stylesheet" href="/assets/css/tabPanel.css">
-    <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
+    <%- include('../layouts/head.ejs') %>
+        <title>followers || following</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/tabPanel.css">
+        <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
 
 </head>
 
 <body>
     <%- include('../layouts/navbar.ejs') %>
-
-        <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
         <!-- GRID SYSTEM -->
         <div class="my-2 container-fluid">
             <div class="row">
@@ -56,19 +51,16 @@
 
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="/assets/vendor/jquery/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
-            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
 
-            <!-- <script src="/https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
+                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-            <script>
-                let selectedTap = <%- JSON.stringify(selectedTab) %>
-                let userLoggedIn = <%- JSON.stringify(profileUser) %>
-            </script>
-            <script src="/js/common.js"></script>
-            <!-- <script src="/js/postPage.js"></script> -->
-            <script src="/js/followersAndFollwing.js"></script>
+                <script>
+                    let selectedTap = <%- JSON.stringify(selectedTab) %>
+                    let userLoggedIn = <%- JSON.stringify(profileUser) %>
+                </script>
+                <script src="/js/common.js"></script>
+                <script src="/js/followersAndFollwing.js"></script>
 
 </body>
 

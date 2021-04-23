@@ -2,25 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/assets/img/logo-white.png" rel="icon">
+    <%- include('../layouts/head.ejs') %>
 
-    <title>Search</title>
-    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-    <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <title>Search</title>
+        <%- include('../layouts/vendorCss.ejs') %>
+
+
+            <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+            <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+            <link href="/assets/css/style.css" rel="stylesheet">
+            <link href="/assets/css/navbar.css" rel="stylesheet">
+            <link rel="stylesheet" href="/assets/css/scrollbar.css">
 </head>
 <style>
     .h7 {
@@ -735,92 +730,89 @@
             </div>
             <!-- layout end -->
 
-            <script src="/assets/vendor/jquery/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    wireFrames();
+            <%- include('../layouts/strapAndJQuery.ejs') %>
 
-                    let name;
-                    let country = 'any';
-                    let yearOfBirth = 'any';
-                    let gender = 'any';
-                    let language = 'any';
-                    let skills = [];
+                <script>
+                    $(document).ready(function() {
+                        wireFrames();
 
-                    function wireFrames() {
-                        $('#country').on('change keyup paste', function(e) {
-                            country = $(this).val();
-                            findUser();
-                        })
-                        $('#yearOfBirth').on('change keyup paste', function(e) {
-                            yearOfBirth = $(this).val();
-                            findUser();
-                        })
-                        $('#gender').on('change keyup paste', function(e) {
-                            gender = $(this).val();
-                            findUser();
-                        })
-                        $('#language').on('change keyup paste', function(e) {
-                            language = $(this).val();
-                            findUser();
-                        })
-                        $('.skills').on('change keyup paste', function(e) {
-                            if (skills !== undefined) {
-                                if (!skills.includes($(this).val())) {
-                                    skills.push($(this).val())
-                                } else if (skills.includes($(this).val())) {
-                                    skills = skills.filter(el => el !== $(this).val())
-                                        //skills.pop(`${$(this).val()}`)
-                                }
-                            } else {
-                                skills = [$(this).val()];
-                            }
-                            console.log($(this).val());
-                            findUser();
-                        })
+                        let name;
+                        let country = 'any';
+                        let yearOfBirth = 'any';
+                        let gender = 'any';
+                        let language = 'any';
+                        let skills = [];
 
-
-
-
-
-                        function findUser(searchQuery) {
-                            // add event listeners to all inputs
-                            // get all values from all inputs and send them as an object to the server
-                            name = $('#name').val()
-                            let allData = {};
-                            allData['name'] = name;
-                            allData['country'] = country;
-                            allData['yearOfBirth'] = yearOfBirth;
-                            allData['gender'] = gender;
-                            allData['nativeLang'] = language;
-                            allData['skills'] = skills;
-                            console.log(allData);
-                            $.ajax({
-                                url: '/search/users',
-                                method: 'POST',
-                                contentType: 'application/json',
-                                data: JSON.stringify({
-                                    allData
-                                }),
-                                success: function(response) {
-                                    let users = response.users;
-                                    console.info(users);
-                                    // console.log(response, 'from UI');
-                                    if (users.length === 0) {
-                                        $('#match-list').html('');
+                        function wireFrames() {
+                            $('#country').on('change keyup paste', function(e) {
+                                country = $(this).val();
+                                findUser();
+                            })
+                            $('#yearOfBirth').on('change keyup paste', function(e) {
+                                yearOfBirth = $(this).val();
+                                findUser();
+                            })
+                            $('#gender').on('change keyup paste', function(e) {
+                                gender = $(this).val();
+                                findUser();
+                            })
+                            $('#language').on('change keyup paste', function(e) {
+                                language = $(this).val();
+                                findUser();
+                            })
+                            $('.skills').on('change keyup paste', function(e) {
+                                if (skills !== undefined) {
+                                    if (!skills.includes($(this).val())) {
+                                        skills.push($(this).val())
+                                    } else if (skills.includes($(this).val())) {
+                                        skills = skills.filter(el => el !== $(this).val())
+                                            //skills.pop(`${$(this).val()}`)
                                     }
-                                    $('#match-list').html(users);
-                                },
-                            });
-                        }
-                    }
+                                } else {
+                                    skills = [$(this).val()];
+                                }
+                                console.log($(this).val());
+                                findUser();
+                            })
 
-                })
-            </script>
-            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"
-                integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg=="
-                crossorigin="anonymous"></script> -->
+
+
+
+
+                            function findUser(searchQuery) {
+                                // add event listeners to all inputs
+                                // get all values from all inputs and send them as an object to the server
+                                name = $('#name').val()
+                                let allData = {};
+                                allData['name'] = name;
+                                allData['country'] = country;
+                                allData['yearOfBirth'] = yearOfBirth;
+                                allData['gender'] = gender;
+                                allData['nativeLang'] = language;
+                                allData['skills'] = skills;
+                                console.log(allData);
+                                $.ajax({
+                                    url: '/search/users',
+                                    method: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({
+                                        allData
+                                    }),
+                                    success: function(response) {
+                                        let users = response.users;
+                                        console.info(users);
+                                        // console.log(response, 'from UI');
+                                        if (users.length === 0) {
+                                            $('#match-list').html('');
+                                        }
+                                        $('#match-list').html(users);
+                                    },
+                                });
+                            }
+                        }
+
+                    })
+                </script>
 </body>
 
 </html>

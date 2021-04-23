@@ -1,90 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Roadmap</title>
 
 <head>
-    <link href="assets/img/logo-white.png" rel="icon">
-    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="/assets/css/roadmap.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
+    <%- include('../layouts/head.ejs') %>
+        <title>Roadmap</title>
+        <%- include('../layouts/vendorCss.ejs') %>
+
+            <link href="/assets/css/roadmap.css" rel="stylesheet">
+            <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+            <link href="/assets/css/navbar.css" rel="stylesheet">
+            <link href="/assets/css/style.css" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+            <link rel="stylesheet" href="/assets/css/scrollbar.css">
 
 
 
-    <style>
-        a {
-            text-decoration: none;
-            color: #06A763;
-        }
-
-        .card-content h6.head {
-            margin-top: 10px;
-            margin-bottom: 50px;
-            font-size: 24px;
-            font-weight: bold;
-
-        }
-
-        /* .card-content p.para{
+            <style>
+                a {
+                    text-decoration: none;
+                    color: #06A763;
+                }
+                
+                .card-content h6.head {
+                    margin-top: 10px;
+                    margin-bottom: 50px;
+                    font-size: 24px;
+                    font-weight: bold;
+                }
+                /* .card-content p.para{
 
             }  */
-        .timeline-block {
-            margin-bottom: 80px;
-        }
-
-        @media (max-width: 767px) {
-            .section-title h1 {
-                font-size: 30px !important;
-            }
-
-            .section-title p {
-                font-size: 17px !important;
-            }
-
-            .section-title {
-                height: 400px;
-            }
-        }
-
-        @media (max-width: 430px) {
-            .section-title h1 {
-                font-size: 30px !important;
-            }
-
-            .section-title p {
-                font-size: 17px !important;
-            }
-
-            .section-title {
-                height: 500px !important;
-            }
-        }
-
-        @media (max-width: 1100px) {
-            .section-title h1 {
-                font-size: 30px !important;
-            }
-
-            .section-title p {
-                font-size: 20px !important;
-            }
-
-            .section-title {
-                height: 600px;
-
-            }
-        }
-    </style>
+                
+                .timeline-block {
+                    margin-bottom: 80px;
+                }
+                
+                @media (max-width: 767px) {
+                    .section-title h1 {
+                        font-size: 30px !important;
+                    }
+                    .section-title p {
+                        font-size: 17px !important;
+                    }
+                    .section-title {
+                        height: 400px;
+                    }
+                }
+                
+                @media (max-width: 430px) {
+                    .section-title h1 {
+                        font-size: 30px !important;
+                    }
+                    .section-title p {
+                        font-size: 17px !important;
+                    }
+                    .section-title {
+                        height: 500px !important;
+                    }
+                }
+                
+                @media (max-width: 1100px) {
+                    .section-title h1 {
+                        font-size: 30px !important;
+                    }
+                    .section-title p {
+                        font-size: 20px !important;
+                    }
+                    .section-title {
+                        height: 600px;
+                    }
+                }
+            </style>
 
 </head>
 
@@ -120,40 +108,40 @@
                         <!-- TIMELINE CONTENT -->
                         <% if(steps !==undefined || steps.length !==0) {%>
                             <% for(let topic of steps){ %>
-                                        <!-- THIRD TIMELINE -->
-                                        <div class="timeline-block">
-                                            <!-- DOT -->
-                                            <div class="timeline-dot">
-                                                <h6>
-                                                    <%= count  %>
-                                                </h6>
-                                            </div>
-                                            <!-- TIMELINE CONTENT -->
-                                            <div class="card timeline-content">
-                                                <a>
-                                                    <div class="card-content">
-                                                        <!-- TIMELINE TITLE -->
-                                                        <a href="topic.html">
-                                                            <h6 class="timeline-title head">
-                                                                <%= topic.title %>
-                                                            </h6>
-                                                        </a>
-                                                        <!-- TIMELINE TITLE INFO -->
-                                                        <div class="timeline-info">
-
-                                                        </div>
-                                                        <!-- TIMELINE PARAGRAPH -->
-                                                        <p>
-                                                            <%= topic.description %>
-                                                        </p>
-                                                    </div>
+                                <!-- THIRD TIMELINE -->
+                                <div class="timeline-block">
+                                    <!-- DOT -->
+                                    <div class="timeline-dot">
+                                        <h6>
+                                            <%= count  %>
+                                        </h6>
+                                    </div>
+                                    <!-- TIMELINE CONTENT -->
+                                    <div class="card timeline-content">
+                                        <a>
+                                            <div class="card-content">
+                                                <!-- TIMELINE TITLE -->
+                                                <a href="topic.html">
+                                                    <h6 class="timeline-title head">
+                                                        <%= topic.title %>
+                                                    </h6>
                                                 </a>
-                                            </div>
-                                        </div>                                
-                                         <% count =   count+1 %>
+                                                <!-- TIMELINE TITLE INFO -->
+                                                <div class="timeline-info">
 
-                                                    <% } %>
-                                                        <% } %>
+                                                </div>
+                                                <!-- TIMELINE PARAGRAPH -->
+                                                <p>
+                                                    <%= topic.description %>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <% count =   count+1 %>
+
+                                    <% } %>
+                                        <% } %>
 
 
 
@@ -166,8 +154,8 @@
 
 
 
-            <script src="/assets/vendor/jquery/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
+
 
 </body>
 
