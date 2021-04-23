@@ -2,15 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/errormessages.css" rel="stylesheet">
-    <link href="/auth/auth.css" rel="stylesheet">
-    <link href="/assets/img/logo-white.png" rel="icon">
-
-
+    <%- include('../layouts/head.ejs') %>
+        <title>Reset Password</title>
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <link href="/auth/auth.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,25 +19,19 @@
                             <%= errorMassage %>
                         </h3>
                         <% } %>
-
-
                             <!-- TEXT FIELD GROUPS -->
 
                             <div class="form-group">
                                 <input class="form-control" name="email" type="email" id="email" placeholder="Email">
                             </div>
-                            <button class="mx-auto btn btn-primary btn-block button custom-btn btn-16"
-                                type="submit">RESET
+                            <button class="mx-auto btn btn-primary btn-block button custom-btn btn-16" type="submit">RESET
                                 PASSWORD</button>
                 </form>
             </div>
         </div>
     </div>
-
-
     <!-- bootstrap scripts -->
-    <script src="/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <%- include('../layouts/strapAndJQuery.ejs') %>
 </body>
 
 </html>

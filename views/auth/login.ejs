@@ -2,13 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="/assets/css/errormessages.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/auth/auth.css" rel="stylesheet">
-    <link href="/assets/img/logo-white.png" rel="icon">
+    <%- include('../layouts/head.ejs') %>
+        <title>Login</title>
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <link href="/auth/auth.css" rel="stylesheet">
 
 </head>
 
@@ -31,23 +28,17 @@
                                 <!-- TEXT FIELD GROUPS -->
                                 <div class="form-group">
                                     <!--<label for="email">Email address</label>-->
-                                    <input
-                                        class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
-                                        name="email" type="email" value="<%= oldInput.email %>" id="email"
-                                        placeholder="Enter email">
+                                    <input class="form-control <%= validationErrors.find(e => e.param === 'email') ? 'invalid blinking' : '' %>" name="email" type="email" value="<%= oldInput.email %>" id="email" placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
                                     <!--<label for="password">Password</label>-->
-                                    <input
-                                        class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid' : '' %>"
-                                        name="password" value="<%= oldInput.password %>" type="password" id="password"
-                                        placeholder="Password">
+                                    <input class="form-control <%= validationErrors.find(e => e.param === 'password' || e.param === 'notMatched') ? 'invalid blinking' : '' %>" name="password" value="<%= oldInput.password %>" type="password" id="password" placeholder="Password">
                                 </div>
                                 <button class="mx-auto btn btn-primary btn-block" type="submit">Login</button>
                                 <a href="/auth/reset"> Reset Password</a>
                                 <b>
                                     <p> If you don't have account ? <a style="text-align: center;"
-                                            href="/auth/register">register
+                                            href="/auth/register?redirectTo=<%= redirectTo %>">register
                                             please</a></p>
 
                                     <input type="hidden" name="redirectTo" value="<%= redirectTo %>">
@@ -57,8 +48,8 @@
     </div>
 
     <!-- bootstrap scripts -->
-    <script src="/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+
 </body>
 
 </html>

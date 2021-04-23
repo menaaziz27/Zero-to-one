@@ -43,7 +43,6 @@ exports.getUserDashboard = async (req, res) => {
 };
 exports.deleteUser = async (req, res) => {
 	const userId = req.body.id.toString();
-	console.log(userId);
 	try {
 		// if the deleted user is the currently logged in delete the session then delete user and redirect to home
 		if (req.user._id.toString() === userId) {
