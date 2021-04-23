@@ -8,8 +8,8 @@ const moment = require('moment');
 
 exports.getDashboard = async (req, res) => {
 	try {
-		const users = await User.find({});
-		const posts = await Post.find({});
+		const users = await User.find({_id :{$ne :req.session.user._id.toString()}}, { password: 0 });
+		const posts = await Post.find({user :{$ne :req.session.user._id.toString()}}).sort({ createdAt: -1 }).populate('user');
 		const roadmaps = await Roadmap.find({});
 		const topics = await Topic.find({});
 		res.render('dashboard/dashboard.ejs', {
@@ -26,24 +26,16 @@ exports.getDashboard = async (req, res) => {
 
 exports.getUserDashboard = async (req, res) => {
 	try {
-		const users = await User.find({}, { password: 0 });
-		const posts = await Post.find({});
-		const roadmaps = await Roadmap.find({});
-		const topics = await Topic.find({});
-
+		const users = await User.find({_id :{$ne :req.session.user._id.toString()}}, { password: 0 });
 		res.render('dashboard/user/userdashboard.ejs', {
 			users,
-			posts,
-			roadmaps,
-			topics,
 		});
 	} catch (e) {
 		console.log(e);
 	}
 };
 exports.deleteUser = async (req, res) => {
-	const userId = req.body.id.toString();
-	console.log(userId);
+	const userId = req.params.id.toString();
 	try {
 		// if the deleted user is the currently logged in delete the session then delete user and redirect to home
 		if (req.user._id.toString() === userId) {
@@ -56,9 +48,9 @@ exports.deleteUser = async (req, res) => {
 		// if the deleted user was the current logged in just redirect me to home page and delete it's session
 		const user = await User.findById(userId);
 		await user.remove();
-		res.redirect('/admin/dashboard/users');
+    res.status(200).json({ message: 'Success!' });
 	} catch (e) {
-		console.log(e);
+    res.status(500).json({ message: 'Deleting post failed.' });
 	}
 };
 exports.getEditUserDashboard = async (req, res) => {
@@ -123,13 +115,9 @@ exports.postEditUserDashboard = async (req, res) => {
 //=========================Post Dashboard ==========================
 exports.getPostDashboard = async (req, res) => {
 	try {
-		const users = await User.find({});
-		const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
-		const roadmaps = await Roadmap.find({});
+		const posts = await Post.find({user :{$ne :req.session.user._id.toString()}}).sort({ createdAt: -1 }).populate('user');
 		res.render('dashboard/posts/postsdashboard.ejs', {
-			users,
 			posts,
-			roadmaps,
 			moment,
 		});
 	} catch (e) {
@@ -137,13 +125,13 @@ exports.getPostDashboard = async (req, res) => {
 	}
 };
 exports.deletePost = async (req, res) => {
-	const postId = req.body.id;
+	const postId = req.params.id;
 
 	try {
 		await Post.findByIdAndDelete(postId);
-		res.redirect('/admin/dashboard/posts');
+    res.status(200).json({ message: 'Success!' });
 	} catch (e) {
-		console.log(e);
+    res.status(500).json({ message: 'Deleting post failed.' });
 	}
 };
 
@@ -176,12 +164,8 @@ exports.postEditPostDashboard = async (req, res) => {
 
 exports.getRoadmapDashboard = async (req, res) => {
 	try {
-		const users = await User.find({});
-		const posts = await Post.find({});
 		const roadmaps = await Roadmap.find({}).populate('steps');
 		res.render('dashboard/roadmap/roadmapDashboard.ejs', {
-			users,
-			posts,
 			roadmaps,
 		});
 	} catch (e) {
@@ -216,14 +200,15 @@ exports.postCreateRoadmapDashboard = async (req, res) => {
 	}
 };
 exports.deleteRoadmap = async (req, res) => {
-	const roadmapId = req.body.id;
+	const roadmapId = req.params.id;
 
 	try {
 		const roadmap = await Roadmap.findById(roadmapId);
 		await roadmap.remove();
-		res.redirect('/admin/dashboard/roadmaps');
+    res.status(200).json({ message: 'Success!' });
 	} catch (e) {
 		console.log(e);
+    res.status(500).json({ message: 'failed!' });
 	}
 };
 exports.getEditRoadmapDashboard = async (req, res) => {
@@ -261,11 +246,24 @@ exports.postEditroadmapDashboard = async (req, res) => {
 
 exports.getTopicDashboard = async (req, res) => {
 	try {
-		const topics = await Topic.find({}).populate('roadmap');
-		const roadmaps = await Roadmap.find({});
+    const roadmaps = await Roadmap.find({})
+		const topics = await Topic.find({}).populate('roadmaps');
 		res.render('dashboard/topic/topicDashboard.ejs', {
 			topics,
-			roadmaps,
+      roadmaps
+		});
+	} catch (e) {
+		console.log(e);
+	}
+};
+exports.getRoadmapTopicsDashboard = async (req, res) => {
+  const roadmaproute = req.params.roadmap
+	try {
+    const roadmaps = await Roadmap.find()
+    const roadmap = await Roadmap.findOne({routeName : roadmaproute}).populate('steps')
+		res.render('dashboard/topic/roadmapTopics.ejs', {
+      roadmap,
+      roadmaps,
 		});
 	} catch (e) {
 		console.log(e);
@@ -289,40 +287,48 @@ exports.postCreateTopicDashboard = async (req, res) => {
 	const description = req.body.description;
 	const routeName = req.body.routeName;
 	let references = req.body.references;
-	const roadmaproute = req.body.roadmap;
-
+  let roadmaproute
+  if(typeof req.body.roadmaps == 'object') {
+ roadmaproute = req.body.roadmaps;
+  }else if (typeof req.body.roadmaps == 'string'){
+    roadmaproute = [req.body.roadmaps]
+  }else{
+    roadmaproute =[]
+  }
 	try {
-		const topic = await new Topic();
+    const topic = await new Topic();
 		topic.title = title;
 		topic.summary = summary;
 		topic.description = description;
 		topic.routeName = routeName;
 		topic.references = references;
-		const roadmap = await Roadmap.findOne({ routeName: roadmaproute });
-		roadmap.steps.push(topic);
-		await roadmap.save();
-		topic.roadmap = roadmap;
-		await topic.save();
-		res.redirect('/admin/dashboard/topics');
+    for (var i = 0; i < roadmaproute.length; i++) {
+     const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] });
+      roadmap.steps.push(topic);
+      await roadmap.save();
+      topic.roadmaps.push(roadmap);
+    };
+    await topic.save();
+    res.redirect('/admin/dashboard/topics');
 	} catch (e) {
 		console.log(e);
 	}
 };
 exports.deleteTopic = async (req, res) => {
-	const TopicId = req.body.id;
+	const TopicId = req.params.id;
 
 	try {
 		await Topic.findByIdAndDelete(TopicId);
-		res.redirect('/admin/dashboard/topics');
+    res.status(200).json({ message: 'Success!' });
 	} catch (e) {
-		console.log(e);
+    res.status(500).json({ message: 'failed!' });
 	}
 };
 
 exports.getEditTopicDashboard = async (req, res) => {
 	const topicId = req.params.id;
 	try {
-		const topic = await Topic.findById({ _id: topicId });
+		const topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
 		const roadmaps = await Roadmap.find({});
 		references = topic.references;
 		res.render('dashboard/topic/editTopic.ejs', {
@@ -341,19 +347,32 @@ exports.postEditTopicDashboard = async (req, res) => {
 	const description = req.body.description;
 	const routeName = req.body.routeName;
 	let references = req.body.references;
-	let roadmaproute = req.body.roadmap;
-
+  let roadmaproute
+	if(typeof req.body.roadmaps == 'object') {
+    roadmaproute = req.body.roadmaps;
+    }else if (typeof req.body.roadmaps == 'string'){
+      roadmaproute = [req.body.roadmaps]
+    }else{
+      roadmaproute =[]
+    }
 	const topicId = req.body.id;
-
 	try {
-		const topic = await Topic.findById({ _id: topicId });
+		const topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
 		topic.title = title;
 		topic.summary = summary;
 		topic.description = description;
 		topic.routeName = routeName;
 		topic.references = references;
-		const roadmap = await Roadmap.findOne({ routeName: roadmaproute });
-		topic.roadmap = roadmap;
+    for (var i = 0; i < roadmaproute.length; i++) {
+      const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] }).populate('steps');
+      if(!topic.roadmaps.some(road =>  road.title ===roadmap.title)){
+        topic.roadmaps.push(roadmap)
+      }
+      if(!roadmap.steps.some(step => step.title ===topic.title)){
+        roadmap.steps.push(topic);
+        await roadmap.save();
+      }
+     };
 		topic.save();
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {

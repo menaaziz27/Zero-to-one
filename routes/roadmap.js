@@ -4,13 +4,14 @@ const {
 	createRoadmap,
 	getRoadmap,
 	getRoadmaps,
-	getDiagram,
+   gettopic
 } = require('../controllers/roadmapscontroller');
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 router.get('/', getRoadmaps);
 router.post('/createe', createRoadmap);
 router.get('/:roadmap', isAuthenticated, getRoadmap);
-router.get('/:roadmap/:topic', getDiagram);
+router.get('/roadmap/:topic', gettopic);
+
 
 module.exports = router;

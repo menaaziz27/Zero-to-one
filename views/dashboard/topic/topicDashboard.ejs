@@ -377,11 +377,24 @@
                                     <span style="display: inline-block; margin-right: 3px;">
                                         <h4>
                                             <i style="margin-right: 16px;" class="fab fa-accusoft"></i>
-                                            Topics
+                                           All Topics
                                         </h4>
                                     </span>
                                 </a>
                             </div>
+                            <% for (let roadmap of roadmaps) { %>
+                            <div class="flex items-center">
+                                <a href="/admin/dashboard/topics/<%=roadmap.routeName%>">
+
+                                    <span style="display: inline-block; margin-right: 3px;">
+                                        <h4>
+                                            <i style="margin-right: 16px;" class="fab fa-accusoft"></i>
+                                            <%=roadmap.title%>
+                                        </h4>
+                                    </span>
+                                </a>
+                            </div>
+                            <%}%>
                         </div>
                     </div>
                 </div>
@@ -403,7 +416,7 @@
                     <% if (topics !==undefined || topics !==null) { %>
                         <% topics.forEach(function(topic) { %>
                             <div class="crayons-story " data-content-user-id="219080">
-                                <div class="crayons-story__body">
+                                <div id="topic" class="crayons-story__body">
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
                                             <div>
@@ -426,8 +439,9 @@
 
                                             <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
                                                 Roadmaps :
-
-                                                <%= topic.roadmap.title %>
+                                              <%for (let roadmap of topic.roadmaps){ %>
+                                                <%=roadmap.title%>,
+                                                <%}%>
                                             </a>
                                             <br>
 
@@ -445,11 +459,8 @@
                                                     title="Save to reading list">
                                                     <span class="bm-initial">edit</span>
                                                 </a>
-                                                <form method="POST" action="/admin/dashboard/topics/delete">
-                                                    <button style="color: #000;"
-                                                        class="btn btn-outline-danger scrollto">Delete</button>
-                                                    <input name="id" type="hidden" value="<%=topic._id%>">
-                                                </form>
+                                                <input name="topicId" type="hidden" value="<%=topic._id%>">
+                                                <button style="color: #000;"class="btn btn-outline-danger scrollto" onclick="deleteTopic(this)">Delete</button>
 
                                             </div>
                                         </div>
@@ -519,6 +530,8 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="/assets/vendor/jquery/jquery.min.js"></script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/js/admin.js"></script>
+
         <!-- <script>
             const element = document.querySelector('#submit');
             element.addEventListener('submit', event => {
