@@ -3,26 +3,24 @@ const router = require('express').Router();
 
 // ============ My-Modules ============
 const {
-	getEdit,
-	getPostDetail,
-	createPost,
-	postEdit,
-	deletePost,
+    getEdit,
+    getPost,
+    createPost,
+    postEdit,
+    deletePost,
+    getPosts,
+    postLike,
+    getPostDetails,
 } = require('../controllers/postController');
 
-// get post detail
-router.get('/:id', getPostDetail);
-
-// get post by id
+router.get('/:id', getPost);
+router.delete('/:id', deletePost);
+router.get('/:id/details', getPostDetails);
+router.put('/:id/like', postLike);
 router.get('/:id/edit', getEdit);
-
-// update post
 router.post('/:id/edit', postEdit);
-
-// delete post by id
-router.post('/:id/delete', deletePost);
-
-// create new post
-router.post('/create', createPost);
+router.post('/', createPost);
+router.get('/', getPosts);
+// router.post('/:id/delete', deletePost);
 
 module.exports = router;
