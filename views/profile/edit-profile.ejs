@@ -543,7 +543,7 @@
                                         <%   for (var i = 0; i < roadmaps.length; i++) {%>
                                             <div class="d-block">
 
-                                                <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].routeName%>" <% if(currentUser.skills.includes(roadmaps[i].routeName)) { %> checked
+                                                <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>" <% if(currentUser.skills.includes(roadmaps[i].title)) { %> checked
                                                 <% } %>>
                                                     <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
                                             </div>
