@@ -32,9 +32,7 @@ exports.getRoadmap = async(req, res, next) => {
     const roadmapName = req.params.roadmap;
     let count = 1;
     try {
-        const roadmap = await Roadmap.findOne({ routeName: roadmapName }).populate(
-            'steps'
-        );
+        const roadmap = await Roadmap.findOne({ routeName: roadmapName }).populate('steps');
         if (roadmap === null) {
             res.locals.error = 'this roadmap is deleted since a while.';
             next();
@@ -59,9 +57,7 @@ exports.gettopic = async(req, res) => {
     const topicName = req.params.topic;
 
     try {
-        const topic = await Topic.findOne({ routeName: topicName }).populate(
-            'roadmaps'
-        );
+        const topic = await Topic.findOne({ routeName: topicName }).populate('roadmaps');
         if (topic === null) {
             res.locals.error = 'this topic is deleted since a while.';
             next();

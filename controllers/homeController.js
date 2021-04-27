@@ -43,16 +43,10 @@ exports.getTimeline = async(req, res, next) => {
             userid: userid,
             posts,
             moment,
-            news,
+             news:[],
             postCount,
             usersCount,
             roadmapsCount,
-            currentPage: page,
-            hasNextPage: POSTS_PER_PAGE * page < totalItems,
-            hasPreviousPage: page > 1,
-            nextPage: page + 1,
-            previousPage: page - 1,
-            lastPage: Math.ceil(totalItems / POSTS_PER_PAGE),
         });
     } catch (e) {
         console.log(e);
@@ -75,7 +69,7 @@ exports.getTimeline = async(req, res, next) => {
         res.render('home/timeline', {
             userid: userid,
             moment,
-            news,
+            news:[],
             posts,
             postCount,
             usersCount,
