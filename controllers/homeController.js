@@ -4,7 +4,6 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
 const { renderUsers, generateCriteriaObject } = require('../middleware/helper');
-const POSTS_PER_PAGE = 4;
 
 exports.getHome = async(req, res, next) => {
     let userid;
@@ -18,7 +17,6 @@ exports.getHome = async(req, res, next) => {
     res.render('home/index', { userid, roadmaps });
 };
 exports.getTimeline = async(req, res, next) => {
-    const page = +req.query.page || 1;
     const data = await axios.get('https://dev.to/api/articles');
     const news = data.data;
     let userid;
@@ -28,23 +26,15 @@ exports.getTimeline = async(req, res, next) => {
         userid = null;
     }
     try {
-        const numPosts = await Post.find().countDocuments();
-        totalItems = numPosts;
-        const posts = await Post.find({})
-            .sort({ createdAt: -1 })
-            .populate('user')
-            .skip((page - 1) * POSTS_PER_PAGE)
-            .limit(POSTS_PER_PAGE);
-
+        const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user')
+  
         const usersCount = await User.find({}).countDocuments();
         const roadmapsCount = await Roadmap.find({}).count();
-        const postCount = posts.length;
         res.render('home/timeline', {
             userid: userid,
             posts,
             moment,
              news,
-            postCount,
             usersCount,
             roadmapsCount,
         });
@@ -65,13 +55,11 @@ exports.getTimeline = async(req, res, next) => {
         const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
         const usersCount = await User.find({}).countDocuments();
         const roadmapsCount = await Roadmap.find({}).countDocuments();
-        const postCount = posts.length;
         res.render('home/timeline', {
             userid: userid,
             moment,
             news,
             posts,
-            postCount,
             usersCount,
             roadmapsCount,
             user: req.session.user,
@@ -169,7 +157,6 @@ exports.getSearchPosts = (req, res) => {
 exports.postSearchPosts = async(req, res) => {
     const { query } = req.body;
     try {
-        const page = +req.query.page || '1';
         console.log(page);
         const allPosts = await Post.aggregate([{
             $match: {
@@ -193,18 +180,12 @@ exports.postSearchPosts = async(req, res) => {
                 ],
             },
         }, ]);
-        const numPosts = await Post.find().countDocuments();
-        totalItems = numPosts;
         //! this line is tricky :D
         const posts = await Post.populate(allPosts, { path: 'user' });
         res.render('search/searchPosts.ejs', {
             posts,
             moment,
-            hasNextPage: POSTS_PER_PAGE * page < totalItems,
-            hasPreviousPage: page > 1,
-            nextPage: page + 1,
-            previousPage: page - 1,
-            lastPage: Math.ceil(totalItems / POSTS_PER_PAGE),
+          
         });
     } catch (e) {
         console.log(e);
