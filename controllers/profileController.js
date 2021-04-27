@@ -3,6 +3,7 @@ const Post = require('../models/Post');
 const moment = require('moment');
 const axios = require('axios');
 const { body, validationResult } = require('express-validator');
+const Roadmap = require('../models/Roadmap')
 
 exports.getUserProfile = async(req, res, next) => {
     // const userId = req.params.id;
@@ -59,7 +60,7 @@ exports.getUserProfile = async(req, res, next) => {
     }
 };
 
-exports.getUpdateProfile = (req, res) => {
+exports.getUpdateProfile = async(req, res) => {
     let userid = req.user._id || null;
 
     let websites = req.user.websites;
@@ -80,12 +81,20 @@ exports.getUpdateProfile = (req, res) => {
             websitesObj['linkedin'] = link;
         }
     }
+    try {
 
-    res.render('profile/edit-profile', {
-        userid: userid,
-        websitesObj,
-        errorMassage: null,
-    });
+        const roadmaps = await Roadmap.find({});
+        res.render('profile/edit-profile', {
+            userid: userid,
+            websitesObj,
+            errorMassage: null,
+            roadmaps
+        });
+    } catch (e) {
+        console.log(e)
+    }
+
+
 };
 
 exports.validateProfile = [
@@ -96,6 +105,7 @@ exports.validateProfile = [
 ];
 
 exports.postUpdateProfile = async(req, res) => {
+    console.log(req.body)
     const userid = req.body.userid;
     const username = req.body.username;
     const name = req.body.name;
@@ -103,7 +113,7 @@ exports.postUpdateProfile = async(req, res) => {
     const country = req.body.country;
     const BirthDate = req.body.date_of_birth;
     const gender = req.body.gender;
-    const skills = req.body.skills;
+    let skills = req.body.skills;
     const nativeLang = req.body.language;
     const github = req.body.github;
     const linkedin = req.body.linkedin;
@@ -111,6 +121,12 @@ exports.postUpdateProfile = async(req, res) => {
     const twitter = req.body.twitter;
     const stackoverflow = req.body.stackoverflow;
 
+    if (skills) {
+        if (typeof skills === 'string') {
+            skills = [skills];
+        }
+    }
+    console.log(skills, 'skillslslsl')
     let image;
     let Image;
     image = req.file;

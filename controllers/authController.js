@@ -222,9 +222,7 @@ exports.postlogin = async(req, res, next) => {
             // save the user object without his password in the session
             req.session.user = user.hidePrivateData();
             req.session.isLoggedin = true;
-            console.log(user, 'userrrrrrrr');
             if (user.role) {
-                console.log('here');
                 req.session.isAdmin = true;
             }
             return req.session.save(err => {
