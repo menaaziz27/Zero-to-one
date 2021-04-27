@@ -4,7 +4,6 @@ const Topic = require('../models/Topic');
 exports.getRoadmaps = async(req, res, next) => {
     try {
         const roadmaps = await Roadmap.find({});
-        console.log(roadmaps);
 
         res.render('roadmaps/roadmaps', {
             roadmaps,
@@ -64,7 +63,6 @@ exports.gettopic = async(req, res) => {
         }
         // console.log(roadmap);
         const roadmaps = topic.roadmaps;
-        console.log(roadmaps[0].title);
         res.render('roadmaps/topic', {
             topic,
             roadmaps,

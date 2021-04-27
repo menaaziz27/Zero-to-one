@@ -61,6 +61,8 @@ exports.deletePost = async(req, res) => {
 // localhost:3000/posts?timeline=true
 exports.createPost = async(req, res) => {
     const { post } = req.body;
+    const replyTo = req.body.replyTo;
+
     let userId = req.session.user._id;
 
     const data = {
@@ -71,6 +73,12 @@ exports.createPost = async(req, res) => {
 
     if (req.body.replyTo) {
         data.replyTo = req.body.replyTo;
+        // update post comments number
+        try {
+            await Post.findOneAndUpdate({ _id: replyTo }, { $inc: { replies: 1 } });
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     try {

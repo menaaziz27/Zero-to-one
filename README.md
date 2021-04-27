@@ -38,44 +38,46 @@
 - [x] adjust post card
 - [x] auto initialize the default image path for newly created user
 - [x] if the user submitted edit profile with no bio so don't save bio property in the record
-- [] separate each file with its CSS file
+- [x] edit & delete post ajax
+- [x] separate each file with its CSS file
+- [x] option to delete websites
+- [x] Likes and comments system
+- [x] navbar bug while redirecting from profile to roadmaps (getting smaller)
+- [x] automatically generate user age after adding birth of year
+- [x] delete hashtags from post description and leave them only in the hashtags
+- [x] what if i posted empty post
 - [] smooth scrolling & change scrollbar color ans shape
-- [] option to delete websites
 - [] add see more button to the post description
-- [] edit & delete post ajax
 - [] side menu bar for navigating in home
 - [] restricted words in any post before creating it (npm bad-words)
-- [] Likes and comments system
 - [] every skill in user profile will be a link to its roadmap in the website
-- [] navbar bug while redirecting from profile to roadmaps (getting smaller)
 - [] alert message in profile page to complete user data if it's not provided yet
 - [] website locally only or globally only
-- [] automatically generate user age after adding birth of year
 - [] pagination and limiting for search page
 - [] adjust db schema
 - [] if there's no users in the search query return No users found .. the same in posts
-- [] delete hashtags from post description and leave them only in the hashtags
 - [] 404 page style
 - [] what if the user enter a post with 100000 characters ? we want a see more button that goes to post details
 - [] change font style
 - [x] what if the admin deletes the user account he logged from
 - [x] proper handling of 404 pages
+- [x] dynamically render skills in forms
 - [] hide user sensitive data
 - [] handle errors rather than logging them to the console
 - [] option for user to change his password inside the app
 - [] validation for roadmaps form
 - [] validation for topics form
-- [] dynamically render skills in forms
-- [] edit profile gender fix
-- [] what if i posted empty post
+- [x] edit profile gender fix
 - [] upload image field with preview
 - [] limit post characters
 - [] fix scrollbar
 - [] hide update and delete button for posts that the user don't owe
 - [] search index problem (auto index when creating db)
 - [] remove border from textarea
-- [] we're not using moment.js anymore now
+- [x] we're not using moment.js anymore now
 - [] style delete button in posts
-- [] delete button in posts fire event on the button only and not the span or icon tags
-- [] replies route
-- [] likes not working properly in any user's profile
+- [x] delete button in posts fire event on the button only and not the span or icon tags
+- [x] replies route
+- [x] likes not working properly in any user's profile
+- [] render comment count dynamically
+- [] adjust search design and logic
