@@ -204,7 +204,7 @@ function createPostHtml(post, userId) {
                                             </path>
                                         </svg>
 
-                                        1
+                                        ${post.replies}
                                         <span class="hidden s:inline">&nbsp;comments</span>
                                     </button>
                                 </div>

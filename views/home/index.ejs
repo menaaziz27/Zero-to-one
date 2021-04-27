@@ -90,7 +90,7 @@
                     <div class="row">
                         <% for (let i=0; i < roadmaps.length; i++) { %>
                             <div class="mt-4 col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-md-0">
-                                <div class="icon-box">
+                                <div class="icon-box w-100">
                                     <div class="icon"><i class="bx bx-window-alt"></i></div>
                                     <% if(!isAuthenticated) { %>
                                         <a href="/roadmaps/<%= roadmaps[i].routeName %>?redirectTo=/roadmaps/<%= roadmaps[i].routeName %>">
