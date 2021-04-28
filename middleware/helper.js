@@ -73,7 +73,7 @@ module.exports = {
                                                         <a href="/users/profile/${
 																													user.username
 																												}" class="crayons-story__secondary fw-medium">
-                                                            ${user.username}
+                                                            @${user.username}
                                                         </a>
                                                     </p>
 
