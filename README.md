@@ -72,12 +72,12 @@
 - [] limit post characters
 - [] fix scrollbar
 - [] hide update and delete button for posts that the user don't owe
-- [] search index problem (auto index when creating db)
+- [x] search index problem (auto index when creating db)
 - [] remove border from textarea
 - [x] we're not using moment.js anymore now
 - [] style delete button in posts
 - [x] delete button in posts fire event on the button only and not the span or icon tags
 - [x] replies route
 - [x] likes not working properly in any user's profile
-- [] render comment count dynamically
-- [] adjust search design and logic
+- [x] render comment count dynamically
+- [x] adjust search design and logic

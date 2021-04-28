@@ -32,7 +32,9 @@ module.exports = {
                                             <div class="crayons-story__meta">
                                                 <div class="crayons-story__author-pic">
 
-                                                    <a href="" class="crayons-avatar crayons-avatar--l ">
+                                                    <a href="/users/profile/${
+																											user.username
+																										}" class="crayons-avatar crayons-avatar--l ">
                                                         <img src="${
 																													user.Image
 																														? '/' + user.Image
@@ -43,7 +45,9 @@ module.exports = {
                                                 </div>
                                                 <div>
                                                     <p>
-                                                        <a href="" class="crayons-story__secondary fw-medium">
+                                                        <a href="/users/profile/${
+																													user.username
+																												}" class="crayons-story__secondary fw-medium">
                                                             ${user.username}
                                                         </a>
                                                     </p>

@@ -444,24 +444,26 @@
                         </div>
                         <!-- end of language -->
 
-                        <!-- begin Skills & interested in -->
-                        <label class="mt-3" for="">Skills</label>
-                        <div class="row ">
-                            <div class="p-0 m-0 col">
-                                <div class="form-check w-100">
-                                    <%   for (var i = 0; i < roadmaps.length; i++) {%>
-                                        <div class="d-block">
+                        <% if (roadmaps !== null && roadmaps.length !== 0) { %>
+                            <!-- begin Skills & interested in -->
+                            <label class="mt-3" for="">Skills</label>
+                            <div class="row ">
+                                <div class="p-0 m-0 col">
+                                    <div class="form-check w-100">
+                                        <%   for (var i = 0; i < roadmaps.length; i++) {%>
+                                            <div class="d-block">
 
-                                            <input name="skills" class="form-check-input skills" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
-                                        </div>
-                                        <% } %>
+                                                <input name="skills" class="form-check-input skills" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>">
+                                                <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
+                                            </div>
+                                            <% } %>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- end of skills -->
+                            <!-- end of skills -->
+                            <% } %>
 
-                        <input class="mt-3 d-block form-control btn btn-outline-dark" type="submit" value="Submit">
+                                <input class="mt-3 d-block form-control btn btn-outline-dark" type="submit" value="Submit">
                     </form>
                 </div>
                 <!-- end col-3 -->
@@ -488,14 +490,14 @@
                                             <div class="crayons-story__meta">
                                                 <div class="crayons-story__author-pic">
 
-                                                    <a href="" class="crayons-avatar crayons-avatar--l ">
+                                                    <a href="/users/profile/<%= user.username %>" class="crayons-avatar crayons-avatar--l ">
                                                         <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/assets/img/default.png <%}%>"
                                                             alt="aemiej profile" class="crayons-avatar__image" />
                                                     </a>
                                                 </div>
                                                 <div>
                                                     <p>
-                                                        <a href="" class="crayons-story__secondary fw-medium">
+                                                        <a href="/users/profile/<%= user.username %>" class="crayons-story__secondary fw-medium">
                                                             <%=user.username%>
                                                         </a>
                                                     </p>
@@ -510,26 +512,36 @@
                                                     <%=user.name%>
                                                 </p>
                                             </h2>
+                                            <% if(user.skills.length !== 0 || user.gender || user.country || user.yearOfBirth)  {%>
                                             <div class="crayons-story__tags">
 
                                                 <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
-                                                    skils :
+                                                    <% if (user.skills && user.skills.length !== 0) { %>
+                                                    skills :
                                                     <% user.skills.forEach(function (skill) { %>
                                                         <%= skill %> , <% }) %>
+                                                        <% } %>
                                                 </a>
                                                 <br>
+                                                    <% if (user.yearOfBirth) { %>
                                                 <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
                                                     year of birth : <%=user.yearOfBirth%>
                                                 </a>
+                                                <% } %>
                                                 <br>
+                                                    <% if (user.country) { %>
                                                 <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
                                                     Country : <%= user.country %>
                                                 </a>
+                                                <% } %>
                                                 <br>
+                                                    <% if (user.gender) { %>
                                                 <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
                                                     Gender : <%= user.gender %>
                                                 </a>
+                                                <% } %>
                                             </div>
+                                            <% } %>
                                             <div class="crayons-story__bottom">
                                                 <div class="crayons-story__details">
 
@@ -633,9 +645,8 @@
                                     }),
                                     success: function(response) {
                                         let users = response.users;
-                                        console.info(users);
                                         // console.log(response, 'from UI');
-                                        if (users.length === 0) {
+                                        if (users === '') {
                                             $('#match-list').html('');
                                         }
                                         $('#match-list').html(users);
