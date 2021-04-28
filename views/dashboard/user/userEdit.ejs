@@ -2,23 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
-    <link href="/assets/img/logo-white.png" rel="icon">
-
-    <!-- bootstrap css -->
-
-    <!-- <link href="/assets/css/errormessages.css" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"> -->
-
-
-    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <title>Edit user</title>
+    <%- include('../../layouts/head.ejs') %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
     <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
@@ -509,21 +494,9 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-group">
-                        <label for="">Skills</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Web development</label>
-                        </div>
-                    </div> -->
-                        <!-- end of grid -->
+                       
                         <br>
-                        <!-- <div class="form-group">
-                                <label for="password">Native language</label>
-                                <input name="nativeLang" class="form-control" type="text" id="Native language"
-                                    placeholder="Native language" value="<%=currentUser.nativeLang%>">
-                            </div> -->
-
+                        
                         <div class="row">
                             <div class="col-6">
                                 <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/users">BACK</a>
@@ -538,16 +511,7 @@
 
         </div>
         <%- include('../../layouts/footer.ejs') %>
-
-            <!-- <script>
-                const element = document.querySelector('#submit');
-                element.addEventListener('submit', event => {
-                    event.preventDefault();
-                });
-            </script> -->
-            <!-- bootstrap scripts -->
-            <script src="/assets/vendor/jquery/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <%- include('../../layouts/strapAndJQuery.ejs') %>
 
 </body>
 
