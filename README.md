@@ -81,3 +81,4 @@
 - [x] likes not working properly in any user's profile
 - [x] render comment count dynamically
 - [x] adjust search design and logic
+- [] if I deleted a roadmap from dashboard it remains in the user skills
