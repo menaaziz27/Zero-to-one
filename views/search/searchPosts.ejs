@@ -37,7 +37,7 @@
 
             <a href="/search">want to search for users ?</a>
             <div id="match-list" class="container">
-                <% if (posts.length === 0 || posts === null) { %>
+                <% if (query !== '' && posts.length === 0 || posts === null ) { %>
                     <h3>No posts found with the keyword '<%= query %>'.</h3>
                     <% } %>
                 <!-- begginning of rendering all posts -->
