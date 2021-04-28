@@ -16,12 +16,14 @@
                 <li class="hvr-underline-from-center">
                     <a class="nav-link" href="/timeline">Timeline</a>
                 </li>
+                <% if(isAuthenticated) { %>
                 <li class="hvr-underline-from-center">
                     <a class="nav-link" href="/news">News</a>
                 </li>
                 <li class="hvr-underline-from-center">
                     <a class="nav-link" href="/search">Search</a>
                 </li>
+                <% } %>
                 <li class="hvr-underline-from-center">
                     <a class="nav-link" href="/roadmaps">Roadmaps</a>
                 </li>
