@@ -169,6 +169,7 @@ exports.getSearchPosts = (req, res) => {
 		modifiedPosts: '',
 		posts: [],
 		moment,
+		query: '',
 	});
 };
 
