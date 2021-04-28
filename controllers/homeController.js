@@ -17,47 +17,7 @@ exports.getHome = async (req, res, next) => {
 	const roadmaps = await Roadmap.find({});
 	res.render('home/index', { userid, roadmaps });
 };
-exports.getTimeline = async (req, res, next) => {
-	const page = +req.query.page || 1;
-	const data = await axios.get('https://dev.to/api/articles');
-	const news = data.data;
-	let userid;
-	if (req.user) {
-		userid = req.user._id.toString();
-	} else {
-		userid = null;
-	}
-	try {
-		const numPosts = await Post.find().countDocuments();
-		totalItems = numPosts;
-		const posts = await Post.find({})
-			.sort({ createdAt: -1 })
-			.populate('user')
-			.skip((page - 1) * POSTS_PER_PAGE)
-			.limit(POSTS_PER_PAGE);
 
-		const usersCount = await User.find({}).countDocuments();
-		const roadmapsCount = await Roadmap.find({}).count();
-		const postCount = posts.length;
-		res.render('home/timeline', {
-			userid: userid,
-			posts,
-			moment,
-			news,
-			postCount,
-			usersCount,
-			roadmapsCount,
-			currentPage: page,
-			hasNextPage: POSTS_PER_PAGE * page < totalItems,
-			hasPreviousPage: page > 1,
-			nextPage: page + 1,
-			previousPage: page - 1,
-			lastPage: Math.ceil(totalItems / POSTS_PER_PAGE),
-		});
-	} catch (e) {
-		console.log(e);
-	}
-};
 exports.getTimeline = async (req, res, next) => {
 	const data = await axios.get('https://dev.to/api/articles');
 	const news = data.data;
