@@ -36,3 +36,12 @@
 	background-color: grey;
 	color: var(--greyText);
 }
+.selectedUser {
+	font-weight: 300;
+	background-color: #cbe5fe;
+	color: #0084ff;
+	padding: 5px;
+	border-radius: 3px;
+	margin: 5px 5px 0 0;
+	display: inline-block;
+}

@@ -91,7 +91,6 @@ $('#userSearchTextBox').keydown(event => {
 	clearTimeout(timer);
 	var textbox = $(event.target);
 	var value = textbox.val();
-	console.log('value , ', value);
 	if (value == '' && event.keycode == 8) {
 		// remove user from selection
 		return;
@@ -383,7 +382,6 @@ function timeDifference(current, previous) {
 
 function searchUsers(search) {
 	$.get('/users', { search }, results => {
-		console.log(results);
 		outputSelectableUsers(results, $('.resultsContainer'));
 	});
 }
@@ -392,13 +390,14 @@ function outputSelectableUsers(results, container) {
 	container.html('');
 
 	results.forEach(result => {
-		if (result._id === userLoggedIn._id) {
+		if (
+			result._id === userLoggedIn._id ||
+			selectedUsers.some(user => user._id === result._id)
+		) {
 			return;
 		}
 		let html = createUserHtml(result, true);
-		console.log(html);
 		let element = $(html);
-		console.log(element);
 		element.click(() => userSelected(result));
 		container.append(element);
 	});
@@ -410,9 +409,24 @@ function outputSelectableUsers(results, container) {
 
 function userSelected(user) {
 	selectedUsers.push(user);
+	updateSelectedUserHtml();
 	$('#userSearchTextBox').val('').focus();
 	$('.resultsContainer').html('');
 	$('#CreateChatButton').prop('disabled', false);
+}
+
+function updateSelectedUserHtml() {
+	let elements = [];
+
+	selectedUsers.forEach(user => {
+		let name = user.name;
+		let userElement = $(`<span class="selectedUser">${name}</span>`);
+		elements.push(userElement);
+	});
+
+	//!
+	$('.selectedUser').remove();
+	$('#selectedUsers').prepend(elements);
 }
 
 //TODO
