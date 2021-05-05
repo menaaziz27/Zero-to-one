@@ -25,14 +25,11 @@ function outputUsers(results, container) {
 	container.html('');
 
 	results.forEach(follower => {
-		console.log(`${follower.name} id is ${follower._id}`);
-		console.log(userLoggedIn._id);
-		let html;
+		let showFollowing = true;
 		if (follower._id === userLoggedIn._id) {
-			html = createUserHtml(follower, false);
-		} else {
-			html = createUserHtml(follower, true);
+			showFollowing = false;
 		}
+		let html = createUserHtml(follower, showFollowing);
 		container.append(html);
 	});
 
@@ -64,6 +61,6 @@ function createUserHtml(userData, showFollowButton) {
                         <span class='username' style="color:blue">@${userData.username}</span>
                     </div>
                 </div>
-               ${followButton}
+							${followButton}
             </div>`;
 }
