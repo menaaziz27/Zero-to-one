@@ -24,3 +24,13 @@ exports.createChat = async (req, res) => {
 		console.log(e);
 	}
 };
+
+exports.getChat = async (req, res) => {
+	
+	try {
+		const result= await Chat.find({users:{ $elemMatch : {$eq :req.session.user._id}}}).populate('users');
+		return res.send(result);
+	} catch (e) {
+		console.log(e);
+	}
+};
