@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layouts/head.ejs') %>
+        <title><%= pageTitle %></title>
+
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+</head>
+
+<body>
+    <%- include('../layouts/navbar.ejs') %>
+        <!-- GRID SYSTEM -->
+        <div class="my-2 container-fluid">
+            <div class="row">
+                
+                <div class="offset-3 col-lg-6 col-md-10 postContent">
+                    <!-- post detail -->
+                    <div class="row d-flex">
+                        <h3>inbox</h3>
+                        <a href="/messages/new" class="ml-auto">
+                            <i class="far fa-plus-square"></i>
+                        </a>
+                    </div>
+                    <hr class="mt-2 mb-3"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
+                    <!-- maybe latest news -->
+                </div>
+            </div>
+
+            <%- include('../layouts/strapAndJQuery.ejs') %>
+
+                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
