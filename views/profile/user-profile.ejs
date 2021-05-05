@@ -38,10 +38,8 @@
                                     <%= user.name %>
                                 </h1>
                                 <% if (user._id.toString() !== currentUser._id.toString()) { %>
-                                    <button class="followButton following" data-user="<%= user.id %>">following</button>
-                                    <% } else{ %>
-                                    <button class="followButton" data-user="<%= user.id %>">follow</button>
-                                        <% } %>
+                                    <button class="<%= isFollowing ? 'followButton following' : 'followButton' %>" data-user="<%= user.id %>"><%= isFollowing ? 'following' : 'follow' %></button>
+                                    <% } %>
                                         <p class="mx-auto mb-4 fs-base m:fs-l color-base-90 max-w-100 m:max-w-75">
                                             <% if (user.bio) { %>
                                                 <%=user.bio%>
