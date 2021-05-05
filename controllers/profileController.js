@@ -7,8 +7,11 @@ const Roadmap = require('../models/Roadmap');
 
 exports.getUserProfile = async (req, res, next) => {
 	// const userId = req.params.id;
+	// console.log(req.query.comments);
+
 	const username = req.params.username;
 	let userRepos = [];
+	let isFollowing;
 
 	try {
 		const userDoc = await User.findOne({ username: username });
@@ -16,8 +19,13 @@ exports.getUserProfile = async (req, res, next) => {
 			res.locals.error = 'this user is deleted recently';
 			next();
 		}
+		if (
+			userDoc?.followers &&
+			userDoc.followers.includes(req.session.user._id)
+		) {
+			isFollowing = true;
+		}
 		userId = userDoc._id;
-		console.log(userDoc.websites);
 		const posts = await Post.find({ user: userId })
 			.sort({ createdAt: 'desc' })
 			.populate('user');
@@ -53,7 +61,8 @@ exports.getUserProfile = async (req, res, next) => {
 			moment,
 			userRepos,
 			postsCount,
-			// isFollowing: '',
+			isFollowing,
+			selectedTap: req.query.comments ? 'comments' : '',
 		});
 	} catch (e) {
 		console.log(e);

@@ -91,14 +91,14 @@ exports.postSearch = async (req, res, next) => {
 			allData.skills = [];
 		}
 	}
-	console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
+	// console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
 	allData = generateCriteriaObject(allData);
-	console.log(allData, 'QUERY DATAAAAAAA');
+	// console.log(allData, 'QUERY DATAAAAAAA');
 
 	try {
 		const users = await User.find(allData, { password: 0 });
 		const roadmaps = await Roadmap.find({});
-		console.log(users);
+		// console.log(users);
 
 		//TODO-1: check if the  request is ajax create string of matched elements in backticks string
 		//TODO-2: send users back to ajax and target the DOM element and replace it's HTML with the string
@@ -179,4 +179,25 @@ exports.postSearchPosts = async (req, res) => {
 	} catch (e) {
 		console.log(e);
 	}
+};
+
+exports.getUsers = async (req, res) => {
+	var searchObj = req.query;
+
+	if (req.query.search !== undefined) {
+		searchObj = {
+			$or: [
+				{ name: { $regex: req.query.search, $options: 'i' } },
+				{ username: { $regex: req.query.search, $options: 'i' } },
+			],
+		};
+	}
+	User.find(searchObj)
+		.then(results => {
+			res.status(200).send(results);
+		})
+		.catch(error => {
+			console.log(error);
+			res.sendStatus(400);
+		});
 };
