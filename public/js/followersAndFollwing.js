@@ -9,14 +9,14 @@ $(document).ready(function () {
 
 function loadFollowers() {
 	// this object is being received in the req.query;
-	$.get(`/users/${userLoggedIn._id}/followersdata`, results => {
+	$.get(`/users/${userProfileId}/followersdata`, results => {
 		outputUsers(results.followers, $('.resultsContainer'));
 	});
 }
 
 function loadFollowing() {
 	// this object is being received in the req.query;
-	$.get(`/users/${userLoggedIn._id}/followingdata`, results => {
+	$.get(`/users/${userProfileId}/followingdata`, results => {
 		outputUsers(results.following, $('.resultsContainer'));
 	});
 }
@@ -25,7 +25,11 @@ function outputUsers(results, container) {
 	container.html('');
 
 	results.forEach(follower => {
-		const html = createUserHtml(follower, true);
+		let showFollowing = true;
+		if (follower._id === userLoggedIn._id) {
+			showFollowing = false;
+		}
+		let html = createUserHtml(follower, showFollowing);
 		container.append(html);
 	});
 
@@ -41,7 +45,7 @@ function createUserHtml(userData, showFollowButton) {
 	const buttonClass = isFollowing ? 'followButton following' : 'followButton';
 
 	var followButton = '';
-	if (showFollowButton && userLoggedIn._id != userData._id) {
+	if (showFollowButton && userLoggedIn._id !== userData._id) {
 		followButton = `<div class='followButtonContainer'>
                             <button class='${buttonClass}' data-user='${userData._id}'>${text}</button>
                         </div>`;
@@ -57,6 +61,6 @@ function createUserHtml(userData, showFollowButton) {
                         <span class='username' style="color:blue">@${userData.username}</span>
                     </div>
                 </div>
-               ${followButton}
+							${followButton}
             </div>`;
 }
