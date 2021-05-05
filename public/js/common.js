@@ -55,6 +55,15 @@ $('#deletePostButton').click(e => {
 	});
 });
 
+
+$('#createChatButton').click(e => {
+	let data = JSON.stringify(selectedUsers);
+
+	#.post('/chats', {users: data}, chat => {
+		window.location.href = `/messages/${chat._id}`;
+	})
+});
+
 $('#submitPostButton, #submitReplyButton').click(e => {
 	var button = $(e.target);
 
@@ -91,8 +100,16 @@ $('#userSearchTextBox').keydown(event => {
 	clearTimeout(timer);
 	var textbox = $(event.target);
 	var value = textbox.val();
-	if (value == '' && event.keycode == 8) {
+	if (value == '' && (event.which === 8 || event.keyCode == 8)) {
 		// remove user from selection
+		selectedUsers.pop();
+		$('.resultsContainer').html('');
+		updateSelectedUserHtml();
+
+		if (selectedUsers.length === 0) {
+			$('#createChatButton').prop('disabled', true);
+		}
+
 		return;
 	}
 
@@ -412,7 +429,7 @@ function userSelected(user) {
 	updateSelectedUserHtml();
 	$('#userSearchTextBox').val('').focus();
 	$('.resultsContainer').html('');
-	$('#CreateChatButton').prop('disabled', false);
+	$('#createChatButton').prop('disabled', false);
 }
 
 function updateSelectedUserHtml() {

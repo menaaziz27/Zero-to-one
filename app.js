@@ -23,6 +23,7 @@ const postRoutes = require('./routes/post');
 const adminRoutes = require('./routes/admin');
 const roadmapsRoutes = require('./routes/roadmap');
 const messagesRoutes = require('./routes/messages');
+const chatRoutes = require('./routes/chat');
 
 // ============ constant vars ============
 // const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
@@ -91,6 +92,7 @@ app.use('/posts', postRoutes);
 app.use('/admin', adminRoutes);
 app.use('/roadmaps', roadmapsRoutes);
 app.use('/messages', messagesRoutes);
+app.use('/chats', chatRoutes);
 // app.use('/admin', adminRoutes)
 app.use((req, res) => {
 	if (!res.locals.error) {
