@@ -4,7 +4,6 @@ const User = require('../models/User');
 const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
 const { renderUsers, generateCriteriaObject } = require('../middleware/helper');
-const POSTS_PER_PAGE = 4;
 
 exports.getHome = async (req, res, next) => {
 	let userid;

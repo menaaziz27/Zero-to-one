@@ -82,6 +82,10 @@
 - [x] render comment count dynamically
 - [x] adjust search design and logic
 - [] if I deleted a roadmap from dashboard it remains in the user skills
-- [] law deft roadmap mn gher topics w 7awelt a3mlha access hy3ml error
+- [x] law deft roadmap mn gher topics w 7awelt a3mlha access hy3ml error
+- [] validation in dashborad
+- [] set default or blank data in edit post form if he didn't change any data in first time 
+- [] fix follow button in other users proile
 - [] in user profile if the user added his information i should render them in a section maybe underneath the skills section
 - [] messages page responsive layout fix
+- [] likes active class need to be fixed

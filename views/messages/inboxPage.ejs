@@ -7,6 +7,8 @@
 
         <link href="/assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/inboxPage.css">
+
 
 </head>
 
@@ -24,17 +26,24 @@
                             <i class="far fa-plus-square"></i>
                         </a>
                     </div>
+                    <div class="resultsContainer"></div>
                     <hr class="mt-2 mb-3"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
                     <!-- maybe latest news -->
                 </div>
             </div>
+        </div>
 
             <%- include('../layouts/strapAndJQuery.ejs') %>
 
                 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+                <script src="/js/inboxPage.js"></script>
+                <script src="/js/common.js"></script>
 
-</body>
+                <script>
+                    /* eslint-disable */
+                    var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+                </script></body>
 
 </html>

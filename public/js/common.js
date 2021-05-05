@@ -171,7 +171,7 @@ function createPostHtml(post, userId) {
                     <div class="crayons-story__top">
                         <div class="crayons-story__meta">
                             <div class="crayons-story__author-pic">
-														<a href="users/profile/${post.user.username}"
+														<a href="/users/profile/${post.user.username}"
 														class="crayons-avatar crayons-avatar--l ">
 														<img src="/${post.user.Image}" alt="aemiej profile"
 														class="crayons-avatar__image" />
@@ -179,7 +179,7 @@ function createPostHtml(post, userId) {
                             </div>
                             <div>
                                 <p>
-                                    <a href="users/profile/${
+                                    <a href="/users/profile/${
 																			post.user.username
 																		}"
                                         class="crayons-story__secondary fw-medium">
@@ -412,7 +412,7 @@ function outputSelectableUsers(results, container) {
 		) {
 			return;
 		}
-		let html = createUserHtml(result, true);
+		let html = createUserHtml(result, false);
 		let element = $(html);
 		element.click(() => userSelected(result));
 		container.append(element);
@@ -430,6 +430,23 @@ function userSelected(user) {
 	$('.resultsContainer').html('');
 	$('#createChatButton').prop('disabled', false);
 }
+function getChatName(chatData) {
+  var chatName = chatData.chatName;
+
+  if(!chatName) {
+      var otherChatUsers = getOtherChatUsers(chatData.users);
+      var namesArray = otherChatUsers.map(user => user.name);
+      chatName = namesArray.join(", ")
+  }
+
+  return chatName;
+}
+function getOtherChatUsers(users) {
+  if(users.length == 1) return users;
+
+  return users.filter(user => user._id != userLoggedIn._id);
+}
+
 
 function updateSelectedUserHtml() {
 	let elements = [];
