@@ -1,4 +1,5 @@
 let timer;
+let selectedUsers = [];
 $('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
 	var value = textbox.val().trim();
@@ -394,14 +395,26 @@ function outputSelectableUsers(results, container) {
 		if (result._id === userLoggedIn._id) {
 			return;
 		}
-		let html = renderUsers(result);
-		container.append(result);
+		let html = createUserHtml(result, true);
+		console.log(html);
+		let element = $(html);
+		console.log(element);
+		element.click(() => userSelected(result));
+		container.append(element);
 	});
 
 	if (results.length === 0) {
 		container.append('<span class="noResults">No result found.</span>');
 	}
 }
+
+function userSelected(user) {
+	selectedUsers.push(user);
+	$('#userSearchTextBox').val('').focus();
+	$('.resultsContainer').html('');
+	$('#CreateChatButton').prop('disabled', false);
+}
+
 //TODO
 //! redundancy fix
 function renderUsers(user) {
@@ -483,4 +496,32 @@ function renderUsers(user) {
                                         </div>
                                     </div>
                                 </div>`;
+}
+
+//! redundancy
+function createUserHtml(userData, showFollowButton) {
+	const isFollowing =
+		userLoggedIn.following && userLoggedIn.following.includes(userData._id);
+	const text = isFollowing ? 'following' : 'follow';
+	const buttonClass = isFollowing ? 'followButton following' : 'followButton';
+
+	var followButton = '';
+	if (showFollowButton && userLoggedIn._id != userData._id) {
+		followButton = `<div class='followButtonContainer'>
+                            <button class='${buttonClass}' data-user='${userData._id}'>${text}</button>
+                        </div>`;
+	}
+
+	return `<div class='user'>
+                <div class='userImageContainer'>
+                    <img src='/${userData.Image}'>
+                </div>
+                <div class='userDetailsContainer'>
+                    <div class='header'>
+                        <a href='/users/profile/${userData.username}'>${userData.name}</a>
+                        <span class='username' style="color:blue">@${userData.username}</span>
+                    </div>
+                </div>
+               ${followButton}
+            </div>`;
 }
