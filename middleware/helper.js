@@ -27,7 +27,7 @@ module.exports = {
 			: '';
 
 		let skillsHtml =
-			user.skills.length !== 0
+			user?.skills?.length !== 0
 				? `<a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
                                                     skills : ${skills}
                                                 </a>

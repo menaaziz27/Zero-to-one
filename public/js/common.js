@@ -1,128 +1,166 @@
+let timer;
+let selectedUsers = [];
 $('#post, #reply').keyup(e => {
-    var textbox = $(e.target);
-    var value = textbox.val().trim();
+	var textbox = $(e.target);
+	var value = textbox.val().trim();
 
-    // check if the event fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
-    let isModal = textbox.parents('.modal').length == 1;
+	// check if the event fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
+	let isModal = textbox.parents('.modal').length == 1;
 
-    var submitPostButton = isModal ?
-        $('#submitReplyButton') :
-        $('#submitPostButton');
+	var submitPostButton = isModal
+		? $('#submitReplyButton')
+		: $('#submitPostButton');
 
-    if (submitPostButton.length == 0) return alert('no submit button found');
+	if (submitPostButton.length == 0) return alert('no submit button found');
 
-    if (value == '') {
-        submitPostButton.prop('disabled', true);
-        return;
-    }
+	if (value == '') {
+		submitPostButton.prop('disabled', true);
+		return;
+	}
 
-    submitPostButton.prop('disabled', false);
+	submitPostButton.prop('disabled', false);
 });
 
 $('#replyModal').on('show.bs.modal', e => {
-    var button = $(e.relatedTarget);
-    var postId = getPostIdFromElement(button);
-    $('#submitReplyButton').data('id', postId);
+	var button = $(e.relatedTarget);
+	var postId = getPostIdFromElement(button);
+	$('#submitReplyButton').data('id', postId);
 
-    $.get(`/posts/${postId}`, postsAndUserId => {
-        let post = postsAndUserId.post;
-        userId = postsAndUserId.userId;
-        outputPosts(post, $('#originalPostContainer'));
-    });
+	$.get(`/posts/${postId}`, postsAndUserId => {
+		let post = postsAndUserId.post;
+		userId = postsAndUserId.userId;
+		outputPosts(post, $('#originalPostContainer'));
+	});
 });
 
 $('#replyModal').on('hidden.bs.modal', e => {
-    $('#originalPostContainer').html('');
+	$('#originalPostContainer').html('');
 });
 
 $('#deletePostModal').on('show.bs.modal', e => {
-    var button = $(e.relatedTarget);
-    var postId = getPostIdFromElement(button);
-    $('#deletePostButton').data('id', postId);
+	var button = $(e.relatedTarget);
+	var postId = getPostIdFromElement(button);
+	$('#deletePostButton').data('id', postId);
 });
 
 $('#deletePostButton').click(e => {
-    let postId = $(e.target).data('id');
+	let postId = $(e.target).data('id');
 
-    $.ajax({
-        url: `/posts/${postId}`,
-        type: 'DELETE',
-        success: postData => {
-            location.reload();
-        },
-    });
+	$.ajax({
+		url: `/posts/${postId}`,
+		type: 'DELETE',
+		success: postData => {
+			location.reload();
+		},
+	});
+});
+
+$('#createChatButton').click(e => {
+	let data = JSON.stringify(selectedUsers);
+
+	$.post('/chats', { users: data }, chat => {
+		window.location.href = `/messages/${chat._id}`;
+	});
 });
 
 $('#submitPostButton, #submitReplyButton').click(e => {
-    var button = $(e.target);
+	var button = $(e.target);
 
-    let isModal = button.parents('.modal').length == 1;
+	let isModal = button.parents('.modal').length == 1;
 
-    var textbox = isModal ? $('#reply') : $('#post');
+	var textbox = isModal ? $('#reply') : $('#post');
 
-    var data = {
-        post: textbox.val(),
-    };
+	var data = {
+		post: textbox.val(),
+	};
 
-    if (isModal) {
-        let id = button.data().id;
-        if (id === null) return alert('button id is null');
-        data.replyTo = id;
-    }
+	if (isModal) {
+		let id = button.data().id;
+		if (id === null) return alert('button id is null');
+		data.replyTo = id;
+	}
 
-    $.post('/posts', data, allData => {
-        userId = allData.userId;
-        let postData = allData.newPost;
+	$.post('/posts', data, allData => {
+		userId = allData.userId;
+		let postData = allData.newPost;
 
-        if (postData.replyTo) {
-            location.reload();
-        } else {
-            const html = createPostHtml(postData, userId);
-            $('.postContent').prepend(html);
-            textbox.val('');
-            button.prop('disabled', true);
-        }
-    });
+		if (postData.replyTo) {
+			location.reload();
+		} else {
+			const html = createPostHtml(postData, userId);
+			$('.postContent').prepend(html);
+			textbox.val('');
+			button.prop('disabled', true);
+		}
+	});
+});
+
+$('#userSearchTextBox').keydown(event => {
+	clearTimeout(timer);
+	var textbox = $(event.target);
+	var value = textbox.val();
+	if (value == '' && (event.which === 8 || event.keyCode == 8)) {
+		// remove user from selection
+		selectedUsers.pop();
+		$('.resultsContainer').html('');
+		updateSelectedUserHtml();
+
+		if (selectedUsers.length === 0) {
+			$('#createChatButton').prop('disabled', true);
+		}
+
+		return;
+	}
+
+	timer = setTimeout(() => {
+		value = textbox.val().trim();
+
+		if (value == '') {
+			$('.resultsContainer').html('');
+		} else {
+			searchUsers(value);
+		}
+	}, 1000);
 });
 
 function createPostHtml(post, userId) {
-    let hashtagsHtml;
+	let hashtagsHtml;
 
-    var timestamp = timeDifference(new Date(), new Date(post.createdAt));
+	var timestamp = timeDifference(new Date(), new Date(post.createdAt));
 
-    let isActive = post.likes.includes(userId) ? 'active' : '';
-    if (post.hashtags) {
-        hashtagsHtml = post.hashtags
-            .map(hashtag => {
-                return `
+	let isActive = post.likes.includes(userId) ? 'active' : '';
+	if (post.hashtags) {
+		hashtagsHtml = post.hashtags
+			.map(hashtag => {
+				return `
                                 <a href="" class="crayons-tag"><span
                                                         class="crayons-tag__prefix">#</span>
                                                     ${hashtag}
                                                 </a>
                             `;
-            })
-            .join('');
-    }
-    var replyFlag = '';
-    if (post.replyTo && post.replyTo._id) {
-        if (!post.replyTo._id) {
-            return alert('Reply to is not populated');
-        } else if (!post.replyTo.user._id) {
-            return alert('Posted by is not populated');
-        }
+			})
+			.join('');
+	}
+	var replyFlag = '';
+	if (post.replyTo && post.replyTo._id) {
+		if (!post.replyTo._id) {
+			return alert('Reply to is not populated');
+		} else if (!post.replyTo.user._id) {
+			return alert('Posted by is not populated');
+		}
 
-        var replyToUsername = post.replyTo.user.username;
-        replyFlag = `<div class='replyFlag'>
+		var replyToUsername = post.replyTo.user.username;
+		replyFlag = `<div class='replyFlag'>
                         Replying to <a href='/users/profile/${replyToUsername}'>@${replyToUsername}<a>
                     </div>`;
-    }
+	}
 
-    let buttons = '';
-    if (post.user._id === userId) {
-        buttons = `<button class="btn btn-dark" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">x</button>`;
-    }
+	let buttons = '';
+	if (post.user._id === userId) {
+		buttons = `<button class="btn btn-dark" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">x</button>`;
+	}
 
-    return `
+	return `
         <div class="crayons-story post" data-id=${post._id}>
 										${buttons}
                 <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
@@ -356,4 +394,164 @@ function timeDifference(current, previous) {
 	} else {
 		return Math.round(elapsed / msPerYear) + ' years ago';
 	}
+}
+
+function searchUsers(search) {
+	$.get('/users', { search }, results => {
+		outputSelectableUsers(results, $('.resultsContainer'));
+	});
+}
+
+function outputSelectableUsers(results, container) {
+	container.html('');
+
+	results.forEach(result => {
+		if (
+			result._id === userLoggedIn._id ||
+			selectedUsers.some(user => user._id === result._id)
+		) {
+			return;
+		}
+		let html = createUserHtml(result, true);
+		let element = $(html);
+		element.click(() => userSelected(result));
+		container.append(element);
+	});
+
+	if (results.length === 0) {
+		container.append('<span class="noResults">No result found.</span>');
+	}
+}
+
+function userSelected(user) {
+	selectedUsers.push(user);
+	updateSelectedUserHtml();
+	$('#userSearchTextBox').val('').focus();
+	$('.resultsContainer').html('');
+	$('#createChatButton').prop('disabled', false);
+}
+
+function updateSelectedUserHtml() {
+	let elements = [];
+
+	selectedUsers.forEach(user => {
+		let name = user.name;
+		let userElement = $(`<span class="selectedUser">${name}</span>`);
+		elements.push(userElement);
+	});
+
+	//!
+	$('.selectedUser').remove();
+	$('#selectedUsers').prepend(elements);
+}
+
+//TODO
+//! redundancy fix
+function renderUsers(user) {
+	let skills = user.skills
+		? user.skills.map(skill => skill + ',').join(' ')
+		: '';
+
+	let skillsHtml =
+		user.skills.length !== 0
+			? `<a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    skills : ${skills}
+                                                </a>
+                                                <br>`
+			: '';
+	let countryHtml = user.country
+		? `<a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    Country : ${user.country}
+                                                </a>
+                                                <br>`
+		: '';
+	let yearHtml = user.yearOfBirth
+		? `<a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    year of birth : ${user.yearOfBirth}
+                                                </a>
+                                                <br>`
+		: '';
+	let genderHtml = user.gender
+		? `<a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
+                                                    Gender : ${user.gender}
+                                                </a>`
+		: '';
+	return `
+		<div class="crayons-story " data-content-user-id="219080">
+                                    <div class="crayons-story__body">
+                                        <div class="crayons-story__top">
+                                            <div class="crayons-story__meta">
+                                                <div class="crayons-story__author-pic">
+
+                                                    <a href="/users/profile/${
+																											user.username
+																										}" class="crayons-avatar crayons-avatar--l ">
+                                                        <img src="${
+																													user.Image
+																														? '/' + user.Image
+																														: '/assets/img/default.png'
+																												}"
+                                                            alt="aemiej profile" class="crayons-avatar__image" />
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <p>
+                                                        <a href="/users/profile/${
+																													user.username
+																												}" class="crayons-story__secondary fw-medium">
+                                                            @${user.username}
+                                                        </a>
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="crayons-story__indention">
+                                            <h2 class="crayons-story__title">
+                                                <p>
+                                                    ${user.name}
+                                                </p>
+                                            </h2>
+                                            <div class="crayons-story__tags">
+                                            ${skillsHtml}
+                                            ${countryHtml}                                                            
+                                            ${yearHtml}                                                            
+                                            ${genderHtml}                                                            
+                                            </div>
+                                            <div class="crayons-story__bottom">
+                                                <div class="crayons-story__details">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
+}
+
+//! redundancy
+function createUserHtml(userData, showFollowButton) {
+	const isFollowing =
+		userLoggedIn.following && userLoggedIn.following.includes(userData._id);
+	const text = isFollowing ? 'following' : 'follow';
+	const buttonClass = isFollowing ? 'followButton following' : 'followButton';
+
+	var followButton = '';
+	if (showFollowButton && userLoggedIn._id != userData._id) {
+		followButton = `<div class='followButtonContainer'>
+                            <button class='${buttonClass}' data-user='${userData._id}'>${text}</button>
+                        </div>`;
+	}
+
+	return `<div class='user'>
+                <div class='userImageContainer'>
+                    <img src='/${userData.Image}'>
+                </div>
+                <div class='userDetailsContainer'>
+                    <div class='header'>
+                        <a href='/users/profile/${userData.username}'>${userData.name}</a>
+                        <span class='username' style="color:blue">@${userData.username}</span>
+                    </div>
+                </div>
+               ${followButton}
+            </div>`;
 }

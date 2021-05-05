@@ -86,3 +86,6 @@
 - [] validation in dashborad
 - [] set default or blank data in edit post form if he didn't change any data in first time 
 - [] fix follow button in other users proile
+- [] in user profile if the user added his information i should render them in a section maybe underneath the skills section
+- [] messages page responsive layout fix
+- [] likes active class need to be fixed
