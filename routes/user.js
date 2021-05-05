@@ -12,7 +12,7 @@ const {
 	getFollowing,
 	getFollowersData,
 	getFollowingData,
-	getComments,
+	// getComments,
 } = require('../controllers/profileController');
 const { getUsers } = require('../controllers/homeController');
 
@@ -24,7 +24,7 @@ router.get('/:userId/followersdata', getFollowersData);
 router.get('/:username/following', getFollowing);
 router.get('/:userId/followingdata', getFollowingData);
 router.get('/profile/:username', isAuthenticated, getUserProfile);
-router.get('/profile/:username/comments', isAuthenticated, getComments);
+// router.get('/profile/:username/comments', isAuthenticated, getComments);
 router.put('/:userId/follow', postFollow);
 router.get('/updateProfile', isAuthenticated, getUpdateProfile);
 router.post('/profile', isAuthenticated, validateProfile, postUpdateProfile);

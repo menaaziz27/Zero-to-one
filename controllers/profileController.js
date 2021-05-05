@@ -7,6 +7,8 @@ const Roadmap = require('../models/Roadmap');
 
 exports.getUserProfile = async (req, res, next) => {
 	// const userId = req.params.id;
+	// console.log(req.query.comments);
+
 	const username = req.params.username;
 	let userRepos = [];
 	let isFollowing;
@@ -60,62 +62,7 @@ exports.getUserProfile = async (req, res, next) => {
 			userRepos,
 			postsCount,
 			isFollowing,
-			selectedTap: '',
-		});
-	} catch (e) {
-		console.log(e);
-	}
-};
-
-exports.getComments = async (req, res) => {
-	const username = req.params.username;
-	let userRepos = [];
-
-	try {
-		const userDoc = await User.findOne({ username: username });
-		if (userDoc === null) {
-			res.locals.error = 'this user is deleted recently';
-			next();
-		}
-		userId = userDoc._id;
-		console.log(userDoc.websites);
-		const posts = await Post.find({ user: userId })
-			.sort({ createdAt: 'desc' })
-			.populate('user');
-		// fetch first five repose from user's github account to show them in projects section
-		const postsCount = posts.length;
-		if (userDoc.websites.length > 0 && userDoc.websites[0].includes('github')) {
-			let userGithubUrl = userDoc.websites[0];
-			const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');
-			// substract username after the last backslash and to the last index of the string
-			const githubUsername = userGithubUrl.substring(
-				lastIndexOfBackSlash + 1,
-				userGithubUrl[-1]
-			);
-			const response = await axios.get(
-				`https://api.github.com/users/${githubUsername}/repos`
-			);
-			const repos = response.data;
-
-			//! this block can be better by returning after pushing 5 elements and not iterating through the whole object data
-			repos.forEach((repo, index) => {
-				// if userRepose less than 5 objects and the repo is not forked (created by the user himself) => push it into array
-				if (repo.fork !== true && userRepos.length < 5) {
-					userRepos.push({ repoName: repo.name, repoUrl: repo.html_url });
-				}
-			});
-		}
-
-		res.render('profile/user-profile', {
-			user: userDoc,
-			userId: userId,
-			username: username,
-			posts,
-			moment,
-			userRepos,
-			postsCount,
-			isFollowing: '',
-			selectedTap: 'comments',
+			selectedTap: req.query.comments ? 'comments' : '',
 		});
 	} catch (e) {
 		console.log(e);
