@@ -55,13 +55,12 @@ $('#deletePostButton').click(e => {
 	});
 });
 
-
 $('#createChatButton').click(e => {
 	let data = JSON.stringify(selectedUsers);
 
-	#.post('/chats', {users: data}, chat => {
+	$.post('/chats', { users: data }, chat => {
 		window.location.href = `/messages/${chat._id}`;
-	})
+	});
 });
 
 $('#submitPostButton, #submitReplyButton').click(e => {
