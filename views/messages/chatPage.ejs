@@ -7,7 +7,11 @@
 
         <link href="/assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+
         <link rel="stylesheet" href="/assets/css/inboxPage.css">
+        <link rel="stylesheet" href="/assets/css/chatPage.css">
+
 
 
 </head>
@@ -15,7 +19,7 @@
 <body>
     <%- include('../layouts/navbar.ejs') %>
         <!-- GRID SYSTEM -->
-        <div class="my-2 container-fluid">
+        <div class="wrapper">
             <div class="row">
                 
                 <div class="offset-sm-2 col-sm-8 offset-md-3 col-md-6 postContent">
@@ -26,8 +30,26 @@
                     <% if(errorMessage) { %>
                         <%= errorMessage %>
                     <% } else { %>
-                    <div class="resultsContainer"></div>
-                    <hr class="mt-2 mb-3"/>
+                    <div style="height: 100%;" class="chatPageContainer ">
+                        <div class="chatTitleBarContainer">
+                            <div class="chatImagesContainer">
+                                <%for (let user of chat.users) {%>
+                                    <img src="/<%=user.Image%>" alt="user's Profile pic" title="<%=user.name%>" >
+                                    <%}%>
+                            </div>
+                            <span id="chatName">this is chat name</span>
+                          
+                            </div>
+                            <div style="height: 100%;" class="mainContentContainer">
+                                <div style="height: 100%;" class="chatContainer">
+                                    <div class="chatMessages"></div>
+                                    <div id="footer" class="footer"> 
+                                        <textarea name="messageInput"  placeholder="Type a message ..."></textarea>
+                                        <button class="sendMessageButton"><i class="fas fa-paper-plane"></i></button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
                     <% } %>
                 </div>
             </div>
