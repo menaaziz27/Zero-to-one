@@ -26,9 +26,12 @@ exports.createChat = async (req, res) => {
 };
 
 exports.getChat = async (req, res) => {
-	
 	try {
-		const result= await Chat.find({users:{ $elemMatch : {$eq :req.session.user._id}}}).populate('users');
+		const result = await Chat.find({
+			users: { $elemMatch: { $eq: req.session.user._id } },
+		})
+			.populate('users')
+			.sort({ updatedAt: -1 });
 		return res.send(result);
 	} catch (e) {
 		console.log(e);

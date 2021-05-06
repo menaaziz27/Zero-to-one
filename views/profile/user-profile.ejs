@@ -38,6 +38,7 @@
                                     <%= user.name %>
                                 </h1>
                                 <% if (user._id.toString() !== currentUser._id.toString()) { %>
+                                    <a href="/messages/<%= user._id %>"><i class="far fa-envelope"></i></a>
                                     <button class="<%= isFollowing ? 'followButton following' : 'followButton' %>" data-user="<%= user.id %>"><%= isFollowing ? 'following' : 'follow' %></button>
                                     <% } %>
                                         <p class="mx-auto mb-4 fs-base m:fs-l color-base-90 max-w-100 m:max-w-75">
@@ -410,7 +411,7 @@
 
         <%- include('../layouts/strapAndJQuery.ejs') %>
 
-
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
             <script src="/js/common.js"></script>
             <script src="/js/profile.js"></script>
             <script>
