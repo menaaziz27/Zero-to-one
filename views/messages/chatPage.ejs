@@ -37,7 +37,7 @@
                                     <img src="/<%=user.Image%>" alt="user's Profile pic" title="<%=user.name%>" >
                                     <%}%>
                             </div>
-                            <span id="chatName">this is chat name</span>
+                            <span id="chatName" data-toggle="modal" data-target="#chatNameModal"><%= chat.chatName %></span>
                           
                             </div>
                             <div style="height: 100%;" class="mainContentContainer">
@@ -54,12 +54,38 @@
                 </div>
             </div>
         </div>
+
+
+
+        <!-- chatName modal -->
+                            <div class="modal fade" id="chatNameModal" tabindex="-1" role="dialog" aria-labelledby="chatNameModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="chatNameModalLabel">Change the chat name</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input id="chatNameTextbox" type="text" placeholder="Enter a name for this chat" value="<%= chat.chatName %>">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button id="chatNameButton" type="button" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 </body>
 <%- include('../layouts/strapAndJQuery.ejs') %>
 
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="/js/chatPage.js"></script>
+<script src="/js/common.js"></script>
 <script>
     let chatId = <%- JSON.stringify(chatId) %>
+    let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
 </script>
 
 </html>

@@ -28,6 +28,7 @@ exports.getChatPage = async (req, res) => {
 		pageTitle: 'chat',
 		chatId: chatId,
 		errorMessage: null,
+		userLoggedIn: req.session.user,
 	};
 
 	if (!isValidId) {
