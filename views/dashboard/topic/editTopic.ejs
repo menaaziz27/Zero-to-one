@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-   >
+   
     <title>Edit Profile</title>
 
     <%- include('../../layouts/head.ejs') %>
@@ -13,7 +13,6 @@
     <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
     <link href="/assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
-
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link href="/assets/css/style.css" rel="stylesheet">
     <link href="/assets/css/errormessages.css" rel="stylesheet">
@@ -97,8 +96,8 @@
                             <%   for (var i = 0; i < roadmaps.length; i++) {%>
                                 <div class="d-block">
 
-                                    <input name="roadmaps" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].routeName%>" <% if(topic.roadmaps.some(road=> road.title ===roadmaps[i].title)) {%> checked
-                                    <%}%>>
+                                    <input name="roadmaps" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].routeName%>" <% if(topic.roadmaps.some(road=> road.title ===roadmaps[i].title)) {%> checked>
+                                    <%}%>
                                         <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
                                 </div>
                                 <% } %>
