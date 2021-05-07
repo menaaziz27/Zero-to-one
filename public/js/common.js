@@ -431,22 +431,21 @@ function userSelected(user) {
 	$('#createChatButton').prop('disabled', false);
 }
 function getChatName(chatData) {
-  var chatName = chatData.chatName;
+	var chatName = chatData.chatName;
 
-  if(!chatName) {
-      var otherChatUsers = getOtherChatUsers(chatData.users);
-      var namesArray = otherChatUsers.map(user => user.name);
-      chatName = namesArray.join(", ")
-  }
+	if (!chatName) {
+		var otherChatUsers = getOtherChatUsers(chatData.users);
+		var namesArray = otherChatUsers.map(user => user.name);
+		chatName = namesArray.join(', ');
+	}
 
-  return chatName;
+	return chatName;
 }
 function getOtherChatUsers(users) {
-  if(users.length == 1) return users;
+	if (users.length == 1) return users;
 
-  return users.filter(user => user._id != userLoggedIn._id);
+	return users.filter(user => user._id != userLoggedIn._id);
 }
-
 
 function updateSelectedUserHtml() {
 	let elements = [];
