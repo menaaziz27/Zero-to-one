@@ -37,3 +37,29 @@ exports.getChat = async (req, res) => {
 		console.log(e);
 	}
 };
+
+// PUT /chats/:chatId
+exports.updateChatName = async (req, res) => {
+	// req.body = { chatName: "whatever the new name is" }
+	try {
+		const result = await Chat.findByIdAndUpdate(req.params.chatId, req.body);
+		return res.sendStatus(204);
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+// GET /chats/:chatId
+exports.getSingleChat = async (req, res) => {
+	try {
+		const chat = await Chat.findOne({
+			_id: req.params.chatId,
+			users: { $elemMatch: { $eq: req.session.user._id } },
+		})
+			.populate('users')
+			.sort({ updatedAt: -1 });
+		return res.send(chat);
+	} catch (e) {
+		console.log(e);
+	}
+};
