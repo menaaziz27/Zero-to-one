@@ -2,7 +2,6 @@ const Chat = require('../models/Chat');
 const User = require('../models/User');
 const Message = require('../models/Message');
 
-
 exports.createChat = async (req, res) => {
 	if (!req.body.users) {
 		return alert('no users sent');
@@ -35,9 +34,9 @@ exports.getChat = async (req, res) => {
 			users: { $elemMatch: { $eq: req.session.user._id } },
 		})
 			.populate('users')
-      .populate('latestMessage')
+			.populate('latestMessage')
 			.sort({ updatedAt: -1 });
-      result = await User.populate(result, { path: "latestMessage.sender" });
+		result = await User.populate(result, { path: 'latestMessage.sender' });
 		return res.send(result);
 	} catch (e) {
 		console.log(e);
@@ -69,14 +68,16 @@ exports.getSingleChat = async (req, res) => {
 		console.log(e);
 	}
 };
+
+// GET /chats/:chatId/messages`
 exports.getSingleChatMessages = async (req, res) => {
 	try {
-   const messages= await Message.find({ chat: req.params.chatId })
-    .populate("sender")
-		
+		const messages = await Message.find({ chat: req.params.chatId }).populate(
+			'sender'
+		);
+
 		return res.send(messages);
 	} catch (e) {
 		console.log(e);
 	}
 };
-
