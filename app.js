@@ -32,7 +32,7 @@ const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
 const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server, { pingTimeout: 60000 });
-
+ 
 const store = new MongoDBStore({
     uri: MongoDB_URI,
     collection: 'sessions',
@@ -53,7 +53,8 @@ const fileFilter = (req, file, cb) => {
     if (
         file.mimetype === 'image/png' ||
         file.mimetype === 'image/jpg' ||
-        file.mimetype === 'image/jpeg'
+        file.mimetype === 'image/jpeg'||
+        file.mimetype === 'image/gif'
     ) {
         cb(null, true);
     } else {
@@ -117,4 +118,17 @@ io.on('connection', socket => {
 
     socket.on('join room', room => socket.join(room));
     socket.on('typing', chatId => socket.in(chatId).emit('typing'));
+    socket.on("stop typing", room => socket.in(room).emit("stop typing"));
+  
+    socket.on("new message", newMessage => {
+      var chat = newMessage.chat;
+
+      if(!chat.users) return console.log("Chat.users not defined");
+
+      chat.users.forEach(user => {
+          
+          if(user._id == newMessage.sender._id) return;
+          socket.in(user._id).emit("message received", newMessage);
+      })
+  });
 });
