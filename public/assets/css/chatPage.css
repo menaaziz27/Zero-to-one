@@ -21,6 +21,10 @@ body {
     font-weight: 300;
 }
 
+ul {
+    margin: 0;
+}
+
 .mainSectionContainer {
     padding: 0;
     border-left: 1px solid var(--lightGrey);

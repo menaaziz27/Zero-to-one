@@ -1,5 +1,8 @@
 $(document).ready(() => {
-    $('.inputTextbox').focus();
+    socket.emit('join room', chatId);
+    socket.on('typing', () => console.log('user is typing'));
+
+    $('.inputTextbox').val('').focus();
     $.get(`/chats/${chatId}`, data => {
         if (data.users.length == 1) {
             alert('other user is not available now');
@@ -44,11 +47,17 @@ $('.sendMessageButton').click(() => {
     messageSubmitted();
 });
 $('.inputTextbox').keydown(event => {
+    updateTyping();
+
     if (event.which === 13) {
         messageSubmitted();
         return false;
     }
 });
+
+function updateTyping() {
+    socket.emit('typing', chatId);
+}
 
 function messageSubmitted() {
     var content = $('.inputTextbox').val().trim();
@@ -125,19 +134,18 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 
     return `<li class='message ${liClassName}'>
 							${imageContainer}
-              <div class='messageContainer'>
-							${nameElement}
-                  <span class='messageBody'>
-                      ${message.content}
-                  </span>
-              </div>
-          </li>`;
+            <div class='messageContainer'>
+                        ${nameElement}
+                <span class='messageBody'>
+                    ${message.content}
+                </span>
+            </div>
+        </li>`;
 }
 
 function scrollToBottom(animated) {
     var container = $('.chatMessages');
     var scrollHeight = container[0].scrollHeight;
-    console.log(scrollHeight);
     if (animated) {
         container.animate({ scrollTop: scrollHeight }, 'slow');
     } else {

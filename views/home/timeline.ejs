@@ -160,14 +160,14 @@
             </div>
         </div>
 
-        <!-- Optional JavaScript -->
+        <script>
+            /* eslint-disable */
+            var userLoggedIn = <%- JSON.stringify(user) %>
+        </script>
         <%- include('../layouts/strapAndJQuery.ejs') %>
+            <!-- Optional JavaScript -->
 
             <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-            <script>
-                /* eslint-disable */
-                var userLoggedIn = <%- JSON.stringify(user) %>
-            </script>
             <script src="js/common.js"></script>
             <script src="js/timeline.js"></script>
 </body>
