@@ -20,6 +20,7 @@ exports.newMessage = (req, res) => {
 };
 
 exports.getChatPage = async (req, res) => {
+  let dots = 'assets/img/dots.gif'
 	let userId = req.session.user._id;
 	let chatId = req.params.chatId;
 	let isValidId = mongoose.isValidObjectId(chatId);
@@ -29,6 +30,7 @@ exports.getChatPage = async (req, res) => {
 		chatId: chatId,
 		errorMessage: null,
 		userLoggedIn: req.session.user,
+    dots
 	};
 
 	if (!isValidId) {
