@@ -1,5 +1,5 @@
 $(document).ready(() => {
-	$.get(`/chats/${chatId}`, data => $('#chatName').text(getChatName(data)));
+	$.get(`/chats/${chatId}`, (data) => {if(data.users.length == 1){alert('other user is not available now')} $('#chatName').text(getChatName(data))});
 });
 
 $('#chatNameButton').click(() => {
@@ -18,3 +18,28 @@ $('#chatNameButton').click(() => {
 		},
 	});
 });
+
+$(".sendMessageButton").click(() => {
+  messageSubmitted();
+})
+$(".inputTextbox").keydown((event) => {
+
+  if(event.which === 13) {
+      messageSubmitted();
+      return false;
+  }
+})
+
+function messageSubmitted() {
+  var content = $(".inputTextbox").val().trim();
+
+  if(content != "") {
+      sendMessage(content);
+      $(".inputTextbox").val("");
+  }
+}
+function sendMessage(content) {
+  $.post("/chatMessage", { content: content, chatId: chatId }, (data, status, xhr) => {
+             console.log(data)
+    })
+}
