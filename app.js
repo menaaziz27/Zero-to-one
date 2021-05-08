@@ -26,39 +26,39 @@ const messagesRoutes = require('./routes/messages');
 const chatRoutes = require('./routes/chat');
 const chatMessageRoutes = require('./routes/chatMessages');
 
-
 // ============ constant vars ============
 // const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
 const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
-
 const app = express();
+const server = app.listen(3000);
+const io = require('socket.io')(server, { pingTimeout: 60000 });
 
 const store = new MongoDBStore({
-	uri: MongoDB_URI,
-	collection: 'sessions',
+    uri: MongoDB_URI,
+    collection: 'sessions',
 });
 
 app.set('view engine', 'ejs');
 
 const fileStorage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, 'images');
-	},
-	filename: (req, file, cb) => {
-		cb(null, file.originalname);
-	},
+    destination: (req, file, cb) => {
+        cb(null, 'images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    },
 });
 
 const fileFilter = (req, file, cb) => {
-	if (
-		file.mimetype === 'image/png' ||
-		file.mimetype === 'image/jpg' ||
-		file.mimetype === 'image/jpeg'
-	) {
-		cb(null, true);
-	} else {
-		cb(null, false);
-	}
+    if (
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg' ||
+        file.mimetype === 'image/jpeg'
+    ) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
 };
 
 // app.use(morgan('tiny'));
@@ -66,24 +66,24 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
-	multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
+    multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
 );
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use(
-	session({
-		secret: 'my secret',
-		resave: false,
-		saveUninitialized: false,
-		store: store,
-	})
+    session({
+        secret: 'my secret',
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+    })
 );
 
 app.use(findUser);
 app.use(flash());
 app.use((req, res, next) => {
-	res.locals.isAuthenticated = req.session.isLoggedin;
-	next();
+    res.locals.isAuthenticated = req.session.isLoggedin;
+    next();
 });
 
 // ============ Routes ============
@@ -99,13 +99,22 @@ app.use('/chatMessage', chatMessageRoutes);
 
 // app.use('/admin', adminRoutes)
 app.use((req, res) => {
-	if (!res.locals.error) {
-		res.locals.error = 'This page is not found.';
-	}
-	res.render('404.ejs');
+    if (!res.locals.error) {
+        res.locals.error = 'This page is not found.';
+    }
+    res.render('404.ejs');
 });
 // app.use((error, req, res, next) => {
 // 	res.redirect("/500");
 // });
 
-app.listen(3000);
+io.on('connection', socket => {
+    console.log('connected to socket');
+    socket.on('setup', userData => {
+        socket.join(userData._id);
+        socket.emit('connected');
+    });
+
+    socket.on('join room', room => socket.join(room));
+    socket.on('typing', chatId => socket.in(chatId).emit('typing'));
+});

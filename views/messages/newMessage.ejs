@@ -3,7 +3,9 @@
 
 <head>
     <%- include('../layouts/head.ejs') %>
-        <title><%= pageTitle %></title>
+        <title>
+            <%= pageTitle %>
+        </title>
 
         <link href="/assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
@@ -20,13 +22,13 @@
         <!-- GRID SYSTEM -->
         <div class="my-2 container-fluid">
             <div class="row">
-                
+
                 <div class="offset-3 col-lg-6 col-md-10 postContent">
                     <!-- post detail -->
                     <div class="row d-flex">
                         <h3>New Message</h3>
                     </div>
-                    <hr class="mt-2 mb-3"/>
+                    <hr class="mt-2 mb-3" />
                     <div class="chatTitleBar">
                         <label for="userSearchTextBox">
                             To:
@@ -43,15 +45,15 @@
                 </div>
             </div>
         </div>
-            <%- include('../layouts/strapAndJQuery.ejs') %>
+        <script>
+            /* eslint-disable */
+            var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
+        <%- include('../layouts/strapAndJQuery.ejs') %>
 
-                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-                <script src="/js/followersAndFollowing.js"></script>
-                <script src="/js/common.js"></script>
-                <script>
-                /* eslint-disable */
-                var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
-            </script>
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <script src="/js/followersAndFollowing.js"></script>
+            <script src="/js/common.js"></script>
 
 </body>
 

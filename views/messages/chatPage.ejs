@@ -47,7 +47,7 @@
                                         <span id="chatName" data-toggle="modal" data-target="#chatNameModal"><%= chat.chatName %></span>
                                     </div>
                                     <div class="mainContentContainer">
-                                        <div class="chatContainer" style="visibility: visible;">
+                                        <div class="chatContainer">
                                             <ul class="chatMessages">
                                             </ul>
                                             <div class="footer">
@@ -93,14 +93,13 @@
 
 
 </body>
+<script>
+    let chatId = <%- JSON.stringify(chatId) %>
+    let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+</script>
 <%- include('../layouts/strapAndJQuery.ejs') %>
-
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="/js/chatPage.js"></script>
     <script src="/js/common.js"></script>
-    <script>
-        let chatId = <%- JSON.stringify(chatId) %>
-        let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
-    </script>
 
 </html>
