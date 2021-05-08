@@ -168,11 +168,7 @@ exports.postSearchPosts = async (req, res) => {
 		res.render('search/searchPosts.ejs', {
 			posts,
 			moment,
-			hasNextPage: POSTS_PER_PAGE * page < totalItems,
-			hasPreviousPage: page > 1,
-			nextPage: page + 1,
-			previousPage: page - 1,
-			lastPage: Math.ceil(totalItems / POSTS_PER_PAGE),
+		
 			query,
 		});
 	} catch (e) {
