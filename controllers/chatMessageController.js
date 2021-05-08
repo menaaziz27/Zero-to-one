@@ -16,7 +16,14 @@ var newMessage = {
 };
 try{
  let message= await Message.create(newMessage)
-  res.send(message);
+ message = await message.populate("sender").execPopulate();
+ message = await message.populate("chat").execPopulate();
+
+    Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message }).catch(e =>{
+      console.log(e)
+    })
+
+  res.status(201).send(message);
 }catch(e){
 console.log(e)
 }

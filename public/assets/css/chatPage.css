@@ -154,15 +154,7 @@ body {
 	font-size: 14px;
 }
 
-.typingDots img {
-	height: 35px;
-}
 
-.typingDots {
-	padding: var(--spacing);
-	padding-bottom: 0;
-	display: none;
-}
 
 .chatMessages .message .messageContainer {
 	display: flex;
