@@ -1,4 +1,5 @@
 $(document).ready(() => {
+	$('.inputTextbox').focus();
 	$.get(`/chats/${chatId}`, data => {
 		if (data.users.length == 1) {
 			alert('other user is not available now');
@@ -13,6 +14,8 @@ $(document).ready(() => {
 		data.forEach((message, index) => {
 			var html = createMessageHtml(message, data[index + 1], lastSenderId);
 			messages.push(html);
+
+			lastSenderId = message.sender._id;
 		});
 		var messagesHtml = messages.join('');
 		addMessagesHtmlToPage(messagesHtml);
@@ -52,6 +55,7 @@ function messageSubmitted() {
 	if (content != '') {
 		sendMessage(content);
 		$('.inputTextbox').val('');
+		$('.inputTextbox').focus();
 	}
 }
 
@@ -93,11 +97,16 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 	let currentSenderId = sender._id;
 	let nextSenderId = nextMessage !== null ? nextMessage?.sender._id : '';
 
+	console.log(`lastSenderId: ${lastSenderId}`);
+	console.log(`currentSenderId: ${currentSenderId}`);
 	let isFirst = lastSenderId !== currentSenderId;
 	let isLast = nextSenderId !== currentSenderId;
-	console.log(isFirst);
-	console.log(isLast);
+	console.log(`isFirst : ${isFirst}`);
+	console.log(`isLast: ${isLast}`);
+	console.log(`message.sender._id: ${message.sender._id}`);
+	console.log(`userLoggedIn._id: ${userLoggedIn._id}`);
 	let isMine = message.sender._id === userLoggedIn._id;
+	console.log(`isMine: ${isMine}`);
 	let liClassName = isMine ? 'mine' : 'theirs';
 
 	let nameElement = '';
@@ -109,13 +118,23 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 		}
 	}
 
+	let profileImage = '';
 	if (isLast) {
 		liClassName += ' last';
+		profileImage = `<img src=/${sender.Image} />`;
+	}
+
+	let imageContainer = '';
+	if (!isMine) {
+		imageContainer = `<div class="imageContainer">
+													${profileImage}
+											</div>`;
 	}
 
 	return `<li class='message ${liClassName}'>
+							${imageContainer}
               <div class='messageContainer'>
-							${senderName}
+							${nameElement}
                   <span class='messageBody'>
                       ${message.content}
                   </span>
