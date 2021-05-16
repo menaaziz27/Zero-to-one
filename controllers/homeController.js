@@ -34,7 +34,7 @@ exports.getTimeline = async (req, res, next) => {
 		res.render('home/timeline', {
 			userid: userid,
 			moment,
-			news,
+			news :news,
 			posts,
 			postCount,
 			usersCount,

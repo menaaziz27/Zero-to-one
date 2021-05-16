@@ -128,7 +128,7 @@
                                 Latest News
                             </h2>
                             <!-- beginning of first news -->
-                            <% if (news) { %>
+                            <% if (!news) { %>
                                 <% news.forEach(function(article, index) { %>
                                     <% if(index < 2) { %>
                                         <a href="<%= article.url %>" target="_blank"></a>
