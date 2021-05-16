@@ -8,21 +8,20 @@ const {
 	getLogin,
 	getNewPassword,
 	getReset,
-	postLogout,
+	getLogout,
 	postlogin,
 	postNewPassword,
 	postReset,
 	postRegister,
 	validateRegister,
 	validateLogin,
-  
 } = require('../controllers/authController');
 
 router.get('/register', getRegister);
 router.post('/register', validateRegister, postRegister);
 router.get('/login', getLogin);
 router.post('/login', validateLogin, postlogin);
-router.post('/logout', postLogout);
+router.get('/logout', getLogout);
 router.get('/reset', getReset);
 router.post('/reset', postReset);
 router.get('/reset/:token', getNewPassword);

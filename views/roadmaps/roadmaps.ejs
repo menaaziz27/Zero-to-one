@@ -34,7 +34,7 @@
 
                         <div class="section-title">
                             <h2>Road Maps</h2>
-                            <h4>We are provide a collection of road maps to give a lot of knowledge </h4>
+                            <h4>We provide a collection of roadmaps to help you in you career :) </h4>
                         </div>
 
                         <div class="row">
@@ -42,7 +42,7 @@
                                 <div class="col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-4 mt-md-0">
                                     <div class="icon-box w-100">
                                         <div class="icon"><i class="bx bx-window-alt"></i></div>
-                                        <% if(!isAuthenticated) {%>
+                                        <% if(!isAuthenticated) { %>
                                             <a href="/roadmaps/<%= roadmaps[i].routeName %>?redirectTo=/roadmaps/<%= roadmaps[i].routeName %>">
                                                 <% } else { %>
                                                     <a href="/roadmaps/<%= roadmaps[i].routeName %>">

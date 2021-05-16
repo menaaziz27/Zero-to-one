@@ -241,17 +241,19 @@
 
                     <div class="crayons-layout__sidebar-left">
                         <div class="hidden gap-2 m:gap-4 m:grid js-user-info">
-                            <% if(user.skills.length !==0) { %>
+                            <% if(user.skills.length !== 0) { %>
                                 <div class="crayons-card crayons-card--secondary">
                                     <header class="crayons-card__header">
                                         <h3 class="crayons-subtitle-3">Skills/languages</h3>
                                     </header>
                                     <div class="crayons-card__body">
                                         <% user.skills.forEach(function(skill){ %>
-                                            <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
-                                                <%= skill %>
-                                            </span>
-                                            <% }) %>
+                                            <a style="all: none;" href="/roadmaps/<%= skill.routeName %>">
+                                                <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
+                                                    <%= skill %>
+                                                </span>
+                                                <% }) %>
+                                            </a>
                                     </div>
                                 </div>
                                 <% } %>
@@ -299,7 +301,7 @@
                                                     </svg>
 
                                                     <a href="/users/profile/<%= user.username %>">
-                                                    <%= postsCount %> posts published </a>
+                                                        <%= postsCount %> posts published </a>
                                                 </div>
                                                 <div class="flex items-center mb-4">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt" class="mr-3 crayons-icon color-base-50">
@@ -409,16 +411,16 @@
 
         <%- include('../layouts/footer.ejs') %>
 
-        <%- include('../layouts/strapAndJQuery.ejs') %>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
 
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-            <script src="/js/common.js"></script>
-            <script src="/js/profile.js"></script>
-            <script>
-                /* eslint-disable */
-                var userLoggedIn = <%- JSON.stringify(user) %>
-                var selectedTap = <%- JSON.stringify(selectedTap) %>
-            </script>
+                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+                <script src="/js/common.js"></script>
+                <script src="/js/profile.js"></script>
+                <script>
+                    /* eslint-disable */
+                    var userLoggedIn = <%- JSON.stringify(user) %>
+                    var selectedTap = <%- JSON.stringify(selectedTap) %>
+                </script>
 </body>
 
 
