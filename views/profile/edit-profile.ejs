@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <h3>Info</h3>
                             <label for="name">Name</label>
-                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" value="<% if(name) {%><%=name%><% } else { %><%= currentUser.name %><% } %>">
+                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" value="<% if(name) {%><%=name%><% } else { %><%= req.session.user.name %><% } %>">
                             <% if (errorMassage) { %>
                                 <% errorMassage.forEach(function(error) { %>
                                     <% if(error.param==='name' ) { %>
@@ -535,64 +535,66 @@
                         <!-- end of language -->
 
                         <!-- beginning of grid -->
-                        <label for="">Skills</label>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-check">
-                                    <div class="d-block">
-                                        <%   for (var i = 0; i < roadmaps.length; i++) {%>
-                                            <div class="d-block">
+                        <% if(roadmaps.length !== 0) { %>
+                            <label for="">Skills</label>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-check">
+                                        <div class="d-block">
+                                            <%   for (var i = 0; i < roadmaps.length; i++) {%>
+                                                <div class="d-block">
 
-                                                <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>" <% if(currentUser.skills.includes(roadmaps[i].title)) { %> checked
-                                                <% } %>>
-                                                    <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
-                                            </div>
-                                            <% } %>
+                                                    <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>" <% if(currentUser.skills.includes(roadmaps[i].title)) { %> checked
+                                                    <% } %>>
+                                                        <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
+                                                </div>
+                                                <% } %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <h3 for="password">Links</h3>
-                            <label class="crayons-field__label" for="github">
+                            <% } %>
+                                <br>
+                                <div class="form-group">
+                                    <h3 for="password">Links</h3>
+                                    <label class="crayons-field__label" for="github">
                                 Github URL
                             </label>
-                            <input value="<% if (websitesObj.github) { %><%= websitesObj.github %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://github.com/..." class="crayons-textfield" type="text" name="github" id="github">
+                                    <input value="<% if (websitesObj.github) { %><%= websitesObj.github %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://github.com/..." class="crayons-textfield" type="text" name="github" id="github">
 
 
-                            <label class="crayons-field__label" for="stackoverflow">
+                                    <label class="crayons-field__label" for="stackoverflow">
                                 StackOverflow URL
                             </label>
-                            <input value="<% if (websitesObj.stackoverflow) { %><%= websitesObj.stackoverflow %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://stackoverflow.com/users/..." class="crayons-textfield" type="text" name="stackoverflow" id="stackoverflow">
+                                    <input value="<% if (websitesObj.stackoverflow) { %><%= websitesObj.stackoverflow %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://stackoverflow.com/users/..." class="crayons-textfield" type="text" name="stackoverflow" id="stackoverflow">
 
 
-                            <label class="crayons-field__label" for="linkedin">
+                                    <label class="crayons-field__label" for="linkedin">
                                 LinkedIn URL
                             </label>
-                            <input value="<% if (websitesObj.linkedin) { %><%= websitesObj.linkedin %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.linkedin.com/in/..." class="crayons-textfield" type="text" name="linkedin" id="linkedin">
+                                    <input value="<% if (websitesObj.linkedin) { %><%= websitesObj.linkedin %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.linkedin.com/in/..." class="crayons-textfield" type="text" name="linkedin" id="linkedin">
 
 
-                            <label class="crayons-field__label" for="twitter">
+                                    <label class="crayons-field__label" for="twitter">
                                 Twitter URL
                             </label>
-                            <input value="<% if (websitesObj.twitter) { %><%= websitesObj.twitter %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.twitter.com/in/..." class="crayons-textfield" type="text" name="twitter" id="twitter">
+                                    <input value="<% if (websitesObj.twitter) { %><%= websitesObj.twitter %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.twitter.com/in/..." class="crayons-textfield" type="text" name="twitter" id="twitter">
 
 
-                            <label class="crayons-field__label" for="instagram">
+                                    <label class="crayons-field__label" for="instagram">
                                 Instagram URL
                             </label>
-                            <input value="<% if (websitesObj.instagram) { %><%= websitesObj.instagram %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.instagram.com/in/..." class="crayons-textfield" type="text" name="instagram" id="instagram">
+                                    <input value="<% if (websitesObj.instagram) { %><%= websitesObj.instagram %><% } else {%><% } %>" class="mb-2 form-control" placeholder="https://www.instagram.com/in/..." class="crayons-textfield" type="text" name="instagram" id="instagram">
 
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <a class="mx-auto btn btn-outline-dark btn-block" href="/users/profile/<%= currentUser.username %>">BACK</a>
-                            </div>
-                            <div class="col-6">
-                                <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>
-                            </div>
-                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a class="mx-auto btn btn-outline-dark btn-block" href="/users/profile/<%= currentUser.username %>">BACK</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>
+                                    </div>
+                                </div>
                     </form>
                 </div>
             </div>

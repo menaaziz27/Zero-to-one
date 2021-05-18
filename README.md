@@ -46,9 +46,9 @@
 - [x] automatically generate user age after adding birth of year
 - [x] delete hashtags from post description and leave them only in the hashtags
 - [x] what if i posted empty post
+- [X] side menu bar for navigating in home
 - [] smooth scrolling & change scrollbar color ans shape
 - [] add see more button to the post description
-- [] side menu bar for navigating in home
 - [] restricted words in any post before creating it (npm bad-words)
 - [] every skill in user profile will be a link to its roadmap in the website
 - [] alert message in profile page to complete user data if it's not provided yet
@@ -71,7 +71,7 @@
 - [] upload image field with preview
 - [] limit post characters
 - [] fix scrollbar
-- [] hide update and delete button for posts that the user don't owe
+- [X] hide update and delete button for posts that the user don't owe
 - [x] search index problem (auto index when creating db)
 - [] remove border from textarea
 - [x] we're not using moment.js anymore now
@@ -81,11 +81,12 @@
 - [x] likes not working properly in any user's profile
 - [x] render comment count dynamically
 - [x] adjust search design and logic
-- [] if I deleted a roadmap from dashboard it remains in the user skills
 - [x] law deft roadmap mn gher topics w 7awelt a3mlha access hy3ml error
 - [] validation in dashborad
-- [] set default or blank data in edit post form if he didn't change any data in first time 
+- [] set default or blank data in edit post form if he didn't change any data in first time
 - [] fix follow button in other users proile
 - [] in user profile if the user added his information i should render them in a section maybe underneath the skills section
-- [] messages page responsive layout fix
 - [] likes active class need to be fixed
+- [X] messages page responsive layout fix
+- [X] if admin deleted roadmap it gets deleted automatically from the user skills list
+- [] delete post form in post submission and remain only the ajax call

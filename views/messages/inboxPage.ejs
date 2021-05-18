@@ -3,7 +3,9 @@
 
 <head>
     <%- include('../layouts/head.ejs') %>
-        <title><%= pageTitle %></title>
+        <title>
+            <%= pageTitle %>
+        </title>
 
         <link href="/assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
@@ -17,8 +19,8 @@
         <!-- GRID SYSTEM -->
         <div class="my-2 container-fluid">
             <div class="row">
-                
-                <div class="offset-sm-2 col-sm-8 offset-md-3 col-md-6 postContent">
+
+                <div class="offset-md-2  col-md-8 col-xs-12 postContent">
                     <!-- post detail -->
                     <div class="row d-flex">
                         <h3>inbox</h3>
@@ -27,21 +29,21 @@
                         </a>
                     </div>
                     <div class="resultsContainer"></div>
-                    <hr class="mt-2 mb-3"/>
+                    <hr class="mt-2 mb-3" />
                 </div>
-                
+
             </div>
         </div>
 </body>
 <%- include('../layouts/strapAndJQuery.ejs') %>
 
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="/js/inboxPage.js"></script>
-<script src="/js/common.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="/js/inboxPage.js"></script>
+    <script src="/js/common.js"></script>
 
-<script>
-/* eslint-disable */
-var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
-</script>
+    <script>
+        /* eslint-disable */
+        var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+    </script>
 
 </html>

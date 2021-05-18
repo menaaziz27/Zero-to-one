@@ -22,15 +22,15 @@
     <div class="wrapper">
         <%- include('../layouts/navbar.ejs') %>
             <div class="row">
-                <nav class="col-2">
-                    <!-- <a class="blue" href="/"> -->
-                    <!-- <i class="fas fa-dove" aria-hidden="true"> -->
+                <!-- <nav class="col-2"> -->
+                <!-- <a class="blue" href="/"> -->
+                <!-- <i class="fas fa-dove" aria-hidden="true"> -->
 
-                    <!-- </i></a><a href="/"><i class="fas fa-home" aria-hidden="true"></i></a><a href="/search"><i class="fas fa-search" aria-hidden="true"></i></a>
+                <!-- </i></a><a href="/"><i class="fas fa-home" aria-hidden="true"></i></a><a href="/search"><i class="fas fa-search" aria-hidden="true"></i></a>
                     <a href="/notifications"><i class="fas fa-bell" aria-hidden="true"></i></a><a href="/messages"><i class="fas fa-envelope" aria-hidden="true"></i></a><a href="/profile"><i class="fas fa-user" aria-hidden="true"></i></a>
                     <a href="/logout"><i class="fas fa-sign-out-alt" aria-hidden="true"></i></a> -->
-                </nav>
-                <div class="mainSectionContainer col-10 col-md-8 col-lg-6">
+                <!-- </nav> -->
+                <div class="mainSectionContainer offset-md-2  col-md-8 col-xs-12">
                     <div class="titleContainer">
                         <h1>Chat</h1>
                     </div>
@@ -40,7 +40,7 @@
                                 <div class="chatPageContainer">
                                     <div class="chatTitleBarContainer">
                                         <div class="chatImagesContainer">
-                                            <% for (let user of chat.users) {%>
+                                            <% for (let user of chat.users) { %>
                                                 <img src="/<%=user.Image%>" alt="user's Profile pic" title="<%=user.name%>">
                                                 <% } %>
                                         </div>
@@ -64,8 +64,9 @@
                                     </div>
                                 </div>
                                 <% } %>
+                                    <!-- <div class="d-none d-md-block col-md-2 col-lg-4"></div> -->
+
                 </div>
-                <div class="d-none d-md-block col-md-2 col-lg-4"></div>
             </div>
 
             <!-- chatName modal -->

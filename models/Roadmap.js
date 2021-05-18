@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Topic = require('./Topic');
+const User = require('./User');
 const Schema = mongoose.Schema;
 
 const roadmapSchema = new Schema({
@@ -28,7 +29,8 @@ const roadmapSchema = new Schema({
 
 roadmapSchema.pre('remove', async function (next) {
 	const roadmap = this;
-
+	const roadmapName = roadmap.title;
+	await User.updateMany({}, { $pull: { skills: roadmapName } });
 	await Topic.deleteMany({ roadmap });
 	next();
 });

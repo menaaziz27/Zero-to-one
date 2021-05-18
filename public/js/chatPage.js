@@ -2,9 +2,8 @@ var typing = false;
 var lastTypingTime;
 $(document).ready(() => {
     socket.emit('join room', chatId);
-    socket.on("typing", () => $(".typingDots").show());
-    socket.on("stop typing", () => $(".typingDots").hide());
-
+    socket.on('typing', () => $('.typingDots').show());
+    socket.on('stop typing', () => $('.typingDots').hide());
 
     $('.inputTextbox').val('').focus();
     $.get(`/chats/${chatId}`, data => {
@@ -60,23 +59,23 @@ $('.inputTextbox').keydown(event => {
 });
 
 function updateTyping() {
-  if(!connected) return;
-  if(!typing) {
-    typing = true;
-    socket.emit("typing", chatId);
-}
-lastTypingTime = new Date().getTime();
-var timerLength = 3000;
-
-setTimeout(() => {
-    var timeNow = new Date().getTime();
-    var timeDiff = timeNow - lastTypingTime;
-
-    if(timeDiff >= timerLength && typing) {
-        socket.emit("stop typing", chatId);
-        typing = false;
+    if (!connected) return;
+    if (!typing) {
+        typing = true;
+        socket.emit('typing', chatId);
     }
-}, timerLength);
+    lastTypingTime = new Date().getTime();
+    var timerLength = 3000;
+
+    setTimeout(() => {
+        var timeNow = new Date().getTime();
+        var timeDiff = timeNow - lastTypingTime;
+
+        if (timeDiff >= timerLength && typing) {
+            socket.emit('stop typing', chatId);
+            typing = false;
+        }
+    }, timerLength);
 }
 
 function messageSubmitted() {
@@ -86,7 +85,7 @@ function messageSubmitted() {
         sendMessage(content);
         $('.inputTextbox').val('');
         $('.inputTextbox').focus();
-        socket.emit("stop typing", chatId);
+        socket.emit('stop typing', chatId);
         typing = false;
     }
 }
@@ -101,9 +100,9 @@ function sendMessage(content) {
                 return;
             }
             addChatMessageHtml(data);
-            if(connected) {
-              socket.emit("new message", data);
-          }
+            if (connected) {
+                socket.emit('new message', data);
+            }
         }
     );
 }
