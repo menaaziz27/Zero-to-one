@@ -10,6 +10,8 @@
             <link href="assets/css/style.css" rel="stylesheet">
             <link href="/assets/css/navbar.css" rel="stylesheet">
             <link rel="stylesheet" href="/assets/css/scrollbar.css">
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -91,7 +93,7 @@
                         <% for (let i=0; i < roadmaps.length; i++) { %>
                             <div class="mt-4 col-lg-4 col-md-6 d-flex col-sm-6 col-xs-12 align-items-stretch mt-md-0">
                                 <div class="icon-box w-100">
-                                    <div class="icon"><i class="bx bx-window-alt"></i></div>
+                                    <div class="icon"><i class="fas fa-road"></i></div>
                                     <% if(!isAuthenticated) { %>
                                         <a href="/roadmaps/<%= roadmaps[i].routeName %>?redirectTo=/roadmaps/<%= roadmaps[i].routeName %>">
                                             <% }else { %>

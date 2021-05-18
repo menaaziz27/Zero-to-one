@@ -3,7 +3,6 @@ const { body, validationResult } = require('express-validator');
 const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
 const Topic = require('../models/Topic');
-
 const moment = require('moment');
 
 exports.getDashboard = async(req, res) => {
@@ -60,18 +59,29 @@ exports.deleteUser = async(req, res) => {
 exports.getEditUserDashboard = async(req, res) => {
     const UserId = req.params.id;
     try {
+      const roadmaps = await Roadmap.find({});
         const user = await User.findById(UserId, { password: 0 });
 
         res.render('dashboard/user/userEdit.ejs', {
             user,
             errorMassage: null,
+            roadmaps
         });
     } catch (e) {
         console.log(e);
     }
 };
+exports.validateUser = [
+  body('name', 'Name must be at least 4 characters in text or numbers only.')
+  .exists()
+  .isLength({ min: 4 }),
+  body('bio', 'bio must be less than 120 characters').isLength({ max: 120 }),
+ 
+];
 exports.postEditUserDashboard = async(req, res) => {
     const userid = req.body.userid;
+    const user = await User.findById(userid, { password: 0 });
+
     const name = req.body.name;
     const bio = req.body.bio;
     const country = req.body.country;
@@ -88,11 +98,20 @@ exports.postEditUserDashboard = async(req, res) => {
         Image = image.path;
     }
     const errors = validationResult(req);
+    console.log(errors)
     if (!errors.isEmpty()) {
-        return res.status(422).render('dashboard/userEdit', {
-            errorMassage: errors.array()[0].msg,
+      let roadmaps;
+		try {
+			roadmaps = await Roadmap.find({});
+		} catch (e) {
+			console.log(e);
+		}
+        return res.status(422).render('dashboard/user/userEdit.ejs', {
+            errorMassage: errors.array(),
+            user,
             name,
             userid: userid,
+            roadmaps
         });
     }
     try {
@@ -183,17 +202,39 @@ exports.getRoadmapDashboard = async(req, res) => {
 
 exports.getCreateRoadmapDashboard = (req, res) => {
     res.render('dashboard/roadmap/addRoadmap.ejs', {
+        title:null,
+        description:null,
+        summary:null,
+        routeName:null,
         errorMassage: null,
     });
 };
+exports.validateRoadmap = [
+  body('title', 'title must be at least 4 characters.').isLength({ min:4,max: 200 }).exists(),
+  body('summary', 'summary must be at least 100 and less than 200 characters.').isLength({ min:100,max: 200 }).exists(),
+  body('description', 'description must be at least 100 and less than 200 characters').isLength({min: 100 }),
+  body('routeName', 'routename  must be at least 2 less than 30 characters').isLength({min:2,max:30}),
 
+ 
+];
 exports.postCreateRoadmapDashboard = async(req, res) => {
     const title = req.body.title;
     const summary = req.body.summary;
     const description = req.body.description;
     const routeName = req.body.routeName;
     const steps = req.body.steps;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors.array());
+      return res.status(422).render('dashboard/roadmap/addRoadmap.ejs', {
+        errorMassage: errors.array(),
+        title:title,
+        summary:summary,
+        description:description,
+        routeName:routeName,
 
+      });
+    }
     try {
         const roadmap = await new Roadmap();
         roadmap.title = title;
@@ -237,6 +278,20 @@ exports.postEditroadmapDashboard = async(req, res) => {
     const description = req.body.description;
     const routeName = req.body.routeName;
     const roadmapId = req.body.id;
+    const roadmap = await Roadmap.findById({ _id: roadmapId });
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors.array());
+      return res.status(422).render('dashboard/roadmap/roadmapEdit.ejs', {
+        errorMassage: errors.array(),
+        title:title,
+        summary:summary,
+        description:description,
+        routeName:routeName,
+        roadmap
+      });
+    }
     try {
         const roadmap = await Roadmap.findById({ _id: roadmapId });
         roadmap.title = title;
@@ -284,19 +339,36 @@ exports.getCreateTopicDashboard = async(req, res) => {
         const roadmaps = await Roadmap.find({});
         res.render('dashboard/topic/addTopic.ejs', {
             errorMassage: null,
+            title:null,
+            summary:null,
+            description:null,
+            routeName:null,
             roadmaps,
         });
     } catch {
         console.log(e);
     }
 };
-
+exports.validateTopic = [
+  body('title', 'title must be at least 4 characters.').isLength({ min:4,max: 200 }).exists(),
+  body('summary', 'summary must be at least 100 and less than 200 characters.').isLength({ min:100,max: 200 }).exists(),
+  body('description', 'description must be at least 100 and less than 200 characters').isLength({min: 100 }),
+  body('routeName', 'routename  must be at least 2 less than 30 characters').isLength({min:2,max:30}),
+];
 exports.postCreateTopicDashboard = async(req, res) => {
     const title = req.body.title;
     const summary = req.body.summary;
     const description = req.body.description;
     const routeName = req.body.routeName;
-    let references = req.body.references;
+    let references 
+    if (typeof req.body.references == 'object') {
+      references = req.body.references;
+    } else if (typeof req.body.references == 'string') {
+      references = [req.body.references];
+    } else {
+      references = [];
+    }
+   
     let roadmaproute;
     if (typeof req.body.roadmaps == 'object') {
         roadmaproute = req.body.roadmaps;
@@ -305,13 +377,34 @@ exports.postCreateTopicDashboard = async(req, res) => {
     } else {
         roadmaproute = [];
     }
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const roadmaps = await Roadmap.find({});
+      console.log(errors.array());
+      return res.status(422).render('dashboard/topic/addTopic.ejs', {
+        errorMassage: errors.array(),
+        title:title,
+        summary:summary,
+        description:description,
+        routeName:routeName,
+        roadmaps
+        
+      });
+    }
     try {
         const topic = await new Topic();
         topic.title = title;
         topic.summary = summary;
         topic.description = description;
         topic.routeName = routeName;
-        topic.references = references;
+        for (var i = 0; i < references.length; i++) {
+          let split = references[i].split('-')
+          console.log(split[0])
+          console.log(split[1])
+
+        }
+        topic.references=references
+        // topic.references = references;
         for (var i = 0; i < roadmaproute.length; i++) {
             const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] });
             roadmap.steps.push(topic);
@@ -357,7 +450,28 @@ exports.postEditTopicDashboard = async(req, res) => {
     const description = req.body.description;
     const routeName = req.body.routeName;
     let references = req.body.references;
+    const topicId = req.body.id;
     let roadmaproute;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      let topic
+      let roadmaps
+      let references
+      try{
+        topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
+        roadmaps = await Roadmap.find({});
+        references = topic.references;
+      }catch(e){
+        console.log(e)
+      }
+      console.log(errors.array());
+      return res.status(422).render('dashboard/topic/editTopic.ejs', {
+        errorMassage: errors.array(),
+        topic,
+        roadmaps,
+        references
+      });
+    }
     if (typeof req.body.roadmaps == 'object') {
         roadmaproute = req.body.roadmaps;
     } else if (typeof req.body.roadmaps == 'string') {
@@ -365,7 +479,6 @@ exports.postEditTopicDashboard = async(req, res) => {
     } else {
         roadmaproute = [];
     }
-    const topicId = req.body.id;
     try {
         const topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
         topic.title = title;
