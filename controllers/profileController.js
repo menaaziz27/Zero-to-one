@@ -6,9 +6,6 @@ const { body, validationResult } = require('express-validator');
 const Roadmap = require('../models/Roadmap');
 
 exports.getUserProfile = async (req, res, next) => {
-	// const userId = req.params.id;
-	// console.log(req.query.comments);
-
 	const username = req.params.username;
 	let userRepos = [];
 	let isFollowing;
@@ -17,7 +14,11 @@ exports.getUserProfile = async (req, res, next) => {
 		const userDoc = await User.findOne({ username: username });
 		if (userDoc === null) {
 			res.locals.error = 'this user is deleted recently';
-			next();
+			const error = new Error(
+				'This account is not found. It may be deleted recently.'
+			);
+			error.statusCode = 422;
+			return next(error);
 		}
 		if (
 			userDoc?.followers &&

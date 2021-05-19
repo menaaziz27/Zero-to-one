@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
+    <title>
+        <%= error %>
+    </title>
     <link href="/assets/img/logo-white.png" rel="icon">
 
     <!-- bootstrap css -->
@@ -34,11 +36,12 @@
 <body>
     <%- include('./layouts/navbar.ejs') %>
 
-
-        <h1>
-            <%= error %>
-        </h1>
-
+        <div class="container mt-5">
+            <h1>
+                <%= error %>
+            </h1>
+            <span><a class="btn btn-success" href="/">Back</a></span>
+        </div>
         <script>
             const element = document.querySelector('#submit');
             element.addEventListener('submit', event => {

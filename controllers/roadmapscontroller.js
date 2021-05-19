@@ -34,9 +34,12 @@ exports.getRoadmap = async (req, res, next) => {
 		const roadmap = await Roadmap.findOne({ routeName: roadmapName }).populate(
 			'steps'
 		);
-		if (roadmap === null) {
-			res.locals.error = 'this roadmap is deleted since a while.';
-			next();
+		if (!roadmap) {
+			const error = new Error(
+				'Roadmap is not found. It may be deleted recently.'
+			);
+			error.statusCode = 404;
+			return next(error);
 		}
 		//! optional chaining
 		console.log(roadmap);
@@ -54,16 +57,19 @@ exports.getRoadmap = async (req, res, next) => {
 	}
 };
 
-exports.gettopic = async (req, res) => {
+exports.gettopic = async (req, res, next) => {
 	const topicName = req.params.topic;
 
 	try {
 		const topic = await Topic.findOne({ routeName: topicName }).populate(
 			'roadmaps'
 		);
-		if (topic === null) {
-			res.locals.error = 'this topic is deleted since a while.';
-			next();
+		if (!topic) {
+			const error = new Error(
+				'Topic is not found. It may be deleted recently.'
+			);
+			error.statusCode = 404;
+			return next(error);
 		}
 		// console.log(roadmap);
 		const roadmaps = topic.roadmaps;
