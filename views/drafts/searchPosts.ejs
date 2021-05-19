@@ -1,0 +1,56 @@
+<% if (query !== '' && posts.length === 0 || posts === null ) { %>
+    <h3>No posts found with the keyword '
+        <%= query %>'.</h3>
+    <% } %>
+        <!-- begginning of rendering all posts -->
+        <% if (posts !==undefined || posts !==null) { %>
+            <% posts.forEach(function(post) { %>
+                <div class="crayons-story post" data-id=<%=post._id%> data-content-user-id="219080">
+                    <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html" aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
+                                Github Real-Time Status to Improve Your Profile</a>
+
+
+                    <div class="crayons-story__body">
+                        <div class="crayons-story__top">
+                            <div class="crayons-story__meta">
+                                <div class="crayons-story__author-pic">
+
+                                    <a href="/users/profile/<%= post.user.username %>" class="crayons-avatar crayons-avatar--l ">
+                                                <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
+                                                    alt="aemiej profile" class="crayons-avatar__image" />
+                                            </a>
+                                </div>
+                                <div>
+                                    <p>
+                                        <a href="/users/profile/<%=post.user.username%>" class="crayons-story__secondary fw-medium">
+                                            <%=post.user.name%>
+                                        </a>
+                                    </p>
+                                    <a href="/posts/<%=post._id %>?timeline=true" class="crayons-story__tertiary fs-xs"><time
+                                                    datetime="2020-08-08T06:46:08Z">
+                                                    <%= moment(post.createdAt).fromNow() %>
+                                                </time><span class="time-ago-indicator-initial-placeholder"
+                                                    data-seconds="1596869168"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="crayons-story__indention">
+                            <h2 class="crayons-story__title">
+                                <p>
+                                    <%= post.description %>
+                                </p>
+                            </h2>
+                            <div class="crayons-story__tags">
+                                <% post.hashtags.forEach(function (tag) { %>
+                                    <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
+                                                <%= tag %>
+                                            </a>
+                                    <% }) %>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                    <% } %>

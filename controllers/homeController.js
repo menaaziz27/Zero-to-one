@@ -80,15 +80,6 @@ exports.postSearch = async (req, res, next) => {
 	let name, yearOfBirth, language, country, gender, skills, body;
 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
 		allData = req.body.allData;
-	} else {
-		allData = req.body;
-		// if skills length is 1 that means it has one value which will be string
-		if (typeof allData.skills === 'string') {
-			allData.skills = [allData.skills];
-		}
-		if (allData.skills === undefined) {
-			allData.skills = [];
-		}
 	}
 	// console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
 	allData = generateCriteriaObject(allData);
@@ -112,11 +103,6 @@ exports.postSearch = async (req, res, next) => {
 				matchedUsers = '';
 			}
 			res.send({ users: matchedUsers });
-		} else {
-			res.render('search/final_search.ejs', {
-				users,
-				roadmaps,
-			});
 		}
 	} catch (e) {
 		console.log(e);
@@ -129,6 +115,7 @@ exports.getSearchPosts = (req, res) => {
 		posts: [],
 		moment,
 		query: '',
+		user: req.session.user,
 	});
 };
 
@@ -165,12 +152,13 @@ exports.postSearchPosts = async (req, res) => {
 		totalItems = numPosts;
 		//! this line is tricky :D
 		const posts = await Post.populate(allPosts, { path: 'user' });
-		res.render('search/searchPosts.ejs', {
-			posts,
-			moment,
-		
-			query,
-		});
+		return res.send({ posts });
+		// res.render('search/searchPosts.ejs', {
+		// 	posts,
+		// 	moment,
+
+		// 	query,
+		// });
 	} catch (e) {
 		console.log(e);
 	}

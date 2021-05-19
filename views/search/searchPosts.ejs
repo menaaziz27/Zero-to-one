@@ -32,74 +32,12 @@
         <!-- partial:index.partial.html -->
         <div class="container">
             <form class="mt-4 form-search" method="POST" action="/search/posts">
-                <input class="form-control me-2" name="query" type="text" placeholder="Search for posts" aria-label="Search">
+                <input id="submitButton" class="form-control me-2" name="query" type="text" placeholder="Search for posts" aria-label="Search">
             </form>
 
             <a href="/search">want to search for users ?</a>
-            <div id="match-list" class="container">
-                <% if (query !== '' && posts.length === 0 || posts === null ) { %>
-                    <h3>No posts found with the keyword '<%= query %>'.</h3>
-                    <% } %>
-                <!-- begginning of rendering all posts -->
-                <% if (posts !==undefined || posts !==null) { %>
-                    <% posts.forEach(function(post) { %>
-                        <div class="crayons-story post" data-id=<%=post._id%> data-content-user-id="219080">
-                            <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html" aria-labelledby="article-link-421966" class="crayons-story__hidden-navigation-link">Use
-                                Github Real-Time Status to Improve Your Profile</a>
-
-
-                            <div class="crayons-story__body">
-                                <div class="crayons-story__top">
-                                    <div class="crayons-story__meta">
-                                        <div class="crayons-story__author-pic">
-
-                                            <a href="/users/profile/<%= post.user.username %>" class="crayons-avatar crayons-avatar--l ">
-                                                <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
-                                                    alt="aemiej profile" class="crayons-avatar__image" />
-                                            </a>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                <a href="/users/profile/<%=post.user.username%>" class="crayons-story__secondary fw-medium">
-                                                    <%=post.user.name%>
-                                                </a>
-                                            </p>
-                                            <a href="/posts/<%=post._id %>?timeline=true" class="crayons-story__tertiary fs-xs"><time
-                                                    datetime="2020-08-08T06:46:08Z">
-                                                    <%= moment(post.createdAt).fromNow() %>
-                                                </time><span class="time-ago-indicator-initial-placeholder"
-                                                    data-seconds="1596869168"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="crayons-story__indention">
-                                    <h2 class="crayons-story__title">
-                                        <p>
-                                            <%= post.description %>
-                                        </p>
-                                    </h2>
-                                    <div class="crayons-story__tags">
-                                        <% post.hashtags.forEach(function (tag) { %>
-                                            <a href="" class="crayons-tag"><span class="crayons-tag__prefix">#</span>
-                                                <%= tag %>
-                                            </a>
-                                            <% }) %>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <% }) %>
-                            <% } %>
-            </div>
+            <div id="match-list" class="container"></div>
         </div>
-
-
-
-
-
-        <!--  -->
 
         <!-- post comments modal -->
         <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
@@ -128,7 +66,6 @@
             </div>
         </div>
 
-
         <!-- post delete modal -->
         <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -150,38 +87,63 @@
             </div>
         </div>
 
-        <%- include('../layouts/strapAndJQuery.ejs') %>
 
+
+        <%- include('../layouts/strapAndJQuery.ejs') %>
 
             <script src="/js/common.js"></script>
             <script src="/js/postPage.js"></script>
             <script>
+                /* eslint-disable */
+                var userLoggedIn = <%- JSON.stringify(user) %>
+            </script>
+            <script>
                 $(document).ready(function() {
-                    $('#search').on('input', function(e) {
-                        const searchText = $('#search').val() || null;
+                    let userId = userLoggedIn._id
+                    let timer;
+                    $(window).keydown(function(event) {
+                        if (event.keyCode == 13) {
+                            event.preventDefault();
+                            return false;
+                        }
+                    });
+
+                    $('#submitButton').on('change keyup paste', function(e) {
+                        clearInterval(timer)
+                        const searchText = $('#submitButton').val() || null;
                         console.log(searchText)
                         if (searchText !== null) {
                             if (searchText.length === 0) {
                                 $('#search').val() = ''
                             } else {
-                                $.ajax({
-                                    url: '/search/posts',
-                                    method: 'POST',
-                                    dataType: "json",
-                                    contentType: 'application/json',
-                                    data: JSON.stringify({
-                                        query: searchText
-                                    }),
-                                    success: function(response) {
-                                        console.log(response.modifiedPosts)
-                                        $('#match-list').html(response.modifiedPosts);
-                                    }
-                                })
+                                timer = setTimeout(() => {
+                                    $.ajax({
+                                        url: '/search/posts',
+                                        method: 'POST',
+                                        dataType: "json",
+                                        contentType: 'application/json',
+                                        data: JSON.stringify({
+                                            query: searchText
+                                        }),
+                                        success: function(data) {
+                                            // TODO: accept all posts
+                                            // TODO: map through the array of objects
+                                            // TODO: create PostHtml for each object sending obj to a function with the post and postId
+                                            // TODO: append each postHtml to the div container
+                                            console.log(data)
+                                            data.posts.map(postObj => {
+                                                    var postHtml = createPostHtml(postObj, userId);
+                                                    console.log(postHtml);
+                                                    $('#match-list').append(postHtml)
+                                                })
+                                                //$('#match-list').text(data.posts);
+                                        }
+                                    })
+                                }, 1000)
                             }
                         } else {
                             $('#match-list').html('');
                         }
-
                     })
                 })
             </script>

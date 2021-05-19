@@ -127,7 +127,10 @@ function createPostHtml(post, userId) {
 	let hashtagsHtml;
 
 	var timestamp = timeDifference(new Date(), new Date(post.createdAt));
-
+	//!
+	if (post.likes === 0) {
+		post.likes = [];
+	}
 	let isActive = post.likes.includes(userId) ? 'active' : '';
 	if (post.hashtags) {
 		hashtagsHtml = post.hashtags
@@ -289,6 +292,23 @@ $(document).on('click', '.likeButton', function (e) {
 		},
 	});
 });
+
+$(document).on('click', '.user', function (e) {
+	let element = $(e.target);
+	console.log(element, 'here');
+	let username = getUsernameFromElement(element);
+	if (username !== undefined && !element.is('button')) {
+		window.location.href = `/users/profile/${username}`;
+	}
+});
+
+function getUsernameFromElement(element) {
+	var isRoot = element.hasClass('user');
+	var rootElement = isRoot ? element : element.closest('.user');
+	var username = rootElement.data().username;
+	if (username === undefined) return alert('Post id undefined');
+	return username;
+}
 
 $(document).on('click', '.post', function (e) {
 	let element = $(e.target);
@@ -573,10 +593,9 @@ function createUserHtml(userData, showFollowButton) {
 }
 
 function messageReceived(newMessage) {
-  if($(".chatContainer").length == 0) {
-      // Show popup notification
-  }
-  else {
-      addChatMessageHtml(newMessage);
-  }
+	if ($('.chatContainer').length == 0) {
+		// Show popup notification
+	} else {
+		addChatMessageHtml(newMessage);
+	}
 }
