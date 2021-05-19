@@ -8,12 +8,13 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
         <link href="assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
         <link rel="stylesheet" href="/assets/css/timeline.css">
         <link rel="stylesheet" href="/assets/css/button.css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -34,7 +35,7 @@
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
                 <div class="col-lg-6 col-md-10">
-                    <% if(!postDetail) {%>
+                    <% if(!postDetail) { %>
                         <!--- Post Form Begins -->
                         <section class="mb-2 card">
 
@@ -45,7 +46,7 @@
                                         <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                             <div class="form-group">
                                                 <label class="sr-only" for="post">post</label>
-                                                <textarea style="resize: none;height:100px" class="form-control" name="post" id="post" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                <textarea style="resize: none;height:100px;border-color: Transparent;" class="form-control" name="post" id="post" rows="3" placeholder="What are you thinking..." required></textarea>
                                             </div>
                                         </div>
                                     </div>

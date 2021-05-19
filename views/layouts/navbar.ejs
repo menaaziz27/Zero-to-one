@@ -17,43 +17,41 @@
                     <a class="nav-link" href="/timeline">Timeline</a>
                 </li>
                 <% if(isAuthenticated) { %>
-                <li class="hvr-underline-from-center">
-                    <a class="nav-link" href="/news">News</a>
-                </li>
-                <li class="hvr-underline-from-center">
-                    <a class="nav-link" href="/search">Search</a>
-                </li>
-                <% } %>
-                <li class="hvr-underline-from-center">
-                    <a class="nav-link" href="/roadmaps">Roadmaps</a>
-                </li>
-                
-                <% if(isAuthenticated && userid !==null ) { %>
                     <li class="hvr-underline-from-center">
-                        <a class="nav-link" href="/messages">Messages</a>
+                        <a class="nav-link" href="/news">News</a>
                     </li>
                     <li class="hvr-underline-from-center">
-                        <a class="nav-link" href="/users/profile/<%= currentUser.username%>">Profile</a>
+                        <a class="nav-link" href="/search">Search</a>
                     </li>
-                    <%if (isAdmin) {%>
+                    <% } %>
                         <li class="hvr-underline-from-center">
-                            <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                            <a class="nav-link" href="/roadmaps">Roadmaps</a>
                         </li>
-                        <% } %>
 
-                            <li class="">
-                                <form method="POST" action="/auth/logout">
-                                    <button class="btn btn-outline-danger scrollto">Logout</button>
-                                </form>
+                        <% if(isAuthenticated && userid !==null ) { %>
+                            <li class="hvr-underline-from-center">
+                                <a class="nav-link" href="/messages">Messages</a>
                             </li>
-                            <% } else { %>
+                            <li class="hvr-underline-from-center">
+                                <a class="nav-link" href="/users/profile/<%= currentUser.username%>">Profile</a>
+                            </li>
+                            <%if (isAdmin) {%>
                                 <li class="hvr-underline-from-center">
-                                    <a class="nav-link" href="auth/login">Login</a>
-                                </li>
-                                <li class="hvr-underline-from-center">
-                                    <a class="nav-link" href="auth/register">Get Started</a>
+                                    <a class="nav-link" href="/admin/dashboard">Dashboard</a>
                                 </li>
                                 <% } %>
+
+                                    <li class="hvr-underline-from-center">
+                                        <a class="nav-link" href="/auth/logout">Logout</a>
+                                    </li>
+                                    <% } else { %>
+                                        <li class="hvr-underline-from-center">
+                                            <a class="nav-link" href="auth/login">Login</a>
+                                        </li>
+                                        <li class="hvr-underline-from-center">
+                                            <a class="nav-link" href="auth/register">Get Started</a>
+                                        </li>
+                                        <% } %>
             </ul>
         </div>
     </div>

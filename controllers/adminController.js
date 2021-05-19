@@ -397,14 +397,7 @@ exports.postCreateTopicDashboard = async(req, res) => {
         topic.summary = summary;
         topic.description = description;
         topic.routeName = routeName;
-        for (var i = 0; i < references.length; i++) {
-          let split = references[i].split('-')
-          console.log(split[0])
-          console.log(split[1])
-
-        }
         topic.references=references
-        // topic.references = references;
         for (var i = 0; i < roadmaproute.length; i++) {
             const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] });
             roadmap.steps.push(topic);

@@ -29,6 +29,7 @@ exports.getUserProfile = async (req, res, next) => {
 		const posts = await Post.find({ user: userId })
 			.sort({ createdAt: 'desc' })
 			.populate('user');
+
 		// fetch first five repose from user's github account to show them in projects section
 		const postsCount = posts.length;
 		if (userDoc.websites.length > 0 && userDoc.websites[0].includes('github')) {
@@ -73,6 +74,12 @@ exports.getUpdateProfile = async (req, res) => {
 	let userid = req.user._id || null;
 
 	let websites = req.user.websites;
+	let userDoc;
+	try {
+		userDoc = await User.findOne({ _id: req.session.user._id });
+	} catch (e) {
+		console.log(e);
+	}
 
 	let websitesObj = {};
 
@@ -97,6 +104,7 @@ exports.getUpdateProfile = async (req, res) => {
 			websitesObj,
 			errorMassage: null,
 			roadmaps,
+			name: userDoc.name,
 		});
 	} catch (e) {
 		console.log(e);
@@ -112,20 +120,22 @@ exports.validateProfile = [
 
 exports.postUpdateProfile = async (req, res) => {
 	console.log(req.body);
-	const userid = req.body.userid;
-	const username = req.body.username;
-	const name = req.body.name;
-	const bio = req.body.bio;
-	const country = req.body.country;
-	const BirthDate = req.body.date_of_birth;
-	const gender = req.body.gender;
-	let skills = req.body.skills;
-	const nativeLang = req.body.language;
-	const github = req.body.github;
-	const linkedin = req.body.linkedin;
-	const instagram = req.body.instagram;
-	const twitter = req.body.twitter;
-	const stackoverflow = req.body.stackoverflow;
+	let {
+		userid,
+		username,
+		name,
+		bio,
+		country,
+		date_of_birth: BirthDate,
+		gender,
+		skills,
+		language: nativeLang,
+		github,
+		linkedin,
+		instagram,
+		twitter,
+		stackoverflow,
+	} = req.body;
 
 	if (skills) {
 		if (typeof skills === 'string') {
@@ -159,12 +169,19 @@ exports.postUpdateProfile = async (req, res) => {
 	}
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
+		let roadmaps;
+		try {
+			roadmaps = await Roadmap.find({});
+		} catch (e) {
+			console.log(e);
+		}
 		console.log(errors.array());
 		return res.status(422).render('profile/edit-profile', {
 			errorMassage: errors.array(),
 			name,
 			userid: userid,
 			websitesObj,
+			roadmaps,
 		});
 	}
 	//! ============================================
@@ -180,13 +197,15 @@ exports.postUpdateProfile = async (req, res) => {
 		user.gender = gender;
 		if (skills !== undefined) {
 			user.skills = skills;
+		} else {
+			user.skills = [];
 		}
 		user.nativeLang = nativeLang;
 
 		if (image !== undefined) {
 			user.Image = Image;
 		}
-		// !if github url is provided it will always be first element in my array that's why im checking it there in my profile controller above
+		//* if github url is provided it will always be first element in my array that's why im checking it there in my profile controller above
 		let websites = [github, linkedin, stackoverflow, twitter, instagram];
 
 		if (

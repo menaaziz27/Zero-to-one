@@ -17,10 +17,10 @@ const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 router.get('/', getHome);
 router.get('/timeline', isAuthenticated, getTimeline);
-router.get('/news', getNews);
-router.get('/search', getSearch);
-router.get('/search/posts', getSearchPosts);
-router.post('/search/posts', postSearchPosts);
-router.post('/search/users', postSearch);
+router.get('/news', isAuthenticated, getNews);
+router.get('/search', isAuthenticated, getSearch);
+router.get('/search/posts', isAuthenticated, getSearchPosts);
+router.post('/search/posts', isAuthenticated, postSearchPosts);
+router.post('/search/users', isAuthenticated, postSearch);
 
 module.exports = router;
