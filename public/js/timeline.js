@@ -1,7 +1,6 @@
 let userId;
 $(document).ready(function () {
 	function load() {
-		// put them in load function
 		$.get(`/posts?skip=${skip}&limit=${limit}`, postsAndUserId => {
 			let posts = postsAndUserId.posts;
 			userId = postsAndUserId.userId;

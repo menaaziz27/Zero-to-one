@@ -122,7 +122,6 @@ exports.getSearchPosts = (req, res) => {
 exports.postSearchPosts = async (req, res) => {
 	const { query } = req.body;
 	const { skip, limit } = req.query;
-	// console.log(skip, limit);
 	try {
 		const page = +req.query.page || '1';
 		const allPosts = await Post.aggregate([

@@ -104,7 +104,7 @@
                     let searchText;
 
                     function load() {
-                        let text = $('#submitButton').val() || null;
+
                         console.log(skip, limit);
                         $.ajax({
                             url: `/search/posts?skip=${skip}&limit=${limit}`,
@@ -112,7 +112,7 @@
                             dataType: "json",
                             contentType: 'application/json',
                             data: JSON.stringify({
-                                query: text
+                                query: searchText
                             }),
                             success: function(data) {
                                 console.log(data)
@@ -142,11 +142,13 @@
 
                     $('#submitButton').on('change keyup paste', function(e) {
                         clearInterval(timer)
-                        searchText = $('#submitButton').val() || null;
+                        searchText = $('#submitButton').val().trim() || null;
                         console.log(searchText)
                         if (searchText !== null) {
                             if (searchText.length === 0) {
                                 $('#search').val() = ''
+                            } else if (!searchText.replace(/\s/g, '').length) {
+                                return;
                             } else {
                                 timer = setTimeout(() => {
                                     skip = 0;
@@ -160,11 +162,6 @@
                                             query: searchText
                                         }),
                                         success: function(data) {
-                                            // TODO: accept all posts
-                                            // TODO: map through the array of objects
-                                            // TODO: create PostHtml for each object sending obj to a function with the post and postId
-                                            // TODO: append each postHtml to the div container
-                                            console.log(data)
                                             if (searchText) {
                                                 $('#match-list').html('');
                                             }
@@ -175,8 +172,6 @@
                                             skip = skip + limit;
                                         }
                                     })
-
-                                    trackQuery = searchText;
                                 }, 1000)
                             }
                         } else {
