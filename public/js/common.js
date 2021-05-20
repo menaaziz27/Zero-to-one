@@ -160,7 +160,7 @@ function createPostHtml(post, userId) {
 
 	let buttons = '';
 	if (post.user._id === userId) {
-		buttons = `<button class="btn btn-danger" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
+		buttons = `<button class="btn btn-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
 	}
 
 	return `
@@ -297,7 +297,6 @@ $(document).on('click', '.likeButton', function (e) {
 
 $(document).on('click', '.user', function (e) {
 	let element = $(e.target);
-	console.log(element, 'here');
 	let username = getUsernameFromElement(element);
 	if (username !== undefined && !element.is('button')) {
 		window.location.href = `/users/profile/${username}`;

@@ -83,17 +83,23 @@
                                                     </time>
                                                 </span>
                                                         <% } %>
-                                                        <%if (user.nativeLang) {%>
-                                                             <i style="font-size: x-large;" class="fas fa-language"></i>  <p> &nbsp;<%=user.nativeLang%></p> 
-                                                            <%}%>
-                                                            &nbsp
-                                                            <%if (user.gender) {%>
-                                                                <i style="font-size: x-large;" class="fas fa-venus-mars"></i>  <p> &nbsp;<%=user.gender%></p> 
-                                                               <%}%>
+                                                            <%if (user.nativeLang) {%>
+                                                                <i style="font-size: x-large;" class="fas fa-language"></i>
+                                                                <p> &nbsp;
+                                                                    <%=user.nativeLang%>
+                                                                </p>
+                                                                <%}%>
+                                                                    &nbsp
+                                                                    <%if (user.gender) {%>
+                                                                        <i style="font-size: x-large;" class="fas fa-venus-mars"></i>
+                                                                        <p> &nbsp;
+                                                                            <%=user.gender%>
+                                                                        </p>
+                                                                        <%}%>
 
 
-                                                            <!-- ===================== BEGINNING OF USER ICONS =================== -->
-                                                            <span class="-ml-1 profile-header__meta__item">
+                                                                            <!-- ===================== BEGINNING OF USER ICONS =================== -->
+                                                                            <span class="-ml-1 profile-header__meta__item">
                                                         <!-- if twitter -->
                                                         <% user.websites.forEach( function(link) { %>
                                                             <% if(link.includes("twitter")) { %>
@@ -210,15 +216,15 @@
                                                                                                     <% }) %>
                                                     </span>
 
-                                                            <!-- ========================= END OF USER ICONS FOR WEBSITES ======================  -->
-                                                            <% if(userid==user._id ) { %>
+                                                                            <!-- ========================= END OF USER ICONS FOR WEBSITES ======================  -->
+                                                                            <% if(userid==user._id ) { %>
 
-                                                                <span>
+                                                                                <span>
                                                             <a href="/users/updateProfile"
                                                                 class="btn btn-outline-info">Edit
                                                                 Profile</a>
                                                         </span>
-                                                                <% } %>
+                                                                                <% } %>
                                         </div>
                             </div>
                             <div class="profile-header__bottom fs-base">
@@ -255,12 +261,10 @@
                                     </header>
                                     <div class="crayons-card__body">
                                         <% user.skills.forEach(function(skill){ %>
-                                            <a style="all: none;" href="/roadmaps/<%= skill.routeName %>">
-                                                <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
-                                                    <%= skill %>
-                                                </span>
-                                                <% }) %>
-                                            </a>
+                                            <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
+                                                <%= skill %>
+                                            </span>
+                                            <% }) %>
                                     </div>
                                 </div>
                                 <% } %>
@@ -318,14 +322,6 @@
                                                         </path>
                                                     </svg>
                                                     <a href="/users/profile/<%= user.username %>?comments=true">6 comments written</a>
-                                                </div>
-                                                <div class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="aavo11kuxepnfcc1uh5458yldkuco6e3" class="mr-3 crayons-icon color-base-50">
-                                                        <title id="aavo11kuxepnfcc1uh5458yldkuco6e3">Tag</title>
-                                                        <path
-                                                            d="M7.784 14l.42-4H4V8h4.415l.525-5h2.011l-.525 5h3.989l.525-5h2.011l-.525 5H20v2h-3.784l-.42 4H20v2h-4.415l-.525 5h-2.011l.525-5H9.585l-.525 5H7.049l.525-5H4v-2h3.784zm2.011 0h3.99l.42-4h-3.99l-.42 4z">
-                                                        </path>
-                                                    </svg> 17 tags followed
                                                 </div>
                                             </div>
                         </div>
