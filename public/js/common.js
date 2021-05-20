@@ -1,4 +1,6 @@
 let timer;
+let skip = 0;
+let limit = 10;
 let selectedUsers = [];
 $('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
@@ -376,7 +378,7 @@ function outputPostsWithReplies(results, container) {
 }
 
 function outputPosts(posts, container) {
-	container.html('');
+	//container.html('');
 
 	if (!Array.isArray(posts)) {
 		posts = [posts];
@@ -387,7 +389,9 @@ function outputPosts(posts, container) {
 	});
 
 	if (posts.length == 0) {
-		container.append("<span class='noResults'>Nothing to show.</span>");
+		if (container.html() === '') {
+			container.append("<span class='noResults'>Nothing to show.</span>");
+		}
 	}
 }
 

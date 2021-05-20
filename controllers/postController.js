@@ -92,8 +92,14 @@ exports.createPost = async (req, res) => {
 };
 
 exports.getPosts = async (req, res) => {
+	const { skip } = req.query;
+	const { limit } = req.query;
+	delete req.query.skip;
+	delete req.query.limit;
+
 	var userId = req.session.user._id;
 	let searchObj = req.query;
+	console.log(req.query);
 
 	// b-filter kol el posts elli feha field replyTo 3shan ana 3ayz el posts bs msh el comments
 	if (searchObj.isReply !== undefined) {
@@ -102,7 +108,7 @@ exports.getPosts = async (req, res) => {
 		delete searchObj.isReply;
 	}
 
-	var posts = await getPosts(searchObj);
+	var posts = await getPosts(searchObj, Number(skip), Number(limit));
 	return res.status(200).send({ posts, userId });
 };
 
@@ -194,10 +200,12 @@ exports.getPostDetails = async (req, res, next) => {
 		});
 };
 
-async function getPosts(criteria) {
+async function getPosts(criteria, skip = 0, limit = 1) {
 	try {
 		let results = await Post.find(criteria)
 			.sort({ createdAt: -1 })
+			.skip(skip)
+			.limit(limit)
 			.populate('user')
 			.populate('replyTo');
 
