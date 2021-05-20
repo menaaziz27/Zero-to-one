@@ -1,8 +1,25 @@
 let userId;
 $(document).ready(function () {
-	$.get('/posts', postsAndUserId => {
-		let posts = postsAndUserId.posts;
-		userId = postsAndUserId.userId;
-		outputPosts(posts, $('.postContent'));
-	});
+	let skip = 0;
+	let limit = 11;
+
+	function load() {
+		// put them in load function
+		$.get(`/posts?skip=${skip}&limit=${limit}`, postsAndUserId => {
+			let posts = postsAndUserId.posts;
+			userId = postsAndUserId.userId;
+			// call output posts with the incoming 20 post only
+			outputPosts(posts, $('.postContent'));
+			skip = skip + limit - 1;
+		});
+	}
+
+	// If scrolled to bottom, load the next 10 posts
+	window.onscroll = () => {
+		if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+			load();
+		}
+	};
+
+	load();
 });

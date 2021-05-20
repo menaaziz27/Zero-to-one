@@ -376,7 +376,7 @@ function outputPostsWithReplies(results, container) {
 }
 
 function outputPosts(posts, container) {
-	container.html('');
+	//container.html('');
 
 	if (!Array.isArray(posts)) {
 		posts = [posts];
