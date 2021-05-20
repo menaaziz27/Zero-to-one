@@ -41,12 +41,7 @@ exports.getRoadmap = async (req, res, next) => {
 			error.statusCode = 404;
 			return next(error);
 		}
-		//! optional chaining
-		console.log(roadmap);
-		//!roadmap?.steps
 		const steps = roadmap.steps;
-		//!steps[0]?.title
-		console.log(steps[0]?.title);
 		res.render('roadmaps/diagram', {
 			roadmap,
 			steps,
@@ -72,7 +67,6 @@ exports.gettopic = async (req, res, next) => {
 			error.statusCode = 404;
 			return next(error);
 		}
-		// console.log(roadmap);
 		const roadmaps = topic.roadmaps;
 		res.render('roadmaps/topic', {
 			topic,

@@ -537,7 +537,6 @@
                                 } else {
                                     skills = [$(this).val()];
                                 }
-                                console.log($(this).val());
                                 findUser();
                             })
 
@@ -564,7 +563,6 @@
                                         }),
                                         success: function(response) {
                                             let users = response.users;
-                                            // console.log(response, 'from UI');
                                             if (users === '') {
                                                 $('#match-list').html('');
                                             }
