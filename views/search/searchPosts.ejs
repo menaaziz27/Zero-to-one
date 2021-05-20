@@ -149,6 +149,8 @@
                                 $('#search').val() = ''
                             } else {
                                 timer = setTimeout(() => {
+                                    skip = 0;
+                                    limit = 10;
                                     $.ajax({
                                         url: `/search/posts?skip=${skip}&limit=${limit}`,
                                         method: 'POST',
@@ -163,6 +165,9 @@
                                             // TODO: create PostHtml for each object sending obj to a function with the post and postId
                                             // TODO: append each postHtml to the div container
                                             console.log(data)
+                                            if (searchText) {
+                                                $('#match-list').html('');
+                                            }
                                             data.posts.map(postObj => {
                                                 var postHtml = createPostHtml(postObj, userId);
                                                 $('#match-list').append(postHtml)
@@ -170,6 +175,8 @@
                                             skip = skip + limit;
                                         }
                                     })
+
+                                    trackQuery = searchText;
                                 }, 1000)
                             }
                         } else {
