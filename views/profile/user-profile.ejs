@@ -10,7 +10,7 @@
         <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
         <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
         <link href="/assets/css/navbar.css" rel="stylesheet">
-        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <!-- <link rel="stylesheet" href="/assets/css/scrollbar.css"> -->
         <link rel="stylesheet" href="/assets/css/userProfile.css">
         <link rel="stylesheet" href="/assets/css/button.css">
         <link href="/assets/css/style.css" rel="stylesheet">
@@ -418,18 +418,18 @@
             </div>
         </div>
 
-        <%- include('../layouts/footer.ejs') %>
 
-            <%- include('../layouts/strapAndJQuery.ejs') %>
 
-                <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-                <script src="/js/common.js"></script>
-                <script src="/js/profile.js"></script>
-                <script>
-                    /* eslint-disable */
-                    var userLoggedIn = <%- JSON.stringify(user) %>
-                    var selectedTap = <%- JSON.stringify(selectedTap) %>
-                </script>
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+            <script src="/js/common.js"></script>
+            <script src="/js/profile.js"></script>
+            <script>
+                /* eslint-disable */
+                var userLoggedIn = <%- JSON.stringify(user) %>
+                var selectedTap = <%- JSON.stringify(selectedTap) %>
+            </script>
 </body>
 
 
