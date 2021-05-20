@@ -1,8 +1,5 @@
 let userId;
 $(document).ready(function () {
-	let skip = 0;
-	let limit = 11;
-
 	function load() {
 		// put them in load function
 		$.get(`/posts?skip=${skip}&limit=${limit}`, postsAndUserId => {

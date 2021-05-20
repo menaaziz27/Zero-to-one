@@ -8,19 +8,31 @@ $(document).ready(function () {
 });
 
 function loadPosts() {
-	// this object is being received in the req.query;
-	$.get('/posts', { user: userLoggedIn, isReply: false }, postsAndUserId => {
-		let posts = postsAndUserId.posts;
-		userId = postsAndUserId.userId;
-		outputPosts(posts, $('.postContent'));
-	});
+	$.get(
+		`/posts?skip=${skip}&limit=${limit}`,
+		{ user: userLoggedIn, isReply: false },
+		postsAndUserId => {
+			let posts = postsAndUserId.posts;
+			userId = postsAndUserId.userId;
+			outputPosts(posts, $('.postContent'));
+		}
+	);
 }
 
 function loadComments() {
-	// this object is being received in the req.query;
-	$.get('/posts', { user: userLoggedIn, isReply: true }, postsAndUserId => {
-		let posts = postsAndUserId.posts;
-		userId = postsAndUserId.userId;
-		outputPosts(posts, $('.postContent'));
-	});
+	$.get(
+		`/posts?skip=${skip}&limit=${limit}`,
+		{ user: userLoggedIn, isReply: true },
+		postsAndUserId => {
+			let posts = postsAndUserId.posts;
+			userId = postsAndUserId.userId;
+			outputPosts(posts, $('.postContent'));
+		}
+	);
 }
+
+window.onscroll = () => {
+	if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+		selectedTap === 'comments' ? loadComments() : loadPosts();
+	}
+};
