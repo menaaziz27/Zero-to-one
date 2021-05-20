@@ -7,9 +7,10 @@ $(document).ready(function () {
 			userId = postsAndUserId.userId;
 			// call output posts with the incoming 20 post only
 			outputPosts(posts, $('.postContent'));
-			skip = skip + limit - 1;
+			skip = skip + limit;
 		});
 	}
+	load();
 
 	// If scrolled to bottom, load the next 10 posts
 	window.onscroll = () => {
@@ -17,6 +18,4 @@ $(document).ready(function () {
 			load();
 		}
 	};
-
-	load();
 });

@@ -15,6 +15,7 @@ function loadPosts() {
 			let posts = postsAndUserId.posts;
 			userId = postsAndUserId.userId;
 			outputPosts(posts, $('.postContent'));
+			skip = skip + limit;
 		}
 	);
 }
@@ -27,6 +28,7 @@ function loadComments() {
 			let posts = postsAndUserId.posts;
 			userId = postsAndUserId.userId;
 			outputPosts(posts, $('.postContent'));
+			skip = skip + limit;
 		}
 	);
 }

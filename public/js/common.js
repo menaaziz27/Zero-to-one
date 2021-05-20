@@ -1,6 +1,6 @@
 let timer;
 let skip = 0;
-let limit = 11;
+let limit = 10;
 let selectedUsers = [];
 $('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
