@@ -20,10 +20,6 @@ const roadmapSchema = new Schema({
 		type: String,
 		required: [true, 'url required'],
 	},
-	routeName: {
-		type: String,
-		required: [true, 'url required'],
-	},
 	steps: [{ type: Schema.Types.ObjectId, ref: 'topic' }],
 });
 

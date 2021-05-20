@@ -30,7 +30,7 @@
         <div class="container">
             <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
                 <div class="py-4 rounded col-md-6 offset-md-3">
-                    <h3 style="text-align: center;">Add roadmap</h3>
+                    <h3 style="text-align: center;">Edit roadmap</h3>
                     <!-- FORM -->
                     <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
                     <form action="/admin/dashboard/roadmaps/edit" method="POST" enctype="multipart/form-data" id="submit">
@@ -40,24 +40,55 @@
                             <label for="name">title</label>
                             <input class="form-control" type="text" name="title" id="title" placeholder="Enter title" value="<%= roadmap.title%>">
                             <% if (errorMassage) { %>
-                                <small class="text-danger">
-                                    <%= errorMassage %>
-                                </small>
-                                <% } %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='title' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
                         <div class="form-group">
                             <label for="password">summary</label>
                             <input class="form-control" type="text" id="address" placeholder="summary" name="summary" value="<%= roadmap.summary%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='summary' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
                         <input type="hidden" name="id" value="<%=roadmap._id%>">
 
                         <div class="form-group">
                             <label for="password">description</label>
                             <input class="form-control" type="text" id="address" placeholder="description" name="description" value="<%= roadmap.description%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='description' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
                         <div class="form-group">
                             <label for="password">routeName</label>
                             <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName" value="<%= roadmap.routeName%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='routeName' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
                         <br>
                         <div class="row">

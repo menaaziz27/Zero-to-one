@@ -57,7 +57,8 @@ exports.getRoadmap = async (req, res, next) => {
 	}
 };
 
-exports.gettopic = async (req, res, next) => {
+exports.gettopic = async (req, res) => {
+	let referencee;
 	const topicName = req.params.topic;
 
 	try {
@@ -76,6 +77,7 @@ exports.gettopic = async (req, res, next) => {
 		res.render('roadmaps/topic', {
 			topic,
 			roadmaps,
+			referencee,
 		});
 	} catch (e) {
 		console.log(e);

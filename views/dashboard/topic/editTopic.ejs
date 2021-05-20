@@ -26,21 +26,18 @@
             color: red;
         }
     </style>
-    <script>
-        var id = 0;
-
-        var newinput = function() {
-            var parent = document.querySelector('.steps')
-            var field = document.createElement("input")
-            field.className = "form-control"
-            field.style = "display:block;"
-            field.id = "input" + id;
-            field.name = "references";
-            field.type = "text";
-            parent.appendChild(field);
-            id += 1;
+     <script>
+       
+        const addtextfield = btn => {
+         
+    //create the text box and x button next to it
+    var subtask = "<div class ='form-group' id='stepfield' ><input id='step' class='form-control' type='text' name='references'  style='width: 50%;'><button class=' btn btn-success' type='button'  name='deleteSubTask'>X</button></div>"
+             $(".references").append(subtask)
+             $(".references").on("click","button[name=deleteSubTask]",function(){
+            //delete the tr containing the control
+            $(this).parent().remove()
+            })
         }
-    </script>
     </script>
 </head>
 
@@ -51,7 +48,7 @@
 
             <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
                 <div class="py-4 rounded col-md-6 offset-md-3">
-                    <h3 style="text-align: center;">Add Topic</h3>
+                    <h3 style="text-align: center;">Edit Topic</h3>
                     <!-- FORM -->
                     <!-- <form action="/users/profile" method="POST" enctype="multipart/form-data"> -->
                     <form action="/admin/dashboard/topics/edit" method="POST" enctype="multipart/form-data" id="submit">
@@ -61,35 +58,67 @@
                             <label for="name">title</label>
                             <input class="form-control" type="text" name="title" id="title" placeholder="<%=topic.title%>" value="<%=topic.title%>">
                             <% if (errorMassage) { %>
-                                <small class="text-danger">
-                                    <%= errorMassage %>
-                                </small>
-                                <% } %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='title' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
+                           
                         </div>
                         <input type="hidden" name="id" value="<%=topic._id%>">
                         <div class="form-group">
                             <label for="password">summary</label>
                             <input class="form-control" type="text" id="address" placeholder="summary" name="summary" value="<%=topic.summary%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='summary' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
 
                         <div class="form-group">
                             <label for="password">description</label>
                             <input class="form-control" type="text" id="address" placeholder="description" name="description" value="<%=topic.description%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='description' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
                         <div class="form-group">
                             <label for="password">routeName</label>
                             <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName" value="<%=topic.routeName%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='routeName' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
-                        <div class="form-group steps">
+                        <div class="form-group references">
                             <label for="password">References</label>
-                            <button class="btn btn-success btn-sm" type="button" name="button" onclick="newinput()">+</button>
+                            <button id="btnstep" type="button" name="button" onclick="addtextfield()">+</button>
                             <% if (topic.references) { %>
                                 <% for (let reference of references) { %>
-                                    <input class="form-control" name="references" type="text" value="<%= reference%>">
+                                    <input id='step' class='form-control' type='text' name='references' value="<%=reference%>"  style='width: 50%;'>
                                     <%}%>
                                         <%}%>
-
                         </div>
+                       
 
                         <div class="form-check">
                             <label for="roadmaps">Roadmaps</label>
