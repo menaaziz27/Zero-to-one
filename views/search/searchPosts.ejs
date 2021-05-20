@@ -136,7 +136,7 @@
                                             // TODO: append each postHtml to the div container
                                             console.log(data)
                                             data.posts.map(postObj => {
-                                                var postHtml = createPostHtml(postObj, userId, true);
+                                                var postHtml = createPostHtml(postObj, userId);
                                                 console.log(postHtml);
                                                 $('#match-list').append(postHtml)
                                             })

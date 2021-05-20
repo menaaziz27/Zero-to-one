@@ -57,7 +57,7 @@ exports.getRoadmap = async (req, res, next) => {
 	}
 };
 
-exports.gettopic = async (req, res) => {
+exports.gettopic = async (req, res, next) => {
 	let referencee;
 	const topicName = req.params.topic;
 

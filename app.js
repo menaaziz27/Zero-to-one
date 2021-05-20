@@ -109,12 +109,12 @@ app.use((error, req, res, next) => {
 	});
 });
 
-// app.use((req, res) => {
-// 	if (!res.locals.error) {
-// 		res.locals.error = 'This page is not found.';
-// 	}
-// 	res.render('404.ejs');
-// });
+app.use((req, res) => {
+	if (!res.locals.error) {
+		res.locals.error = 'This page is not found.';
+	}
+	res.render('404.ejs');
+});
 
 io.on('connection', socket => {
 	console.log('connected to socket');
