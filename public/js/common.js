@@ -389,7 +389,9 @@ function outputPosts(posts, container) {
 	});
 
 	if (posts.length == 0) {
-		container.append("<span class='noResults'>Nothing to show.</span>");
+		if (container.html() === '') {
+			container.append("<span class='noResults'>Nothing to show.</span>");
+		}
 	}
 }
 

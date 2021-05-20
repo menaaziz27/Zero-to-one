@@ -34,7 +34,7 @@ exports.getTimeline = async (req, res, next) => {
 		res.render('home/timeline', {
 			userid: userid,
 			moment,
-			news :news,
+			news: news,
 			posts,
 			postCount,
 			usersCount,
@@ -121,6 +121,8 @@ exports.getSearchPosts = (req, res) => {
 
 exports.postSearchPosts = async (req, res) => {
 	const { query } = req.body;
+	const { skip, limit } = req.query;
+	// console.log(skip, limit);
 	try {
 		const page = +req.query.page || '1';
 		const allPosts = await Post.aggregate([
@@ -147,18 +149,15 @@ exports.postSearchPosts = async (req, res) => {
 					],
 				},
 			},
-		]);
+		])
+			.sort({ createdAt: -1 })
+			.skip(Number(skip))
+			.limit(Number(limit));
 		const numPosts = await Post.find().countDocuments();
 		totalItems = numPosts;
 		//! this line is tricky :D
 		const posts = await Post.populate(allPosts, { path: 'user' });
 		return res.send({ posts });
-		// res.render('search/searchPosts.ejs', {
-		// 	posts,
-		// 	moment,
-
-		// 	query,
-		// });
 	} catch (e) {
 		console.log(e);
 	}

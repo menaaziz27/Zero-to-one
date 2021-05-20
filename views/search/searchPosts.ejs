@@ -101,6 +101,34 @@
                 $(document).ready(function() {
                     let userId = userLoggedIn._id
                     let timer;
+                    let searchText;
+
+                    function load() {
+                        let text = $('#submitButton').val() || null;
+                        console.log(skip, limit);
+                        $.ajax({
+                            url: `/search/posts?skip=${skip}&limit=${limit}`,
+                            method: 'POST',
+                            dataType: "json",
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                query: text
+                            }),
+                            success: function(data) {
+                                console.log(data)
+                                data.posts.map(postObj => {
+                                    var postHtml = createPostHtml(postObj, userId);
+                                    $('#match-list').append(postHtml)
+                                })
+                                skip = skip + limit;
+                            }
+                        })
+                    }
+                    window.onscroll = () => {
+                        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                            load();
+                        }
+                    };
                     $(window).keydown(function(event) {
                         if (event.keyCode == 13) {
                             event.preventDefault();
@@ -114,7 +142,7 @@
 
                     $('#submitButton').on('change keyup paste', function(e) {
                         clearInterval(timer)
-                        const searchText = $('#submitButton').val() || null;
+                        searchText = $('#submitButton').val() || null;
                         console.log(searchText)
                         if (searchText !== null) {
                             if (searchText.length === 0) {
@@ -122,7 +150,7 @@
                             } else {
                                 timer = setTimeout(() => {
                                     $.ajax({
-                                        url: '/search/posts',
+                                        url: `/search/posts?skip=${skip}&limit=${limit}`,
                                         method: 'POST',
                                         dataType: "json",
                                         contentType: 'application/json',
@@ -137,9 +165,9 @@
                                             console.log(data)
                                             data.posts.map(postObj => {
                                                 var postHtml = createPostHtml(postObj, userId);
-                                                console.log(postHtml);
                                                 $('#match-list').append(postHtml)
                                             })
+                                            skip = skip + limit;
                                         }
                                     })
                                 }, 1000)
