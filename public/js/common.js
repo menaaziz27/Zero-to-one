@@ -160,12 +160,11 @@ function createPostHtml(post, userId) {
 
 	let buttons = '';
 	if (post.user._id === userId) {
-		buttons = `<button class="btn btn-dark" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">x</button>`;
+		buttons = `<button class="btn btn-danger" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
 	}
 
 	return `
         <div class="crayons-story post" data-id=${post._id}>
-										${buttons}
                 <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
                     aria-labelledby="article-link-421966"
                     class="crayons-story__hidden-navigation-link">Use
@@ -266,6 +265,9 @@ function createPostHtml(post, userId) {
                                     </a>`
 																		: ''
 																}
+                                &nbsp
+                                ${buttons}
+
                             </div>
                         </div>
                     </div>
