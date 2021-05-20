@@ -51,7 +51,7 @@ module.exports = {
                                                 </a>`
 			: '';
 		return `
-		<div class="crayons-story " data-content-user-id="219080">
+		<div class="crayons-story user" data-username="${user.username}">
                                     <div class="crayons-story__body">
                                         <div class="crayons-story__top">
                                             <div class="crayons-story__meta">

@@ -22,18 +22,17 @@
         <div class="container">
             <div class="row">
                 <div class="pl-0 pr-4 col-md-4">
-                    <form action="/search/users" method="POST">
-                        <!-- Name field -->
-                        <div class="my-3">
-                            <label for="exampleFormControlInput1" class="form-label">Name</label>
-                            <input id="name" name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
-                        </div>
-                        <!-- end name -->
+                    <!-- Name field -->
+                    <div class="my-3">
+                        <label for="exampleFormControlInput1" class="form-label">Name</label>
+                        <input id="name" name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+                    </div>
+                    <!-- end name -->
 
-                        <!-- Country -->
-                        <div class="my-3 from-control">
-                            <label for="country">country</label>
-                            <select name="country" id="country" class="form-control selectpicker" aria-label="Default select example">
+                    <!-- Country -->
+                    <div class="my-3 from-control">
+                        <label for="country">country</label>
+                        <select name="country" id="country" class="form-control selectpicker" aria-label="Default select example">
                                 <option selected value="any">any</option>
                                 <option value="Afganistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
@@ -285,12 +284,12 @@
                                 <option value="Zambia">Zambia</option>
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
-                        </div>
-                        <!-- end country -->
+                    </div>
+                    <!-- end country -->
 
-                        <!-- begin year of birth -->
-                        <label for="yearOfBirth">year of birth</label>
-                        <select name="yearOfBirth" id="yearOfBirth" class="form-control form-select-sm selectpicker" aria-label=".form-select-sm example">
+                    <!-- begin year of birth -->
+                    <label for="yearOfBirth">year of birth</label>
+                    <select name="yearOfBirth" id="yearOfBirth" class="form-control form-select-sm selectpicker" aria-label=".form-select-sm example">
                             <option selected value="any">any</option>
                             <option value="1960">1960</option>
                             <option value="1961">1961</option>
@@ -350,23 +349,23 @@
                             <option value="2000">2015</option>
                             <option value="2000">2016</option>
                         </select>
-                        <!-- end of year of birth -->
+                    <!-- end of year of birth -->
 
-                        <!-- begin gender -->
-                        <div class="mt-3">
-                            <label for="gender">Gender</label>
-                            <select name="gender" id="gender" class="form-control form-select-sm" aria-label="">
+                    <!-- begin gender -->
+                    <div class="mt-3">
+                        <label for="gender">Gender</label>
+                        <select name="gender" id="gender" class="form-control form-select-sm" aria-label="">
                                 <option selected>any</option>
                                 <option value="male">male</option>
                                 <option value="female">female</option>
                             </select>
-                        </div>
-                        <!-- end of gender -->
+                    </div>
+                    <!-- end of gender -->
 
-                        <!-- begin of tounge language -->
-                        <div class="mt-3">
-                            <label for="language">tounge language</label>
-                            <select name="nativeLang" id="language" class="form-control form-select-sm selectpicker" aria-label="">
+                    <!-- begin of tounge language -->
+                    <div class="mt-3">
+                        <label for="language">tounge language</label>
+                        <select name="nativeLang" id="language" class="form-control form-select-sm selectpicker" aria-label="">
                                 <option selected>any</option>
                                 <option value="Afrikaans">Afrikaans</option>
                                 <option value="Albanian">Albanian</option>
@@ -441,134 +440,40 @@
                                 <option value="Welsh">Welsh</option>
                                 <option value="Xhosa">Xhosa</option>
                             </select>
-                        </div>
-                        <!-- end of language -->
+                    </div>
+                    <!-- end of language -->
 
-                        <% if (roadmaps !== null && roadmaps.length !== 0) { %>
-                            <!-- begin Skills & interested in -->
-                            <label class="mt-3" for="">Skills</label>
-                            <div class="row ">
-                                <div class="p-0 m-0 col">
-                                    <div class="form-check w-100">
-                                        <%   for (var i = 0; i < roadmaps.length; i++) {%>
-                                            <div class="d-block">
+                    <% if (roadmaps !== null && roadmaps.length !== 0) { %>
+                        <!-- begin Skills & interested in -->
+                        <label class="mt-3" for="">Skills</label>
+                        <div class="row ">
+                            <div class="p-0 m-0 col">
+                                <div class="form-check w-100">
+                                    <%   for (var i = 0; i < roadmaps.length; i++) { %>
+                                        <div class="d-block">
 
-                                                <input name="skills" class="form-check-input skills" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>">
-                                                <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
-                                            </div>
-                                            <% } %>
-                                    </div>
+                                            <input name="skills" class="form-check-input skills" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>
+                                        </div>
+                                        <% } %>
                                 </div>
                             </div>
-                            <!-- end of skills -->
-                            <% } %>
-
-                                <input class="mt-3 d-block form-control btn btn-outline-dark" type="submit" value="Submit">
-                    </form>
+                        </div>
+                        <!-- end of skills -->
+                        <% } %>
+                            <input id="submitButton" class="mt-3 d-block form-control btn btn-outline-dark" type="submit" value="Submit">
                 </div>
                 <!-- end col-3 -->
 
                 <!-- begin col-9 -->
                 <div class="mt-4 col-md-8">
-
-                    <!--  -->
-
                     <div class="mt-3 row">
                         <div class="col-md-6"> <a href="/search">Search by User</a></div>
                         <div class="col-md-6"> <a href="/search/posts"> Search by Posts</a></div>
                     </div>
                     <!-- cards -->
-                    <!-- card1 -->
-
-
-                    <div id="match-list" class="mt-4">
-                        <% if (users !==undefined || users !==null) { %>
-                            <% users.forEach(function(user) { %>
-                                <div class="crayons-story " data-content-user-id="219080">
-                                    <div class="crayons-story__body">
-                                        <div class="crayons-story__top">
-                                            <div class="crayons-story__meta">
-                                                <div class="crayons-story__author-pic">
-
-                                                    <a href="/users/profile/<%= user.username %>" class="crayons-avatar crayons-avatar--l ">
-                                                        <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/assets/img/default.png <%}%>"
-                                                            alt="aemiej profile" class="crayons-avatar__image" />
-                                                    </a>
-                                                </div>
-                                                <div>
-                                                    <p>
-                                                        <a href="/users/profile/<%= user.username %>" class="crayons-story__secondary fw-medium">
-                                                            <%=user.username%>
-                                                        </a>
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="crayons-story__indention">
-                                            <h2 class="crayons-story__title">
-                                                <p>
-                                                    <%=user.name%>
-                                                </p>
-                                            </h2>
-                                            <% if(user.skills.length !== 0 || user.gender || user.country || user.yearOfBirth)  {%>
-                                            <div class="crayons-story__tags">
-
-                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
-                                                    <% if (user.skills && user.skills.length !== 0) { %>
-                                                    skills :
-                                                    <% user.skills.forEach(function (skill) { %>
-                                                        <%= skill %> , <% }) %>
-                                                        <% } %>
-                                                </a>
-                                                <br>
-                                                    <% if (user.yearOfBirth) { %>
-                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
-                                                    year of birth : <%=user.yearOfBirth%>
-                                                </a>
-                                                <% } %>
-                                                <br>
-                                                    <% if (user.country) { %>
-                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
-                                                    Country : <%= user.country %>
-                                                </a>
-                                                <% } %>
-                                                <br>
-                                                    <% if (user.gender) { %>
-                                                <a href="" class="crayons-tag"><span class="crayons-tag__prefix"></span>
-                                                    Gender : <%= user.gender %>
-                                                </a>
-                                                <% } %>
-                                            </div>
-                                            <% } %>
-                                            <div class="crayons-story__bottom">
-                                                <div class="crayons-story__details">
-
-
-                                                </div>
-                                                <div class="crayons-story__save">
-                                                    <a type="button" href="/admin/dashboard/users/edit/<%=user._id%>" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
-                                                        <span class="bm-initial">edit</span>
-                                                    </a>
-                                                    <form method="POST" action="/admin/dashboard/users/delete">
-                                                        <button style="color: #000;" class="btn btn-outline-danger scrollto">Delete</button>
-                                                        <input name="id" type="hidden" value="<%=user._id%>">
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% }) %>
-                                    <% } %>
-                                        <!-- end card -->
-
-
-                    </div>
+                    <div id="match-list" class="mt-4"></div>
                     <!-- end col-9 -->
-
                 </div>
                 <!-- end row -->
 
@@ -576,9 +481,22 @@
             <!-- layout end -->
 
             <%- include('../layouts/strapAndJQuery.ejs') %>
-
+                <script src="/js/common.js"></script>
+                <script src="/js/postPage.js"></script>
                 <script>
                     $(document).ready(function() {
+                        $(window).keydown(function(event) {
+                            if (event.keyCode == 13) {
+                                event.preventDefault();
+                                return false;
+                            }
+                        });
+
+                        $('#submitButton').click(function(e) {
+                            e.preventDefault();
+                            return false;
+                        })
+                        let timer;
                         wireFrames();
 
                         let name;
@@ -589,6 +507,10 @@
                         let skills = [];
 
                         function wireFrames() {
+                            $('#name').on('change keyup paste', function(e) {
+                                name = $(this).val();
+                                findUser();
+                            })
                             $('#country').on('change keyup paste', function(e) {
                                 country = $(this).val();
                                 findUser();
@@ -611,7 +533,6 @@
                                         skills.push($(this).val())
                                     } else if (skills.includes($(this).val())) {
                                         skills = skills.filter(el => el !== $(this).val())
-                                            //skills.pop(`${$(this).val()}`)
                                     }
                                 } else {
                                     skills = [$(this).val()];
@@ -620,11 +541,8 @@
                                 findUser();
                             })
 
-
-
-
-
                             function findUser(searchQuery) {
+                                clearInterval(timer);
                                 // add event listeners to all inputs
                                 // get all values from all inputs and send them as an object to the server
                                 name = $('#name').val()
@@ -636,22 +554,25 @@
                                 allData['nativeLang'] = language;
                                 allData['skills'] = skills;
                                 console.log(allData);
-                                $.ajax({
-                                    url: '/search/users',
-                                    method: 'POST',
-                                    contentType: 'application/json',
-                                    data: JSON.stringify({
-                                        allData
-                                    }),
-                                    success: function(response) {
-                                        let users = response.users;
-                                        // console.log(response, 'from UI');
-                                        if (users === '') {
-                                            $('#match-list').html('');
-                                        }
-                                        $('#match-list').html(users);
-                                    },
-                                });
+                                timer = setTimeout(() => {
+                                    $.ajax({
+                                        url: '/search/users',
+                                        method: 'POST',
+                                        contentType: 'application/json',
+                                        data: JSON.stringify({
+                                            allData
+                                        }),
+                                        success: function(response) {
+                                            let users = response.users;
+                                            // console.log(response, 'from UI');
+                                            if (users === '') {
+                                                $('#match-list').html('');
+                                            }
+                                            $('#match-list').html(users);
+                                        },
+                                    });
+                                }, 1000)
+
                             }
                         }
 

@@ -92,7 +92,7 @@
                     <!-- FIRST TIMELINE -->
                     <div class="timeline-block">                        
                         <!-- TIMELINE CONTENT -->
-                        <% if(steps !==undefined || steps.length !==0) {%>
+                        <% if(steps !==undefined || steps.length !==0) { %>
                             <% for(let topic of steps){ %>
                                 <!-- THIRD TIMELINE -->
                                 <div class="timeline-block">
@@ -107,7 +107,7 @@
                                         <a>
                                             <div class="card-content">
                                                 <!-- TIMELINE TITLE -->
-                                                <a href="/roadmaps/roadmap/<%= topic.routeName %>">
+                                                <a href="/roadmaps/<%= roadmap.routeName %>/<%= topic.routeName %>">
                                                     <h6 class="timeline-title head">
                                                         <%= topic.title %>
                                                     </h6>

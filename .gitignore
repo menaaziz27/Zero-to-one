@@ -124,3 +124,4 @@ dist/
 # Temporary folders
 tmp/
 temp/
+views/drafts/
