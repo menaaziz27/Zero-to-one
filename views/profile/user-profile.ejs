@@ -83,6 +83,13 @@
                                                     </time>
                                                 </span>
                                                         <% } %>
+                                                        <%if (user.nativeLang) {%>
+                                                             <i style="font-size: x-large;" class="fas fa-language"></i>  <p> &nbsp;<%=user.nativeLang%></p> 
+                                                            <%}%>
+                                                            &nbsp
+                                                            <%if (user.gender) {%>
+                                                                <i style="font-size: x-large;" class="fas fa-venus-mars"></i>  <p> &nbsp;<%=user.gender%></p> 
+                                                               <%}%>
 
 
                                                             <!-- ===================== BEGINNING OF USER ICONS =================== -->
