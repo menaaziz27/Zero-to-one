@@ -65,6 +65,26 @@ $('#createChatButton').click(e => {
 	});
 });
 
+$('#submitBookmarkButton').click(e => {
+var input = $('#routeName')
+var icon=$('#bookmarkIcon')
+let roadmapp
+let user
+  var data ={
+		routeName: input.attr('value')
+	};
+	$.post('/roadmaps/bookmark',  data ,allData => {
+		roadmapp = allData.roadmap;
+    user = allData.user;
+    if(icon.attr('class')=='far fa-bookmark'){
+      icon.attr('class', 'fas fa-bookmark')
+    }else{
+      icon.attr('class', 'far fa-bookmark')
+    }
+});
+});
+
+
 $('#submitPostButton, #submitReplyButton').click(e => {
 	var button = $(e.target);
 
@@ -96,6 +116,7 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 		}
 	});
 });
+
 
 $('#userSearchTextBox').keydown(event => {
 	clearTimeout(timer);
