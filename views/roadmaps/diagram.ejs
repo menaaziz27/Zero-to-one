@@ -10,6 +10,8 @@
             <link href="/assets/css/navbar.css" rel="stylesheet">
             <link href="/assets/css/style.css" rel="stylesheet">
             <link rel="stylesheet" href="/assets/css/scrollbar.css">
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
             <style>
                 a {
                     text-decoration: none;
@@ -85,6 +87,16 @@
                     <P style="font-size: 25px;text-align: justify; margin-bottom: 20px;">
                         <%= roadmap.description %>
                     </P>
+                    <input id="routeName" type="hidden" value="<%= roadmap.routeName %>">
+                  <button id="submitBookmarkButton" class="btn btn-success">
+                      <%if (user.bookmarks.some(road => road.title === roadmap.title)) {%>
+                      <i id='bookmarkIcon' class="far fa-bookmark"></i>
+                      <%}else{%>
+                        <i id='bookmarkIcon' class="fas fa-bookmark"></i>
+
+                        <%}%>
+                   </button> 
+                  <label style="font-style: italic;" for="Bookmark"><b>Bookmark</b></label> 
                 </div>
               
                 <div id="timeline-experience">
@@ -137,10 +149,11 @@
         </section>
 
         <%- include('../layouts/footer.ejs') %>
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+
+        <script src="/js/common.js"></script>
 
 
-
-            <%- include('../layouts/strapAndJQuery.ejs') %>
 
 
 </body>

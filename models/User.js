@@ -29,6 +29,7 @@ const userSchema = new Schema(
 		likes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 		following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 		followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    bookmarks: [{ type: Schema.Types.ObjectId, ref: 'roadmap' }],
 		resetToken: String,
 		resetTokenExpiration: Date,
 		role: String,

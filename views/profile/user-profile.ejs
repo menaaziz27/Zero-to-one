@@ -294,11 +294,17 @@
                                         <% } %>
                                             <div class="crayons-card crayons-card--secondary">
                                                 <header class="crayons-card__header">
-                                                    <h3 class="crayons-subtitle-3">Available for...</h3>
+                                                    <h3 class="crayons-subtitle-3">Your Bookmarks</h3>
                                                 </header>
 
                                                 <div class="crayons-card__body">
-                                                    <p>Web development, testing and analysis, computer vision. </p>
+                                                    <% user.bookmarks.forEach(function(bookmark){ %>
+                                                        <a style="text-decoration: none;" href="/roadmaps/<%=bookmark.routeName %>">
+                                                            <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
+                                                                <%= bookmark.title %>
+                                                            </span>
+                                                        </a>
+                                                        <% }) %>
                                                 </div>
                                             </div>
 

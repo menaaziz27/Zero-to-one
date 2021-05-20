@@ -11,7 +11,7 @@ exports.getUserProfile = async (req, res, next) => {
 	let isFollowing;
 
 	try {
-		const userDoc = await User.findOne({ username: username });
+		const userDoc = await User.findOne({ username: username }).populate('bookmarks');
 		if (userDoc === null) {
 			res.locals.error = 'this user is deleted recently';
 			const error = new Error(
