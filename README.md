@@ -90,3 +90,6 @@
 - [X] messages page responsive layout fix
 - [X] if admin deleted roadmap it gets deleted automatically from the user skills list
 - [] delete post form in post submission and remain only the ajax call
+- [] number of posts and comments in profile need to be fixed
+- [] edit post route need to be fixed after edit
+- [] following and followers page links
