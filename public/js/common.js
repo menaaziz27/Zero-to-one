@@ -329,8 +329,10 @@ function getUsernameFromElement(element) {
 	console.log(isRoot, '329');
 	var rootElement = isRoot ? element : element.closest('.user');
 	console.log(rootElement, '331');
-	var username = rootElement.data().username;
-	if (username === undefined) return alert('username is undefined');
+	if (rootElement.data().username) {
+		var username = rootElement.data().username;
+	}
+	// if (username === undefined) return alert('username is undefined');
 	return username;
 }
 
@@ -604,7 +606,7 @@ function createUserHtml(userData, showFollowButton) {
                         </div>`;
 	}
 
-	return `<div class='user' data-username=${userData.username}>
+	return `<div class='user' >
                 <div class='userImageContainer'>
                     <img src='/${userData.Image}'>
                 </div>
