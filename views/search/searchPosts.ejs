@@ -31,11 +31,13 @@
 
         <!-- partial:index.partial.html -->
         <div class="container">
+
             <form class="mt-4 form-search" method="POST" action="/search/posts">
-                <input id="submitButton" class="form-control me-2" name="query" type="text" placeholder="Search for posts" aria-label="Search">
+                <strong><h1>Search for posts</h1></strong>
+                <input id="submitButton" class="form-control mt-4" name="query" type="text" placeholder="Search for posts" aria-label="Search">
             </form>
 
-            <a href="/search">want to search for users ?</a>
+            <a class="btn btn-success" href="/search">want to search for users ?</a>
             <div id="match-list" class="container"></div>
         </div>
 
@@ -102,27 +104,33 @@
                     let userId = userLoggedIn._id
                     let timer;
                     let searchText;
+                    let finished = false;
 
                     function load() {
 
                         console.log(skip, limit);
-                        $.ajax({
-                            url: `/search/posts?skip=${skip}&limit=${limit}`,
-                            method: 'POST',
-                            dataType: "json",
-                            contentType: 'application/json',
-                            data: JSON.stringify({
-                                query: searchText
-                            }),
-                            success: function(data) {
-                                console.log(data)
-                                data.posts.map(postObj => {
-                                    var postHtml = createPostHtml(postObj, userId);
-                                    $('#match-list').append(postHtml)
-                                })
-                                skip = skip + limit;
-                            }
-                        })
+                        if (!finished) {
+                            $.ajax({
+                                url: `/search/posts?skip=${skip}&limit=${limit}`,
+                                method: 'POST',
+                                dataType: "json",
+                                contentType: 'application/json',
+                                data: JSON.stringify({
+                                    query: searchText
+                                }),
+                                success: function(data) {
+                                    console.log(data)
+                                    if (data.posts < 10) {
+                                        finished = true;
+                                    }
+                                    data.posts.map(postObj => {
+                                        var postHtml = createPostHtml(postObj, userId);
+                                        $('#match-list').append(postHtml)
+                                    })
+                                    skip = skip + limit;
+                                }
+                            })
+                        }
                     }
                     window.onscroll = () => {
                         if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
@@ -153,25 +161,31 @@
                                 timer = setTimeout(() => {
                                     skip = 0;
                                     limit = 10;
-                                    $.ajax({
-                                        url: `/search/posts?skip=${skip}&limit=${limit}`,
-                                        method: 'POST',
-                                        dataType: "json",
-                                        contentType: 'application/json',
-                                        data: JSON.stringify({
-                                            query: searchText
-                                        }),
-                                        success: function(data) {
-                                            if (searchText) {
-                                                $('#match-list').html('');
+                                    if (!finished) {
+                                        $.ajax({
+                                            url: `/search/posts?skip=${skip}&limit=${limit}`,
+                                            method: 'POST',
+                                            dataType: "json",
+                                            contentType: 'application/json',
+                                            data: JSON.stringify({
+                                                query: searchText
+                                            }),
+                                            success: function(data) {
+                                                if (searchText) {
+                                                    $('#match-list').html('');
+                                                }
+                                                // to prevent user to make another requests if the posts are all fetched 
+                                                if (data.posts < 10) {
+                                                    finished = true;
+                                                }
+                                                data.posts.map(postObj => {
+                                                    var postHtml = createPostHtml(postObj, userId);
+                                                    $('#match-list').append(postHtml)
+                                                })
+                                                skip = skip + limit;
                                             }
-                                            data.posts.map(postObj => {
-                                                var postHtml = createPostHtml(postObj, userId);
-                                                $('#match-list').append(postHtml)
-                                            })
-                                            skip = skip + limit;
-                                        }
-                                    })
+                                        })
+                                    }
                                 }, 1000)
                             }
                         } else {

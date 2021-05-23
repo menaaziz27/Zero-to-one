@@ -6,6 +6,7 @@ const session = require('express-session');
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
+const morgan = require('morgan');
 const MongoDBStore = require('connect-mongodb-session')(session);
 // ============ Core-Modules ============
 const path = require('path');
@@ -61,7 +62,7 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-// app.use(morgan('tiny'));
+app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -117,7 +118,6 @@ app.use((req, res) => {
 });
 
 io.on('connection', socket => {
-	console.log('connected to socket');
 	socket.on('setup', userData => {
 		socket.join(userData._id);
 		socket.emit('connected');

@@ -82,14 +82,15 @@
 - [x] render comment count dynamically
 - [x] adjust search design and logic
 - [x] law deft roadmap mn gher topics w 7awelt a3mlha access hy3ml error
-- [] validation in dashborad
+- [X] validation in dashborad
 - [] set default or blank data in edit post form if he didn't change any data in first time
 - [] fix follow button in other users proile
-- [] in user profile if the user added his information i should render them in a section maybe underneath the skills section
-- [] likes active class need to be fixed
+- [X] in user profile if the user added his information i should render them in a section maybe underneath the skills section
+- [X] likes active class need to be fixed
 - [X] messages page responsive layout fix
 - [X] if admin deleted roadmap it gets deleted automatically from the user skills list
 - [] delete post form in post submission and remain only the ajax call
 - [] number of posts and comments in profile need to be fixed
 - [] edit post route need to be fixed after edit
-- [] following and followers page links
+- [X] following and followers page links
+- [X] prevent user of making fetch posts reqeusts if he hits the end of a page and the posts length is zero

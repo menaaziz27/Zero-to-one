@@ -1,3 +1,4 @@
+let finished = false;
 $(document).ready(function () {
 	console.log(selectedTap);
 	if (selectedTap === 'comments') {
@@ -8,29 +9,39 @@ $(document).ready(function () {
 });
 
 function loadPosts() {
-	$.get(
-		`/posts?skip=${skip}&limit=${limit}`,
-		{ user: userLoggedIn, isReply: false },
-		postsAndUserId => {
-			let posts = postsAndUserId.posts;
-			userId = postsAndUserId.userId;
-			outputPosts(posts, $('.postContent'));
-			skip = skip + limit;
-		}
-	);
+	if (!finished) {
+		$.get(
+			`/posts?skip=${skip}&limit=${limit}`,
+			{ user: userLoggedIn, isReply: false },
+			postsAndUserId => {
+				let posts = postsAndUserId.posts;
+				userId = postsAndUserId.userId;
+				if (posts.length < 10) {
+					finished = true;
+				}
+				outputPosts(posts, $('.postContent'));
+				skip = skip + limit;
+			}
+		);
+	}
 }
 
 function loadComments() {
-	$.get(
-		`/posts?skip=${skip}&limit=${limit}`,
-		{ user: userLoggedIn, isReply: true },
-		postsAndUserId => {
-			let posts = postsAndUserId.posts;
-			userId = postsAndUserId.userId;
-			outputPosts(posts, $('.postContent'));
-			skip = skip + limit;
-		}
-	);
+	if (!finished) {
+		$.get(
+			`/posts?skip=${skip}&limit=${limit}`,
+			{ user: userLoggedIn, isReply: true },
+			postsAndUserId => {
+				let posts = postsAndUserId.posts;
+				userId = postsAndUserId.userId;
+				if (posts.length < 10) {
+					finished = true;
+				}
+				outputPosts(posts, $('.postContent'));
+				skip = skip + limit;
+			}
+		);
+	}
 }
 
 window.onscroll = () => {
