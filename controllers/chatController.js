@@ -1,6 +1,8 @@
 const Chat = require('../models/Chat');
 const User = require('../models/User');
 const Message = require('../models/Message');
+const mongoose = require('mongoose');
+
 
 exports.createChat = async (req, res) => {
 	if (!req.body.users) {
@@ -56,13 +58,22 @@ exports.updateChatName = async (req, res) => {
 
 // GET /chats/:chatId
 exports.getSingleChat = async (req, res) => {
-	try {
-		const chat = await Chat.findOne({
+  try {
+		let chat = await Chat.findOne({
 			_id: req.params.chatId,
 			users: { $elemMatch: { $eq: req.session.user._id } },
 		})
 			.populate('users')
 			.sort({ updatedAt: -1 });
+      if(!chat){
+        const otheruser =req.params.chatId
+        let userFound = await User.findById(otheruser);
+        let userId =req.session.user._id
+        if (userFound) {
+          chat = await getChatByUserId(userId, userFound._id);
+          console.log(chat._id ,555555555555555)
+        }
+      }
 		return res.send(chat);
 	} catch (e) {
 		console.log(e);
@@ -75,9 +86,43 @@ exports.getSingleChatMessages = async (req, res) => {
 		const messages = await Message.find({ chat: req.params.chatId }).populate(
 			'sender'
 		);
+    console.log(messages ,77777777777)
 
 		return res.send(messages);
 	} catch (e) {
 		console.log(e);
 	}
 };
+
+function getChatByUserId(userLoggedInId, anotherUserId) {
+	return Chat.findOneAndUpdate(
+		{
+			isGroupChat: false,
+			users: {
+				$size: 2,
+				$all: [
+					{
+						$elemMatch: {
+							$eq: mongoose.Types.ObjectId(userLoggedInId),
+						},
+					},
+					{
+						$elemMatch: {
+							$eq: mongoose.Types.ObjectId(anotherUserId),
+						},
+					},
+				],
+			},
+		},
+		{
+			$setOnInsert: {
+				users: [userLoggedInId, anotherUserId],
+			},
+		},
+		{
+			new: true,
+			upsert: true,
+		}
+	).populate('users');
+}
+

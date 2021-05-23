@@ -129,7 +129,7 @@ io.on('connection', socket => {
 
 	socket.on('new message', newMessage => {
 		var chat = newMessage.chat;
-
+  console.log(chat)
 		if (!chat.users) return console.log('Chat.users not defined');
 
 		chat.users.forEach(user => {
