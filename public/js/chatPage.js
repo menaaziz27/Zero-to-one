@@ -6,7 +6,7 @@ $(document).ready(() => {
     socket.on('stop typing', () => $('.typingDots').hide());
 
     $('.inputTextbox').val('').focus();
-    $.get(`/chats/${chatId}`, data => {
+    $.get(`/messages/${chatId}`, data => {
         if (data.users.length == 1) {
             alert('other user is not available now');
         }

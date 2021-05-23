@@ -65,15 +65,6 @@ exports.getSingleChat = async (req, res) => {
 		})
 			.populate('users')
 			.sort({ updatedAt: -1 });
-      if(!chat){
-        const otheruser =req.params.chatId
-        let userFound = await User.findById(otheruser);
-        let userId =req.session.user._id
-        if (userFound) {
-          chat = await getChatByUserId(userId, userFound._id);
-          console.log(chat._id ,555555555555555)
-        }
-      }
 		return res.send(chat);
 	} catch (e) {
 		console.log(e);
@@ -86,7 +77,6 @@ exports.getSingleChatMessages = async (req, res) => {
 		const messages = await Message.find({ chat: req.params.chatId }).populate(
 			'sender'
 		);
-    console.log(messages ,77777777777)
 
 		return res.send(messages);
 	} catch (e) {

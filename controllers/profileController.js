@@ -193,15 +193,21 @@ exports.postUpdateProfile = async (req, res) => {
 		if (bio !== '') {
 			user.bio = bio;
 		}
-		user.country = country;
-		user.yearOfBirth = BirthDate;
+    if (country !== '') {
+      user.country = country;
+		}
+    if (BirthDate !== '') {
+      user.yearOfBirth = BirthDate;
+		}
 		user.gender = gender;
 		if (skills !== undefined) {
-			user.skills = skills;
+      user.skills = skills;
 		} else {
-			user.skills = [];
+      user.skills = [];
 		}
-		user.nativeLang = nativeLang;
+    if (nativeLang !== '') {
+      user.nativeLang = nativeLang;
+    }
 
 		if (image !== undefined) {
 			user.Image = Image;
