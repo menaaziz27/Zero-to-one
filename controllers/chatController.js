@@ -1,6 +1,8 @@
 const Chat = require('../models/Chat');
 const User = require('../models/User');
 const Message = require('../models/Message');
+const mongoose = require('mongoose');
+
 
 exports.createChat = async (req, res) => {
 	if (!req.body.users) {
@@ -56,8 +58,8 @@ exports.updateChatName = async (req, res) => {
 
 // GET /chats/:chatId
 exports.getSingleChat = async (req, res) => {
-	try {
-		const chat = await Chat.findOne({
+  try {
+		let chat = await Chat.findOne({
 			_id: req.params.chatId,
 			users: { $elemMatch: { $eq: req.session.user._id } },
 		})
@@ -81,3 +83,36 @@ exports.getSingleChatMessages = async (req, res) => {
 		console.log(e);
 	}
 };
+
+function getChatByUserId(userLoggedInId, anotherUserId) {
+	return Chat.findOneAndUpdate(
+		{
+			isGroupChat: false,
+			users: {
+				$size: 2,
+				$all: [
+					{
+						$elemMatch: {
+							$eq: mongoose.Types.ObjectId(userLoggedInId),
+						},
+					},
+					{
+						$elemMatch: {
+							$eq: mongoose.Types.ObjectId(anotherUserId),
+						},
+					},
+				],
+			},
+		},
+		{
+			$setOnInsert: {
+				users: [userLoggedInId, anotherUserId],
+			},
+		},
+		{
+			new: true,
+			upsert: true,
+		}
+	).populate('users');
+}
+
