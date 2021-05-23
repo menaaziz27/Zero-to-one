@@ -65,6 +65,13 @@ exports.getSingleChat = async (req, res) => {
 		})
 			.populate('users')
 			.sort({ updatedAt: -1 });
+      if (!chat) {
+        // make sure chatId is not a user id
+        let userFound = await User.findById({_id:req.params.chatId});
+        if (userFound) {
+          chat = await getChatByUserId(userId, userFound._id);
+        }
+      }
 		return res.send(chat);
 	} catch (e) {
 		console.log(e);

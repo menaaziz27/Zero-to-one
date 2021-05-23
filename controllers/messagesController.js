@@ -43,14 +43,12 @@ exports.getChatPage = async (req, res) => {
 			_id: chatId,
 			users: { $elemMatch: { $eq: userId } },
 		}).populate('users');
-
 		// if chat is null
 		if (!chat) {
-			// make sure chatId is not a user id
+      // make sure chatId is not a user id
 			let userFound = await User.findById(chatId);
-
 			if (userFound) {
-				chat = await getChatByUserId(userId, userFound._id);
+        chat = await getChatByUserId(userId, userFound._id);
 			}
 		}
 
