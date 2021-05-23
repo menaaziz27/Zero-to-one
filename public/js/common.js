@@ -66,24 +66,23 @@ $('#createChatButton').click(e => {
 });
 
 $('#submitBookmarkButton').click(e => {
-var input = $('#routeName')
-var icon=$('#bookmarkIcon')
-let roadmapp
-let user
-  var data ={
-		routeName: input.attr('value')
+	var input = $('#routeName');
+	var icon = $('#bookmarkIcon');
+	let roadmapp;
+	let user;
+	var data = {
+		routeName: input.attr('value'),
 	};
-	$.post('/roadmaps/bookmark',  data ,allData => {
+	$.post('/roadmaps/bookmark', data, allData => {
 		roadmapp = allData.roadmap;
-    user = allData.user;
-    if(icon.attr('class')=='far fa-bookmark'){
-      icon.attr('class', 'fas fa-bookmark')
-    }else{
-      icon.attr('class', 'far fa-bookmark')
-    }
+		user = allData.user;
+		if (icon.attr('class') == 'far fa-bookmark') {
+			icon.attr('class', 'fas fa-bookmark');
+		} else {
+			icon.attr('class', 'far fa-bookmark');
+		}
+	});
 });
-});
-
 
 $('#submitPostButton, #submitReplyButton').click(e => {
 	var button = $(e.target);
@@ -116,7 +115,6 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 		}
 	});
 });
-
 
 $('#userSearchTextBox').keydown(event => {
 	clearTimeout(timer);
@@ -328,9 +326,11 @@ $(document).on('click', '.user', function (e) {
 
 function getUsernameFromElement(element) {
 	var isRoot = element.hasClass('user');
+	console.log(isRoot, '329');
 	var rootElement = isRoot ? element : element.closest('.user');
+	console.log(rootElement, '331');
 	var username = rootElement.data().username;
-	if (username === undefined) return alert('Post id undefined');
+	if (username === undefined) return alert('username is undefined');
 	return username;
 }
 
@@ -596,15 +596,15 @@ function createUserHtml(userData, showFollowButton) {
 		userLoggedIn.following && userLoggedIn.following.includes(userData._id);
 	const text = isFollowing ? 'following' : 'follow';
 	const buttonClass = isFollowing ? 'followButton following' : 'followButton';
-
+	console.log(userData.username);
 	var followButton = '';
 	if (showFollowButton && userLoggedIn._id != userData._id) {
 		followButton = `<div class='followButtonContainer'>
-                            <button class='${buttonClass}' data-user='${userData._id}'>${text}</button>
+                            <button class='${buttonClass} data-user=${userData._id}'>${text}</button>
                         </div>`;
 	}
 
-	return `<div class='user'>
+	return `<div class='user' data-username=${userData.username}>
                 <div class='userImageContainer'>
                     <img src='/${userData.Image}'>
                 </div>

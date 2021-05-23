@@ -51,9 +51,10 @@ exports.getNews = async (req, res) => {
 	const data = await axios.get('https://dev.to/api/articles');
 
 	const news = data.data;
-	res.render('news', {
+	res.render('news/news', {
 		title: 'News',
 		news: news,
+		pageTitle: 'News',
 	});
 };
 
@@ -70,13 +71,6 @@ exports.getSearch = async (req, res) => {
 };
 
 exports.postSearch = async (req, res, next) => {
-	//TODO-1: extract both data from ajax and from the form
-	//TODO-2: format both objects to match each others
-	//TODO-3: format the query that gonna undergoes to the search in DB
-	//TODO-4: get the list of users that match this query or criteria
-	//TODO-5: adjust the ejs cards for users
-	//TODO-6: make a loading spinner that loads before rendering users to the client
-
 	let name, yearOfBirth, language, country, gender, skills, body;
 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
 		allData = req.body.allData;

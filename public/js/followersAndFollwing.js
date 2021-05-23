@@ -51,7 +51,7 @@ function createUserHtml(userData, showFollowButton) {
                         </div>`;
 	}
 
-	return `<div class='user'>
+	return `<div class='user' data-username=${userData.username}>
                 <div class='userImageContainer'>
                     <img src='/${userData.Image}'>
                 </div>
