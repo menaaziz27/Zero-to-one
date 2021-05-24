@@ -62,7 +62,7 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -131,7 +131,6 @@ io.on('connection', socket => {
 	socket.on('new message', newMessage => {
 		console.log(newMessage);
 		var chat = newMessage.chat;
-
 		if (!chat.users) return console.log('Chat.users not defined');
 
 		chat.users.forEach(user => {

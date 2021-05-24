@@ -329,6 +329,7 @@ function getUsernameFromElement(element) {
 	console.log(isRoot, '329');
 	var rootElement = isRoot ? element : element.closest('.user');
 	console.log(rootElement, '331');
+
 	if (rootElement.data().username) {
 		var username = rootElement.data().username;
 	}
