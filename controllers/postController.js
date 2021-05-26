@@ -108,6 +108,21 @@ exports.getPosts = async (req, res) => {
 		delete searchObj.isReply;
 	}
 
+	if (searchObj.followingOnly !== undefined) {
+		let followingOnly = searchObj.followingOnly == 'true';
+
+		if (followingOnly) {
+			let objectsIds = req.session.user.following;
+
+			objectsIds.push(req.session.user._id);
+
+			searchObj.user = { $in: objectsIds };
+		}
+		delete searchObj.followingOnly;
+	}
+
+	console.log(searchObj);
+
 	var posts = await getPosts(searchObj, Number(skip), Number(limit));
 	return res.status(200).send({ posts, userId });
 };
