@@ -27,24 +27,35 @@ exports.getTimeline = async (req, res, next) => {
 		userid = null;
 	}
 	try {
-		const posts = await Post.find({}).sort({ createdAt: -1 }).populate('user');
-		const usersCount = await User.find({}).countDocuments();
-		const roadmapsCount = await Roadmap.find({}).countDocuments();
-		const postCount = posts.length;
 		res.render('home/timeline', {
+			// moment,
 			userid: userid,
-			moment,
+			pageTitle: 'Timeline',
 			news: news,
-			posts,
-			postCount,
-			usersCount,
-			roadmapsCount,
 			user: req.session.user,
 			postDetail: false,
 		});
 	} catch (e) {
 		console.log(e);
 	}
+};
+
+exports.explore = async (req, res, next) => {
+	const data = await axios.get('https://dev.to/api/articles');
+	const news = data.data;
+	let userid;
+	if (req.user) {
+		userid = req.user._id.toString();
+	} else {
+		userid = null;
+	}
+	res.render('home/explore', {
+		pageTitle: 'Explore',
+		userid: userid,
+		news: news,
+		user: req.session.user,
+		postDetail: false,
+	});
 };
 
 exports.getNews = async (req, res) => {
