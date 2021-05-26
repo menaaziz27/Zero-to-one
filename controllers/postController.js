@@ -99,7 +99,6 @@ exports.getPosts = async (req, res) => {
 
 	var userId = req.session.user._id;
 	let searchObj = req.query;
-	console.log(req.query);
 
 	// b-filter kol el posts elli feha field replyTo 3shan ana 3ayz el posts bs msh el comments
 	if (searchObj.isReply !== undefined) {
@@ -120,8 +119,6 @@ exports.getPosts = async (req, res) => {
 		}
 		delete searchObj.followingOnly;
 	}
-
-	console.log(searchObj);
 
 	var posts = await getPosts(searchObj, Number(skip), Number(limit));
 	return res.status(200).send({ posts, userId });
