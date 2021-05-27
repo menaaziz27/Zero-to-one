@@ -59,7 +59,9 @@ exports.explore = async (req, res, next) => {
 };
 
 exports.getNews = async (req, res) => {
-	const data = await axios.get('https://dev.to/api/articles');
+	const data = await axios.get(
+		'https://dev.to/api/articles?per_page=100&tags=javascript, css, react, web, coding&top=5'
+	);
 
 	const news = data.data;
 	res.render('news/news', {
