@@ -128,6 +128,7 @@ io.on('connection', socket => {
 	socket.on('stop typing', room => socket.in(room).emit('stop typing'));
 
 	socket.on('new message', newMessage => {
+		console.log(newMessage);
 		var chat = newMessage.chat;
 		if (!chat.users) return console.log('Chat.users not defined');
 

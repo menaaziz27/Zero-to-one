@@ -292,46 +292,49 @@
 
                                         </div>
                                         <% } %>
-                                        <%if(user.bookmarks.length>0) {%>
-                                            <div class="crayons-card crayons-card--secondary">
-                                                <header class="crayons-card__header">
-                                                    <h3 class="crayons-subtitle-3">Your Bookmarks</h3>
-                                                </header>
+                                            <% if(user.bookmarks.length !== 0) {%>
 
-                                                <div class="crayons-card__body">
-                                                    <% user.bookmarks.forEach(function(bookmark){ %>
-                                                        <a style="text-decoration: none;" href="/roadmaps/<%=bookmark.routeName %>">
-                                                            <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
+                                                <%if(user.bookmarks) {%>
+                                                    <div class="crayons-card crayons-card--secondary">
+                                                        <header class="crayons-card__header">
+                                                            <h3 class="crayons-subtitle-3">Your Bookmarks</h3>
+                                                        </header>
+
+                                                        <div class="crayons-card__body">
+                                                            <% user.bookmarks.forEach(function(bookmark){ %>
+                                                                <a style="text-decoration: none;" href="/roadmaps/<%=bookmark.routeName %>">
+                                                                    <span class="m-1 crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button">
                                                                 <%= bookmark.title %>
                                                             </span>
-                                                        </a>
-                                                        <% }) %>
-                                                </div>
-                                            </div>
-                                            <%}%>
+                                                                </a>
+                                                                <% }) %>
+                                                        </div>
+                                                    </div>
+                                                    <%}%>
+                                                        <% } %>
 
-                                            <div class="p-4 crayons-card crayons-card--secondary">
-                                                <div class="flex items-center mb-4">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
+                                                            <div class="p-4 crayons-card crayons-card--secondary">
+                                                                <div class="flex items-center mb-4">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
                                                         <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
                                                         <path
                                                             d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
                                                         </path>
                                                     </svg>
 
-                                                    <a href="/users/profile/<%= user.username %>">
-                                                        <%= postsCount %> posts published </a>
-                                                </div>
-                                                <div class="flex items-center mb-4">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt" class="mr-3 crayons-icon color-base-50">
+                                                                    <a href="/users/profile/<%= user.username %>">
+                                                                        <%= postsCount %> posts published </a>
+                                                                </div>
+                                                                <div class="flex items-center mb-4">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="abufedsnsekr607wkz3cghttsqxk7imt" class="mr-3 crayons-icon color-base-50">
                                                         <title id="abufedsnsekr607wkz3cghttsqxk7imt">Comment</title>
                                                         <path
                                                             d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
                                                         </path>
                                                     </svg>
-                                                    <a href="/users/profile/<%= user.username %>?comments=true">6 comments written</a>
-                                                </div>
-                                            </div>
+                                                                    <a href="/users/profile/<%= user.username %>?comments=true">6 comments written</a>
+                                                                </div>
+                                                            </div>
                         </div>
                     </div>
 

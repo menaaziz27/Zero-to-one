@@ -12,11 +12,13 @@ const {
 	postSearch,
 	getHtml,
 	getCss,
+	explore,
 } = require('../controllers/homeController');
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 router.get('/', getHome);
 router.get('/timeline', isAuthenticated, getTimeline);
+router.get('/explore', isAuthenticated, explore);
 router.get('/news', isAuthenticated, getNews);
 router.get('/search', isAuthenticated, getSearch);
 router.get('/search/posts', isAuthenticated, getSearchPosts);

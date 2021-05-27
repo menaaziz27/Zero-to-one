@@ -16,6 +16,9 @@
                 <li class="hvr-underline-from-center">
                     <a class="nav-link" href="/timeline">Timeline</a>
                 </li>
+                <li class="hvr-underline-from-center">
+                    <a class="nav-link" href="/explore">Explore</a>
+                </li>
                 <% if(isAuthenticated) { %>
                     <li class="hvr-underline-from-center">
                         <a class="nav-link" href="/news">News</a>
@@ -29,29 +32,29 @@
                         </li>
 
                         <% if(isAuthenticated && userid !==null ) { %>
-                            <li class="hvr-underline-from-center">
-                                <a class="nav-link" href="/messages">Messages</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Options
+                                        </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/users/profile/<%= currentUser.username%>">Profile</a>
+                                    <a class="dropdown-item" href="/users/updateProfile">Edit Profile</a>
+                                    <a class="dropdown-item" href="/messages">Messages</a>
+                                    <%if (isAdmin) {%>
+                                        <a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
+                                        <% } %>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="/auth/logout">Logout</a>
+                                </div>
                             </li>
-                            <li class="hvr-underline-from-center">
-                                <a class="nav-link" href="/users/profile/<%= currentUser.username%>">Profile</a>
-                            </li>
-                            <%if (isAdmin) {%>
+                            <% } else { %>
                                 <li class="hvr-underline-from-center">
-                                    <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                                    <a class="nav-link" href="auth/login">Login</a>
+                                </li>
+                                <li class="hvr-underline-from-center">
+                                    <a class="nav-link" href="auth/register">Get Started</a>
                                 </li>
                                 <% } %>
-
-                                    <li class="hvr-underline-from-center">
-                                        <a class="nav-link" href="/auth/logout">Logout</a>
-                                    </li>
-                                    <% } else { %>
-                                        <li class="hvr-underline-from-center">
-                                            <a class="nav-link" href="auth/login">Login</a>
-                                        </li>
-                                        <li class="hvr-underline-from-center">
-                                            <a class="nav-link" href="auth/register">Get Started</a>
-                                        </li>
-                                        <% } %>
             </ul>
         </div>
     </div>

@@ -5,7 +5,7 @@ $(document).ready(function () {
 		if (!finished) {
 			$.get(
 				`/posts?skip=${skip}&limit=${limit}`,
-				{ followingOnly: true },
+				{ isReply: false },
 				postsAndUserId => {
 					let posts = postsAndUserId.posts;
 					userId = postsAndUserId.userId;

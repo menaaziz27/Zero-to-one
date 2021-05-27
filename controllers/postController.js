@@ -99,13 +99,25 @@ exports.getPosts = async (req, res) => {
 
 	var userId = req.session.user._id;
 	let searchObj = req.query;
-	console.log(req.query);
 
 	// b-filter kol el posts elli feha field replyTo 3shan ana 3ayz el posts bs msh el comments
 	if (searchObj.isReply !== undefined) {
 		let isReply = searchObj.isReply == 'true';
 		searchObj.replyTo = { $exists: isReply };
 		delete searchObj.isReply;
+	}
+
+	if (searchObj.followingOnly !== undefined) {
+		let followingOnly = searchObj.followingOnly == 'true';
+
+		if (followingOnly) {
+			let objectsIds = req.session.user.following;
+
+			objectsIds.push(req.session.user._id);
+
+			searchObj.user = { $in: objectsIds };
+		}
+		delete searchObj.followingOnly;
 	}
 
 	var posts = await getPosts(searchObj, Number(skip), Number(limit));
