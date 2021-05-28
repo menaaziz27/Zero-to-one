@@ -210,7 +210,7 @@ exports.getCreateRoadmapDashboard = (req, res) => {
     });
 };
 exports.validateRoadmap = [
-  body('title', 'title must be at least 4 characters.').isLength({ min:4,max: 200 }).exists(),
+  body('title', 'title must be at least 2 characters.').isLength({ min:2,max: 200 }).exists(),
   body('summary', 'summary must be at least 100 and less than 200 characters.').isLength({ min:100,max: 200 }).exists(),
   body('description', 'description must be at least 100 and less than 200 characters').isLength({min: 100 }),
   body('routeName', 'routename  must be at least 2 less than 30 characters').isLength({min:2,max:30}),
@@ -343,6 +343,7 @@ exports.getCreateTopicDashboard = async(req, res) => {
             summary:null,
             description:null,
             routeName:null,
+            video:null,
             roadmaps,
         });
     } catch {
@@ -350,16 +351,19 @@ exports.getCreateTopicDashboard = async(req, res) => {
     }
 };
 exports.validateTopic = [
-  body('title', 'title must be at least 4 characters.').isLength({ min:4,max: 200 }).exists(),
-  body('summary', 'summary must be at least 100 and less than 200 characters.').isLength({ min:100,max: 200 }).exists(),
+  body('title', 'title must be at least 2 characters.').isLength({ min:2,max: 200 }).exists(),
+  body('summary', 'summary must be less than 200 characters.').isLength({ max: 200 }).exists(),
   body('description', 'description must be at least 100 and less than 200 characters').isLength({min: 100 }),
   body('routeName', 'routename  must be at least 2 less than 30 characters').isLength({min:2,max:30}),
+
 ];
 exports.postCreateTopicDashboard = async(req, res) => {
     const title = req.body.title;
     const summary = req.body.summary;
     const description = req.body.description;
     const routeName = req.body.routeName;
+    const video = req.body.video;
+
     let references 
     if (typeof req.body.references == 'object') {
       references = req.body.references;
@@ -387,6 +391,7 @@ exports.postCreateTopicDashboard = async(req, res) => {
         summary:summary,
         description:description,
         routeName:routeName,
+        video:video,
         roadmaps
         
       });
@@ -398,6 +403,10 @@ exports.postCreateTopicDashboard = async(req, res) => {
         topic.description = description;
         topic.routeName = routeName;
         topic.references=references
+        if(video !=''&& video.includes('https://')){
+          topic.video=video
+
+        }
         for (var i = 0; i < roadmaproute.length; i++) {
             const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] });
             roadmap.steps.push(topic);
@@ -443,6 +452,7 @@ exports.postEditTopicDashboard = async(req, res) => {
     const description = req.body.description;
     const routeName = req.body.routeName;
     let references = req.body.references;
+    const video = req.body.video;
     const topicId = req.body.id;
     let roadmaproute;
     const errors = validationResult(req);
@@ -479,6 +489,9 @@ exports.postEditTopicDashboard = async(req, res) => {
         topic.description = description;
         topic.routeName = routeName;
         topic.references = references;
+        if(video !=''&&video!='https://'){
+          topic.video=video
+        }
         for (var i = 0; i < roadmaproute.length; i++) {
             const roadmap = await Roadmap.findOne({
                 routeName: roadmaproute[i],
