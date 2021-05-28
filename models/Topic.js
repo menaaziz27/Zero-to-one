@@ -21,7 +21,7 @@ const topicSchema = new Schema({
 	},
 	references: [String],
 	roadmaps: [{ type: Schema.Types.ObjectId, ref: 'roadmap' }],
-  video: String,
+	video: String,
 });
 
 const Topic = mongoose.model('topic', topicSchema);

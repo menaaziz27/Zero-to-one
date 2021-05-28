@@ -9594,7 +9594,7 @@ a {
 }
 
 @media (min-width: 768px) {
-    :root {
+     :root {
         --layout-sidebar-left-width: 2fr;
         --layout-padding: var(--su-2);
         --layout: var(--layout-content-width);
@@ -9602,7 +9602,7 @@ a {
 }
 
 @media (min-width: 1024px) {
-    :root {
+     :root {
         --layout-sidebar-left-width: 240px;
         --layout-content-width: 1fr;
         --layout-gap: var(--su-4);
@@ -9850,21 +9850,21 @@ a {
 }
 
 @media (min-width: 640px) {
-    :root {
+     :root {
         --content-padding-x: var(--su-5);
         --content-padding-y: var(--su-5);
     }
 }
 
 @media (min-width: 768px) {
-    :root {
+     :root {
         --content-padding-x: var(--su-8);
         --content-padding-y: var(--su-7);
     }
 }
 
 @media (min-width: 1280px) {
-    :root {
+     :root {
         --content-padding-x: var(--su-9);
     }
 }
@@ -9881,13 +9881,13 @@ a {
 }
 
 @media (min-width: 640px) {
-    :root {
+     :root {
         --content-secondary-font-size: var(--fs-l);
     }
 }
 
 @media (min-width: 768px) {
-    :root {
+     :root {
         --content-rythm: var(--su-4);
         --content-font-size: var(--fs-xl);
     }
@@ -12103,6 +12103,8 @@ textarea.crayons-textfield.crayons-textfield--ghost {
 
 .crayons-story__body {
     padding: var(--story-padding);
+    /* border: 0;
+    box-shadow: 0 2px 6px 0 hsla(0deg 0% 0% / 20%); */
 }
 
 @media (min-width: 768px) {
