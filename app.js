@@ -118,7 +118,6 @@ app.use((req, res) => {
 });
 
 io.on('connection', socket => {
-	console.log('connected to socket');
 	socket.on('setup', userData => {
 		socket.join(userData._id);
 		socket.emit('connected');
