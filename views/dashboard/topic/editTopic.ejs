@@ -3,7 +3,7 @@
 
 <head>
    
-    <title>Edit Profile</title>
+    <title>Edit Topic</title>
 
     <%- include('../../layouts/head.ejs') %>
 
@@ -102,6 +102,19 @@
                             <% if (errorMassage) { %>
                                 <% errorMassage.forEach(function(error) { %>
                                     <% if(error.param==='routeName' ) { %>
+                                        <small class="text-danger">
+                                            <%= error.msg %>
+                                        </small>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">video</label>
+                            <input class="form-control" type="text" id="video" placeholder="video" name="video"<%if(topic.video){%> value="<%=topic.video%>"<%}%>>
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='video' ) { %>
                                         <small class="text-danger">
                                             <%= error.msg %>
                                         </small>
