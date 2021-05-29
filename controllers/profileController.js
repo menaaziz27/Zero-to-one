@@ -4,6 +4,7 @@ const moment = require('moment');
 const axios = require('axios');
 const { body, validationResult } = require('express-validator');
 const Roadmap = require('../models/Roadmap');
+const Notification = require('../models/Notification');
 
 exports.getUserProfile = async (req, res, next) => {
 	const username = req.params.username;
@@ -11,7 +12,9 @@ exports.getUserProfile = async (req, res, next) => {
 	let isFollowing;
 
 	try {
-		const userDoc = await User.findOne({ username: username }).populate('bookmarks');
+		const userDoc = await User.findOne({ username: username }).populate(
+			'bookmarks'
+		);
 		if (userDoc === null) {
 			res.locals.error = 'this user is deleted recently';
 			const error = new Error(
@@ -193,21 +196,21 @@ exports.postUpdateProfile = async (req, res) => {
 		if (bio !== '') {
 			user.bio = bio;
 		}
-    if (country !== '') {
-      user.country = country;
+		if (country !== '') {
+			user.country = country;
 		}
-    if (BirthDate !== '') {
-      user.yearOfBirth = BirthDate;
+		if (BirthDate !== '') {
+			user.yearOfBirth = BirthDate;
 		}
 		user.gender = gender;
 		if (skills !== undefined) {
-      user.skills = skills;
+			user.skills = skills;
 		} else {
-      user.skills = [];
+			user.skills = [];
 		}
-    if (nativeLang !== '') {
-      user.nativeLang = nativeLang;
-    }
+		if (nativeLang !== '') {
+			user.nativeLang = nativeLang;
+		}
 
 		if (image !== undefined) {
 			user.Image = Image;
@@ -262,6 +265,14 @@ exports.postFollow = async (req, res) => {
 		res.sendStatus(400);
 	});
 
+	if (!isFollowing) {
+		await Notification.insertNotification(
+			userId,
+			req.session.user._id,
+			'follow',
+			req.session.user._id
+		);
+	}
 	res.status(200).send(req.session.user);
 };
 

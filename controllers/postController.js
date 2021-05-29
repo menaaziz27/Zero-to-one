@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
+const Notification = require('../models/Notification');
 const findHashtags = require('find-hashtags');
 
 // /posts/:id/details
@@ -84,7 +85,16 @@ exports.createPost = async (req, res) => {
 
 	try {
 		let newPost = await Post.create(data);
-		newPost = await Post.populate(newPost, { path: 'user' });
+		newPost = await User.populate(newPost, { path: 'user' });
+		newPost = await Post.populate(newPost, { path: 'replyTo' });
+		if (newPost.replyTo !== undefined) {
+			await Notification.insertNotification(
+				newPost.replyTo.user,
+				req.session.user._id,
+				'reply',
+				newPost._id
+			);
+		}
 		return res.status(201).send({ newPost, userId });
 	} catch (e) {
 		console.log(e);
@@ -157,6 +167,15 @@ exports.postLike = async (req, res) => {
 		console.log(error);
 		res.sendStatus(400);
 	});
+
+	if (!isLiked) {
+		await Notification.insertNotification(
+			post.user,
+			userId,
+			'postLike',
+			post._id
+		);
+	}
 
 	res.status(200).send(post);
 };

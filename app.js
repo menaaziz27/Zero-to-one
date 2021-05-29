@@ -25,6 +25,7 @@ const roadmapsRoutes = require('./routes/roadmap');
 const messagesRoutes = require('./routes/messages');
 const chatRoutes = require('./routes/chat');
 const chatMessageRoutes = require('./routes/chatMessages');
+const notificationsRoutes = require('./routes/notifications');
 
 // ============ constant vars ============
 // const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
@@ -97,6 +98,7 @@ app.use('/roadmaps', roadmapsRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/chats', chatRoutes);
 app.use('/chatMessage', chatMessageRoutes);
+app.use('/notifications', notificationsRoutes);
 
 // handling different errors
 app.use((error, req, res, next) => {

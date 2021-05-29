@@ -28,7 +28,6 @@ exports.getTimeline = async (req, res, next) => {
 	}
 	try {
 		res.render('home/timeline', {
-			// moment,
 			userid: userid,
 			pageTitle: 'Timeline',
 			news: news,
