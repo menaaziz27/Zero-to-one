@@ -270,7 +270,7 @@ exports.postFollow = async (req, res) => {
 			userId,
 			req.session.user._id,
 			'follow',
-			req.session.user._id
+			req.session.user.username
 		);
 	}
 	res.status(200).send(req.session.user);
