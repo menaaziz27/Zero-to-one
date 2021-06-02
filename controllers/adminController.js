@@ -4,6 +4,8 @@ const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
 const Topic = require('../models/Topic');
 const moment = require('moment');
+var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.))?(\\?(.))?");
+
 
 exports.getDashboard = async(req, res) => {
     try {
@@ -372,14 +374,14 @@ exports.postCreateTopicDashboard = async(req, res) => {
     } else {
       references = [];
     }
-   
+    
     let roadmaproute;
     if (typeof req.body.roadmaps == 'object') {
-        roadmaproute = req.body.roadmaps;
+      roadmaproute = req.body.roadmaps;
     } else if (typeof req.body.roadmaps == 'string') {
-        roadmaproute = [req.body.roadmaps];
+      roadmaproute = [req.body.roadmaps];
     } else {
-        roadmaproute = [];
+      roadmaproute = [];
     }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -397,15 +399,18 @@ exports.postCreateTopicDashboard = async(req, res) => {
       });
     }
     try {
-        const topic = await new Topic();
-        topic.title = title;
-        topic.summary = summary;
-        topic.description = description;
-        topic.routeName = routeName;
-        topic.references=references
-        if(video !=''&& video.includes('https://')){
+      const topic = await new Topic();
+      topic.title = title;
+      topic.summary = summary;
+      topic.description = description;
+      topic.routeName = routeName;
+      const ref = references.filter(ref => ref !='');
+      topic.references=ref
+        if(video !=''&&regex.test(video)){
+          console.log('success')
           topic.video=video
-
+        }else{
+          console.log('fail')
         }
         for (var i = 0; i < roadmaproute.length; i++) {
             const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] });
@@ -455,6 +460,7 @@ exports.postEditTopicDashboard = async(req, res) => {
     const video = req.body.video;
     const topicId = req.body.id;
     let roadmaproute;
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       let topic
@@ -488,8 +494,9 @@ exports.postEditTopicDashboard = async(req, res) => {
         topic.summary = summary;
         topic.description = description;
         topic.routeName = routeName;
-        topic.references = references;
-        if(video !=''&&video!='https://'){
+        const ref = references.filter(ref => ref !='');
+        topic.references=ref
+        if(video !=''&&regex.test(video)){
           topic.video=video
         }
         for (var i = 0; i < roadmaproute.length; i++) {
