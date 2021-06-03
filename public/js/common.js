@@ -390,6 +390,8 @@ $(document).on('click', '.notification.active', e => {
 	markNotificationAsOpened(notificationId, callback);
 });
 
+$('#markNotificationAsRead').click(() => markNotificationAsOpened());
+
 function getPostIdFromElement(element) {
 	var isRoot = element.hasClass('post');
 	var rootElement = isRoot ? element : element.closest('.post');

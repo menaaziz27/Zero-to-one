@@ -5,3 +5,9 @@
 .resultListItem.notification * {
     pointer-events: none;
 }
+
+#markNotificationAsRead {
+    border: none !important;
+    background: white !important;
+    outline: none !important;
+}

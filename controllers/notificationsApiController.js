@@ -35,3 +35,20 @@ exports.markAsOpened = async (req, res, next) => {
 		next(e);
 	}
 };
+
+exports.markManyAsOpened = async (req, res, next) => {
+	try {
+		const notifications = await Notification.updateMany(
+			{ userTo: req.session.user._id },
+			{
+				opened: true,
+			}
+		);
+		res.sendStatus(204);
+	} catch (e) {
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
+	}
+};
