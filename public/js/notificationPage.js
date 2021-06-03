@@ -19,9 +19,10 @@ function createNotificationHtml(notification) {
 	let userFrom = notification.userFrom;
 	let text = notificationText(notification);
 	let url = notificationUrl(notification);
+	let activeclass = notification.opened ? '' : 'active';
 
 	return `
-		<a href='${url}' class='resultListItem notification'>
+		<a style="text-decoration: none;" href='${url}' class='resultListItem notification ${activeclass}' data-id="${notification._id}">
                 <div class='resultsImageContainer'>
                     <img src='${userFrom.Image}'>
                 </div>
@@ -34,7 +35,6 @@ function createNotificationHtml(notification) {
 
 function notificationText(notification) {
 	let userFrom = notification.userFrom;
-	console.log(userFrom);
 	if (!userFrom.name || !userFrom.username) {
 		return alert('userFrom is not populated');
 	}

@@ -376,6 +376,20 @@ $(document).on('click', '.followButton', function (e) {
 	});
 });
 
+$(document).on('click', '.notification.active', e => {
+	let container = $(e.target);
+	let notificationId = container.data().id;
+	console.log(notificationId);
+	let href = container.attr('href');
+	console.log(href);
+	e.preventDefault();
+
+	let callback = () => {
+		window.location = href;
+	};
+	markNotificationAsOpened(notificationId, callback);
+});
+
 function getPostIdFromElement(element) {
 	var isRoot = element.hasClass('post');
 	var rootElement = isRoot ? element : element.closest('.post');
@@ -627,4 +641,18 @@ function messageReceived(newMessage) {
 	} else {
 		addChatMessageHtml(newMessage);
 	}
+}
+
+function markNotificationAsOpened(notificationId = null, callback = null) {
+	if (callback === null) callback = () => location.reload();
+
+	let url =
+		notificationId !== null
+			? `/api/notifications/${notificationId}/markAsOpened`
+			: '/api/notifications/markAsOpened';
+	$.ajax({
+		url: url,
+		type: 'PUT',
+		success: () => callback(),
+	});
 }

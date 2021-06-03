@@ -21,3 +21,17 @@ exports.getNotifications = async (req, res, next) => {
 		next(e);
 	}
 };
+exports.markAsOpened = async (req, res, next) => {
+	try {
+		const notifications = await Notification.findByIdAndUpdate(req.params.id, {
+			opened: true,
+		});
+		console.log('markasopened controller');
+		res.sendStatus(204);
+	} catch (e) {
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
+	}
+};
