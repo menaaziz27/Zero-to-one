@@ -123,7 +123,7 @@ exports.validateProfile = [
 ];
 
 exports.postUpdateProfile = async (req, res) => {
-	console.log(req.body);
+	// console.log(req.body);
 	let {
 		userid,
 		username,
