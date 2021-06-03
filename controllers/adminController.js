@@ -4,6 +4,9 @@ const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
 const Topic = require('../models/Topic');
 const moment = require('moment');
+var regex = new RegExp(
+	'^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.))?(\\?(.))?'
+);
 
 exports.getDashboard = async (req, res) => {
 	try {
@@ -422,9 +425,13 @@ exports.postCreateTopicDashboard = async (req, res) => {
 		topic.summary = summary;
 		topic.description = description;
 		topic.routeName = routeName;
-		topic.references = references;
-		if (video != '' && video.includes('https://')) {
+		const ref = references.filter(ref => ref != '');
+		topic.references = ref;
+		if (video != '' && regex.test(video)) {
+			console.log('success');
 			topic.video = video;
+		} else {
+			console.log('fail');
 		}
 		for (var i = 0; i < roadmaproute.length; i++) {
 			const roadmap = await Roadmap.findOne({ routeName: roadmaproute[i] });
@@ -509,6 +516,73 @@ exports.postEditTopicDashboard = async (req, res) => {
 		topic.routeName = routeName;
 		topic.references = references;
 		if (video != '' && video.includes('https://')) {
+			topic.video = video;
+		}
+		for (var i = 0; i < roadmaproute.length; i++) {
+			const roadmap = await Roadmap.findOne({
+				routeName: roadmaproute[i],
+			}).populate('steps');
+			if (!topic.roadmaps.some(road => road.title === roadmap.title)) {
+				topic.roadmaps.push(roadmap);
+			}
+			if (!roadmap.steps.some(step => step.title === topic.title)) {
+				roadmap.steps.push(topic);
+				await roadmap.save();
+			}
+		}
+		topic.save();
+		res.redirect('/admin/dashboard/topics');
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+exports.postEditTopicDashboard = async (req, res) => {
+	const title = req.body.title;
+	const summary = req.body.summary;
+	const description = req.body.description;
+	const routeName = req.body.routeName;
+	let references = req.body.references;
+	const video = req.body.video;
+	const topicId = req.body.id;
+	let roadmaproute;
+
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		let topic;
+		let roadmaps;
+		let references;
+		try {
+			topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
+			roadmaps = await Roadmap.find({});
+			references = topic.references;
+		} catch (e) {
+			console.log(e);
+		}
+		console.log(errors.array());
+		return res.status(422).render('dashboard/topic/editTopic.ejs', {
+			errorMassage: errors.array(),
+			topic,
+			roadmaps,
+			references,
+		});
+	}
+	if (typeof req.body.roadmaps == 'object') {
+		roadmaproute = req.body.roadmaps;
+	} else if (typeof req.body.roadmaps == 'string') {
+		roadmaproute = [req.body.roadmaps];
+	} else {
+		roadmaproute = [];
+	}
+	try {
+		const topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
+		topic.title = title;
+		topic.summary = summary;
+		topic.description = description;
+		topic.routeName = routeName;
+		const ref = references.filter(ref => ref != '');
+		topic.references = ref;
+		if (video != '' && regex.test(video)) {
 			topic.video = video;
 		}
 		for (var i = 0; i < roadmaproute.length; i++) {
