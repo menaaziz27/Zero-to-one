@@ -5,10 +5,16 @@ const Roadmap = require('../models/Roadmap');
 const Notification = require('../models/Notification');
 exports.getNotifications = async (req, res, next) => {
 	try {
-		const notifications = await Notification.find({
+		let searchObj = {
 			userTo: req.session.user._id,
 			notificationType: { $ne: 'newMessage' },
-		})
+		};
+
+		if (req.query.unreadOnly !== undefined && req.query.unreadOnly === 'true') {
+			searchObj.opened = false;
+		}
+
+		const notifications = await Notification.find()
 			.populate('userTo')
 			.populate('userFrom')
 			.sort({ createdAt: -1 });
