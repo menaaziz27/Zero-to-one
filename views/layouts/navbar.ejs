@@ -30,6 +30,18 @@
                         <li class="hvr-underline-from-center">
                             <a class="nav-link" href="/roadmaps">Roadmaps</a>
                         </li>
+                        <li class="">
+                            <a class="nav-link" href="/notifications">
+                                <i class="fas fa-bell"></i>
+                                <span id="notificationBadge"></span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="nav-link" href="/messages">
+                                <i class="fas fa-envelope"></i>
+                                <span id="messagesBadge"></span>
+                            </a>
+                        </li>
 
                         <% if(isAuthenticated && userid !==null ) { %>
                             <li class="nav-item dropdown">

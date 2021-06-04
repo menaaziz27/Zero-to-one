@@ -89,3 +89,33 @@ li.dropdown:last-child .dropdown-menu {
     right: 0;
     left: auto;
 }
+
+li a {
+    position: relative;
+}
+
+li i {
+    font-size: 22px;
+}
+
+#notificationBadge,
+#messagesBadge {
+    background-color: var(--red);
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    position: absolute;
+    top: -8px;
+    right: -7px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+#notificationBadge.active,
+#messagesBadge.active {
+    visibility: visible;
+}
