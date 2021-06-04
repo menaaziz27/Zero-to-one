@@ -5,6 +5,7 @@ let selectedUsers = [];
 
 $(document).ready(() => {
 	refreshMessageBadge();
+	refreshNotificationBadge();
 });
 $('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
@@ -676,12 +677,12 @@ function refreshMessageBadge() {
 }
 
 function refreshNotificationBadge() {
-	$.get('/chats/', { unreadOnly: true }, data => {
+	$.get('/api/notifications', { unreadOnly: true }, data => {
 		let numResults = data.length;
 		if (numResults > 0) {
-			$('#messagesBadge').text(numResults).addClass('active');
+			$('#notificationBadge').text(numResults).addClass('active');
 		} else {
-			$('#messagesBadge').text('').removeClass('active');
+			$('#notificationBadge').text('').removeClass('active');
 		}
 	});
 }
