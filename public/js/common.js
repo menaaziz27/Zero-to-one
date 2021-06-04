@@ -1,3 +1,4 @@
+
 let timer;
 let skip = 0;
 let limit = 10;
@@ -83,7 +84,22 @@ $('#submitBookmarkButton').click(e => {
 		}
 	});
 });
-
+$('#feedbackButton').click(e => {
+	var name = $('#name');
+  var email = $('#email');
+  var message = $('#message');
+	 var data = {
+		name: name.val(),
+   email: email.val(),
+   message: message.val(),
+	 };
+   console.log(data)
+	$.post('/feedback', data, allData => {});
+    name.val('')
+    email.val('')
+    message.val('')
+    alert('Thank you for your feedback')
+});
 $('#submitPostButton, #submitReplyButton').click(e => {
 	var button = $(e.target);
 

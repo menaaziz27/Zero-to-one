@@ -72,3 +72,22 @@ const deleteTopic = btn => {
 			console.log(err);
 		});
 };
+
+const deletefeedback = btn => {
+	const feedbackId = btn.parentNode.querySelector('[name=feedbackId]').value;
+
+	const feedbackElement = btn.closest('#feedback');
+	fetch('/admin/dashboard/feedback/delete/' + feedbackId, {
+		method: 'DELETE',
+	})
+		.then(result => {
+			return result.json();
+		})
+		.then(data => {
+			feedbackElement.remove(feedbackElement);
+		})
+		.catch(err => {
+			console.log(err);
+		});
+};
+

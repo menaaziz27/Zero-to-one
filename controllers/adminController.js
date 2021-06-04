@@ -3,6 +3,7 @@ const { body, validationResult } = require('express-validator');
 const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
 const Topic = require('../models/Topic');
+const Feedback = require('../models/Feedback')
 const moment = require('moment');
 var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.))?(\\?(.))?");
 
@@ -516,4 +517,25 @@ exports.postEditTopicDashboard = async(req, res) => {
     } catch (e) {
         console.log(e);
     }
+};
+exports.getFeedback = async(req, res) => {
+  try {
+      const feedbacks = await Feedback.find({});
+      res.render('dashboard/feedback.ejs', {
+          feedbacks,
+          errorMassage: null,
+          
+      });
+  } catch (e) {
+      console.log(e);
+  }
+};
+exports.deleteFeedback = async(req, res) => {
+  const feedbackId = req.params.id;
+  try {
+      await Feedback.findByIdAndDelete(feedbackId);
+      res.status(200).json({ message: 'Success!' });
+  } catch (e) {
+      res.status(500).json({ message: 'failed!' });
+  }
 };

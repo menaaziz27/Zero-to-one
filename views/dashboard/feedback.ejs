@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
-    <%- include('../../layouts/head.ejs') %>
+    
+    <%- include('../layouts/head.ejs') %>
 
-    <title>Dashboard</title>
-  
+    <title>Feedback</title>
+   
+
     <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
@@ -14,13 +16,14 @@
     <link href="/assets/css/navbar.css" rel="stylesheet">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/scrollbar.css">
+   
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <title>Test2</title>
+
     <!-- ================== END ====================== -->
 </head>
 
 <body>
-    <%- include('../../layouts/navbar.ejs') %>
+    <%- include('../layouts/navbar.ejs') %>
 
         <!-- ===================== IF THE USER IS AUTHENTICATED =================== -->
         <!-- GRID SYSTEM -->
@@ -37,25 +40,26 @@
 
                                     <span style="display: inline-block; margin-right: 3px;">
                                         <h4>
-                                                <i style="margin-right: 16px;"class="far fa-user"></i> 
-                                                Users 
-                                           </h4> 
-                                        </span>
+                                            <i style="margin-right: 16px;" class="far fa-user"></i>
+                                            Users
+                                        </h4>
+                                    </span>
                                 </a>
                             </div>
                             <div class="flex items-center mb-4">
                                 <a href="/admin/dashboard/posts">
                                     <h4>
-                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                           role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                           class="mr-3 crayons-icon color-base-50">
-                                           <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
-                                           <path
-                                               d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
-                                           </path>
-                                       </svg>
-                                        Posts 
-                                   </h4> 
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" role="img"
+                                            aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
+                                            class="mr-3 crayons-icon color-base-50">
+                                            <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
+                                            <path
+                                                d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
+                                            </path>
+                                        </svg>
+                                        Posts
+                                    </h4>
                                 </a>
                             </div>
                             <div class="flex items-center">
@@ -64,8 +68,8 @@
                                     <span style="display: inline-block; margin-right: 3px;">
                                         <h4>
                                             <i style="margin-right: 16px;" class="fas fa-road"></i>
-                                            Roadmaps 
-                                       </h4>                                
+                                            Roadmaps
+                                        </h4>
                                     </span>
                                 </a>
                             </div>
@@ -76,8 +80,8 @@
                                     <span style="display: inline-block; margin-right: 3px;">
                                         <h4>
                                             <i style="margin-right: 16px;" class="fab fa-accusoft"></i>
-                                           All Topics 
-                                       </h4>                                
+                                           All Topics
+                                        </h4>
                                     </span>
                                 </a>
                             </div>
@@ -93,40 +97,26 @@
                                     </span>
                                 </a>
                             </div>
+                
                         </div>
                     </div>
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
                 <div class="col">
 
-                      <% if (posts !==undefined || posts !==null) { %>
-                        <% posts.forEach(function(post) { %>
-                            <div id="post" class="crayons-story " data-content-user-id="219080">
+                    <br><br><br>
+                    <% if (feedbacks !==undefined || feedbacks !==null) { %>
+                        <% feedbacks.forEach(function(feedback) { %>
+                            <div id="feedback" class="crayons-story " data-content-user-id="219080">
                                 <div  class="crayons-story__body">
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
-                                            <div class="crayons-story__author-pic">
-
-                                                <a href="/users/profile/<%=post.user.username%>"
-                                                    class="crayons-avatar crayons-avatar--l ">
-                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
-                                                        alt="aemiej profile" class="crayons-avatar__image" />
-                                                </a>
-                                            </div>
                                             <div>
-                                                <p>
-                                                    <a href="/users/profile/<%=post.user.username%>"
-                                                        class="crayons-story__secondary fw-medium">
-                                                        <%=post.user.name%>
-                                                    </a>
-                                                </p>
-                                                <a href="/posts/<%=post._id %>"
-                                                    class="crayons-story__tertiary fs-xs"><time
-                                                        datetime="2020-08-08T06:46:08Z">
-                                                        <%= moment(post.createdAt).fromNow() %>
-                                                    </time><span class="time-ago-indicator-initial-placeholder"
-                                                        data-seconds="1596869168"></span></a>
-                                                
+                                                <a href="" class="crayons-story__secondary fw-medium">
+                                                    <h3>
+                                                        <%=feedback.name%>
+                                                    </h3>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -134,51 +124,60 @@
                                     <div class="crayons-story__indention">
                                         <h2 class="crayons-story__title">
                                             <p>
-                                                <%=post.description%>
+                                                <%=feedback.message%>
                                             </p>
                                         </h2>
                                         <div class="crayons-story__tags">
 
-                                            <% post.hashtags.forEach(function (tag) { %>
-                                                <a href="" class="crayons-tag"><span
-                                                        class="crayons-tag__prefix">#</span>
-                                                    <%= tag %>
-                                                </a>
-                                                <% }) %>   
+                                          <span class="crayons-tag__prefix"></span>
+                                                email :<%=feedback.email%>
+                                           
+                                            <br>
+
                                         </div>
                                         <div class="crayons-story__bottom">
                                             <div class="crayons-story__details">
-                                               
-                                               
+
+
                                             </div>
                                             <div class="crayons-story__save">
-                                                    <a type="button" href="/admin/dashboard/posts/edit/<%=post._id%>"
-                                                        id="article-save-button-421966"
-                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                                        data-reactable-id="421966" aria-label="Save to reading list"
-                                                        title="Save to reading list">
-                                                        <span class="bm-initial">edit</span>
-                                                    </a>
-                                                    <input name="postId" type="hidden" value="<%=post._id%>">
-                                                    <button type="button" style="color: #000;" onclick="deletePost(this)" class="btn btn-outline-danger">Delete</button>
-                                                    
+                                                <!-- <a type="button" href="/admin/dashboard/topics/edit/"
+                                                    id="article-save-button-421966"
+                                                    class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                    data-reactable-id="421966" aria-label="Save to reading list"
+                                                    title="Save to reading list">
+                                                    <span class="bm-initial">edit</span>
+                                                </a> -->
+                                                <input name="feedbackId" type="hidden" value="<%=feedback._id%>">
+                                                <button style="color: #000;"class="btn btn-outline-danger scrollto" onclick="deletefeedback(this)">Delete</button>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <% }) %>
-                            <% } %>
-                      
+                                <% } %>
+
+                                    <!-- Post Ends -->
+                                    <!-- endpost -->
+                                    <!-- Post Ends -->
                 </div>
                 <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
                     <!-- aside latest news -->
                     <aside class="widget">
                         <div class="widget blog-widget">
                             <h2 class="widget-header">
-                              
+
                             </h2>
-                          
+                            <!-- beginning of first news -->
+                            <!-- beginning of first news -->
+
+
+                            <!-- ending of first news -->
+
+
+                            <!-- ending of first news -->
                         </div>
                        
                 </div>
@@ -187,11 +186,14 @@
 
 
 
-        <%- include('../../layouts/strapAndJQuery.ejs') %>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <%- include('../layouts/strapAndJQuery.ejs') %>
 
         <script src="/assets/js/admin.js"></script>
-    
-
+        <script src="/assets/vendor/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        
 </body>
 
 </html>
