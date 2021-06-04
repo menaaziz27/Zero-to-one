@@ -46,6 +46,7 @@ exports.markManyAsOpened = async (req, res, next) => {
 		);
 		res.sendStatus(204);
 	} catch (e) {
+		console.log(e);
 		if (!e.statusCode) {
 			e.statusCode = 500;
 		}
