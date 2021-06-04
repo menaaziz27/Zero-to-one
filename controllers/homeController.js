@@ -3,6 +3,8 @@ const moment = require('moment');
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Roadmap = require('../models/Roadmap');
+const Feedback = require('../models/Feedback');
+
 const { renderUsers, generateCriteriaObject } = require('../middleware/helper');
 
 exports.getHome = async (req, res, next) => {
@@ -187,3 +189,16 @@ exports.getUsers = async (req, res) => {
 			res.sendStatus(400);
 		});
 };
+
+
+exports.postFeedback = async(req,res) =>{
+  const  data  = req.body;
+  console.log(data)
+  try {
+		let newfeedback = await Feedback.create(data);
+      newfeedback.save()
+		return res.status(201).send({newfeedback});
+	} catch (e) {
+		console.log(e);
+	}
+}

@@ -26,7 +26,9 @@ const {
 	deleteTopic,
 	getEditTopicDashboard,
 	postEditTopicDashboard,
-  getRoadmapTopicsDashboard
+  getRoadmapTopicsDashboard,
+  getFeedback,
+  deleteFeedback
 } = require('../controllers/adminController');
 
 router.get('/dashboard',isAdmin, getDashboard);
@@ -61,5 +63,13 @@ router.delete('/dashboard/topics/delete/:id', deleteTopic);
 router.get('/dashboard/topics/edit/:id',isAdmin, getEditTopicDashboard);
 router.post('/dashboard/topics/edit',validateTopic, postEditTopicDashboard);
 router.get('/dashboard/topics/:roadmap',isAdmin, getRoadmapTopicsDashboard);
+
+
+// =====================Feedback Dashboard========================
+
+router.get('/dashboard/feedback',isAdmin, getFeedback);
+router.delete('/dashboard/feedback/delete/:id', deleteFeedback);
+
+
 
 module.exports = router;
