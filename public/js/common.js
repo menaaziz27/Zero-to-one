@@ -111,6 +111,7 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 		let postData = allData.newPost;
 
 		if (postData.replyTo) {
+			emitNotification(postData.replyTo.user);
 			location.reload();
 		} else {
 			const html = createPostHtml(postData, userId);
@@ -314,6 +315,7 @@ $(document).on('click', '.likeButton', function (e) {
 			button.find('span').text(postData.likes.length || '');
 			if (postData.likes.includes(userLoggedIn._id)) {
 				button.addClass('active');
+				emitNotification(postData.user);
 			} else {
 				button.removeClass('active');
 			}
@@ -365,6 +367,7 @@ $(document).on('click', '.followButton', function (e) {
 			if (userLoggedIn.following && userLoggedIn.following.includes(userId)) {
 				button.addClass('following');
 				button.text('following');
+				emitNotification(userId);
 			} else {
 				button.removeClass('following');
 				button.text('follow');
