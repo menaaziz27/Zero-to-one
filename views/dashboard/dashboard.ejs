@@ -2,23 +2,23 @@
 <html lang="en">
 
 <head>
-   
+
     <title>Dashboard</title>
     <%- include('../layouts/head.ejs') %>
 
-   
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/dashboard.css" rel="stylesheet">
 
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <title>Test2</title>
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/dashboard.css" rel="stylesheet">
 
-    
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <title>Test2</title>
+
+
 </head>
 
 <body>
@@ -31,7 +31,7 @@
                 <div class="mb-2 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h3 >
+                            <h3>
                                 Dashboard
                             </h3>
                             <div class="flex items-center mb-4">
@@ -48,16 +48,12 @@
                             <div class="flex items-center mb-4">
                                 <a href="/admin/dashboard/posts">
                                     <h4>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" role="img"
-                                            aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                            class="mr-3 crayons-icon color-base-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
                                             <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
                                             <path
                                                 d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
                                             </path>
-                                        </svg>
-                                        Posts
+                                        </svg> Posts
                                     </h4>
                                 </a>
                             </div>
@@ -134,9 +130,12 @@
             </div>
         </div>
 
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
+        <%- include('../layouts/strapAndJQuery.ejs') %>
+
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 </body>
 

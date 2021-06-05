@@ -190,10 +190,14 @@
         </main>
         <!-- footer -->
         <%- include('../layouts/footer.ejs') %>
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
 
 
-            <script src="/assets/vendor/jquery/jquery.min.js"></script>
-            <script src="/bootstrap/js/bootstrap.min.js"></script>
+                <!-- <script src="/assets/vendor/jquery/jquery.min.js"></script>
+            <script src="/bootstrap/js/bootstrap.min.js"></script> -->
 
 </body>
 

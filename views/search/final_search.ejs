@@ -479,18 +479,20 @@
 
             </div>
             <!-- layout end -->
-
+            <script>
+                let userLoggedIn = <%- JSON.stringify(user) %>
+            </script>
             <%- include('../layouts/strapAndJQuery.ejs') %>
                 <script src="/js/common.js"></script>
-                <script src="/js/postPage.js"></script>
+                <!-- <script src="/js/postPage.js"></script> -->
                 <script>
                     $(document).ready(function() {
                         /* $(window).keydown(function(event) {
-                             if (event.keyCode == 13) {
-                                 event.preventDefault();
-                                 return false;
-                             }
-                         });*/
+                            if (event.keyCode == 13) {
+                                event.preventDefault();
+                                return false;
+                            }
+                        });*/
 
                         // $('#submitButton').click(function(e) {
                         //    e.preventDefault();

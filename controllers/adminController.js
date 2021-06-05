@@ -26,6 +26,7 @@ exports.getDashboard = async (req, res) => {
 			posts,
 			roadmaps,
 			topics,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -41,6 +42,7 @@ exports.getUserDashboard = async (req, res) => {
 		);
 		res.render('dashboard/user/userdashboard.ejs', {
 			users,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -75,6 +77,7 @@ exports.getEditUserDashboard = async (req, res) => {
 			user,
 			errorMassage: null,
 			roadmaps,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -154,6 +157,7 @@ exports.getPostDashboard = async (req, res) => {
 		res.render('dashboard/posts/postsdashboard.ejs', {
 			posts,
 			moment,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -177,6 +181,7 @@ exports.getEditPostDashboard = async (req, res) => {
 		res.render('dashboard/posts/postEdit.ejs', {
 			post,
 			errorMassage: null,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -202,6 +207,7 @@ exports.getRoadmapDashboard = async (req, res) => {
 		const roadmaps = await Roadmap.find({}).populate('steps');
 		res.render('dashboard/roadmap/roadmapDashboard.ejs', {
 			roadmaps,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -215,6 +221,7 @@ exports.getCreateRoadmapDashboard = (req, res) => {
 		summary: null,
 		routeName: null,
 		errorMassage: null,
+		userLoggedIn: req.session.user,
 	});
 };
 exports.validateRoadmap = [
@@ -227,7 +234,7 @@ exports.validateRoadmap = [
 	body(
 		'description',
 		'description must be at least 100 and less than 200 characters'
-	).isLength({ min: 100 }),
+	).isLength({ min: 50 }),
 	body(
 		'routeName',
 		'routename  must be at least 2 less than 30 characters'
@@ -282,6 +289,7 @@ exports.getEditRoadmapDashboard = async (req, res) => {
 		res.render('dashboard/roadmap/roadmapEdit.ejs', {
 			errorMassage: null,
 			roadmap,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -329,6 +337,7 @@ exports.getTopicDashboard = async (req, res) => {
 		res.render('dashboard/topic/topicDashboard.ejs', {
 			topics,
 			roadmaps,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -344,6 +353,7 @@ exports.getRoadmapTopicsDashboard = async (req, res) => {
 		res.render('dashboard/topic/roadmapTopics.ejs', {
 			roadmap,
 			roadmaps,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -360,6 +370,7 @@ exports.getCreateTopicDashboard = async (req, res) => {
 			routeName: null,
 			video: null,
 			roadmaps,
+			userLoggedIn: req.session.user,
 		});
 	} catch {
 		console.log(e);
@@ -467,6 +478,7 @@ exports.getEditTopicDashboard = async (req, res) => {
 			errorMassage: null,
 			roadmaps,
 			references,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);

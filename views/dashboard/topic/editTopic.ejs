@@ -2,43 +2,42 @@
 <html lang="en">
 
 <head>
-   
+
     <title>Edit Topic</title>
 
     <%- include('../../layouts/head.ejs') %>
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
 
-    <style>
-        label {
-            color: #009961;
-        }
-        
-        .error-message {
-            color: red;
-        }
-    </style>
-     <script>
-       
-        const addtextfield = btn => {
-         
-    //create the text box and x button next to it
-    var subtask = "<div class ='form-group' id='stepfield' ><input id='step' class='form-control' type='text' name='references'  style='width: 50%;'><button class=' btn btn-success' type='button'  name='deleteSubTask'>X</button></div>"
-             $(".references").append(subtask)
-             $(".references").on("click","button[name=deleteSubTask]",function(){
-            //delete the tr containing the control
-            $(this).parent().remove()
-            })
-        }
-    </script>
+        <style>
+            label {
+                color: #009961;
+            }
+            
+            .error-message {
+                color: red;
+            }
+        </style>
+        <script>
+            const addtextfield = btn => {
+
+                //create the text box and x button next to it
+                var subtask = "<div class ='form-group' id='stepfield' ><input id='step' class='form-control' type='text' name='references'  style='width: 50%;'><button class=' btn btn-success' type='button'  name='deleteSubTask'>X</button></div>"
+                $(".references").append(subtask)
+                $(".references").on("click", "button[name=deleteSubTask]", function() {
+                    //delete the tr containing the control
+                    $(this).parent().remove()
+                })
+            }
+        </script>
 </head>
 
 <body>
@@ -66,7 +65,7 @@
                                         <% } %>
                                             <% }) %>
                                                 <% } %>
-                           
+
                         </div>
                         <input type="hidden" name="id" value="<%=topic._id%>">
                         <div class="form-group">
@@ -111,27 +110,29 @@
                         </div>
                         <div class="form-group">
                             <label for="password">video</label>
-                            <input class="form-control" type="text" id="video" placeholder="video" name="video"<%if(topic.video){%> value="<%=topic.video%>"<%}%>>
-                            <% if (errorMassage) { %>
-                                <% errorMassage.forEach(function(error) { %>
-                                    <% if(error.param==='video' ) { %>
-                                        <small class="text-danger">
+                            <input class="form-control" type="text" id="video" placeholder="video" name="video" <%if(topic.video){%> value="
+                            <%=topic.video%>"
+                                <%}%>>
+                                    <% if (errorMassage) { %>
+                                        <% errorMassage.forEach(function(error) { %>
+                                            <% if(error.param==='video' ) { %>
+                                                <small class="text-danger">
                                             <%= error.msg %>
                                         </small>
-                                        <% } %>
-                                            <% }) %>
                                                 <% } %>
+                                                    <% }) %>
+                                                        <% } %>
                         </div>
                         <div class="form-group references">
                             <label for="password">References</label>
                             <button id="btnstep" type="button" name="button" onclick="addtextfield()">+</button>
                             <% if (topic.references) { %>
                                 <% for (let reference of references) { %>
-                                    <input id='step' class='form-control' type='text' name='references' value="<%=reference%>"  style='width: 50%;'>
+                                    <input id='step' class='form-control' type='text' name='references' value="<%=reference%>" style='width: 50%;'>
                                     <%}%>
                                         <%}%>
                         </div>
-                       
+
 
                         <div class="form-check">
                             <label for="roadmaps">Roadmaps</label>
@@ -160,8 +161,10 @@
         </div>
         <%- include('../../layouts/footer.ejs') %>
 
-        <%- include('../../layouts/strapAndJQuery.ejs') %>
-
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../../layouts/strapAndJQuery.ejs') %>
 
 </body>
 

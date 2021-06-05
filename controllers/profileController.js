@@ -68,6 +68,7 @@ exports.getUserProfile = async (req, res, next) => {
 			postsCount,
 			isFollowing,
 			selectedTap: req.query.comments ? 'comments' : '',
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -109,6 +110,7 @@ exports.getUpdateProfile = async (req, res) => {
 			errorMassage: null,
 			roadmaps,
 			name: userDoc.name,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);

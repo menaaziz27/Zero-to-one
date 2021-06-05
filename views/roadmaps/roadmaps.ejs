@@ -72,7 +72,9 @@
             </main>
             <!-- footer -->
             <%- include('../layouts/footer.ejs') %>
-
+                <script>
+                    let userLoggedIn = <%- JSON.stringify(user) %>
+                </script>
                 <%- include('../layouts/strapAndJQuery.ejs') %>
 
 </body>

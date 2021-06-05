@@ -6,7 +6,7 @@ exports.getMessages = (req, res) => {
 	const payload = {
 		pageTitle: 'Inbox Page',
 		userLoggedIn: req.session.user,
-		userLoggedInJs: JSON.stringify(req.session.user),
+		userLoggedInJs: req.session.user,
 	};
 	res.render('messages/inboxPage', payload);
 };
@@ -14,7 +14,7 @@ exports.newMessage = (req, res) => {
 	const payload = {
 		pageTitle: 'New Message',
 		userLoggedIn: req.session.user,
-		userLoggedInJs: JSON.stringify(req.session.user),
+		userLoggedInJs: req.session.user,
 	};
 	res.render('messages/newMessage', payload);
 };
@@ -45,10 +45,10 @@ exports.getChatPage = async (req, res) => {
 		}).populate('users');
 		// if chat is null
 		if (!chat) {
-      // make sure chatId is not a user id
+			// make sure chatId is not a user id
 			let userFound = await User.findById(chatId);
 			if (userFound) {
-        chat = await getChatByUserId(userId, userFound._id);
+				chat = await getChatByUserId(userId, userFound._id);
 			}
 		}
 

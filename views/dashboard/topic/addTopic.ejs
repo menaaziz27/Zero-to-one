@@ -4,41 +4,40 @@
 <head>
     <%- include('../../layouts/head.ejs') %>
 
-    <title>ADD Topic</title>
+        <title>ADD Topic</title>
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
 
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
 
-    <style>
-        label {
-            color: #009961;
-        }
+        <style>
+            label {
+                color: #009961;
+            }
+            
+            .error-message {
+                color: red;
+            }
+        </style>
+        <script>
+            const addtextfield = btn => {
 
-        .error-message {
-            color: red;
-        }
-    </style>
-    <script>
-       
-        const addtextfield = btn => {
-         
-    //create the text box and x button next to it
-    var subtask = "<div class ='form-group' id='stepfield' ><input id='step' class='form-control' type='text' name='references' placeholder='Title URL'  style='width: 50%;'><button class=' btn btn-success' type='button'  name='deleteSubTask'>X</button></div>"
-             $(".references").append(subtask)
-             $(".references").on("click","button[name=deleteSubTask]",function(){
-            //delete the tr containing the control
-            $(this).parent().remove()
-            })
-        }
-    </script>
+                //create the text box and x button next to it
+                var subtask = "<div class ='form-group' id='stepfield' ><input id='step' class='form-control' type='text' name='references' placeholder='Title URL'  style='width: 50%;'><button class=' btn btn-success' type='button'  name='deleteSubTask'>X</button></div>"
+                $(".references").append(subtask)
+                $(".references").on("click", "button[name=deleteSubTask]", function() {
+                    //delete the tr containing the control
+                    $(this).parent().remove()
+                })
+            }
+        </script>
 </head>
 
 <body>
@@ -56,69 +55,79 @@
                         <div class="form-group">
                             <h3>Info</h3>
                             <label for="name">title</label>
-                            <input class="form-control" type="text" name="title" id="title" required placeholder="Enter title"<%if(title){%> value="<%=title%>"<%}%> >
-                            <% if (errorMassage) { %>
-                                <% errorMassage.forEach(function(error) { %>
-                                    <% if(error.param==='title' ) { %>
-                                        <small class="text-danger">
+                            <input class="form-control" type="text" name="title" id="title" required placeholder="Enter title" <%if(title){%> value="
+                            <%=title%>"
+                                <%}%> >
+                                    <% if (errorMassage) { %>
+                                        <% errorMassage.forEach(function(error) { %>
+                                            <% if(error.param==='title' ) { %>
+                                                <small class="text-danger">
                                             <%= error.msg %>
                                         </small>
-                                        <% } %>
-                                            <% }) %>
                                                 <% } %>
-                            
+                                                    <% }) %>
+                                                        <% } %>
+
                         </div>
                         <div class="form-group">
                             <label for="password">summary</label>
-                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary" <%if(summary){%> value="<%=summary%>"<%}%>>
-                            <% if (errorMassage) { %>
-                                <% errorMassage.forEach(function(error) { %>
-                                    <% if(error.param==='summary' ) { %>
-                                        <small class="text-danger">
+                            <input class="form-control" type="text" id="address" placeholder="summary" name="summary" <%if(summary){%> value="
+                            <%=summary%>"
+                                <%}%>>
+                                    <% if (errorMassage) { %>
+                                        <% errorMassage.forEach(function(error) { %>
+                                            <% if(error.param==='summary' ) { %>
+                                                <small class="text-danger">
                                             <%= error.msg %>
                                         </small>
-                                        <% } %>
-                                            <% }) %>
                                                 <% } %>
+                                                    <% }) %>
+                                                        <% } %>
                         </div>
                         <div class="form-group">
                             <label for="password">description</label>
-                            <input class="form-control" type="text" id="address" placeholder="description" name="description"<%if(description){%> value="<%=description%>"<%}%>>
-                            <% if (errorMassage) { %>
-                                <% errorMassage.forEach(function(error) { %>
-                                    <% if(error.param==='description' ) { %>
-                                        <small class="text-danger">
+                            <input class="form-control" type="text" id="address" placeholder="description" name="description" <%if(description){%> value="
+                            <%=description%>"
+                                <%}%>>
+                                    <% if (errorMassage) { %>
+                                        <% errorMassage.forEach(function(error) { %>
+                                            <% if(error.param==='description' ) { %>
+                                                <small class="text-danger">
                                             <%= error.msg %>
                                         </small>
-                                        <% } %>
-                                            <% }) %>
                                                 <% } %>
+                                                    <% }) %>
+                                                        <% } %>
                         </div>
                         <div class="form-group">
                             <label for="password">routeName</label>
-                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName"<%if(routeName){%> value="<%=routeName%>"<%}%>>
-                            <% if (errorMassage) { %>
-                                <% errorMassage.forEach(function(error) { %>
-                                    <% if(error.param==='routeName' ) { %>
-                                        <small class="text-danger">
+                            <input class="form-control" type="text" id="address" placeholder="routeName" name="routeName" <%if(routeName){%> value="
+                            <%=routeName%>"
+                                <%}%>>
+                                    <% if (errorMassage) { %>
+                                        <% errorMassage.forEach(function(error) { %>
+                                            <% if(error.param==='routeName' ) { %>
+                                                <small class="text-danger">
                                             <%= error.msg %>
                                         </small>
-                                        <% } %>
-                                            <% }) %>
                                                 <% } %>
+                                                    <% }) %>
+                                                        <% } %>
                         </div>
                         <div class="form-group">
                             <label for="password">video</label>
-                            <input class="form-control" type="text" id="video" placeholder="video" name="video"<%if(video){%> value="<%=video%>"<%}%>>
-                            <% if (errorMassage) { %>
-                                <% errorMassage.forEach(function(error) { %>
-                                    <% if(error.param==='video' ) { %>
-                                        <small class="text-danger">
+                            <input class="form-control" type="text" id="video" placeholder="video" name="video" <%if(video){%> value="
+                            <%=video%>"
+                                <%}%>>
+                                    <% if (errorMassage) { %>
+                                        <% errorMassage.forEach(function(error) { %>
+                                            <% if(error.param==='video' ) { %>
+                                                <small class="text-danger">
                                             <%= error.msg %>
                                         </small>
-                                        <% } %>
-                                            <% }) %>
                                                 <% } %>
+                                                    <% }) %>
+                                                        <% } %>
                         </div>
                         <div class="form-group references">
                             <label for="password">References</label>
@@ -128,20 +137,17 @@
                         <div class="form-check">
                             <label for="roadmaps">Roadmaps</label>
                             <% roadmaps.forEach(function (roadmap) { %>
-                            <div class="d-block">
-                                <input name="roadmaps" class="form-check-input" type="checkbox"
-                                    id="flexSwitchCheckDefault" value="<%=roadmap.routeName%>" >
-                                    <label class="form-check-label"
-                                        for="flexSwitchCheckDefault"><%=roadmap.title%></label>
-                                    </div>
-                                    <% }) %>
+                                <div class="d-block">
+                                    <input name="roadmaps" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmap.routeName%>">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmap.title%></label>
+                                </div>
+                                <% }) %>
                         </div>
-                     
-                                                  <br>
+
+                        <br>
                         <div class="row">
                             <div class="col-6">
-                                <a class="mx-auto btn btn-outline-dark btn-block"
-                                    href="/admin/dashboard/topics">BACK</a>
+                                <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/topics">BACK</a>
                             </div>
                             <div class="col-6">
                                 <button class="mx-auto btn btn-success btn-block" type="submit">SUBMIT</button>
@@ -154,6 +160,9 @@
         </div>
         <%- include('../../layouts/footer.ejs') %>
             <!-- bootstrap scripts -->
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
             <%- include('../../layouts/strapAndJQuery.ejs') %>
 </body>
 

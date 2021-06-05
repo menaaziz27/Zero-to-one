@@ -8,6 +8,7 @@ exports.getRoadmaps = async (req, res, next) => {
 
 		res.render('roadmaps/roadmaps', {
 			roadmaps,
+			user: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -50,6 +51,7 @@ exports.getRoadmap = async (req, res, next) => {
 			steps,
 			count,
 			user,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -76,6 +78,7 @@ exports.gettopic = async (req, res, next) => {
 			topic,
 			roadmaps,
 			referencee,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);

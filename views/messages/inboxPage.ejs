@@ -35,15 +35,15 @@
             </div>
         </div>
 </body>
+<script>
+    /* eslint-disable */
+    var userLoggedIn = <%- JSON.stringify(userLoggedInJs) %>
+</script>
 <%- include('../layouts/strapAndJQuery.ejs') %>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="/js/inboxPage.js"></script>
     <script src="/js/common.js"></script>
 
-    <script>
-        /* eslint-disable */
-        var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
-    </script>
 
 </html>

@@ -2,27 +2,27 @@
 <html lang="en">
 
 <head>
-  
+
 
     <title>Roadmap Dashboard</title>
     <%- include('../../layouts/head.ejs') %>
 
 
-    <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <title>Test2</title>
+        <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <title>Test2</title>
 
 
-   
 
-    <!-- ================== END ====================== -->
+
+        <!-- ================== END ====================== -->
 </head>
 
 <body>
@@ -35,7 +35,7 @@
                 <div class="mb-2 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h3 >
+                            <h3>
                                 Dashboard
                             </h3>
                             <div class="flex items-center mb-4">
@@ -52,16 +52,12 @@
                             <div class="flex items-center mb-4">
                                 <a href="/admin/dashboard/posts">
                                     <h4>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" role="img"
-                                            aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                            class="mr-3 crayons-icon color-base-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
                                             <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
                                             <path
                                                 d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
                                             </path>
-                                        </svg>
-                                        Posts
+                                        </svg> Posts
                                     </h4>
                                 </a>
                             </div>
@@ -125,17 +121,16 @@
                                         </h2>
                                         <div class="crayons-story__tags">
 
-                                          <span class="crayons-tag__prefix"></span>
-                                                topics :
-                                                <% if (roadmap.steps.length !==0) {%>
-                                                    <% for (let step of roadmap.steps ) {%>
-                                                        <%= step.title %> ,
-                                                            <%}%>
-                                                                <% } else { %>
-                                                                    There is no topics yet
-                                                                    <% } %>
-                                         
-                                            <br>
+                                            <span class="crayons-tag__prefix"></span> topics :
+                                            <% if (roadmap.steps.length !==0) { %>
+                                                <% for (let step of roadmap.steps ) {%>
+                                                    <%= step.title %> ,
+                                                        <%}%>
+                                                            <% } else { %>
+                                                                There is no topics yet
+                                                                <% } %>
+
+                                                                    <br>
 
                                         </div>
                                         <div class="crayons-story__bottom">
@@ -144,15 +139,11 @@
 
                                             </div>
                                             <div class="crayons-story__save">
-                                                <a type="button" href="/admin/dashboard/roadmaps/edit/<%=roadmap._id%>"
-                                                    id="article-save-button-421966"
-                                                    class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                                    data-reactable-id="421966" aria-label="Save to reading list"
-                                                    title="Save to reading list">
+                                                <a type="button" href="/admin/dashboard/roadmaps/edit/<%=roadmap._id%>" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
                                                     <span class="bm-initial">edit</span>
                                                 </a>
                                                 <input name="roadmapId" type="hidden" value="<%=roadmap._id%>">
-                                                <button style="color: #000;"class="btn btn-outline-danger scrollto" onclick="deleteRoadmap(this)">Delete</button>
+                                                <button style="color: #000;" class="btn btn-outline-danger scrollto" onclick="deleteRoadmap(this)">Delete</button>
 
                                             </div>
                                         </div>
@@ -180,13 +171,15 @@
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+        <script>
+            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
         <%- include('../../layouts/strapAndJQuery.ejs') %>
 
-        <script src="/assets/js/admin.js"></script>
+            <script src="/assets/js/admin.js"></script>
 
-      
+
 </body>
 
 </html>

@@ -67,6 +67,7 @@ exports.getNews = async (req, res) => {
 		title: 'News',
 		news: news,
 		pageTitle: 'News',
+		user: req.session.user,
 	});
 };
 
@@ -76,6 +77,7 @@ exports.getSearch = async (req, res) => {
 		res.render('search/final_search.ejs', {
 			users: [],
 			roadmaps,
+			user: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
