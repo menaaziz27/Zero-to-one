@@ -106,14 +106,13 @@
                     <% if (users !==undefined || users !==null) { %>
                         <% users.forEach(function(user) { %>
                             <div id="user" class="crayons-story " data-content-user-id="219080">
-                                <div  class="crayons-story__body">
+                                <div class="crayons-story__body">
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
                                             <div class="crayons-story__author-pic">
 
                                                 <a href="/users/profile/<%=user.username%>" class="crayons-avatar crayons-avatar--l ">
-                                                    <img src="<% if(user.Image) { %>/<%= user.Image %> <% } else { %>/assets/img/default.png <%}%>"
-                                                        alt="aemiej profile" class="crayons-avatar__image" />
+                                                    <img src="<%= user.Image %>" alt="aemiej profile" class="crayons-avatar__image" />
                                                 </a>
                                             </div>
                                             <div>

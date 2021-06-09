@@ -155,6 +155,7 @@ exports.getPostDashboard = async (req, res) => {
 		})
 			.sort({ createdAt: -1 })
 			.populate('user');
+
 		res.render('dashboard/posts/postsdashboard.ejs', {
 			posts,
 			moment,

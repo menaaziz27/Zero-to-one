@@ -73,8 +73,8 @@
                                     <span style="display: inline-block; margin-right: 3px;">
                                         <h4>
                                             <i style="margin-right: 16px;" class="fab fa-accusoft"></i>
-                                           All Topics 
-                                       </h4>                                
+                                        All Topics 
+                                    </h4>                                
                                     </span>
                                 </a>
                             </div>
@@ -85,7 +85,7 @@
                                     <span style="display: inline-block; margin-right: 3px;">
                                         <h4>
                                             <i style="margin-right: 16px;" class="fab fa-accusoft"></i>
-                                           Feedback
+                                            Feedback
                                         </h4>
                                     </span>
                                 </a>
@@ -97,73 +97,67 @@
                 <div class="col">
 
                     <% if (posts !==undefined || posts !==null) { %>
-                        <% posts.forEach(function(post) { %>
-<<<<<<< HEAD
-                            <div class="crayons-story " data-content-user-id="219080">
-                                <div id="post" class="crayons-story__body">
-=======
-                            <div id="post" class="crayons-story " data-content-user-id="219080">
-                                <div  class="crayons-story__body">
->>>>>>> d02494c8b7c25ff0d9999158b5a0921dd741e57f
-                                    <div class="crayons-story__top">
-                                        <div class="crayons-story__meta">
-                                            <div class="crayons-story__author-pic">
-
-                                                <a href="/users/profile/<%=post.user.username%>" class="crayons-avatar crayons-avatar--l ">
-                                                    <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
+                        <% posts.forEach((post) => { %>
+                            <% if(post.user) { %>
+                                <div id="post" class="crayons-story " data-content-user-id="219080">
+                                    <div class="crayons-story__body">
+                                        <div class="crayons-story__top">
+                                            <div class="crayons-story__meta">
+                                                <div class="crayons-story__author-pic">
+                                                    <a href="/users/profile/<%=post.user.username%>" class="crayons-avatar crayons-avatar--l ">
+                                                    <img src="<%= post.user.Image %>"
                                                         alt="aemiej profile" class="crayons-avatar__image" />
                                                 </a>
-                                            </div>
-                                            <div>
-                                                <p>
-                                                    <a href="/users/profile/<%=post.user.username%>" class="crayons-story__secondary fw-medium">
-                                                        <%=post.user.name%>
-                                                    </a>
-                                                </p>
-                                                <a href="/posts/<%=post._id %>" class="crayons-story__tertiary fs-xs"><time
+                                                </div>
+                                                <div>
+                                                    <p>
+                                                        <a href="/users/profile/<%=post.user.username%>" class="crayons-story__secondary fw-medium">
+                                                            <%=post.user.name%>
+                                                        </a>
+                                                    </p>
+                                                    <a href="/posts/<%=post._id %>" class="crayons-story__tertiary fs-xs"><time
                                                         datetime="2020-08-08T06:46:08Z">
                                                         <%= moment(post.createdAt).fromNow() %>
                                                     </time><span class="time-ago-indicator-initial-placeholder"
                                                         data-seconds="1596869168"></span></a>
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="crayons-story__indention">
-                                        <h2 class="crayons-story__title">
-                                            <p>
-                                                <%=post.description%>
-                                            </p>
-                                        </h2>
-                                        <div class="crayons-story__tags">
-
-                                            <% post.hashtags.forEach(function (tag) { %>
-                                                <a href="" class="crayons-tag"><span
+                                        <div class="crayons-story__indention">
+                                            <h2 class="crayons-story__title">
+                                                <p>
+                                                    <%=post.description%>
+                                                </p>
+                                            </h2>
+                                            <div class="crayons-story__tags">
+                                                <% post.hashtags.forEach(function (tag) { %>
+                                                    <a href="" class="crayons-tag"><span
                                                         class="crayons-tag__prefix">#</span>
                                                     <%= tag %>
                                                 </a>
-                                                <% }) %>
-                                        </div>
-                                        <div class="crayons-story__bottom">
-                                            <div class="crayons-story__details">
-
-
+                                                    <% }) %>
                                             </div>
-                                            <div class="crayons-story__save">
-                                                <a type="button" href="/admin/dashboard/posts/edit/<%=post._id%>" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
-                                                    <span class="bm-initial">edit</span>
-                                                </a>
-                                                <input name="postId" type="hidden" value="<%=post._id%>">
-                                                <button type="button" style="color: #000;" onclick="deletePost(this)" class="btn btn-outline-danger">Delete</button>
+                                            <div class="crayons-story__bottom">
+                                                <div class="crayons-story__details">
 
+
+                                                </div>
+                                                <div class="crayons-story__save">
+                                                    <a type="button" href="/admin/dashboard/posts/edit/<%=post._id%>" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
+                                                        <span class="bm-initial">edit</span>
+                                                    </a>
+                                                    <input name="postId" type="hidden" value="<%=post._id%>">
+                                                    <button type="button" style="color: #000;" onclick="deletePost(this)" class="btn btn-outline-danger">Delete</button>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <% }) %>
                                 <% } %>
+                                    <% }) %>
+                                        <% } %>
 
                 </div>
                 <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">

@@ -94,3 +94,5 @@
 - [] edit post route need to be fixed after edit
 - [X] following and followers page links
 - [X] prevent user of making fetch posts reqeusts if he hits the end of a page and the posts length is zero
+- [] posts dashboard
+- [] add client socket to following and followers page

@@ -111,16 +111,16 @@ app.use('/notifications', notificationsRoutes);
 app.use('/api/notifications', notificationsApiRoutes);
 
 // handling different errors
-app.use((error, req, res, next) => {
-	console.log(error.message);
-	if (!error.message) {
-		error.message = 'Page Not Found';
-	}
-	res.render('404.ejs', {
-		error: error.message,
-		title: 'Error',
-	});
-});
+// app.use((error, req, res, next) => {
+// 	console.log(error.message);
+// 	if (!error.message) {
+// 		error.message = 'Page Not Found';
+// 	}
+// 	res.render('404.ejs', {
+// 		error: error.message,
+// 		title: 'Error',
+// 	});
+// });
 
 app.use((req, res) => {
 	if (!res.locals.error) {

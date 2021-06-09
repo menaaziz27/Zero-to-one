@@ -29,7 +29,7 @@ const userSchema = new Schema(
 		likes: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 		following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 		followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    bookmarks: [{ type: Schema.Types.ObjectId, ref: 'roadmap' }],
+		bookmarks: [{ type: Schema.Types.ObjectId, ref: 'roadmap' }],
 		resetToken: String,
 		resetTokenExpiration: Date,
 		role: String,
@@ -50,6 +50,14 @@ userSchema.pre('remove', async function (next) {
 	const user = this;
 
 	await Post.deleteMany({ user: user._id });
+	await User.updateMany(
+		{ followers: { $in: user._id } },
+		{ followers: { $pull: user._id } }
+	);
+	await User.updateMany(
+		{ following: { $in: user._id } },
+		{ followers: { $pull: user._id } }
+	);
 	next();
 });
 
