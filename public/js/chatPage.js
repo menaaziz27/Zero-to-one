@@ -26,6 +26,7 @@ $(document).ready(() => {
 		var messagesHtml = messages.join('');
 		addMessagesHtmlToPage(messagesHtml);
 		scrollToBottom(false);
+		markMessagesAsRead();
 	});
 });
 
@@ -176,4 +177,12 @@ function scrollToBottom(animated) {
 	} else {
 		container.scrollTop(scrollHeight);
 	}
+}
+
+function markMessagesAsRead() {
+	$.ajax({
+		url: `/chats/${chatId}/messages/markAsRead`,
+		type: 'PUT',
+		success: () => refreshMessageBadge(),
+	});
 }

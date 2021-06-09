@@ -96,6 +96,19 @@ exports.getSingleChatMessages = async (req, res) => {
 	}
 };
 
+exports.markMessagesAsRead = async (req, res) => {
+	try {
+		const messages = await Message.updateMany(
+			{ chat: req.params.chatId },
+			{ $addToSet: { readBy: req.session.user._id } }
+		);
+
+		return res.sendStatus(204);
+	} catch (e) {
+		console.log(e);
+	}
+};
+
 function getChatByUserId(userLoggedInId, anotherUserId) {
 	return Chat.findOneAndUpdate(
 		{
