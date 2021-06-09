@@ -148,7 +148,6 @@ exports.postUpdateProfile = async (req, res) => {
 			skills = [skills];
 		}
 	}
-	console.log(skills, 'skillslslsl');
 	let image;
 	let Image;
 	image = req.file;
