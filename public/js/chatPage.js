@@ -148,7 +148,7 @@ function createMessageHtml(message, nextMessage, lastSenderId) {
 	let profileImage = '';
 	if (isLast) {
 		liClassName += ' last';
-		profileImage = `<img src=/${sender.Image} />`;
+		profileImage = `<img src=${sender.Image} />`;
 	}
 
 	let imageContainer = '';
