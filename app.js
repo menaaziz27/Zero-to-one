@@ -25,6 +25,8 @@ const roadmapsRoutes = require('./routes/roadmap');
 const messagesRoutes = require('./routes/messages');
 const chatRoutes = require('./routes/chat');
 const chatMessageRoutes = require('./routes/chatMessages');
+const notificationsRoutes = require('./routes/notifications');
+const notificationsApiRoutes = require('./routes/notifications_api');
 
 // ============ constant vars ============
 // const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
@@ -97,6 +99,8 @@ app.use('/roadmaps', roadmapsRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/chats', chatRoutes);
 app.use('/chatMessage', chatMessageRoutes);
+app.use('/notifications', notificationsRoutes);
+app.use('/api/notifications', notificationsApiRoutes);
 
 // handling different errors
 app.use((error, req, res, next) => {
@@ -126,9 +130,11 @@ io.on('connection', socket => {
 	socket.on('join room', room => socket.join(room));
 	socket.on('typing', chatId => socket.in(chatId).emit('typing'));
 	socket.on('stop typing', room => socket.in(room).emit('stop typing'));
+	socket.on('notification received', room =>
+		socket.in(room).emit('notification received')
+	);
 
 	socket.on('new message', newMessage => {
-		console.log(newMessage);
 		var chat = newMessage.chat;
 		if (!chat.users) return console.log('Chat.users not defined');
 

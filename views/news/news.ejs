@@ -39,7 +39,7 @@
                     <hr class="mt-2 mb-3" />
                     <div class="row h-100 justify-content-center align-items-center">
                         <% if (news) { %>
-                            <div style="width: 60%; border-radius:2px;" class="content">
+                            <div style="border-radius:2px;" class="col-md-8 col-xs-8 col-sm-8">
                                 <% news.forEach(function(article) { %>
                                     <div style="width: 100%;" class="mb-5 card">
                                         <div style="padding: 0px;background-color:white;" class="content">
@@ -72,6 +72,9 @@
             </div>
         </div>
 </body>
+<script>
+    let userLoggedIn = <%- JSON.stringify(user) %>
+</script>
 <%- include('../layouts/strapAndJQuery.ejs') %>
 
 </html>

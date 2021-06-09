@@ -3,7 +3,6 @@ const User = require('../models/User');
 const Message = require('../models/Message');
 const mongoose = require('mongoose');
 
-
 exports.createChat = async (req, res) => {
 	if (!req.body.users) {
 		return alert('no users sent');
@@ -33,11 +32,17 @@ exports.createChat = async (req, res) => {
 exports.getChat = async (req, res) => {
 	try {
 		let result = await Chat.find({
-			users: { $elemMatch: { $eq: req.session.user._id } },
+			users: { $elemMatch: { $eq: req.session?.user?._id } },
 		})
 			.populate('users')
 			.populate('latestMessage')
 			.sort({ updatedAt: -1 });
+
+		if (req.query.unreadOnly !== undefined && req.query.unreadOnly === 'true') {
+			result = result.filter(
+				res => !res.latestMessage?.readBy.includes(req.session.user._id)
+			);
+		}
 		result = await User.populate(result, { path: 'latestMessage.sender' });
 		return res.send(result);
 	} catch (e) {
@@ -58,20 +63,20 @@ exports.updateChatName = async (req, res) => {
 
 // GET /chats/:chatId
 exports.getSingleChat = async (req, res) => {
-  try {
+	try {
 		let chat = await Chat.findOne({
 			_id: req.params.chatId,
 			users: { $elemMatch: { $eq: req.session.user._id } },
 		})
 			.populate('users')
 			.sort({ updatedAt: -1 });
-      if (!chat) {
-        // make sure chatId is not a user id
-        let userFound = await User.findById({_id:req.params.chatId});
-        if (userFound) {
-          chat = await getChatByUserId(userId, userFound._id);
-        }
-      }
+		if (!chat) {
+			// make sure chatId is not a user id
+			let userFound = await User.findById({ _id: req.params.chatId });
+			if (userFound) {
+				chat = await getChatByUserId(userId, userFound._id);
+			}
+		}
 		return res.send(chat);
 	} catch (e) {
 		console.log(e);
@@ -86,6 +91,19 @@ exports.getSingleChatMessages = async (req, res) => {
 		);
 
 		return res.send(messages);
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+exports.markMessagesAsRead = async (req, res) => {
+	try {
+		const messages = await Message.updateMany(
+			{ chat: req.params.chatId },
+			{ $addToSet: { readBy: req.session.user._id } }
+		);
+
+		return res.sendStatus(204);
 	} catch (e) {
 		console.log(e);
 	}
@@ -122,4 +140,3 @@ function getChatByUserId(userLoggedInId, anotherUserId) {
 		}
 	).populate('users');
 }
-

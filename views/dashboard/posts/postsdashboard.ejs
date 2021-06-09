@@ -4,19 +4,19 @@
 <head>
     <%- include('../../layouts/head.ejs') %>
 
-    <title>Dashboard</title>
-  
-    <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <title>Test2</title>
-    <!-- ================== END ====================== -->
+        <title>Dashboard</title>
+
+        <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <title>Test2</title>
+        <!-- ================== END ====================== -->
 </head>
 
 <body>
@@ -29,7 +29,7 @@
                 <div class="mb-2 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h3 >
+                            <h3>
                                 Dashboard
                             </h3>
                             <div class="flex items-center mb-4">
@@ -46,16 +46,13 @@
                             <div class="flex items-center mb-4">
                                 <a href="/admin/dashboard/posts">
                                     <h4>
-                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                           role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                           class="mr-3 crayons-icon color-base-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
                                            <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
                                            <path
                                                d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
                                            </path>
-                                       </svg>
-                                        Posts 
-                                   </h4> 
+                                       </svg> Posts
+                                    </h4>
                                 </a>
                             </div>
                             <div class="flex items-center">
@@ -99,34 +96,36 @@
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
                 <div class="col">
 
-                      <% if (posts !==undefined || posts !==null) { %>
+                    <% if (posts !==undefined || posts !==null) { %>
                         <% posts.forEach(function(post) { %>
+<<<<<<< HEAD
+                            <div class="crayons-story " data-content-user-id="219080">
+                                <div id="post" class="crayons-story__body">
+=======
                             <div id="post" class="crayons-story " data-content-user-id="219080">
                                 <div  class="crayons-story__body">
+>>>>>>> d02494c8b7c25ff0d9999158b5a0921dd741e57f
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
                                             <div class="crayons-story__author-pic">
 
-                                                <a href="/users/profile/<%=post.user.username%>"
-                                                    class="crayons-avatar crayons-avatar--l ">
+                                                <a href="/users/profile/<%=post.user.username%>" class="crayons-avatar crayons-avatar--l ">
                                                     <img src="<% if(post.user.Image) { %>/<%= post.user.Image %> <% } else { %>/assets/img/default.png <%}%>"
                                                         alt="aemiej profile" class="crayons-avatar__image" />
                                                 </a>
                                             </div>
                                             <div>
                                                 <p>
-                                                    <a href="/users/profile/<%=post.user.username%>"
-                                                        class="crayons-story__secondary fw-medium">
+                                                    <a href="/users/profile/<%=post.user.username%>" class="crayons-story__secondary fw-medium">
                                                         <%=post.user.name%>
                                                     </a>
                                                 </p>
-                                                <a href="/posts/<%=post._id %>"
-                                                    class="crayons-story__tertiary fs-xs"><time
+                                                <a href="/posts/<%=post._id %>" class="crayons-story__tertiary fs-xs"><time
                                                         datetime="2020-08-08T06:46:08Z">
                                                         <%= moment(post.createdAt).fromNow() %>
                                                     </time><span class="time-ago-indicator-initial-placeholder"
                                                         data-seconds="1596869168"></span></a>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -144,53 +143,51 @@
                                                         class="crayons-tag__prefix">#</span>
                                                     <%= tag %>
                                                 </a>
-                                                <% }) %>   
+                                                <% }) %>
                                         </div>
                                         <div class="crayons-story__bottom">
                                             <div class="crayons-story__details">
-                                               
-                                               
+
+
                                             </div>
                                             <div class="crayons-story__save">
-                                                    <a type="button" href="/admin/dashboard/posts/edit/<%=post._id%>"
-                                                        id="article-save-button-421966"
-                                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                                        data-reactable-id="421966" aria-label="Save to reading list"
-                                                        title="Save to reading list">
-                                                        <span class="bm-initial">edit</span>
-                                                    </a>
-                                                    <input name="postId" type="hidden" value="<%=post._id%>">
-                                                    <button type="button" style="color: #000;" onclick="deletePost(this)" class="btn btn-outline-danger">Delete</button>
-                                                    
+                                                <a type="button" href="/admin/dashboard/posts/edit/<%=post._id%>" id="article-save-button-421966" class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button" data-reactable-id="421966" aria-label="Save to reading list" title="Save to reading list">
+                                                    <span class="bm-initial">edit</span>
+                                                </a>
+                                                <input name="postId" type="hidden" value="<%=post._id%>">
+                                                <button type="button" style="color: #000;" onclick="deletePost(this)" class="btn btn-outline-danger">Delete</button>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <% }) %>
-                            <% } %>
-                      
+                                <% } %>
+
                 </div>
                 <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
                     <!-- aside latest news -->
                     <aside class="widget">
                         <div class="widget blog-widget">
                             <h2 class="widget-header">
-                              
+
                             </h2>
-                          
+
                         </div>
-                       
+
                 </div>
             </div>
         </div>
 
 
-
+        <script>
+            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
         <%- include('../../layouts/strapAndJQuery.ejs') %>
 
-        <script src="/assets/js/admin.js"></script>
-    
+            <script src="/assets/js/admin.js"></script>
+
 
 </body>
 

@@ -4,25 +4,25 @@
 <head>
     <title>Edit user</title>
     <%- include('../../layouts/head.ejs') %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
 
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
 
-    <style>
-        label {
-            color: #009961;
-        }
-
-        .error-message {
-            color: red;
-        }
-    </style>
+        <style>
+            label {
+                color: #009961;
+            }
+            
+            .error-message {
+                color: red;
+            }
+        </style>
 </head>
 
 <body>
@@ -40,31 +40,29 @@
                         <div class="form-group">
                             <h3>Info</h3>
                             <label for="name">Name</label>
-                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter name"
-                                value="<% if(name) {%><%=user.name%><% } else { %><%= user.name %><% } %>">
-                                <% if (errorMassage) { %>
-                                    <% errorMassage.forEach(function(error) { %>
-                                        <% if(error.param==='name' ) { %>
-                                            <small class="text-danger">
+                            <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" value="<% if(name) {%><%=user.name%><% } else { %><%= user.name %><% } %>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='name' ) { %>
+                                        <small class="text-danger">
                                                 <%= error.msg %>
                                             </small>
-                                            <% } %>
-                                                <% }) %>
-                                                    <% } %>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
                         <div class="form-group">
                             <label for="password">Bio</label>
-                            <input class="form-control" type="text" id="address" placeholder="Bio" name="bio"
-                                value="<%=user.bio%>">
-                                <% if (errorMassage) { %>
-                                    <% errorMassage.forEach(function(error) { %>
-                                        <% if(error.param==='bio' ) { %>
-                                            <small class="text-danger">
+                            <input class="form-control" type="text" id="address" placeholder="Bio" name="bio" value="<%=user.bio%>">
+                            <% if (errorMassage) { %>
+                                <% errorMassage.forEach(function(error) { %>
+                                    <% if(error.param==='bio' ) { %>
+                                        <small class="text-danger">
                                                 <%= error.msg %>
                                             </small>
-                                            <% } %>
-                                                <% }) %>
-                                                    <% } %>
+                                        <% } %>
+                                            <% }) %>
+                                                <% } %>
                         </div>
                         <input type="hidden" name="userid" value="<%= user._id%>">
                         <input type="hidden" name="username" value="<%= user.username %>">
@@ -76,8 +74,7 @@
                         </div>
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select class="form-control" id="country" name="country" id="country"
-                                value="<%=currentUser.country%>">
+                            <select class="form-control" id="country" name="country" id="country" value="<%=currentUser.country%>">
                                 <% if( user.country ) { %>
                                     <option value="<%=currentUser.country%>">
                                         <%=user.country%>
@@ -340,8 +337,7 @@
                     </div> -->
                         <div class="form-group">
                             <label for="year">Date f birth</label>
-                            <select class="form-control" name="date_of_birth" tabindex="9" id="year"
-                                value="<%=currentUser.yearOfBirth%>">
+                            <select class="form-control" name="date_of_birth" tabindex="9" id="year" value="<%=currentUser.yearOfBirth%>">
                                 <% if( user.yearOfBirth ) { %>
                                     <option value="<%=currentUser.yearOfBirth%>">
                                         <%=user.yearOfBirth%>
@@ -448,8 +444,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Gender</label>
-                            <select name="gender" class="form-control" id="exampleFormControlSelect1"
-                                value="<%=currentUser.gender%>">
+                            <select name="gender" class="form-control" id="exampleFormControlSelect1" value="<%=currentUser.gender%>">
                                 <% if( user.gender) { %>
                                     <option value="<%=currentUser.gender%>">
                                         <%=user.gender%>
@@ -465,7 +460,7 @@
                             <div class="col-4">
                                 <div class="form-check">
                                     <div class="d-block">
-                                         <%   for (var i = 0; i < roadmaps.length; i++) {%>
+                                        <%   for (var i = 0; i < roadmaps.length; i++) {%>
                                             <div class="d-block">
 
                                                 <input name="skills" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>" <% if(currentUser.skills.includes(roadmaps[i].title)) { %> checked
@@ -474,13 +469,13 @@
                                             </div>
                                             <% } %>
                                     </div>
-                                
+
                                 </div>
                             </div>
                         </div>
-                       
+
                         <br>
-                        
+
                         <div class="row">
                             <div class="col-6">
                                 <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/users">BACK</a>
@@ -495,8 +490,10 @@
 
         </div>
         <%- include('../../layouts/footer.ejs') %>
-        <%- include('../../layouts/strapAndJQuery.ejs') %>
-
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../../layouts/strapAndJQuery.ejs') %>
 </body>
 
 </html>

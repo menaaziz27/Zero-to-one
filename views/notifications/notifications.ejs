@@ -10,6 +10,7 @@
         <link href="/assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
         <link rel="stylesheet" href="/assets/css/inboxPage.css">
+        <link rel="stylesheet" href="/assets/css/notificationPage.css">
 
 
 </head>
@@ -23,10 +24,10 @@
                 <div class="offset-md-2  col-md-8 col-xs-12 postContent">
                     <!-- post detail -->
                     <div class="row d-flex">
-                        <h3>inbox</h3>
-                        <a href="/messages/new" class="ml-auto">
-                            <i class="far fa-plus-square"></i>
-                        </a>
+                        <h3 class="ml-3">Notifications</h3>
+                        <button id="markNotificationAsRead" class="ml-auto mr-3">
+                            <i class="fas fa-check-double"></i>
+                        </button>
                     </div>
                     <div class="resultsContainer"></div>
                     <hr class="mt-2 mb-3" />
@@ -37,12 +38,12 @@
 </body>
 <script>
     /* eslint-disable */
-    var userLoggedIn = <%- JSON.stringify(userLoggedInJs) %>
+    var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
 </script>
 <%- include('../layouts/strapAndJQuery.ejs') %>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="/js/inboxPage.js"></script>
+    <script src="/js/notificationPage.js"></script>
     <script src="/js/common.js"></script>
 
 

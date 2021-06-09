@@ -30,7 +30,6 @@ exports.getTimeline = async (req, res, next) => {
 	}
 	try {
 		res.render('home/timeline', {
-			// moment,
 			userid: userid,
 			pageTitle: 'Timeline',
 			news: news,
@@ -61,13 +60,16 @@ exports.explore = async (req, res, next) => {
 };
 
 exports.getNews = async (req, res) => {
-	const data = await axios.get('https://dev.to/api/articles');
+	const data = await axios.get(
+		'https://dev.to/api/articles?per_page=100&tags=javascript, css, react, web, coding&top=5'
+	);
 
 	const news = data.data;
 	res.render('news/news', {
 		title: 'News',
 		news: news,
 		pageTitle: 'News',
+		user: req.session.user,
 	});
 };
 
@@ -77,6 +79,7 @@ exports.getSearch = async (req, res) => {
 		res.render('search/final_search.ejs', {
 			users: [],
 			roadmaps,
+			user: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);

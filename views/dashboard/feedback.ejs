@@ -2,24 +2,24 @@
 <html lang="en">
 
 <head>
-    
+
     <%- include('../layouts/head.ejs') %>
 
-    <title>Feedback</title>
-   
+        <title>Feedback</title>
 
-    <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-   
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-    <!-- ================== END ====================== -->
+        <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+        <!-- ================== END ====================== -->
 </head>
 
 <body>
@@ -32,7 +32,7 @@
                 <div class="mb-2 col-md-3">
                     <div class="card">
                         <div class="card-body">
-                            <h3 >
+                            <h3>
                                 Dashboard
                             </h3>
                             <div class="flex items-center mb-4">
@@ -49,16 +49,12 @@
                             <div class="flex items-center mb-4">
                                 <a href="/admin/dashboard/posts">
                                     <h4>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" role="img"
-                                            aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s"
-                                            class="mr-3 crayons-icon color-base-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s" class="mr-3 crayons-icon color-base-50">
                                             <title id="ae4j6bgaqcnm49u8u3eqcdkwttibhj9s">Post</title>
                                             <path
                                                 d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z">
                                             </path>
-                                        </svg>
-                                        Posts
+                                        </svg> Posts
                                     </h4>
                                 </a>
                             </div>
@@ -97,7 +93,7 @@
                                     </span>
                                 </a>
                             </div>
-                
+
                         </div>
                     </div>
                 </div>
@@ -108,7 +104,7 @@
                     <% if (feedbacks !==undefined || feedbacks !==null) { %>
                         <% feedbacks.forEach(function(feedback) { %>
                             <div id="feedback" class="crayons-story " data-content-user-id="219080">
-                                <div  class="crayons-story__body">
+                                <div class="crayons-story__body">
                                     <div class="crayons-story__top">
                                         <div class="crayons-story__meta">
                                             <div>
@@ -129,10 +125,10 @@
                                         </h2>
                                         <div class="crayons-story__tags">
 
-                                          <span class="crayons-tag__prefix"></span>
-                                                email :<%=feedback.email%>
-                                           
-                                            <br>
+                                            <span class="crayons-tag__prefix"></span> email :
+                                            <%=feedback.email%>
+
+                                                <br>
 
                                         </div>
                                         <div class="crayons-story__bottom">
@@ -149,7 +145,7 @@
                                                     <span class="bm-initial">edit</span>
                                                 </a> -->
                                                 <input name="feedbackId" type="hidden" value="<%=feedback._id%>">
-                                                <button style="color: #000;"class="btn btn-outline-danger scrollto" onclick="deletefeedback(this)">Delete</button>
+                                                <button style="color: #000;" class="btn btn-outline-danger scrollto" onclick="deletefeedback(this)">Delete</button>
 
                                             </div>
                                         </div>
@@ -170,30 +166,16 @@
                             <h2 class="widget-header">
 
                             </h2>
-                            <!-- beginning of first news -->
-                            <!-- beginning of first news -->
-
-
-                            <!-- ending of first news -->
-
-
-                            <!-- ending of first news -->
                         </div>
-                       
+
                 </div>
             </div>
         </div>
 
-
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <%- include('../layouts/strapAndJQuery.ejs') %>
 
-        <script src="/assets/js/admin.js"></script>
-        <script src="/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
-        
+            <script src="/assets/js/admin.js"></script>
+
 </body>
 
 </html>

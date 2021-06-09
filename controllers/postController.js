@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
+const Notification = require('../models/Notification');
 const findHashtags = require('find-hashtags');
 
 // /posts/:id/details
@@ -84,7 +85,16 @@ exports.createPost = async (req, res) => {
 
 	try {
 		let newPost = await Post.create(data);
-		newPost = await Post.populate(newPost, { path: 'user' });
+		newPost = await User.populate(newPost, { path: 'user' });
+		newPost = await Post.populate(newPost, { path: 'replyTo' });
+		if (newPost.replyTo !== undefined) {
+			await Notification.insertNotification(
+				newPost.replyTo.user,
+				req.session.user._id,
+				'reply',
+				newPost._id
+			);
+		}
 		return res.status(201).send({ newPost, userId });
 	} catch (e) {
 		console.log(e);
@@ -158,6 +168,15 @@ exports.postLike = async (req, res) => {
 		res.sendStatus(400);
 	});
 
+	if (!isLiked) {
+		await Notification.insertNotification(
+			post.user,
+			userId,
+			'postLike',
+			post._id
+		);
+	}
+
 	res.status(200).send(post);
 };
 
@@ -227,40 +246,3 @@ async function getPosts(criteria, skip = 0, limit = 1) {
 		console.log(e);
 	}
 }
-
-// /posts/:id
-// exports.getPostDetail = async (req, res, next) => {
-// 	let timeline = req.query.timeline || false;
-// 	const postId = req.params.id;
-
-// 	try {
-// 		const post = await Post.findById(postId).populate('user');
-// 		// if the post is deleted go to the 404 page
-// 		if (post === null) {
-// 			res.locals.error = 'This post is deleted recently';
-// 			next();
-// 		}
-// 		res.render('post/details-post', {
-// 			post: post || '',
-// 			timeline,
-// 		});
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };
-
-// posts/:id/delete
-// exports.deletePost = async (req, res) => {
-// 	const postId = req.params.id;
-
-// 	try {
-// 		await Post.findByIdAndDelete(postId);
-// 		if (req.query.timeline) {
-// 			res.redirect('/timeline');
-// 		} else {
-// 			res.redirect('/users/profile/' + req.session.user._id.toString());
-// 		}
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };

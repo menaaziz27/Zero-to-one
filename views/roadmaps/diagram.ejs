@@ -88,21 +88,21 @@
                         <%= roadmap.description %>
                     </P>
                     <input id="routeName" type="hidden" value="<%= roadmap.routeName %>">
-                  <button id="submitBookmarkButton" class="btn btn-success">
+                    <button id="submitBookmarkButton" class="btn btn-success">
                       <%if (user.bookmarks.some(road => road.title === roadmap.title)) {%>
                       <i id='bookmarkIcon' class="far fa-bookmark"></i>
                       <%}else{%>
                         <i id='bookmarkIcon' class="fas fa-bookmark"></i>
 
                         <%}%>
-                   </button> 
-                  <label style="font-style: italic;" for="Bookmark"><b>Bookmark</b></label> 
+                   </button>
+                    <label style="font-style: italic;" for="Bookmark"><b>Bookmark</b></label>
                 </div>
-              
+
                 <div id="timeline-experience">
 
                     <!-- FIRST TIMELINE -->
-                    <div class="timeline-block">                        
+                    <div class="timeline-block">
                         <!-- TIMELINE CONTENT -->
                         <% if(steps !==undefined || steps.length !==0) { %>
                             <% for(let topic of steps){ %>
@@ -149,9 +149,12 @@
         </section>
 
         <%- include('../layouts/footer.ejs') %>
-        <%- include('../layouts/strapAndJQuery.ejs') %>
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../layouts/strapAndJQuery.ejs') %>
 
-        <script src="/js/common.js"></script>
+                <script src="/js/common.js"></script>
 
 
 

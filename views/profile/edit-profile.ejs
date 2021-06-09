@@ -441,10 +441,12 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Gender</label>
-                            <input type="radio" id="male" name="gender" value="male" <%if(currentUser.gender =='male'){%> checked<%}%> >
-                            <label for="male">Male</label>
-                            <input type="radio" id="female" name="gender" value="female" <%if(currentUser.gender =='female'){%> checked<%}%> >
-                               <label for="female">Female</label><br>
+                            <input type="radio" id="male" name="gender" value="male" <%if(currentUser.gender=='male' ){%> checked
+                            <%}%> >
+                                <label for="male">Male</label>
+                                <input type="radio" id="female" name="gender" value="female" <%if(currentUser.gender=='female' ){%> checked
+                                <%}%> >
+                                    <label for="female">Female</label><br>
                         </div>
                         <!-- begin of tounge language -->
                         <div class="mt-3">
@@ -600,6 +602,10 @@
         </div>
         <%- include('../layouts/footer.ejs') %>
 
+            <script>
+                /* eslint-disable */
+                var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
             <%- include('../layouts/strapAndJQuery.ejs') %>
 
 </body>

@@ -1,8 +1,12 @@
-
 let timer;
 let skip = 0;
 let limit = 10;
 let selectedUsers = [];
+
+$(document).ready(() => {
+	refreshMessageBadge();
+	refreshNotificationBadge();
+});
 $('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
 	var value = textbox.val().trim();
@@ -84,22 +88,7 @@ $('#submitBookmarkButton').click(e => {
 		}
 	});
 });
-$('#feedbackButton').click(e => {
-	var name = $('#name');
-  var email = $('#email');
-  var message = $('#message');
-	 var data = {
-		name: name.val(),
-   email: email.val(),
-   message: message.val(),
-	 };
-   console.log(data)
-	$.post('/feedback', data, allData => {});
-    name.val('')
-    email.val('')
-    message.val('')
-    alert('Thank you for your feedback')
-});
+
 $('#submitPostButton, #submitReplyButton').click(e => {
 	var button = $(e.target);
 
@@ -122,6 +111,7 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 		let postData = allData.newPost;
 
 		if (postData.replyTo) {
+			emitNotification(postData.replyTo.user);
 			location.reload();
 		} else {
 			const html = createPostHtml(postData, userId);
@@ -325,6 +315,7 @@ $(document).on('click', '.likeButton', function (e) {
 			button.find('span').text(postData.likes.length || '');
 			if (postData.likes.includes(userLoggedIn._id)) {
 				button.addClass('active');
+				emitNotification(postData.user);
 			} else {
 				button.removeClass('active');
 			}
@@ -376,6 +367,7 @@ $(document).on('click', '.followButton', function (e) {
 			if (userLoggedIn.following && userLoggedIn.following.includes(userId)) {
 				button.addClass('following');
 				button.text('following');
+				emitNotification(userId);
 			} else {
 				button.removeClass('following');
 				button.text('follow');
@@ -391,6 +383,22 @@ $(document).on('click', '.followButton', function (e) {
 		},
 	});
 });
+
+$(document).on('click', '.notification.active', e => {
+	let container = $(e.target);
+	let notificationId = container.data().id;
+	console.log(notificationId);
+	let href = container.attr('href');
+	console.log(href);
+	e.preventDefault();
+
+	let callback = () => {
+		window.location = href;
+	};
+	markNotificationAsOpened(notificationId, callback);
+});
+
+$('#markNotificationAsRead').click(() => markNotificationAsOpened());
 
 function getPostIdFromElement(element) {
 	var isRoot = element.hasClass('post');
@@ -638,9 +646,46 @@ function createUserHtml(userData, showFollowButton) {
 }
 
 function messageReceived(newMessage) {
-	if ($('.chatContainer').length == 0) {
+	if ($(`[data-room="${newMessage.chat._id}"]`).length == 0) {
 		// Show popup notification
 	} else {
 		addChatMessageHtml(newMessage);
 	}
+	refreshMessageBadge();
+}
+
+function markNotificationAsOpened(notificationId = null, callback = null) {
+	if (callback === null) callback = () => location.reload();
+
+	let url =
+		notificationId !== null
+			? `/api/notifications/${notificationId}/markAsOpened`
+			: '/api/notifications/markAsOpened';
+	$.ajax({
+		url: url,
+		type: 'PUT',
+		success: () => callback(),
+	});
+}
+
+function refreshMessageBadge() {
+	$.get('/chats/', { unreadOnly: true }, data => {
+		let numResults = data.length;
+		if (numResults > 0) {
+			$('#messagesBadge').text(numResults).addClass('active');
+		} else {
+			$('#messagesBadge').text('').removeClass('active');
+		}
+	});
+}
+
+function refreshNotificationBadge() {
+	$.get('/api/notifications', { unreadOnly: true }, data => {
+		let numResults = data.length;
+		if (numResults > 0) {
+			$('#notificationBadge').text(numResults).addClass('active');
+		} else {
+			$('#notificationBadge').text('').removeClass('active');
+		}
+	});
 }

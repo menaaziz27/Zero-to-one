@@ -292,7 +292,7 @@
 
                                         </div>
                                         <% } %>
-                                            <% if(user.bookmarks.length !== 0) {%>
+                                            <% if(user.bookmarks.length !== 0) { %>
 
                                                 <%if(user.bookmarks) {%>
                                                     <div class="crayons-card crayons-card--secondary">
@@ -424,17 +424,17 @@
         </div>
 
 
+        <script>
+            /* eslint-disable */
+            var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            var selectedTap = <%- JSON.stringify(selectedTap) %>
+        </script>
 
         <%- include('../layouts/strapAndJQuery.ejs') %>
 
             <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
             <script src="/js/common.js"></script>
             <script src="/js/profile.js"></script>
-            <script>
-                /* eslint-disable */
-                var userLoggedIn = <%- JSON.stringify(user) %>
-                var selectedTap = <%- JSON.stringify(selectedTap) %>
-            </script>
 </body>
 
 

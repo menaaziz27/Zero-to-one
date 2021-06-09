@@ -2,27 +2,27 @@
 <html lang="en">
 
 <head>
-    
+
     <title>Edit Roadmap</title>
     <%- include('../../layouts/head.ejs') %>
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
 
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/style.css" rel="stylesheet">
-    <link href="/assets/css/errormessages.css" rel="stylesheet">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/errormessages.css" rel="stylesheet">
 
-    <style>
-        label {
-            color: #009961;
-        }
-
-        .error-message {
-            color: red;
-        }
-    </style>
+        <style>
+            label {
+                color: #009961;
+            }
+            
+            .error-message {
+                color: red;
+            }
+        </style>
 </head>
 
 <body>
@@ -93,8 +93,7 @@
                         <br>
                         <div class="row">
                             <div class="col-6">
-                                <a class="mx-auto btn btn-outline-dark btn-block"
-                                    href="/admin/dashboard/roadmaps">BACK</a>
+                                <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/roadmaps">BACK</a>
                             </div>
                             <div class="col-6">
                                 <button class="mx-auto btn btn-success btn-block" type="submit">UPDATE</button>
@@ -106,8 +105,10 @@
 
         </div>
         <%- include('../../layouts/footer.ejs') %>
-
-        <%- include('../../layouts/strapAndJQuery.ejs') %>
+            <script>
+                let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
+            <%- include('../../layouts/strapAndJQuery.ejs') %>
 
 
 </body>
