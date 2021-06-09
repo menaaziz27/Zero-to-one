@@ -5,6 +5,7 @@ const axios = require('axios');
 const { body, validationResult } = require('express-validator');
 const Roadmap = require('../models/Roadmap');
 const Notification = require('../models/Notification');
+const { uploadToCloudinary, buildSuccessMsg } = require('../middleware/helper');
 
 exports.getUserProfile = async (req, res, next) => {
 	const username = req.params.username;
@@ -151,9 +152,13 @@ exports.postUpdateProfile = async (req, res) => {
 	let image;
 	let Image;
 	image = req.file;
-
+	console.log(image);
 	if (image !== undefined) {
 		Image = image.path;
+		Image = await uploadToCloudinary(Image);
+		var response = buildSuccessMsg([Image.url]);
+		console.log(Image);
+		console.log(response);
 	}
 	//Validaton block ===============================
 	let websites = req.user.websites;
@@ -214,7 +219,7 @@ exports.postUpdateProfile = async (req, res) => {
 		}
 
 		if (image !== undefined) {
-			user.Image = Image;
+			user.Image = Image.url;
 		}
 		//* if github url is provided it will always be first element in my array that's why im checking it there in my profile controller above
 		let websites = [github, linkedin, stackoverflow, twitter, instagram];

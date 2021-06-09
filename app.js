@@ -6,10 +6,12 @@ const session = require('express-session');
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
 const morgan = require('morgan');
 const MongoDBStore = require('connect-mongodb-session')(session);
 // ============ Core-Modules ============
 const path = require('path');
+const fs = require('fs');
 
 // ============ My-Modules ============
 require('./utils/db');
@@ -40,6 +42,12 @@ const store = new MongoDBStore({
 	collection: 'sessions',
 });
 
+cloudinary.config({
+	cloud_name: 'zerotoone',
+	api_key: '548494186289963',
+	api_secret: 'oYVibulrmtTvm9St1jr1KNQA0Yg',
+});
+
 app.set('view engine', 'ejs');
 
 const fileStorage = multer.diskStorage({
@@ -66,7 +74,7 @@ const fileFilter = (req, file, cb) => {
 
 // app.use(morgan('tiny'));
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(
 	multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')

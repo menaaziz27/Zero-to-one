@@ -1,4 +1,6 @@
 const User = require('../models/User');
+const cloudinary = require('cloudinary');
+const fs = require('fs');
 
 module.exports = {
 	findUser: (req, res, next) => {
@@ -57,22 +59,14 @@ module.exports = {
                                             <div class="crayons-story__meta">
                                                 <div class="crayons-story__author-pic">
 
-                                                    <a href="/users/profile/${
-																											user.username
-																										}" class="crayons-avatar crayons-avatar--l ">
-                                                        <img src="${
-																													user.Image
-																														? '/' + user.Image
-																														: '/assets/img/default.png'
-																												}"
+                                                    <a href="/users/profile/${user.username}" class="crayons-avatar crayons-avatar--l ">
+                                                        <img style="height: 100%" src="${user.Image}"
                                                             alt="aemiej profile" class="crayons-avatar__image" />
                                                     </a>
                                                 </div>
                                                 <div>
                                                     <p>
-                                                        <a href="/users/profile/${
-																													user.username
-																												}" class="crayons-story__secondary fw-medium">
+                                                        <a href="/users/profile/${user.username}" class="crayons-story__secondary fw-medium">
                                                             @${user.username}
                                                         </a>
                                                     </p>
@@ -123,5 +117,44 @@ module.exports = {
 			}
 		}
 		return data;
+	},
+
+	uploadToCloudinary: async locaFilePath => {
+		// locaFilePath :
+		// path of image which was just uploaded to "uploads" folder
+		var mainFolderName = 'main';
+		var filePathOnCloudinary = mainFolderName + '/' + locaFilePath;
+		// filePathOnCloudinary :
+		// path of image we want when it is uploded to cloudinary
+		return cloudinary.uploader
+			.upload(locaFilePath, { public_id: filePathOnCloudinary })
+			.then(result => {
+				// Image has been successfully uploaded on cloudinary
+				// So we dont need local image file anymore
+				// Remove file from local uploads folder
+				fs.unlinkSync(locaFilePath);
+
+				return {
+					message: 'Success',
+					url: result.url,
+				};
+			})
+			.catch(error => {
+				// Remove file from local uploads folder
+				fs.unlinkSync(locaFilePath);
+				return { message: 'Fail' };
+			});
+	},
+	buildSuccessMsg: urlList => {
+		// Building success msg
+		var response = '<h1><a href="/">Click to go to Home page</a><br></h1><hr>';
+
+		for (var i = 0; i < urlList.length; i++) {
+			response += 'File uploaded successfully.<br><br>';
+			response += `FILE URL: <a href="${urlList[i]}">${urlList[i]}</a>.<br><br>`;
+			response += `<img src="${urlList[i]}" /><br><hr>`;
+		}
+		response += `<br><p>Now you can store this url in database or do anything with it  based on use case.</p>`;
+		return response;
 	},
 };

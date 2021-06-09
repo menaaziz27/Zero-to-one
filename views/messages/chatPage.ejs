@@ -41,7 +41,7 @@
                                     <div class="chatTitleBarContainer">
                                         <div class="chatImagesContainer">
                                             <% for (let user of chat.users) { %>
-                                                <img src="/<%=user.Image%>" alt="user's Profile pic" title="<%=user.name%>">
+                                                <img src="<%=user.Image%>" alt="user's Profile pic" title="<%=user.name%>">
                                                 <% } %>
                                         </div>
                                         <span id="chatName" data-toggle="modal" data-target="#chatNameModal"><%= chat.chatName %></span>

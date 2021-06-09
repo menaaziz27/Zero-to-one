@@ -123,7 +123,8 @@ exports.postRegister = async (req, res, next) => {
 	try {
 		let user = await User.findOne({ email: email });
 		// save the default image for the newly created user
-		let Image = 'assets/img/default.png';
+		let Image =
+			'http://res.cloudinary.com/zerotoone/image/upload/v1623276250/ugxxz6tuisyiurfpwbwk.png';
 		// if there's no user
 		const hashedpass = await bcrypt.hash(password, 12);
 		user = new User({

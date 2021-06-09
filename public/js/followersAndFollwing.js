@@ -53,7 +53,7 @@ function createUserHtml(userData, showFollowButton) {
 
 	return `<div class='user' data-username=${userData.username}>
                 <div class='userImageContainer'>
-                    <img src='/${userData.Image}'>
+                    <img style="height: 100%" src='${userData.Image}'>
                 </div>
                 <div class='userDetailsContainer'>
                     <div class='header'>

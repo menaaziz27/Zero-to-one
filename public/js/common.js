@@ -202,7 +202,7 @@ function createPostHtml(post, userId) {
                             <div class="crayons-story__author-pic">
 														<a href="/users/profile/${post.user.username}"
 														class="crayons-avatar crayons-avatar--l ">
-														<img src="/${post.user.Image}" alt="aemiej profile"
+														<img src="${post.user.Image}" alt="aemiej profile"
 														class="crayons-avatar__image" />
 														</a>
                             </div>
@@ -633,7 +633,7 @@ function createUserHtml(userData, showFollowButton) {
 
 	return `<div class='user' >
                 <div class='userImageContainer'>
-                    <img src='/${userData.Image}'>
+                    <img style="height: 100%" src='${userData.Image}'>
                 </div>
                 <div class='userDetailsContainer'>
                     <div class='header'>
