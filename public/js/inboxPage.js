@@ -24,7 +24,13 @@ function createChatHtml(chatData) {
 	var image = getChatImageElements(chatData);
 	var latestMessage = getLatestMessage(chatData.latestMessage);
 
-	return `<a style =" text-decoration: none;" href='/messages/${chatData._id}' class='resultListItem'>
+	let activeClass =
+		!chatData.latestMessage ||
+		chatData.latestMessage.readBy.includes(userLoggedIn._id)
+			? ''
+			: 'active';
+
+	return `<a style =" text-decoration: none;" href='/messages/${chatData._id}' class='resultListItem ${activeClass}'>
               ${image}
               <div class='resultsDetailsContainer ellipsis'>
                   <span class='heading ellipsis'>${chatName}</span>
@@ -32,7 +38,6 @@ function createChatHtml(chatData) {
               </div>
           </a>`;
 }
-
 
 function getLatestMessage(latestMessage) {
 	if (latestMessage != null) {
