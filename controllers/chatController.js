@@ -32,7 +32,7 @@ exports.createChat = async (req, res) => {
 exports.getChat = async (req, res) => {
 	try {
 		let result = await Chat.find({
-			users: { $elemMatch: { $eq: req.session.user._id } },
+			users: { $elemMatch: { $eq: req.session?.user?._id } },
 		})
 			.populate('users')
 			.populate('latestMessage')

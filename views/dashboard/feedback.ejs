@@ -3,22 +3,23 @@
 
 <head>
 
-    <title>Dashboard</title>
     <%- include('../layouts/head.ejs') %>
 
+        <title>Feedback</title>
 
+
+        <!-- ==================== IF THE USER IS AUTHENTICATED ===================== -->
+        <!-- Bootstrap CSS -->
         <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
         <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
         <link href="/assets/css/style.css" rel="stylesheet">
-        <link href="/assets/css/dashboard.css" rel="stylesheet">
-
         <link href="/assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
+
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-        <title>Test2</title>
 
-
+        <!-- ================== END ====================== -->
 </head>
 
 <body>
@@ -97,58 +98,83 @@
                     </div>
                 </div>
                 <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
-                <div class="col-md-8">
+                <div class="col">
 
-                    <!--- Post Form Begins -->
-                    <section class="mb-2 card">
-                        <div class="card-body ">
-                            <div class="row d-flex  mt-100">
-                                <div class="col-md-12">
-                                    <div class="progress blue "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=roadmaps.length %> Roadmaps
+                    <br><br><br>
+                    <% if (feedbacks !==undefined || feedbacks !==null) { %>
+                        <% feedbacks.forEach(function(feedback) { %>
+                            <div id="feedback" class="crayons-story " data-content-user-id="219080">
+                                <div class="crayons-story__body">
+                                    <div class="crayons-story__top">
+                                        <div class="crayons-story__meta">
+                                            <div>
+                                                <a href="" class="crayons-story__secondary fw-medium">
+                                                    <h3>
+                                                        <%=feedback.name%>
+                                                    </h3>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="progress yellow "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=topics.length %> Topic
+
+                                    <div class="crayons-story__indention">
+                                        <h2 class="crayons-story__title">
+                                            <p>
+                                                <%=feedback.message%>
+                                            </p>
+                                        </h2>
+                                        <div class="crayons-story__tags">
+
+                                            <span class="crayons-tag__prefix"></span> email :
+                                            <%=feedback.email%>
+
+                                                <br>
+
                                         </div>
-                                    </div>
-                                    <div class="progress yellow "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=posts.length %> Post
-                                        </div>
-                                    </div>
-                                    <div class="progress blue "> <span class="progress-left"> <span
-                                                class="progress-bar"></span> </span> <span class="progress-right"> <span
-                                                class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=users.length %> Users
+                                        <div class="crayons-story__bottom">
+                                            <div class="crayons-story__details">
+
+
+                                            </div>
+                                            <div class="crayons-story__save">
+                                                <!-- <a type="button" href="/admin/dashboard/topics/edit/"
+                                                    id="article-save-button-421966"
+                                                    class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
+                                                    data-reactable-id="421966" aria-label="Save to reading list"
+                                                    title="Save to reading list">
+                                                    <span class="bm-initial">edit</span>
+                                                </a> -->
+                                                <input name="feedbackId" type="hidden" value="<%=feedback._id%>">
+                                                <button style="color: #000;" class="btn btn-outline-danger scrollto" onclick="deletefeedback(this)">Delete</button>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+                            <% }) %>
+                                <% } %>
 
-                        </div>
-                    </section>
+                                    <!-- Post Ends -->
+                                    <!-- endpost -->
+                                    <!-- Post Ends -->
                 </div>
+                <div class="col-lg-3 col-xl-3 d-none d-lg-block d-lg-none">
+                    <!-- aside latest news -->
+                    <aside class="widget">
+                        <div class="widget blog-widget">
+                            <h2 class="widget-header">
 
+                            </h2>
+                        </div>
+
+                </div>
             </div>
         </div>
 
-        <script>
-            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
-        </script>
         <%- include('../layouts/strapAndJQuery.ejs') %>
 
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="/assets/js/admin.js"></script>
 
 </body>
 
