@@ -101,14 +101,23 @@ exports.createPost = async (req, res) => {
 	}
 };
 
+// GET /posts?skip=0&limit=10
 exports.getPosts = async (req, res) => {
 	const { skip } = req.query;
 	const { limit } = req.query;
+	let { profileUser } = req.query;
+
 	delete req.query.skip;
 	delete req.query.limit;
+	delete req.query.user;
 
-	var userId = req.session.user._id;
 	let searchObj = req.query;
+	searchObj.user = profileUser || null;
+	!searchObj.user && delete searchObj.user;
+	delete searchObj.profileUser;
+	console.log(searchObj);
+
+	let userId = req.session.user._id;
 
 	// b-filter kol el posts elli feha field replyTo 3shan ana 3ayz el posts bs msh el comments
 	if (searchObj.isReply !== undefined) {

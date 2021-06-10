@@ -38,10 +38,7 @@
                                     <%= user.name %>
                                 </h1>
                                 <% if (user._id.toString() !== currentUser._id.toString()) { %>
-                                    <button style="border-radius: 60px;font-weight: bold;padding: 5px 15px;" class="btn btn-sm btn-primary">
-                                        Send Message
-                                        <a  href="/messages/<%= user._id %>"></a>
-                                    </button>
+                                    <a style="border-radius: 60px;font-weight: bold;padding: 5px 15px;" class="btn btn-sm btn-primary" href="/messages/<%= user._id %>">Send Message</a>
                                     <button class="<%= isFollowing ? 'followButton following' : 'followButton' %>" data-user="<%= user.id %>"><%= isFollowing ? 'following' : 'follow' %></button>
                                     <% } %>
                                         <p class="mx-auto mb-4 fs-base m:fs-l color-base-90 max-w-100 m:max-w-75">
@@ -431,6 +428,7 @@
             /* eslint-disable */
             var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
             var selectedTap = <%- JSON.stringify(selectedTap) %>
+            var profileUser = <%- JSON.stringify(userId) %>
         </script>
 
         <%- include('../layouts/strapAndJQuery.ejs') %>

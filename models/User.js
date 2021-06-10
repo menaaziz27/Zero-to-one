@@ -56,7 +56,7 @@ userSchema.pre('remove', async function (next) {
 	);
 	await User.updateMany(
 		{ following: { $in: user._id } },
-		{ followers: { $pull: user._id } }
+		{ following: { $pull: user._id } }
 	);
 	next();
 });
