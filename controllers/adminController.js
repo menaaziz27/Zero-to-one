@@ -124,6 +124,7 @@ exports.postEditUserDashboard = async (req, res) => {
 			name,
 			userid: userid,
 			roadmaps,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -230,7 +231,7 @@ exports.validateRoadmap = [
 		.isLength({ min: 2, max: 200 })
 		.exists(),
 	body('summary', 'summary must be at least 100 and less than 200 characters.')
-		.isLength({ min: 100, max: 200 })
+		.isLength({ min: 2})
 		.exists(),
 	body(
 		'description',
@@ -256,6 +257,7 @@ exports.postCreateRoadmapDashboard = async (req, res) => {
 			summary: summary,
 			description: description,
 			routeName: routeName,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -314,6 +316,7 @@ exports.postEditroadmapDashboard = async (req, res) => {
 			description: description,
 			routeName: routeName,
 			roadmap,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -382,7 +385,7 @@ exports.validateTopic = [
 		.isLength({ min: 2, max: 200 })
 		.exists(),
 	body('summary', 'summary must be less than 200 characters.')
-		.isLength({ min: 10, max: 60 })
+		.isLength({ min: 2, max: 60 })
 		.exists(),
 	body(
 		'description',
@@ -429,6 +432,7 @@ exports.postCreateTopicDashboard = async (req, res) => {
 			routeName: routeName,
 			video: video,
 			roadmaps,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -512,6 +516,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 			topic,
 			roadmaps,
 			references,
+      userLoggedIn: req.session.user
 		});
 	}
 	if (typeof req.body.roadmaps == 'object') {
@@ -578,6 +583,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 			topic,
 			roadmaps,
 			references,
+      userLoggedIn: req.session.user
 		});
 	}
 	if (typeof req.body.roadmaps == 'object') {
@@ -623,6 +629,7 @@ exports.getFeedback = async (req, res) => {
 		res.render('dashboard/feedback.ejs', {
 			feedbacks,
 			errorMassage: null,
+      userLoggedIn: req.session.user
 		});
 	} catch (e) {
 		console.log(e);
