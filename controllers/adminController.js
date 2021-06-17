@@ -589,6 +589,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 		roadmaproute = [];
 	}
 	try {
+		console.log('references', references);
 		const topic = await Topic.findById({ _id: topicId }).populate('roadmaps');
 		topic.title = title;
 		topic.summary = summary;

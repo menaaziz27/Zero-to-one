@@ -116,10 +116,10 @@
 
                     </code>
                 </pre> -->
-                    <%if(topic.video){%>
+                    <% if(topic.video){ %>
                         <iframe width="100%" height="515" src="<%=topic.video%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                 </iframe>
-                        <%}%>
+                        <% } %>
                             <div class="section-title">
                                 <h2>Refernces</h2>
                             </div>
@@ -132,14 +132,14 @@
                             <%}%>
                     </div> -->
                             <div class="row" style="margin-left:-16px;margin-right:-16px">
-                                <% for(let reference of topic.references) {%>
-                                    <%referencee = reference.split(' ')%>
+                                <% for(let reference of topic.references) { %>
+                                    <% referencee = reference.split(' ') %>
                                         <div class="w3-third col-3">
-                                            <a class="bigbtn" href="<%=referencee[1]%>">
-                                                <%=referencee[0]%>
+                                            <a class="bigbtn" href="<%=referencee[1]%>" target="_blank">
+                                                <%= referencee[0] %>
                                             </a>
                                         </div>
-                                        <%}%>
+                                        <% } %>
 
                                             <!-- <div class="w3-third col-3">
   <a class="bigbtn" href="/tags/ref_html_browsersupport.asp">Browser Support</a>
