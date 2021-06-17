@@ -231,7 +231,7 @@ exports.getPostDetails = async (req, res, next) => {
 		});
 };
 
-async function getPosts(criteria, skip = 0, limit = 1) {
+async function getPosts(criteria, skip = 0, limit = 0) {
 	try {
 		let results = await Post.find(criteria)
 			.sort({ createdAt: -1 })
