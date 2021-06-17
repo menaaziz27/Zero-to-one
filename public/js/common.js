@@ -111,7 +111,11 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 		let postData = allData.newPost;
 
 		if (postData.replyTo) {
-			emitNotification(postData.replyTo.user);
+			console.log('postData.replyTo.user', postData.replyTo.user);
+			console.log('userLoggedIn._id', userLoggedIn._id);
+			if (userLoggedIn._id !== postData.replyTo.user) {
+				emitNotification(postData.replyTo.user);
+			}
 			location.reload();
 		} else {
 			const html = createPostHtml(postData, userId);
@@ -315,7 +319,11 @@ $(document).on('click', '.likeButton', function (e) {
 			button.find('span').text(postData.likes.length || '');
 			if (postData.likes.includes(userLoggedIn._id)) {
 				button.addClass('active');
-				emitNotification(postData.user);
+				console.log('320  userLoggedIn._id ', userLoggedIn._id);
+				console.log('321  postData.user.id ', postData.user);
+				if (userLoggedIn._id.toString() !== postData.user.toString()) {
+					emitNotification(postData.user);
+				}
 			} else {
 				button.removeClass('active');
 			}
@@ -412,17 +420,16 @@ function outputPostsWithReplies(results, container) {
 	container.html('');
 
 	if (results.replyTo !== undefined && results.replyTo._id !== undefined) {
-		var html = createPostHtml(results.replyTo);
+		var html = createPostHtml(results.replyTo, userLoggedIn._id);
 		container.append(html);
 	}
 
-	var mainPostHtml = createPostHtml(results.post, userLoggedIn._id);
-	container.append(mainPostHtml);
-
 	results.replies.forEach(result => {
-		var html = createPostHtml(result);
-		container.append(html);
+		var html = createPostHtml(result, userLoggedIn._id);
+		container.prepend(html);
 	});
+	var mainPostHtml = createPostHtml(results.post, userLoggedIn._id);
+	container.prepend(mainPostHtml);
 }
 
 function outputPosts(posts, container) {
