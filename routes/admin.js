@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { isAdmin } = require('../middleware/isAuthenticated');
+const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 const {
 	getDashboard,
@@ -31,43 +32,43 @@ const {
   deleteFeedback
 } = require('../controllers/adminController');
 
-router.get('/dashboard',isAdmin, getDashboard);
+router.get('/dashboard',isAuthenticated,isAdmin, getDashboard);
 // =====================USer Dashboard========================
 
-router.get('/dashboard/users',isAdmin, getUserDashboard);
-router.get('/dashboard/users/edit/:id',isAdmin, getEditUserDashboard);
+router.get('/dashboard/users',isAuthenticated,isAdmin, getUserDashboard);
+router.get('/dashboard/users/edit/:id',isAuthenticated,isAdmin, getEditUserDashboard);
 router.delete('/dashboard/users/delete/:id', deleteUser);
 router.post('/dashboard/users/edit',validateUser, postEditUserDashboard);
 
 // =====================Post Dashboard========================
 
-router.get('/dashboard/posts',isAdmin, getPostDashboard);
+router.get('/dashboard/posts',isAuthenticated,isAdmin, getPostDashboard);
 router.delete('/dashboard/posts/delete/:id', deletePost);
-router.get('/dashboard/posts/edit/:id',isAdmin, getEditPostDashboard);
+router.get('/dashboard/posts/edit/:id',isAuthenticated,isAdmin, getEditPostDashboard);
 router.post('/dashboard/posts/edit', postEditPostDashboard);
 
 // =====================Roadmap Dashboard========================
 
-router.get('/dashboard/roadmaps',isAdmin, getRoadmapDashboard);
-router.get('/dashboard/roadmaps/create',isAdmin, getCreateRoadmapDashboard);
+router.get('/dashboard/roadmaps',isAuthenticated,isAdmin, getRoadmapDashboard);
+router.get('/dashboard/roadmaps/create',isAuthenticated,isAdmin, getCreateRoadmapDashboard);
 router.post('/dashboard/roadmaps/create',validateRoadmap, postCreateRoadmapDashboard);
 router.delete('/dashboard/roadmaps/delete/:id', deleteRoadmap);
-router.get('/dashboard/roadmaps/edit/:id',isAdmin, getEditRoadmapDashboard);
+router.get('/dashboard/roadmaps/edit/:id',isAuthenticated,isAdmin, getEditRoadmapDashboard);
 router.post('/dashboard/roadmaps/edit', validateRoadmap,postEditroadmapDashboard);
 
 // =====================Topic Dashboard========================
-router.get('/dashboard/topics',isAdmin, getTopicDashboard);
-router.get('/dashboard/topics/create',isAdmin, getCreateTopicDashboard);
+router.get('/dashboard/topics',isAuthenticated,isAdmin, getTopicDashboard);
+router.get('/dashboard/topics/create',isAuthenticated,isAdmin, getCreateTopicDashboard);
 router.post('/dashboard/topics/create',validateTopic, postCreateTopicDashboard);
 router.delete('/dashboard/topics/delete/:id', deleteTopic);
-router.get('/dashboard/topics/edit/:id',isAdmin, getEditTopicDashboard);
+router.get('/dashboard/topics/edit/:id',isAuthenticated,isAdmin, getEditTopicDashboard);
 router.post('/dashboard/topics/edit',validateTopic, postEditTopicDashboard);
-router.get('/dashboard/topics/:roadmap',isAdmin, getRoadmapTopicsDashboard);
+router.get('/dashboard/topics/:roadmap',isAuthenticated,isAdmin, getRoadmapTopicsDashboard);
 
 
 // =====================Feedback Dashboard========================
 
-router.get('/dashboard/feedback',isAdmin, getFeedback);
+router.get('/dashboard/feedback',isAuthenticated,isAdmin, getFeedback);
 router.delete('/dashboard/feedback/delete/:id', deleteFeedback);
 
 

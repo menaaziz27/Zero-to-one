@@ -9,12 +9,13 @@ const {
 	getSingleChatMessages,
 	markMessagesAsRead,
 } = require('../controllers/chatController');
+const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 router.post('/', createChat);
-router.get('/', getChat);
+router.get('/',isAuthenticated, getChat);
 router.put('/:chatId', updateChatName);
-router.get('/:chatId', getSingleChat);
-router.get('/:chatId/messages', getSingleChatMessages);
+router.get('/:chatId',isAuthenticated, getSingleChat);
+router.get('/:chatId/messages',isAuthenticated, getSingleChatMessages);
 router.put('/:chatId/messages/markAsRead', markMessagesAsRead);
 
 module.exports = router;
