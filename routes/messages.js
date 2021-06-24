@@ -8,8 +8,8 @@ const {
 } = require('../controllers/messagesController');
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
-router.get('/', getMessages);
-router.get('/new', newMessage);
-router.get('/:chatId', getChatPage);
+router.get('/', isAuthenticated, getMessages);
+router.get('/new', isAuthenticated, newMessage);
+router.get('/:chatId', isAuthenticated, getChatPage);
 
 module.exports = router;
