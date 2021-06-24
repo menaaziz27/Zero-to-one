@@ -11,11 +11,11 @@ const {
 } = require('../controllers/chatController');
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
-router.post('/', createChat);
-router.get('/',isAuthenticated, getChat);
-router.put('/:chatId', updateChatName);
-router.get('/:chatId',isAuthenticated, getSingleChat);
-router.get('/:chatId/messages',isAuthenticated, getSingleChatMessages);
-router.put('/:chatId/messages/markAsRead', markMessagesAsRead);
+router.post('/', isAuthenticated, createChat);
+router.get('/', isAuthenticated, getChat);
+router.put('/:chatId', isAuthenticated, updateChatName);
+router.get('/:chatId', isAuthenticated, getSingleChat);
+router.get('/:chatId/messages', isAuthenticated, getSingleChatMessages);
+router.put('/:chatId/messages/markAsRead', isAuthenticated, markMessagesAsRead);
 
 module.exports = router;
