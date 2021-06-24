@@ -71,8 +71,11 @@ const fileFilter = (req, file, cb) => {
 		cb(null, false);
 	}
 };
-
-// app.use(morgan('tiny'));
+// app.use((req, res, next) => {
+// 	res.header('Vary', 'X-Requested-With');
+// 	next();
+// });
+app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
