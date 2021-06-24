@@ -124,6 +124,7 @@ exports.postEditUserDashboard = async (req, res) => {
 			name,
 			userid: userid,
 			roadmaps,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -150,6 +151,8 @@ exports.postEditUserDashboard = async (req, res) => {
 //=========================Post Dashboard ==========================
 exports.getPostDashboard = async (req, res) => {
 	try {
+    const roadmaps = await Roadmap.find({});
+
 		const posts = await Post.find({
 			user: { $ne: req.session.user._id.toString() },
 		})
@@ -158,6 +161,7 @@ exports.getPostDashboard = async (req, res) => {
 		res.render('dashboard/posts/postsdashboard.ejs', {
 			posts,
 			moment,
+      roadmaps,
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
@@ -178,9 +182,11 @@ exports.deletePost = async (req, res) => {
 exports.getEditPostDashboard = async (req, res) => {
 	const postId = req.params.id;
 	try {
+    const roadmaps = await Roadmap.find({});
 		const post = await Post.findById({ _id: postId });
 		res.render('dashboard/posts/postEdit.ejs', {
 			post,
+      roadmaps,
 			errorMassage: null,
 			userLoggedIn: req.session.user,
 		});
@@ -215,9 +221,12 @@ exports.getRoadmapDashboard = async (req, res) => {
 	}
 };
 
-exports.getCreateRoadmapDashboard = (req, res) => {
+exports.getCreateRoadmapDashboard = async (req, res) => {
+  const roadmaps = await Roadmap.find({});
+
 	res.render('dashboard/roadmap/addRoadmap.ejs', {
 		title: null,
+    roadmaps,
 		description: null,
 		summary: null,
 		routeName: null,
@@ -230,7 +239,7 @@ exports.validateRoadmap = [
 		.isLength({ min: 2, max: 200 })
 		.exists(),
 	body('summary', 'summary must be at least 100 and less than 200 characters.')
-		.isLength({ min: 100, max: 200 })
+		.isLength({ min: 2})
 		.exists(),
 	body(
 		'description',
@@ -248,14 +257,17 @@ exports.postCreateRoadmapDashboard = async (req, res) => {
 	const routeName = req.body.routeName;
 	const steps = req.body.steps;
 	const errors = validationResult(req);
+  const roadmaps = await Roadmap.find({});
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		return res.status(422).render('dashboard/roadmap/addRoadmap.ejs', {
 			errorMassage: errors.array(),
 			title: title,
+      roadmaps,
 			summary: summary,
 			description: description,
 			routeName: routeName,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -284,12 +296,15 @@ exports.deleteRoadmap = async (req, res) => {
 	}
 };
 exports.getEditRoadmapDashboard = async (req, res) => {
+  const roadmaps = await Roadmap.find({});
+
 	const roadmapId = req.params.id;
 	try {
 		const roadmap = await Roadmap.findById({ _id: roadmapId });
 		res.render('dashboard/roadmap/roadmapEdit.ejs', {
 			errorMassage: null,
 			roadmap,
+      roadmaps,
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
@@ -303,17 +318,19 @@ exports.postEditroadmapDashboard = async (req, res) => {
 	const routeName = req.body.routeName;
 	const roadmapId = req.body.id;
 	const roadmap = await Roadmap.findById({ _id: roadmapId });
-
+  const roadmaps = await Roadmap.find({});
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		return res.status(422).render('dashboard/roadmap/roadmapEdit.ejs', {
 			errorMassage: errors.array(),
 			title: title,
+      roadmaps,
 			summary: summary,
 			description: description,
 			routeName: routeName,
 			roadmap,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -382,7 +399,7 @@ exports.validateTopic = [
 		.isLength({ min: 2, max: 200 })
 		.exists(),
 	body('summary', 'summary must be less than 200 characters.')
-		.isLength({ min: 10, max: 60 })
+		.isLength({ min: 2, max: 60 })
 		.exists(),
 	body(
 		'description',
@@ -429,6 +446,7 @@ exports.postCreateTopicDashboard = async (req, res) => {
 			routeName: routeName,
 			video: video,
 			roadmaps,
+      userLoggedIn: req.session.user
 		});
 	}
 	try {
@@ -512,6 +530,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 			topic,
 			roadmaps,
 			references,
+      userLoggedIn: req.session.user
 		});
 	}
 	if (typeof req.body.roadmaps == 'object') {
@@ -578,6 +597,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 			topic,
 			roadmaps,
 			references,
+      userLoggedIn: req.session.user
 		});
 	}
 	if (typeof req.body.roadmaps == 'object') {
@@ -623,6 +643,7 @@ exports.getFeedback = async (req, res) => {
 		res.render('dashboard/feedback.ejs', {
 			feedbacks,
 			errorMassage: null,
+      userLoggedIn: req.session.user
 		});
 	} catch (e) {
 		console.log(e);

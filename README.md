@@ -94,3 +94,10 @@
 - [] edit post route need to be fixed after edit
 - [X] following and followers page links
 - [X] prevent user of making fetch posts reqeusts if he hits the end of a page and the posts length is zero
+- [] replies issue azzouz
+- [] notification bug azzouz
+- [x] dashboard sidebar layout abdalla
+- [x] dashboard circles background transparent abdalla
+- [x] footer links dynamic abdalla
+- [x] user profile comment number abdalla
+- [] error handling azzouz

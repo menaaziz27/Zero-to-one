@@ -11,7 +11,7 @@ $(document).ready(function () {
 function loadPosts() {
 	if (!finished) {
 		$.get(
-			`/posts?skip=${skip}&limit=${limit}`,
+			`/posts?skip=${skip}&limit=${limit}&profileUser=${profileUser}`,
 			{ user: userLoggedIn, isReply: false },
 			postsAndUserId => {
 				let posts = postsAndUserId.posts;
@@ -29,7 +29,7 @@ function loadPosts() {
 function loadComments() {
 	if (!finished) {
 		$.get(
-			`/posts?skip=${skip}&limit=${limit}`,
+			`/posts?skip=${skip}&limit=${limit}&profileUser=${profileUser}`,
 			{ user: userLoggedIn, isReply: true },
 			postsAndUserId => {
 				let posts = postsAndUserId.posts;
@@ -47,5 +47,5 @@ function loadComments() {
 window.onscroll = () => {
 	if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
 		selectedTap === 'comments' ? loadComments() : loadPosts();
-	}
+  }
 };
