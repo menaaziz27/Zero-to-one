@@ -35,10 +35,11 @@
                     <h5 class="text-left">Our Roadmaps</h5>
                     <ul class="pl-1">
                         <!--<li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>-->
-                        <li><i class="bx bx-chevron-right"></i> <a class="footer" href="/diagram">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a class="footer" href="/">Bioinformatics</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a class="footer" href="/">python</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a class="footer" href="/">Graphic Design</a></li>
+                        <%   for (var i = 0; i < roadmaps.length; i++) {%> 
+                            <li><i class="bx bx-chevron-right"></i> <a class="footer" href="/roadmaps/<%=roadmaps[i].routeName%>"><%=roadmaps[i].title%></a></li>
+
+                            <%}%>
+                       
                     </ul>
                 </div>
 

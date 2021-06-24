@@ -151,6 +151,8 @@ exports.postEditUserDashboard = async (req, res) => {
 //=========================Post Dashboard ==========================
 exports.getPostDashboard = async (req, res) => {
 	try {
+    const roadmaps = await Roadmap.find({});
+
 		const posts = await Post.find({
 			user: { $ne: req.session.user._id.toString() },
 		})
@@ -159,6 +161,7 @@ exports.getPostDashboard = async (req, res) => {
 		res.render('dashboard/posts/postsdashboard.ejs', {
 			posts,
 			moment,
+      roadmaps,
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
@@ -179,9 +182,11 @@ exports.deletePost = async (req, res) => {
 exports.getEditPostDashboard = async (req, res) => {
 	const postId = req.params.id;
 	try {
+    const roadmaps = await Roadmap.find({});
 		const post = await Post.findById({ _id: postId });
 		res.render('dashboard/posts/postEdit.ejs', {
 			post,
+      roadmaps,
 			errorMassage: null,
 			userLoggedIn: req.session.user,
 		});
@@ -216,9 +221,12 @@ exports.getRoadmapDashboard = async (req, res) => {
 	}
 };
 
-exports.getCreateRoadmapDashboard = (req, res) => {
+exports.getCreateRoadmapDashboard = async (req, res) => {
+  const roadmaps = await Roadmap.find({});
+
 	res.render('dashboard/roadmap/addRoadmap.ejs', {
 		title: null,
+    roadmaps,
 		description: null,
 		summary: null,
 		routeName: null,
@@ -249,11 +257,13 @@ exports.postCreateRoadmapDashboard = async (req, res) => {
 	const routeName = req.body.routeName;
 	const steps = req.body.steps;
 	const errors = validationResult(req);
+  const roadmaps = await Roadmap.find({});
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		return res.status(422).render('dashboard/roadmap/addRoadmap.ejs', {
 			errorMassage: errors.array(),
 			title: title,
+      roadmaps,
 			summary: summary,
 			description: description,
 			routeName: routeName,
@@ -286,12 +296,15 @@ exports.deleteRoadmap = async (req, res) => {
 	}
 };
 exports.getEditRoadmapDashboard = async (req, res) => {
+  const roadmaps = await Roadmap.find({});
+
 	const roadmapId = req.params.id;
 	try {
 		const roadmap = await Roadmap.findById({ _id: roadmapId });
 		res.render('dashboard/roadmap/roadmapEdit.ejs', {
 			errorMassage: null,
 			roadmap,
+      roadmaps,
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
@@ -305,13 +318,14 @@ exports.postEditroadmapDashboard = async (req, res) => {
 	const routeName = req.body.routeName;
 	const roadmapId = req.body.id;
 	const roadmap = await Roadmap.findById({ _id: roadmapId });
-
+  const roadmaps = await Roadmap.find({});
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		return res.status(422).render('dashboard/roadmap/roadmapEdit.ejs', {
 			errorMassage: errors.array(),
 			title: title,
+      roadmaps,
 			summary: summary,
 			description: description,
 			routeName: routeName,

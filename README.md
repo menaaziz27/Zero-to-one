@@ -96,8 +96,8 @@
 - [X] prevent user of making fetch posts reqeusts if he hits the end of a page and the posts length is zero
 - [] replies issue azzouz
 - [] notification bug azzouz
-- [] dashboard sidebar layout abdalla
-- [] dashboard circles background transparent abdalla
-- [] footer links dynamic abdalla
-- [] user profile comment number abdalla
+- [x] dashboard sidebar layout abdalla
+- [x] dashboard circles background transparent abdalla
+- [x] footer links dynamic abdalla
+- [x] user profile comment number abdalla
 - [] error handling azzouz

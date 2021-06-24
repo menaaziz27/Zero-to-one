@@ -32,8 +32,10 @@ exports.getUserProfile = async (req, res, next) => {
 		userId = userDoc._id;
 		const posts = await Post.find({ user: userId })
 			.sort({ createdAt: 'desc' })
-			.populate('user');
-
+			.populate('user').populate('replyTo');
+      let commentCount =0
+      posts.forEach(post =>{if(post.replyTo) {commentCount +=1 }})
+      
 		// fetch first five repose from user's github account to show them in projects section
 		const postsCount = posts.length;
 		if (userDoc.websites.length > 0 && userDoc.websites[0].includes('github')) {
@@ -64,6 +66,7 @@ exports.getUserProfile = async (req, res, next) => {
 			username: username,
 			posts,
 			moment,
+      commentCount,
 			userRepos,
 			postsCount,
 			isFollowing,
