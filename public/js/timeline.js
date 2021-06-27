@@ -1,8 +1,8 @@
 let userId;
-let finished = false;
+let isFinished = false;
 $(document).ready(function () {
 	function load() {
-		if (!finished) {
+		if (!isFinished) {
 			$.get(
 				`/posts?skip=${skip}&limit=${limit}`,
 				{ followingOnly: true },
@@ -10,7 +10,7 @@ $(document).ready(function () {
 					let posts = postsAndUserId.posts;
 					userId = postsAndUserId.userId;
 					if (posts.length < 10) {
-						finished = true;
+						isFinished = true;
 					}
 					outputPosts(posts, $('.postContent'));
 					skip = skip + limit;

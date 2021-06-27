@@ -249,7 +249,6 @@ async function getPosts(criteria, skip = 0, limit = 0) {
 			.populate('replyTo');
 
 		return await User.populate(results, { path: 'replyTo.user' });
-		// return res.status(200).send({ posts, userId: req.session.user._id });
 	} catch (e) {
 		console.log(e);
 	}

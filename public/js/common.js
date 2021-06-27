@@ -11,7 +11,6 @@ $('#post, #reply').keyup(e => {
 	var textbox = $(e.target);
 	var value = textbox.val().trim();
 
-	// check if the event fires in the modal or not .. law f el modal hn5alli el disabled 3la el reply
 	let isModal = textbox.parents('.modal').length == 1;
 
 	var submitPostButton = isModal
@@ -115,6 +114,9 @@ $('#submitPostButton, #submitReplyButton').click(e => {
 			location.reload();
 		} else {
 			const html = createPostHtml(postData, userId);
+			if ($('.postContent').children().get(0).tagName === 'SPAN') {
+				$('.postContent').text('');
+			}
 			$('.postContent').prepend(html);
 			textbox.val('');
 			button.prop('disabled', true);
@@ -127,7 +129,6 @@ $('#userSearchTextBox').keydown(event => {
 	var textbox = $(event.target);
 	var value = textbox.val();
 	if (value == '' && (event.which === 8 || event.keyCode == 8)) {
-		// remove user from selection
 		selectedUsers.pop();
 		$('.resultsContainer').html('');
 		updateSelectedUserHtml();
@@ -154,7 +155,6 @@ function createPostHtml(post, userId) {
 	let hashtagsHtml;
 
 	var timestamp = timeDifference(new Date(), new Date(post.createdAt));
-	//!
 	if (post.likes === 0) {
 		post.likes = [];
 	}
@@ -340,7 +340,6 @@ function getUsernameFromElement(element) {
 	if (rootElement.data().username) {
 		var username = rootElement.data().username;
 	}
-	// if (username === undefined) return alert('username is undefined');
 	return username;
 }
 
@@ -418,7 +417,6 @@ function outputPostsWithReplies(results, container) {
 
 	var mainPostHtml = createPostHtml(results.post, userLoggedIn._id);
 	container.append(mainPostHtml);
-
 	results.replies.forEach(result => {
 		var html = createPostHtml(result);
 		container.append(html);
@@ -426,8 +424,6 @@ function outputPostsWithReplies(results, container) {
 }
 
 function outputPosts(posts, container) {
-	//container.html('');
-
 	if (!Array.isArray(posts)) {
 		posts = [posts];
 	}

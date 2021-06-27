@@ -15,8 +15,6 @@ const transporter = nodemailer.createTransport(
 	})
 );
 
-// =========== Registeration ============
-
 //get register page
 // auth/register?redirectTo=roadmaps/webdev
 exports.getRegister = (req, res, next) => {
@@ -40,7 +38,6 @@ exports.validateRegister = [
 		.isLength({ min: 4 })
 		.trim()
 		.custom((value, { req }) => {
-			//async validation (we wating for date )
 			return User.findOne({ name: value }).then(userDoc => {
 				if (userDoc) {
 					return Promise.reject('Name is already taken.');
@@ -51,7 +48,6 @@ exports.validateRegister = [
 		.isEmail()
 		.withMessage('This email is not valid!')
 		.custom((value, { req }) => {
-			//async validation (we wating for date )
 			return User.findOne({ email: value }).then(userDoc => {
 				if (userDoc) {
 					return Promise.reject('Email is already exist.');
@@ -59,7 +55,6 @@ exports.validateRegister = [
 			});
 		})
 		.normalizeEmail(),
-	//password validation
 	body(
 		'password',
 		'Please enter a password with only numbers, text and at least 5 characters.'
@@ -67,8 +62,6 @@ exports.validateRegister = [
 		.isLength({ min: 5 })
 		.isAlphanumeric()
 		.trim(),
-
-	//confirm password validation
 	body('confirmPassword')
 		.trim()
 		.custom((value, { req }) => {
@@ -193,7 +186,6 @@ exports.validateLogin = [
 
 //Post Login
 exports.postlogin = async (req, res, next) => {
-	// const query = req.body.query === 'webdevelop' ? false : true;
 	let redirectTo = req.body.redirectTo || req.query.redirectTo;
 	const email = req.body.email;
 	const password = req.body.password;
@@ -215,11 +207,9 @@ exports.postlogin = async (req, res, next) => {
 	try {
 		const user = await User.findOne({ email: email });
 
-		const doMatch = await bcrypt.compare(password, user.password); //true or false
+		const doMatch = await bcrypt.compare(password, user.password);
 
 		if (doMatch) {
-			// if email exists and password matches
-			// save the user object without his password in the session
 			req.session.user = user.hidePrivateData();
 			req.session.isLoggedin = true;
 			if (user.role) {

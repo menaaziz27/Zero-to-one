@@ -30,7 +30,7 @@ const notificationsApiRoutes = require('./routes/notifications_api');
 
 // ============ constant vars ============
 // const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
-const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+const MongoDB_URI = 'mongodb://localhost:27017/test';
 const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server, { pingTimeout: 60000 });
@@ -102,6 +102,13 @@ app.use('/chatMessage', chatMessageRoutes);
 app.use('/notifications', notificationsRoutes);
 app.use('/api/notifications', notificationsApiRoutes);
 
+app.use((req, res) => {
+	if (!res.locals.error) {
+		res.locals.error = 'This page is not found.';
+	}
+	res.render('404.ejs');
+});
+
 // handling different errors
 app.use((error, req, res, next) => {
 	console.log(error.message);
@@ -112,13 +119,6 @@ app.use((error, req, res, next) => {
 		error: error.message,
 		title: 'Error',
 	});
-});
-
-app.use((req, res) => {
-	if (!res.locals.error) {
-		res.locals.error = 'This page is not found.';
-	}
-	res.render('404.ejs');
 });
 
 io.on('connection', socket => {
