@@ -47,6 +47,41 @@
 - [x] delete hashtags from post description and leave them only in the hashtags
 - [x] what if i posted empty post
 - [X] side menu bar for navigating in home
+- [x] what if the admin deletes the user account he logged from
+- [x] proper handling of 404 pages
+- [x] edit profile gender fix
+- [x] dynamically render skills in forms
+- [x] replies route
+- [x] likes not working properly in any user's profile
+- [x] render comment count dynamically
+- [x] adjust search design and logic
+- [x] law deft roadmap mn gher topics w 7awelt a3mlha access hy3ml error
+- [X] validation in dashborad
+- [X] in user profile if the user added his information i should render them in a section maybe underneath the skills section
+- [X] hide update and delete button for posts that the user don't owe
+- [x] search index problem (auto index when creating db)
+- [x] we're not using moment.js anymore now
+- [x] delete button in posts fire event on the button only and not the span or icon tags
+- [X] likes active class need to be fixed
+- [X] messages page responsive layout fix
+- [X] if admin deleted roadmap it gets deleted automatically from the user skills list
+- [X] following and followers page links
+- [X] prevent user of making fetch posts reqeusts if he hits the end of a page and the posts length is zero
+- [x] dashboard sidebar layout abdalla
+- [x] dashboard circles background transparent abdalla
+- [x] footer links dynamic abdalla
+- [x] user profile comment number abdalla
+- [X] nothing to show in posts for new accounts
+- [] hide user sensitive data
+- [] handle errors rather than logging them to the console
+- [] option for user to change his password inside the app
+- [] validation for roadmaps form
+- [] validation for topics form
+- [] upload image field with preview
+- [] limit post characters
+- [] fix scrollbar
+- [] remove border from textarea
+- [] style delete button in posts
 - [] smooth scrolling & change scrollbar color ans shape
 - [] add see more button to the post description
 - [] restricted words in any post before creating it (npm bad-words)
@@ -58,46 +93,13 @@
 - [] if there's no users in the search query return No users found .. the same in posts
 - [] 404 page style
 - [] what if the user enter a post with 100000 characters ? we want a see more button that goes to post details
-- [] change font style
-- [x] what if the admin deletes the user account he logged from
-- [x] proper handling of 404 pages
-- [x] dynamically render skills in forms
-- [] hide user sensitive data
-- [] handle errors rather than logging them to the console
-- [] option for user to change his password inside the app
-- [] validation for roadmaps form
-- [] validation for topics form
-- [x] edit profile gender fix
-- [] upload image field with preview
-- [] limit post characters
-- [] fix scrollbar
-- [X] hide update and delete button for posts that the user don't owe
-- [x] search index problem (auto index when creating db)
-- [] remove border from textarea
-- [x] we're not using moment.js anymore now
-- [] style delete button in posts
-- [x] delete button in posts fire event on the button only and not the span or icon tags
-- [x] replies route
-- [x] likes not working properly in any user's profile
-- [x] render comment count dynamically
-- [x] adjust search design and logic
-- [x] law deft roadmap mn gher topics w 7awelt a3mlha access hy3ml error
-- [X] validation in dashborad
 - [] set default or blank data in edit post form if he didn't change any data in first time
 - [] fix follow button in other users proile
-- [X] in user profile if the user added his information i should render them in a section maybe underneath the skills section
-- [X] likes active class need to be fixed
-- [X] messages page responsive layout fix
-- [X] if admin deleted roadmap it gets deleted automatically from the user skills list
+- [] change font style
 - [] delete post form in post submission and remain only the ajax call
 - [] number of posts and comments in profile need to be fixed
 - [] edit post route need to be fixed after edit
-- [X] following and followers page links
-- [X] prevent user of making fetch posts reqeusts if he hits the end of a page and the posts length is zero
 - [] replies issue azzouz
 - [] notification bug azzouz
-- [x] dashboard sidebar layout abdalla
-- [x] dashboard circles background transparent abdalla
-- [x] footer links dynamic abdalla
-- [x] user profile comment number abdalla
 - [] error handling azzouz
+- [] redirecting user after logging in

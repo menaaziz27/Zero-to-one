@@ -31,12 +31,12 @@ function createChatHtml(chatData) {
 			: 'active';
 
 	return `<a style =" text-decoration: none;" href='/messages/${chatData._id}' class='resultListItem ${activeClass}'>
-              ${image}
-              <div class='resultsDetailsContainer ellipsis'>
-                  <span class='heading ellipsis'>${chatName}</span>
-                  <span class='subText ellipsis'>${latestMessage}</span>
-              </div>
-          </a>`;
+			${image}
+			<div class='resultsDetailsContainer ellipsis'>
+				<span class='heading ellipsis'>${chatName}</span>
+				<span class='subText ellipsis'>${latestMessage}</span>
+			</div>
+		</a>`;
 }
 
 function getLatestMessage(latestMessage) {

@@ -37,7 +37,7 @@ exports.getRoadmap = async (req, res, next) => {
 		const roadmap = await Roadmap.findOne({ routeName: roadmapName }).populate(
 			'steps'
 		);
-    const roadmaps = await Roadmap.find()
+		const roadmaps = await Roadmap.find();
 		const user = await User.findById({ _id: userid }).populate('bookmarks');
 		if (!roadmap) {
 			const error = new Error(
@@ -51,7 +51,7 @@ exports.getRoadmap = async (req, res, next) => {
 			roadmap,
 			steps,
 			count,
-      roadmaps,
+			roadmaps,
 			user,
 			userLoggedIn: req.session.user,
 		});
@@ -75,7 +75,7 @@ exports.gettopic = async (req, res, next) => {
 			error.statusCode = 404;
 			return next(error);
 		}
-		const roadmaps = await Roadmap.find()
+		const roadmaps = await Roadmap.find();
 		res.render('roadmaps/topic', {
 			topic,
 			roadmaps,

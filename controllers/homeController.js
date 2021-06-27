@@ -91,22 +91,12 @@ exports.postSearch = async (req, res, next) => {
 	if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
 		allData = req.body.allData;
 	}
-	// console.log(allData, 'alldataaaaaaaaaaaaaaaaaaaaaa');
 	allData = generateCriteriaObject(allData);
-	// console.log(allData, 'QUERY DATAAAAAAA');
-
 	try {
 		const users = await User.find(allData, { password: 0 });
 		const roadmaps = await Roadmap.find({});
-		// console.log(users);
-
-		//TODO-1: check if the  request is ajax create string of matched elements in backticks string
-		//TODO-2: send users back to ajax and target the DOM element and replace it's HTML with the string
-		//TODO-3: if the request not ajax just res.render with the list of returning users
 		let matchedUsers;
 		if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-			// TODO-1: chck if the users array is empty => let matchedList = ''
-			// TODO-1: if it's not empty loop with map() and send matched
 			if (users.length !== 0) {
 				matchedUsers = users.map(renderUsers).join('');
 			} else {
@@ -164,7 +154,6 @@ exports.postSearchPosts = async (req, res) => {
 			.limit(Number(limit));
 		const numPosts = await Post.find().countDocuments();
 		totalItems = numPosts;
-		//! this line is tricky :D
 		const posts = await Post.populate(allPosts, { path: 'user' });
 		return res.send({ posts });
 	} catch (e) {
@@ -193,15 +182,14 @@ exports.getUsers = async (req, res) => {
 		});
 };
 
-
-exports.postFeedback = async(req,res) =>{
-  const  data  = req.body;
-  console.log(data)
-  try {
+exports.postFeedback = async (req, res) => {
+	const data = req.body;
+	console.log(data);
+	try {
 		let newfeedback = await Feedback.create(data);
-      newfeedback.save()
-		return res.status(201).send({newfeedback});
+		newfeedback.save();
+		return res.status(201).send({ newfeedback });
 	} catch (e) {
 		console.log(e);
 	}
-}
+};

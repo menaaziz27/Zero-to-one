@@ -47,5 +47,5 @@ function loadComments() {
 window.onscroll = () => {
 	if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
 		selectedTap === 'comments' ? loadComments() : loadPosts();
-  }
+	}
 };
