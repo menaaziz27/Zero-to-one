@@ -36,7 +36,7 @@ exports.createMessage = async (req, res) => {
 
 function insertNotifications(chat, message) {
 	chat.users.forEach(userId => {
-		if (userId == message.sender._id.toString()) return;
+		if (userId.toString() === message.sender._id.toString()) return;
 
 		Notification.insertNotification(
 			userId,
