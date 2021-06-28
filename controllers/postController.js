@@ -87,7 +87,10 @@ exports.createPost = async (req, res) => {
 		let newPost = await Post.create(data);
 		newPost = await User.populate(newPost, { path: 'user' });
 		newPost = await Post.populate(newPost, { path: 'replyTo' });
-		if (newPost.replyTo !== undefined) {
+		if (
+			newPost.replyTo !== undefined &&
+			newPost.replyTo.user.toString() !== req.session.user._id.toString()
+		) {
 			await Notification.insertNotification(
 				newPost.replyTo.user,
 				req.session.user._id,
@@ -176,7 +179,8 @@ exports.postLike = async (req, res) => {
 		res.sendStatus(400);
 	});
 
-	if (!isLiked) {
+	console.log(post.user, userId, '179');
+	if (!isLiked && post.user.toString() !== userId.toString()) {
 		await Notification.insertNotification(
 			post.user,
 			userId,
