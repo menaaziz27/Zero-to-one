@@ -103,3 +103,4 @@
 - [] notification bug azzouz
 - [] error handling azzouz
 - [] redirecting user after logging in
+- [] suggested people in explore page
