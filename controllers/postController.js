@@ -6,13 +6,16 @@ const findHashtags = require('find-hashtags');
 const Roadmap = require('../models/Roadmap');
 
 // /posts/:id/details
-exports.getEdit = async (req, res) => {
+exports.getEdit = async (req, res, next) => {
 	// if there's timeline query in the request let timeline = true else False
 	let timeline = req.query.timeline || false;
 	const postId = req.params.id;
 	let userid = req.user._id || null;
 	try {
 		const post = await Post.findById(postId);
+		if (!post) {
+			return next(new Error('Post not found.'));
+		}
 		const roadmaps = await Roadmap.find({});
 		res.render('post/edit-post', {
 			post,
@@ -22,7 +25,10 @@ exports.getEdit = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -111,7 +117,10 @@ exports.createPost = async (req, res) => {
 		}
 		return res.status(201).send({ newPost, userId });
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -174,8 +183,10 @@ exports.postLike = async (req, res) => {
 		},
 		{ new: true }
 	).catch(error => {
-		console.log(error);
-		res.sendStatus(400);
+		if (!e.statusCode) {
+			e.statusCode = 400;
+		}
+		next(e);
 	});
 
 	// Insert post like
@@ -186,11 +197,12 @@ exports.postLike = async (req, res) => {
 		},
 		{ new: true }
 	).catch(error => {
-		console.log(error);
-		res.sendStatus(400);
+		if (!e.statusCode) {
+			e.statusCode = 400;
+		}
+		next(e);
 	});
 
-	console.log(post.user, userId, '179');
 	if (!isLiked && post.user.toString() !== userId.toString()) {
 		await Notification.insertNotification(
 			post.user,

@@ -148,8 +148,7 @@ exports.validateProfile = [
 	body('bio', 'bio must be less than 120 characters').isLength({ max: 120 }),
 ];
 
-exports.postUpdateProfile = async (req, res) => {
-	// console.log(req.body);
+exports.postUpdateProfile = async (req, res, next) => {
 	let {
 		userid,
 		username,
@@ -172,7 +171,6 @@ exports.postUpdateProfile = async (req, res) => {
 			skills = [skills];
 		}
 	}
-	console.log(skills, 'skillslslsl');
 	let image;
 	let Image;
 	image = req.file;
@@ -254,6 +252,10 @@ exports.postUpdateProfile = async (req, res) => {
 		}
 		user.websites = websites;
 		user.save();
+		req.session.user = user;
+		await req.session.save(e => {
+			console.log(e);
+		});
 		res.redirect('/users/profile/' + username);
 	} catch (e) {
 		if (!e.statusCode) {

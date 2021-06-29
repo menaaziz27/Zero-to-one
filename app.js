@@ -29,6 +29,8 @@ const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server, { pingTimeout: 60000 });
 
+app.set('view engine', 'ejs');
+
 const store = new MongoDBStore({
 	uri: MongoDB_URI,
 	collection: 'sessions',
@@ -56,7 +58,6 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-app.set('view engine', 'ejs');
 app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));

@@ -251,10 +251,7 @@ exports.postlogin = async (req, res, next) => {
 //Post logout page
 exports.getLogout = (req, res, next) => {
 	req.session.destroy(e => {
-		if (!e.statusCode) {
-			e.statusCode = 500;
-		}
-		next(e);
+		console.log(e);
 		res.redirect('/');
 	});
 };

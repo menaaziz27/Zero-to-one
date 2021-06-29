@@ -44,7 +44,7 @@ exports.getTimeline = async (req, res, next) => {
 	}
 };
 
-exports.explore = async (req, res, next) => {
+exports.getExplore = async (req, res, next) => {
 	const data = await axios.get('https://dev.to/api/articles');
 	const news = data.data;
 	let userid;
@@ -57,7 +57,7 @@ exports.explore = async (req, res, next) => {
 		pageTitle: 'Explore',
 		userid: userid,
 		news: news,
-		user: req.session.user,
+		userLoggedIn: req.session.user,
 		postDetail: false,
 	});
 };
@@ -198,7 +198,6 @@ exports.getUsers = async (req, res) => {
 
 exports.postFeedback = async (req, res) => {
 	const data = req.body;
-	console.log(data);
 	try {
 		let newfeedback = await Feedback.create(data);
 		newfeedback.save();
@@ -208,5 +207,24 @@ exports.postFeedback = async (req, res) => {
 			e.statusCode = 500;
 		}
 		next(e);
+	}
+};
+
+exports.getSimilars = async (req, res, next) => {
+	console.log('here');
+	const userLoggedIn = req.session.user;
+	console.log(userLoggedIn.nativeLang);
+	console.log(userLoggedIn);
+	try {
+		const similarUsers = await User.find({
+			nativeLang: userLoggedIn.nativeLang,
+		});
+		console.log(similarUsers);
+		return res.json({ similarUsers });
+	} catch (e) {
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		return next(e);
 	}
 };

@@ -1,9 +1,10 @@
 $(document).ready(function () {
-	if (selectedTap === 'followers') {
-		loadFollowers();
-	} else {
-		console.log('else');
-		loadFollowing();
+	if (window.location.pathname !== '/explore') {
+		if (selectedTap === 'followers') {
+			loadFollowers();
+		} else {
+			loadFollowing();
+		}
 	}
 });
 
@@ -63,4 +64,9 @@ function createUserHtml(userData, showFollowButton) {
                 </div>
 							${followButton}
             </div>`;
+}
+if (window.location.pathname === '/explore') {
+	$.get('/similars', users => {
+		console.log(users[0]);
+	});
 }
