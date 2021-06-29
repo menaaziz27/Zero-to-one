@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Post = require('../models/Post');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
@@ -236,8 +237,17 @@ exports.getPost = async (req, res, next) => {
 // /posts/:id/details
 exports.getPostDetails = async (req, res, next) => {
 	var userId = req.session.user._id;
+	const isValidId = mongoose.isValidObjectId(req.params.id);
+
+	if (!isValidId) {
+		const error = new Error('not a valid id syntax.');
+		return next(error);
+	}
 	Post.findById(req.params.id)
 		.then(post => {
+			if (!post) {
+				throw new Error('This post may be deleted recently by its owner.');
+			}
 			let payload = {
 				postId: req.params.id,
 				userId,
@@ -246,8 +256,7 @@ exports.getPostDetails = async (req, res, next) => {
 
 			return res.status(200).render('post/post-details.ejs', payload);
 		})
-		.catch(err => {
-			const error = new Error('Cannot find this post');
+		.catch(error => {
 			error.statusCode = 404;
 			return next(error);
 		});

@@ -80,6 +80,8 @@
 - [X] edit post route need to be fixed after edit
 - [X] replies issue azzouz
 - [X] notification bug azzouz
+- [X] error handling azzouz
+- [X] redirect user back to the previous page in the 404 page
 - [] upload image field with preview
 - [] hide user sensitive data
 - [] option for user to change his password inside the app
@@ -100,4 +102,3 @@
 - [] change font style
 - [] delete post form in post submission and remain only the ajax call
 - [] redirecting user after logging in
-- [] error handling azzouz

@@ -24,13 +24,19 @@ exports.createMessage = async (req, res) => {
 		const chat = await Chat.findByIdAndUpdate(req.body.chatId, {
 			latestMessage: message,
 		}).catch(e => {
-			console.log(e);
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		});
 
 		insertNotifications(chat, message);
 		res.status(201).send(message);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 

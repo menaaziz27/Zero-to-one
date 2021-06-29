@@ -30,7 +30,10 @@ exports.getDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 // =====================USer Dashboard========================
@@ -46,7 +49,10 @@ exports.getUserDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.deleteUser = async (req, res) => {
@@ -81,7 +87,10 @@ exports.getEditUserDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.validateUser = [
@@ -116,7 +125,10 @@ exports.postEditUserDashboard = async (req, res) => {
 		try {
 			roadmaps = await Roadmap.find({});
 		} catch (e) {
-			console.log(e);
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		}
 		return res.status(422).render('dashboard/user/userEdit.ejs', {
 			errorMassage: errors.array(),
@@ -144,7 +156,10 @@ exports.postEditUserDashboard = async (req, res) => {
 		user.save();
 		res.redirect('/admin/dashboard/users');
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -165,7 +180,10 @@ exports.getPostDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.deletePost = async (req, res) => {
@@ -191,7 +209,10 @@ exports.getEditPostDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.postEditPostDashboard = async (req, res) => {
@@ -203,7 +224,10 @@ exports.postEditPostDashboard = async (req, res) => {
 		post.save();
 		res.redirect('/admin/dashboard/posts');
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -217,7 +241,10 @@ exports.getRoadmapDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -280,7 +307,10 @@ exports.postCreateRoadmapDashboard = async (req, res) => {
 		roadmap.save();
 		res.redirect('/admin/dashboard/roadmaps');
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.deleteRoadmap = async (req, res) => {
@@ -291,7 +321,10 @@ exports.deleteRoadmap = async (req, res) => {
 		await roadmap.remove();
 		res.status(200).json({ message: 'Success!' });
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 		res.status(500).json({ message: 'failed!' });
 	}
 };
@@ -308,7 +341,10 @@ exports.getEditRoadmapDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.postEditroadmapDashboard = async (req, res) => {
@@ -342,7 +378,10 @@ exports.postEditroadmapDashboard = async (req, res) => {
 		roadmap.save();
 		res.redirect('/admin/dashboard/roadmaps');
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -358,7 +397,10 @@ exports.getTopicDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.getRoadmapTopicsDashboard = async (req, res) => {
@@ -374,7 +416,10 @@ exports.getRoadmapTopicsDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.getCreateTopicDashboard = async (req, res) => {
@@ -391,7 +436,10 @@ exports.getCreateTopicDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.validateTopic = [
@@ -472,7 +520,10 @@ exports.postCreateTopicDashboard = async (req, res) => {
 		await topic.save();
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.deleteTopic = async (req, res) => {
@@ -500,7 +551,10 @@ exports.getEditTopicDashboard = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 exports.postEditTopicDashboard = async (req, res) => {
@@ -522,7 +576,10 @@ exports.postEditTopicDashboard = async (req, res) => {
 			roadmaps = await Roadmap.find({});
 			references = topic.references;
 		} catch (e) {
-			console.log(e);
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		}
 		console.log(errors.array());
 		return res.status(422).render('dashboard/topic/editTopic.ejs', {
@@ -565,7 +622,10 @@ exports.postEditTopicDashboard = async (req, res) => {
 		topic.save();
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -589,7 +649,10 @@ exports.postEditTopicDashboard = async (req, res) => {
 			roadmaps = await Roadmap.find({});
 			references = topic.references;
 		} catch (e) {
-			console.log(e);
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		}
 		console.log(errors.array());
 		return res.status(422).render('dashboard/topic/editTopic.ejs', {
@@ -633,7 +696,10 @@ exports.postEditTopicDashboard = async (req, res) => {
 		topic.save();
 		res.redirect('/admin/dashboard/topics');
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -646,7 +712,10 @@ exports.getFeedback = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 

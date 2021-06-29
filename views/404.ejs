@@ -7,28 +7,16 @@
     <title>
         <%= error %>
     </title>
-    <link href="/assets/img/logo-white.png" rel="icon">
-
-    <!-- bootstrap css -->
-
-    <!-- <link href="/assets/css/errormessages.css" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"> -->
+    <%- include('./layouts/head.ejs') %>
 
 
-    <link href="/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/venobox/venobox.css" rel="stylesheet">
-    <link href="/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
+        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
+        <link href="/assets/css/navbar.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/css/scrollbar.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-    <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-    <link href="/assets/css/navbar.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/scrollbar.css">
-
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
 
 
 </head>
@@ -40,18 +28,24 @@
             <h1>
                 <%= error %>
             </h1>
-            <span><a class="btn btn-success" href="/">Back</a></span>
+            <span><a class="btn btn-info" onclick="goBack()">Back</a></span>
         </div>
-        <script>
-            const element = document.querySelector('#submit');
-            element.addEventListener('submit', event => {
-                event.preventDefault();
-            });
-        </script>
-        <!-- bootstrap scripts -->
-        <script src="/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
 
+
+        <script>
+            let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+        </script>
+        <%- include('./layouts/strapAndJQuery.ejs') %>
+            <script>
+                function goBack() {
+                    if (window.history.length === 1) {
+                        // its the first page
+                        window.location = "/timeline";
+                    } else {
+                        history.back();
+                    }
+                }
+            </script>
 </body>
 
 </html>

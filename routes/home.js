@@ -13,7 +13,7 @@ const {
 	getHtml,
 	getCss,
 	explore,
-  postFeedback
+	postFeedback,
 } = require('../controllers/homeController');
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
@@ -25,7 +25,6 @@ router.get('/search', isAuthenticated, getSearch);
 router.get('/search/posts', isAuthenticated, getSearchPosts);
 router.post('/search/posts', isAuthenticated, postSearchPosts);
 router.post('/search/users', isAuthenticated, postSearch);
-router.post('/feedback',postFeedback );
-
+router.post('/feedback', postFeedback);
 
 module.exports = router;

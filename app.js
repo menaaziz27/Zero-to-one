@@ -1,5 +1,3 @@
-// ============ Node-Packages ============
-// const morgan = require('morgan');
 const express = require('express');
 const bodyparser = require('body-parser');
 const session = require('express-session');
@@ -8,14 +6,12 @@ const flash = require('connect-flash');
 const multer = require('multer');
 const morgan = require('morgan');
 const MongoDBStore = require('connect-mongodb-session')(session);
-// ============ Core-Modules ============
 const path = require('path');
 
-// ============ My-Modules ============
 require('./utils/db');
+
 const { findUser } = require('./middleware/helper');
 
-// Routes
 const homeRoutes = require('./routes/home');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
@@ -28,8 +24,6 @@ const chatMessageRoutes = require('./routes/chatMessages');
 const notificationsRoutes = require('./routes/notifications');
 const notificationsApiRoutes = require('./routes/notifications_api');
 
-// ============ constant vars ============
-// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
 const MongoDB_URI = 'mongodb://localhost:27017/test';
 const app = express();
 const server = app.listen(3000);
@@ -39,8 +33,6 @@ const store = new MongoDBStore({
 	uri: MongoDB_URI,
 	collection: 'sessions',
 });
-
-app.set('view engine', 'ejs');
 
 const fileStorage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -64,6 +56,7 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
+app.set('view engine', 'ejs');
 app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -106,7 +99,9 @@ app.use((req, res) => {
 	if (!res.locals.error) {
 		res.locals.error = 'This page is not found.';
 	}
-	res.render('404.ejs');
+	res.render('404.ejs', {
+		userLoggedIn: req.session.user,
+	});
 });
 
 // handling different errors
@@ -116,6 +111,7 @@ app.use((error, req, res, next) => {
 		error.message = 'Page Not Found';
 	}
 	res.render('404.ejs', {
+		userLoggedIn: req.session.user,
 		error: error.message,
 		title: 'Error',
 	});

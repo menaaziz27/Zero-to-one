@@ -141,7 +141,10 @@ exports.postRegister = async (req, res, next) => {
 			html: '<h1> You successfully signed up<h1>',
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -215,9 +218,12 @@ exports.postlogin = async (req, res, next) => {
 			if (user.role) {
 				req.session.isAdmin = true;
 			}
-			return req.session.save(err => {
-				if (err) {
-					console.log(err);
+			return req.session.save(e => {
+				if (e) {
+					if (!e.statusCode) {
+						e.statusCode = 500;
+					}
+					next(e);
 				}
 				if (redirectTo) {
 					res.redirect(redirectTo);
@@ -244,8 +250,11 @@ exports.postlogin = async (req, res, next) => {
 
 //Post logout page
 exports.getLogout = (req, res, next) => {
-	req.session.destroy(err => {
-		console.log(err);
+	req.session.destroy(e => {
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 		res.redirect('/');
 	});
 };
@@ -269,7 +278,10 @@ exports.getReset = (req, res, next) => {
 exports.postReset = (req, res, next) => {
 	crypto.randomBytes(32, (err, buffer) => {
 		if (err) {
-			console.log(err);
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 			return res.redirect('/reset');
 		}
 		const token = buffer.toString('hex');
@@ -295,8 +307,11 @@ exports.postReset = (req, res, next) => {
 			`,
 				});
 			})
-			.catch(err => {
-				console.log(err);
+			.catch(e => {
+				if (!e.statusCode) {
+					e.statusCode = 500;
+				}
+				next(e);
 			});
 	});
 };
@@ -322,8 +337,11 @@ exports.getNewPassword = (req, res, next) => {
 				passwordToken: token,
 			});
 		})
-		.catch(err => {
-			console.log(err);
+		.catch(e => {
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		});
 };
 
@@ -356,7 +374,10 @@ exports.postNewPassword = (req, res, next) => {
 				html: '<h1> You successfully reset your password<h1>',
 			});
 		})
-		.catch(err => {
-			console.log(err);
+		.catch(e => {
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		});
 };

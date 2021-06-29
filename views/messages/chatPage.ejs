@@ -44,10 +44,10 @@
                                                 <img src="/<%=user.Image%>" alt="user's Profile pic" title="<%=user.name%>">
                                                 <% } %>
                                         </div>
-                                        <span id="chatName" data-toggle="modal" data-target="#chatNameModal"><%= chat.chatName %></span>
+                                        <span id="chatName" data-toggle="modal" data-target="#chatNameModal"><% if(chat) { %><%= chat.chatName %><% } %></span>
                                     </div>
                                     <div class="mainContentContainer">
-                                        <div class="chatContainer" data-room="<%= chat._id %>">
+                                        <div class="chatContainer" data-room="<% if(chat) { %><%= chat._id %><% } %>">
                                             <ul class="chatMessages">
                                             </ul>
                                             <div class="typingDots">
@@ -80,7 +80,7 @@
                                 </button>
                         </div>
                         <div class="modal-body">
-                            <input id="chatNameTextbox" type="text" placeholder="Enter a name for this chat" value="<%= chat.chatName %>">
+                            <input id="chatNameTextbox" type="text" placeholder="Enter a name for this chat" value="<% if(chat) { %><%= chat.chatName %><% } %>">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

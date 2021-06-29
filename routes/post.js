@@ -3,14 +3,14 @@ const router = require('express').Router();
 
 // ============ My-Modules ============
 const {
-    getEdit,
-    getPost,
-    createPost,
-    postEdit,
-    deletePost,
-    getPosts,
-    postLike,
-    getPostDetails,
+	getEdit,
+	getPost,
+	createPost,
+	postEdit,
+	deletePost,
+	getPosts,
+	postLike,
+	getPostDetails,
 } = require('../controllers/postController');
 
 router.get('/:id', getPost);

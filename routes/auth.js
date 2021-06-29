@@ -1,8 +1,7 @@
 // ============ Node-Packages============
 const router = require('express').Router();
-
-// ============ My-Modules ============
 const User = require('../models/User');
+
 const {
 	getRegister,
 	getLogin,

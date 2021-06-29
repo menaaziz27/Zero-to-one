@@ -25,7 +25,10 @@ exports.createChat = async (req, res) => {
 		const chat = await Chat.create(chatData);
 		return res.send(chat);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -46,7 +49,10 @@ exports.getChat = async (req, res) => {
 		result = await User.populate(result, { path: 'latestMessage.sender' });
 		return res.send(result);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -57,7 +63,10 @@ exports.updateChatName = async (req, res) => {
 		const result = await Chat.findByIdAndUpdate(req.params.chatId, req.body);
 		return res.sendStatus(204);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -79,7 +88,10 @@ exports.getSingleChat = async (req, res) => {
 		}
 		return res.send(chat);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -92,7 +104,10 @@ exports.getSingleChatMessages = async (req, res) => {
 
 		return res.send(messages);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -105,7 +120,10 @@ exports.markMessagesAsRead = async (req, res) => {
 
 		return res.sendStatus(204);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 

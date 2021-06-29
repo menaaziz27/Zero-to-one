@@ -37,7 +37,10 @@ exports.getTimeline = async (req, res, next) => {
 			postDetail: false,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -82,7 +85,10 @@ exports.getSearch = async (req, res) => {
 			user: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -105,7 +111,10 @@ exports.postSearch = async (req, res, next) => {
 			res.send({ users: matchedUsers });
 		}
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -157,7 +166,10 @@ exports.postSearchPosts = async (req, res) => {
 		const posts = await Post.populate(allPosts, { path: 'user' });
 		return res.send({ posts });
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -176,9 +188,11 @@ exports.getUsers = async (req, res) => {
 		.then(results => {
 			res.status(200).send(results);
 		})
-		.catch(error => {
-			console.log(error);
-			res.sendStatus(400);
+		.catch(e => {
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		});
 };
 
@@ -190,6 +204,9 @@ exports.postFeedback = async (req, res) => {
 		newfeedback.save();
 		return res.status(201).send({ newfeedback });
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };

@@ -19,7 +19,7 @@ exports.newMessage = (req, res) => {
 	res.render('messages/newMessage', payload);
 };
 
-exports.getChatPage = async (req, res) => {
+exports.getChatPage = async (req, res, next) => {
 	let dots = 'assets/img/dots.gif';
 	let userId = req.session.user._id;
 	let chatId = req.params.chatId;
@@ -34,8 +34,8 @@ exports.getChatPage = async (req, res) => {
 	};
 
 	if (!isValidId) {
-		payload.errorMessage = "you don't have access to this chat";
-		return res.render('messages/chatPage', payload);
+		const error = new Error('This is a broken link');
+		return next(error);
 	}
 
 	try {
@@ -49,6 +49,9 @@ exports.getChatPage = async (req, res) => {
 			let userFound = await User.findById(chatId);
 			if (userFound) {
 				chat = await getChatByUserId(userId, userFound._id);
+			} else {
+				const error = new Error('This chat is not exist.');
+				return next(error);
 			}
 		}
 
@@ -61,7 +64,10 @@ exports.getChatPage = async (req, res) => {
 
 		return res.render('messages/chatPage', payload);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
