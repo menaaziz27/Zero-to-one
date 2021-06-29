@@ -213,11 +213,21 @@ exports.postFeedback = async (req, res) => {
 exports.getSimilars = async (req, res, next) => {
 	console.log('here');
 	const userLoggedIn = req.session.user;
-	console.log(userLoggedIn.nativeLang);
-	console.log(userLoggedIn);
 	try {
 		const similarUsers = await User.find({
-			nativeLang: userLoggedIn.nativeLang,
+			$and: [
+				{
+					skills: {
+						$in: userLoggedIn.skills,
+					},
+				},
+				{
+					_id: { $ne: userLoggedIn._id },
+				},
+				{
+					followers: { $nin: userLoggedIn._id },
+				},
+			],
 		});
 		console.log(similarUsers);
 		return res.json({ similarUsers });
