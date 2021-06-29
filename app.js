@@ -24,7 +24,13 @@ const chatMessageRoutes = require('./routes/chatMessages');
 const notificationsRoutes = require('./routes/notifications');
 const notificationsApiRoutes = require('./routes/notifications_api');
 
+<<<<<<< HEAD
 const MongoDB_URI = 'mongodb://localhost:27017/test';
+=======
+// ============ constant vars ============
+// const MongoDB_URI = 'mongodb+srv://abdallah:abd12345@cluster0.itsjp.mongodb.net/ZeroToOne?&w=majority';
+const MongoDB_URI = 'mongodb://localhost:27017/zerotoone';
+>>>>>>> 98be740f81d4a236d91e56b50d4a4e03e75a5d63
 const app = express();
 const server = app.listen(3000);
 const io = require('socket.io')(server, { pingTimeout: 60000 });
