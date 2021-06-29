@@ -32,10 +32,15 @@ exports.getUserProfile = async (req, res, next) => {
 		userId = userDoc._id;
 		const posts = await Post.find({ user: userId })
 			.sort({ createdAt: 'desc' })
-			.populate('user').populate('replyTo');
-      let commentCount =0
-      posts.forEach(post =>{if(post.replyTo) {commentCount +=1 }})
-      
+			.populate('user')
+			.populate('replyTo');
+		let commentCount = 0;
+		posts.forEach(post => {
+			if (post.replyTo) {
+				commentCount += 1;
+			}
+		});
+
 		// fetch first five repose from user's github account to show them in projects section
 		const postsCount = posts.length;
 		if (userDoc.websites.length > 0 && userDoc.websites[0].includes('github')) {
@@ -53,11 +58,21 @@ exports.getUserProfile = async (req, res, next) => {
 
 			//! this block can be better by returning after pushing 5 elements and not iterating through the whole object data
 			repos.forEach((repo, index) => {
-				// if userRepose less than 5 objects and the repo is not forked (created by the user himself) => push it into array
 				if (repo.fork !== true && userRepos.length < 5) {
 					userRepos.push({ repoName: repo.name, repoUrl: repo.html_url });
 				}
 			});
+
+			// for (let i = 0; i < repos.length; i++) {
+			// 	if (repos[i].fork !== true && userRepos.length < 5) {
+			// 		userRepos.push({
+			// 			repoName: repos[i].name,
+			// 			repoUrl: repos[i].html_url,
+			// 		});
+			// 	} else {
+			// 		break;
+			// 	}
+			// }
 		}
 
 		res.render('profile/user-profile', {
@@ -66,7 +81,7 @@ exports.getUserProfile = async (req, res, next) => {
 			username: username,
 			posts,
 			moment,
-      commentCount,
+			commentCount,
 			userRepos,
 			postsCount,
 			isFollowing,
@@ -74,7 +89,10 @@ exports.getUserProfile = async (req, res, next) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -116,7 +134,10 @@ exports.getUpdateProfile = async (req, res) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -193,8 +214,6 @@ exports.postUpdateProfile = async (req, res) => {
 			roadmaps,
 		});
 	}
-	//! ============================================
-
 	try {
 		const user = await User.findOne({ _id: userid });
 		user.name = name;
@@ -237,7 +256,10 @@ exports.postUpdateProfile = async (req, res) => {
 		user.save();
 		res.redirect('/users/profile/' + username);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -269,16 +291,22 @@ exports.postFollow = async (req, res) => {
 		console.log(error);
 		res.sendStatus(400);
 	});
-
-	if (!isFollowing) {
-		await Notification.insertNotification(
-			userId,
-			req.session.user._id,
-			'follow',
-			req.session.user.username
-		);
+	try {
+		if (!isFollowing) {
+			await Notification.insertNotification(
+				userId,
+				req.session.user._id,
+				'follow',
+				req.session.user.username
+			);
+		}
+		res.status(200).send(req.session.user);
+	} catch (e) {
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
-	res.status(200).send(req.session.user);
 };
 
 // users/:username:/followers
@@ -288,7 +316,10 @@ exports.getFollowers = async (req, res) => {
 		payload.selectedTab = 'followers';
 		res.status(200).render('profile/followersAndFollowing', payload);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 // users/:username:/following
@@ -299,7 +330,10 @@ exports.getFollowing = async (req, res) => {
 
 		res.status(200).render('profile/followersAndFollowing', payload);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 // users/:userId:/followers
@@ -309,13 +343,14 @@ exports.getFollowersData = async (req, res) => {
 		.then(results => {
 			res.status(200).send(results);
 		})
-		.catch(error => {
-			console.log(error);
-			res.sendStatus(400);
+		.catch(e => {
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		});
 };
 
-// !
 // users/:userId/following
 exports.getFollowingData = async (req, res) => {
 	User.findById(req.params.userId)
@@ -323,9 +358,11 @@ exports.getFollowingData = async (req, res) => {
 		.then(results => {
 			res.status(200).send(results);
 		})
-		.catch(error => {
-			console.log(error);
-			res.sendStatus(400);
+		.catch(e => {
+			if (!e.statusCode) {
+				e.statusCode = 500;
+			}
+			next(e);
 		});
 };
 

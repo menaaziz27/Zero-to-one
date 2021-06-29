@@ -2,6 +2,7 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
 const findHashtags = require('find-hashtags');
+const Roadmap = require('../models/Roadmap');
 
 // /posts/:id/details
 exports.getEdit = async (req, res) => {
@@ -11,10 +12,13 @@ exports.getEdit = async (req, res) => {
 	let userid = req.user._id || null;
 	try {
 		const post = await Post.findById(postId);
+		const roadmaps = await Roadmap.find({});
 		res.render('post/edit-post', {
 			post,
 			userid,
 			timeline,
+			roadmaps,
+			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
 		console.log(e);
@@ -43,7 +47,10 @@ exports.postEdit = async (req, res) => {
 			res.redirect('/users/profile/' + req.session.user.username);
 		}
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -55,7 +62,10 @@ exports.deletePost = async (req, res) => {
 		await Post.findByIdAndDelete(postId);
 		res.sendStatus(202);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 

@@ -11,10 +11,15 @@ exports.getRoadmaps = async (req, res, next) => {
 			user: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
+// TODO
+// !===============================
 exports.createRoadmap = async (req, res) => {
 	try {
 		const newRoadmap = new Roadmap({
@@ -24,7 +29,10 @@ exports.createRoadmap = async (req, res) => {
 		});
 		await newRoadmap.save();
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -44,7 +52,7 @@ exports.getRoadmap = async (req, res, next) => {
 				'Roadmap is not found. It may be deleted recently.'
 			);
 			error.statusCode = 404;
-			return next(error);
+			throw error;
 		}
 		const steps = roadmap.steps;
 		res.render('roadmaps/diagram', {
@@ -56,7 +64,10 @@ exports.getRoadmap = async (req, res, next) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -83,7 +94,10 @@ exports.gettopic = async (req, res, next) => {
 			userLoggedIn: req.session.user,
 		});
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };
 
@@ -98,9 +112,6 @@ exports.postBookmark = async (req, res, next) => {
 			user.bookmarks &&
 			user.bookmarks.some(road => road.title === roadmap.title);
 		let option = isexist ? '$pull' : '$addToSet';
-		console.log(isexist);
-		console.log(option);
-		console.log(roadmap);
 
 		await User.findByIdAndUpdate(
 			userId,
@@ -121,6 +132,9 @@ exports.postBookmark = async (req, res, next) => {
 		// }
 		return res.status(201).send(req.session.user);
 	} catch (e) {
-		console.log(e);
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
 	}
 };

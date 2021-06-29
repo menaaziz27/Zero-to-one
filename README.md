@@ -72,34 +72,32 @@
 - [x] footer links dynamic abdalla
 - [x] user profile comment number abdalla
 - [X] nothing to show in posts for new accounts
-- [] hide user sensitive data
-- [] handle errors rather than logging them to the console
-- [] option for user to change his password inside the app
-- [] validation for roadmaps form
-- [] validation for topics form
+- [X] validation for topics form
+- [X] validation for roadmaps form
+- [X] pagination and limiting for search page
+- [X] fix follow button in other users proile
+- [X] number of posts and comments in profile need to be fixed
+- [X] edit post route need to be fixed after edit
+- [X] replies issue azzouz
+- [X] notification bug azzouz
 - [] upload image field with preview
+- [] hide user sensitive data
+- [] option for user to change his password inside the app
 - [] limit post characters
 - [] fix scrollbar
 - [] remove border from textarea
 - [] style delete button in posts
 - [] smooth scrolling & change scrollbar color ans shape
-- [] add see more button to the post description
 - [] restricted words in any post before creating it (npm bad-words)
 - [] every skill in user profile will be a link to its roadmap in the website
 - [] alert message in profile page to complete user data if it's not provided yet
 - [] website locally only or globally only
-- [] pagination and limiting for search page
 - [] adjust db schema
 - [] if there's no users in the search query return No users found .. the same in posts
 - [] 404 page style
 - [] what if the user enter a post with 100000 characters ? we want a see more button that goes to post details
 - [] set default or blank data in edit post form if he didn't change any data in first time
-- [] fix follow button in other users proile
 - [] change font style
 - [] delete post form in post submission and remain only the ajax call
-- [] number of posts and comments in profile need to be fixed
-- [] edit post route need to be fixed after edit
-- [] replies issue azzouz
-- [] notification bug azzouz
-- [] error handling azzouz
 - [] redirecting user after logging in
+- [] error handling azzouz

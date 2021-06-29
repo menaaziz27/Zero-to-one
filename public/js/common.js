@@ -190,6 +190,9 @@ function createPostHtml(post, userId) {
 		buttons = `<button class="btn btn-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
 	}
 
+	const inTimeline =
+		window.location.pathname === '/timeline' ? '?timeline=true' : '';
+
 	return `
         <div class="crayons-story post" data-id=${post._id}>
                 <a href="aemiej/use-github-real-time-status-to-improve-your-profile-554m.html"
@@ -283,7 +286,7 @@ function createPostHtml(post, userId) {
                                 </small>
                                 ${
 																	userId == post.user._id
-																		? `<a type="button" href="/posts/${post._id}/edit?timeline=true"
+																		? `<a type="button" href="/posts/${post._id}/edit${inTimeline}"
                                         id="article-save-button-421966"
                                         class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
                                         data-reactable-id="421966" aria-label="Save to reading list"
@@ -637,7 +640,7 @@ function createUserHtml(userData, showFollowButton) {
                         <span class='username' style="color:blue">@${userData.username}</span>
                     </div>
                 </div>
-               ${followButton}
+			${followButton}
             </div>`;
 }
 

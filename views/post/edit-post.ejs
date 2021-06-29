@@ -46,6 +46,10 @@
         <!--FOOTER-->
         <%- include('../layouts/footer.ejs') %>
             <!-- bootstrap scripts -->
+            <script>
+                /* eslint-disable */
+                var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
+            </script>
             <%- include('../layouts/strapAndJQuery.ejs') %>
 
 </body>
