@@ -411,14 +411,14 @@ function outputPostsWithReplies(results, container) {
 	container.html('');
 
 	if (results.replyTo !== undefined && results.replyTo._id !== undefined) {
-		var html = createPostHtml(results.replyTo);
+		var html = createPostHtml(results.replyTo, userLoggedIn._id);
 		container.append(html);
 	}
 
 	var mainPostHtml = createPostHtml(results.post, userLoggedIn._id);
 	container.append(mainPostHtml);
 	results.replies.forEach(result => {
-		var html = createPostHtml(result);
+		var html = createPostHtml(result, userLoggedIn._id);
 		container.append(html);
 	});
 }

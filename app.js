@@ -64,7 +64,7 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-// app.use(morgan('tiny'));
+app.use(morgan('tiny'));
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));

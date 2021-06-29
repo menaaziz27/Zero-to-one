@@ -13,10 +13,6 @@ socket.on('notification received', newNotification => {
 });
 
 function emitNotification(userId) {
-	console.log('userId: ', userId);
-	console.log('userLoggedIn: ', userLoggedIn._id);
-	console.log('typeof userid: ', typeof userId);
-	console.log('typeof userLoggedIn: ', typeof userLoggedIn._id);
 	if (userId === userLoggedIn._id) return;
 	console.log('emit notification');
 	socket.emit('notification received', userId);
