@@ -228,7 +228,6 @@ exports.getSimilars = async (req, res, next) => {
 				},
 			],
 		});
-		console.log(similarUsers);
 		res.send(similarUsers);
 	} catch (e) {
 		if (!e.statusCode) {

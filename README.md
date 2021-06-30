@@ -101,4 +101,7 @@
 - [] set default or blank data in edit post form if he didn't change any data in first time
 - [] change font style
 - [] delete post form in post submission and remain only the ajax call
-- [] redirecting user after logging in
+- [X] redirecting user after logging in
+- [X] rendering suggested people
+- [X] footer limited roadmaps
+- [X] disable link redirection in new message page
