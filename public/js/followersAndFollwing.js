@@ -67,6 +67,6 @@ function createUserHtml(userData, showFollowButton) {
 }
 if (window.location.pathname === '/explore') {
 	$.get('/similars', users => {
-		console.log(users[0]);
+		outputUsers(users, $('.resultsContainer'));
 	});
 }

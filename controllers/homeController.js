@@ -211,7 +211,6 @@ exports.postFeedback = async (req, res) => {
 };
 
 exports.getSimilars = async (req, res, next) => {
-	console.log('here');
 	const userLoggedIn = req.session.user;
 	try {
 		const similarUsers = await User.find({
@@ -230,7 +229,7 @@ exports.getSimilars = async (req, res, next) => {
 			],
 		});
 		console.log(similarUsers);
-		return res.json({ similarUsers });
+		res.send(similarUsers);
 	} catch (e) {
 		if (!e.statusCode) {
 			e.statusCode = 500;

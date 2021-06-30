@@ -35,7 +35,7 @@ exports.getChatPage = async (req, res, next) => {
 
 	if (!isValidId) {
 		const error = new Error('This is a broken link');
-		return next(error);
+		next(error);
 	}
 
 	try {
