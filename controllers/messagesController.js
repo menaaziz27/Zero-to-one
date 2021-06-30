@@ -35,7 +35,7 @@ exports.getChatPage = async (req, res, next) => {
 
 	if (!isValidId) {
 		const error = new Error('This is a broken link');
-		return next(error);
+		next(error);
 	}
 
 	try {
@@ -60,7 +60,6 @@ exports.getChatPage = async (req, res, next) => {
 		} else {
 			payload.chat = chat;
 		}
-		console.log(chat.chatName, 'chatname');
 
 		return res.render('messages/chatPage', payload);
 	} catch (e) {

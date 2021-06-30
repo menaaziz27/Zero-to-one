@@ -5,7 +5,7 @@
         <div class="container mb-2">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
-                    <h4>Join zero to one now!</h4>
+                    <h4>zero to one</h4>
                 </div>
             </div>
         </div>
@@ -32,15 +32,24 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="300">
-                    <h5 class="text-left">Our Roadmaps</h5>
-                    <ul class="pl-1">
-                        <!--<li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>-->
-                        <%   for (var i = 0; i < roadmaps.length; i++) {%> 
-                            <li><i class="bx bx-chevron-right"></i> <a class="footer" href="/roadmaps/<%=roadmaps[i].routeName%>"><%=roadmaps[i].title%></a></li>
+                    <% if(roadmaps.length > 0) { %>
+                        <h5 class="text-left">Our Roadmaps</h5>
+                        <ul class="pl-1">
+                            <!--<li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>-->
+                            <%   for (var i = 0; i < roadmaps.length; i++) { %>
+                                <% if (i < 5) { %>
+                                    <li><i class="bx bx-chevron-right"></i>
+                                        <a class="footer" href="/roadmaps/<%=roadmaps[i].routeName%>">
+                                            <%=roadmaps[i].title%>
+                                        </a>
+                                    </li>
+                                    <% } else{ %>
+                                        <% break; %>
+                                            <% } %>
+                                                <%}%>
 
-                            <%}%>
-                       
-                    </ul>
+                        </ul>
+                        <% } %>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="400">
