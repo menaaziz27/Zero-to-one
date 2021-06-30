@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport(
 // auth/register?redirectTo=roadmaps/webdev
 exports.getRegister = (req, res, next) => {
 	let redirectTo = req.query.redirectTo;
-	res.render('auth/register', {
+	res.render('auth/registerr', {
 		pageTitle: 'Registeration',
 		errorMassage: null,
 		oldInput: {
@@ -97,7 +97,7 @@ exports.postRegister = async (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/register', {
+		return res.status(422).render('auth/registerr', {
 			path: '/register',
 			pageTitle: 'Register',
 			// for displaying the red messages
@@ -154,7 +154,7 @@ exports.getLogin = (req, res, next) => {
 	let redirectTo = req.query.redirectTo;
 
 	// const query = req.query.index || null;
-	res.render('auth/login', {
+	res.render('auth/loginn', {
 		pageTitle: 'Login',
 		errorMassage: null,
 		oldInput: {
@@ -195,7 +195,7 @@ exports.postlogin = async (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/login', {
+		return res.status(422).render('auth/loginn', {
 			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: errors.array()[0].msg,
@@ -232,7 +232,7 @@ exports.postlogin = async (req, res, next) => {
 				}
 			});
 		}
-		res.status(422).render('auth/login', {
+		res.status(422).render('auth/loginn', {
 			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: "Password don't match!",
@@ -264,7 +264,7 @@ exports.getReset = (req, res, next) => {
 	} else {
 		message = null;
 	}
-	res.render('auth/reset', {
+	res.render('auth/resett', {
 		path: '/reset',
 		pageTitle: 'Reset Password',
 		errorMassage: message,
@@ -279,14 +279,14 @@ exports.postReset = (req, res, next) => {
 				e.statusCode = 500;
 			}
 			next(e);
-			return res.redirect('/reset');
+			return res.redirect('/auth/reset');
 		}
 		const token = buffer.toString('hex');
 		User.findOne({ email: req.body.email })
 			.then(user => {
 				if (!user) {
 					req.flash('error', 'No account with that email found.');
-					res.redirect('/reset');
+					res.redirect('/auth/reset');
 				}
 				user.resetToken = token;
 				user.resetTokenExpiration = Date.now() + 3600000;
@@ -326,7 +326,7 @@ exports.getNewPassword = (req, res, next) => {
 			} else {
 				message = null;
 			}
-			res.render('auth/new-password', {
+			res.render('auth/new-passwordd', {
 				path: '/new-password',
 				pageTitle: 'New Password',
 				errorMessage: message,
