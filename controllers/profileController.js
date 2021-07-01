@@ -42,7 +42,7 @@ exports.getUserProfile = async (req, res, next) => {
 		});
 
 		// fetch first five repose from user's github account to show them in projects section
-		const postsCount = posts.length;
+		const postsCount = posts.length-commentCount;
 		if (userDoc.websites.length > 0 && userDoc.websites[0].includes('github')) {
 			let userGithubUrl = userDoc.websites[0];
 			const lastIndexOfBackSlash = userGithubUrl.lastIndexOf('/');

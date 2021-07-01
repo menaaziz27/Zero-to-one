@@ -141,10 +141,7 @@ exports.postRegister = async (req, res, next) => {
 			html: '<h1> You successfully signed up<h1>',
 		});
 	} catch (e) {
-		if (!e.statusCode) {
-			e.statusCode = 500;
-		}
-		next(e);
+		console.log(e);
 	}
 };
 
@@ -218,12 +215,9 @@ exports.postlogin = async (req, res, next) => {
 			if (user.role) {
 				req.session.isAdmin = true;
 			}
-			return req.session.save(e => {
-				if (e) {
-					if (!e.statusCode) {
-						e.statusCode = 500;
-					}
-					next(e);
+			return req.session.save(err => {
+				if (err) {
+					console.log(err);
 				}
 				if (redirectTo) {
 					res.redirect(redirectTo);
@@ -250,8 +244,8 @@ exports.postlogin = async (req, res, next) => {
 
 //Post logout page
 exports.getLogout = (req, res, next) => {
-	req.session.destroy(e => {
-		console.log(e);
+	req.session.destroy(err => {
+		console.log(err);
 		res.redirect('/');
 	});
 };
@@ -304,11 +298,8 @@ exports.postReset = (req, res, next) => {
 			`,
 				});
 			})
-			.catch(e => {
-				if (!e.statusCode) {
-					e.statusCode = 500;
-				}
-				next(e);
+			.catch(err => {
+				console.log(err);
 			});
 	});
 };
@@ -334,11 +325,8 @@ exports.getNewPassword = (req, res, next) => {
 				passwordToken: token,
 			});
 		})
-		.catch(e => {
-			if (!e.statusCode) {
-				e.statusCode = 500;
-			}
-			next(e);
+		.catch(err => {
+			console.log(err);
 		});
 };
 
@@ -371,10 +359,7 @@ exports.postNewPassword = (req, res, next) => {
 				html: '<h1> You successfully reset your password<h1>',
 			});
 		})
-		.catch(e => {
-			if (!e.statusCode) {
-				e.statusCode = 500;
-			}
-			next(e);
+		.catch(err => {
+			console.log(err);
 		});
 };
