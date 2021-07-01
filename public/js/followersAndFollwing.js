@@ -1,5 +1,8 @@
 $(document).ready(function () {
-	if (window.location.pathname !== '/explore') {
+	if (
+		window.location.pathname !== '/explore' &&
+		window.location.pathname !== '/timeline'
+	) {
 		if (selectedTap === 'followers') {
 			loadFollowers();
 		} else {
