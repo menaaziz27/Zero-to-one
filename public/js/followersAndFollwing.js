@@ -1,14 +1,13 @@
 $(document).ready(function () {
-	if (
-		window.location.pathname !== '/explore' &&
-		window.location.pathname !== '/timeline'
-	) {
-		if (selectedTap) {
-			if (selectedTap === 'followers') {
-				loadFollowers();
-			} else {
-				loadFollowing();
-			}
+	if (selectedTap === undefined) {
+		selectedTap = null;
+	}
+	if (selectedTap !== undefined) {
+		if (selectedTap === 'followers') {
+			loadFollowers();
+		}
+		if (selectedTap === 'following') {
+			loadFollowing();
 		}
 	}
 });

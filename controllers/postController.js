@@ -257,6 +257,7 @@ exports.getPostDetails = async (req, res, next) => {
 				postId: req.params.id,
 				userId,
 				user: req.session.user,
+				selectedTap: null,
 			};
 
 			return res.status(200).render('post/post-details.ejs', payload);

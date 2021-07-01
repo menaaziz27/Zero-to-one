@@ -35,6 +35,7 @@ exports.getTimeline = async (req, res, next) => {
 			news: news,
 			user: req.session.user,
 			postDetail: false,
+			selectedTap: null,
 		});
 	} catch (e) {
 		if (!e.statusCode) {
@@ -59,6 +60,7 @@ exports.getExplore = async (req, res, next) => {
 		news: news,
 		userLoggedIn: req.session.user,
 		postDetail: false,
+		selectedTap: null,
 	});
 };
 
