@@ -215,7 +215,7 @@ function createPostHtml(post, userId) {
 
 	let buttons = '';
 	if (post.user._id === userId) {
-		buttons = `<button class="btn btn-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
+		buttons = `<button class="btn border border-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
 	}
 
 	const inTimeline =
@@ -233,8 +233,8 @@ function createPostHtml(post, userId) {
                             <div class="crayons-story__author-pic">
 														<a href="/users/profile/${post.user.username}"
 														class="crayons-avatar crayons-avatar--l ">
-														<img src="/${post.user.Image}" alt="aemiej profile"
-														class="crayons-avatar__image" />
+														<img src="/${post.user.Image}" alt="not found"
+														class="crayons-avatar__image" onerror="this.src='assets/img/default.png';" />
 														</a>
                             </div>
                             <div>
@@ -319,7 +319,7 @@ function createPostHtml(post, userId) {
                                         class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
                                         data-reactable-id="421966" aria-label="Save to reading list"
                                         title="Save to reading list">
-                                        <span class="bm-initial">edit</span>
+                                        <span class="bm-initial border border-info">edit</span>
                                     </button>`
 																		: ''
 																}
