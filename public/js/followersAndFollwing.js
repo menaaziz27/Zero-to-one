@@ -3,10 +3,12 @@ $(document).ready(function () {
 		window.location.pathname !== '/explore' &&
 		window.location.pathname !== '/timeline'
 	) {
-		if (selectedTap === 'followers') {
-			loadFollowers();
-		} else {
-			loadFollowing();
+		if (selectedTap) {
+			if (selectedTap === 'followers') {
+				loadFollowers();
+			} else {
+				loadFollowing();
+			}
 		}
 	}
 });

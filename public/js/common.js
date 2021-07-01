@@ -244,6 +244,18 @@ function createPostHtml(post, userId) {
                     class="crayons-story__hidden-navigation-link">Use
                     Github Real-Time Status to Improve Your Profile</a>
                 <div class="crayons-story__body">
+
+
+				<div class="dropdown dropleft clearfix" style="float:right;>
+ <div  data-toggle="dropdown"><a><i class="fas fa-ellipsis-v"></i></a></div>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
+  <li><a  href="#">One</a></li>
+  <li><a href="#">Two</a></li>
+
+
+  </ul>
+</div>
+
                     <div class="crayons-story__top">
                         <div class="crayons-story__meta">
                             <div class="crayons-story__author-pic">
@@ -274,6 +286,8 @@ function createPostHtml(post, userId) {
                             </div>
                         </div>
                     </div>
+
+
 										${replyFlag}
                     <div class="crayons-story__indention">
                         <h2 class="crayons-story__title">
