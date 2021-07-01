@@ -246,8 +246,8 @@ function createPostHtml(post, userId) {
                 <div class="crayons-story__body">
 
 
-				<div class="dropdown dropleft clearfix" style="float:right;>
- <div  data-toggle="dropdown"><a><i class="fas fa-ellipsis-v"></i></a></div>
+				<div class="dropdown dropleft clearfix">
+ <div class=""  style="float:right;"  data-toggle="dropdown"><a><i class="fas fa-ellipsis-v"></i></a></div>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
   <li><a  href="#">One</a></li>
   <li><a href="#">Two</a></li>
