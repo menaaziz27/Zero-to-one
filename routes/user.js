@@ -14,11 +14,12 @@ const {
 	getFollowingData,
 	// getComments,
 } = require('../controllers/profileController');
-const { getUsers } = require('../controllers/homeController');
+const { getUsers, getAllUsers } = require('../controllers/homeController');
 
 const { isAuthenticated } = require('../middleware/isAuthenticated');
 
 router.get('/', getUsers);
+router.get('/all', getAllUsers);
 router.get('/:username/followers', getFollowers);
 router.get('/:userId/followersdata', getFollowersData);
 router.get('/:username/following', getFollowing);

@@ -89,6 +89,15 @@ $('#submitEditButton').click(e => {
 	);
 });
 
+$('#likesModal').on('shown.bs.modal', async e => {
+	const button = $(e.relatedTarget);
+	const postId = getPostIdFromElement(button);
+
+	$.get(`/posts/likers/${postId}`, likers => {
+		outputUsers(likers, $('.resultsContainer'));
+	});
+});
+
 $('#createChatButton').click(e => {
 	let data = JSON.stringify(selectedUsers);
 
@@ -179,6 +188,20 @@ $('#userSearchTextBox').keydown(event => {
 	}, 1000);
 });
 
+// call this when modal shows up for likes
+function getLikers(arrayOfLikes) {
+	let likesArrayOfUserObjects = [];
+	if (arrayOfLikes.length !== 0) {
+		arrayOfLikes.forEach(userId => {
+			$.get(`/users/${userId}`, user => {
+				likesArrayOfUserObjects.push(user);
+				console.log(likesArrayOfUserObjects[0].name);
+			});
+		});
+	}
+	return likesArrayOfUserObjects;
+}
+
 function createPostHtml(post, userId) {
 	let hashtagsHtml;
 
@@ -220,6 +243,8 @@ function createPostHtml(post, userId) {
 
 	const inTimeline =
 		window.location.pathname === '/timeline' ? '?timeline=true' : '';
+
+	let likes;
 
 	return `
         <div class="crayons-story post" data-id=${post._id}>
@@ -325,9 +350,11 @@ function createPostHtml(post, userId) {
 																}
                                 &nbsp
                                 ${buttons}
-
                             </div>
                         </div>
+						<button style="border:none;background:white;" class="text-muted small" data-toggle="modal" data-target="#likesModal" data-likes="[${
+							post.likes
+						}]">${post.likes.length} likes</button>
                     </div>
                 </div>
             </div>
@@ -715,4 +742,49 @@ function refreshNotificationBadge() {
 			$('#notificationBadge').text('').removeClass('active');
 		}
 	});
+}
+
+//! redundancy
+function outputUsers(results, container) {
+	container.html('');
+
+	results.forEach(follower => {
+		let showFollowing = true;
+		if (follower._id === userLoggedIn._id) {
+			showFollowing = false;
+		}
+		let html = createUserHtml(follower, showFollowing);
+		container.append(html);
+	});
+
+	if (results.length === 0) {
+		container.append(`<span class="noResults">No results found</span>`);
+	}
+}
+
+function createUserHtml(userData, showFollowButton) {
+	const isFollowing =
+		userLoggedIn.following && userLoggedIn.following.includes(userData._id);
+	const text = isFollowing ? 'following' : 'follow';
+	const buttonClass = isFollowing ? 'followButton following' : 'followButton';
+
+	var followButton = '';
+	if (showFollowButton && userLoggedIn._id !== userData._id) {
+		followButton = `<div class='followButtonContainer'>
+                            <button class='${buttonClass}' data-user='${userData._id}'>${text}</button>
+                        </div>`;
+	}
+
+	return `<div class='user' data-username=${userData.username}>
+                <div class='userImageContainer'>
+                    <img src='/${userData.Image}'>
+                </div>
+                <div class='userDetailsContainer'>
+                    <div class='header'>
+                        <a href='/users/profile/${userData.username}'>${userData.name}</a>
+                        <span class='username' style="color:blue">@${userData.username}</span>
+                    </div>
+                </div>
+							${followButton}
+            </div>`;
 }

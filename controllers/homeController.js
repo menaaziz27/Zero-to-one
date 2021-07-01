@@ -196,6 +196,23 @@ exports.getUsers = async (req, res) => {
 		});
 };
 
+// GET /users/:userId
+exports.getAllUsers = async (req, res, next) => {
+	// try {
+	// 	const users = await User.find(_id : {$in: });
+	// 	if (!user) {
+	// 		const error = new Error('no user found');
+	// 		throw error;
+	// 	}
+	// 	return res.send(user);
+	// } catch (e) {
+	// 	if (!e.statusCode) {
+	// 		e.statusCode = 500;
+	// 	}
+	// 	next(e);
+	// }
+};
+
 exports.postFeedback = async (req, res) => {
 	const data = req.body;
 	try {
