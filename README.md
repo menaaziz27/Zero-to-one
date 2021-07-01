@@ -105,3 +105,4 @@
 - [X] rendering suggested people
 - [X] footer limited roadmaps
 - [X] disable link redirection in new message page
+- [] show alternative image if user image not found (onerror attr)

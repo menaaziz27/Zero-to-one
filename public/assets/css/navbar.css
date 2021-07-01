@@ -1,9 +1,9 @@
 .bg-darkk {
-    background-color: #00334e;
+    background-color: #343A40;
 }
 
 .bg-darkk .navbar-nav .nav-link:hover {
-    color: #f3f5f7 !important;
+    color: #FFF600 !important;
 }
 
 .bg-darkk .navbar-nav .nav-link:active {
@@ -27,7 +27,7 @@
 }
 
 .bg-darkk .navbar-brand:hover {
-    color: #f8f8f8;
+    color: #FFF600;
 }
 
 
@@ -50,7 +50,8 @@
     left: 51%;
     right: 51%;
     bottom: 0;
-    background: #009961;
+    background: #7952B3;
+    /* underline */
     height: 4px;
     -webkit-transition-property: left, right;
     transition-property: left, right;

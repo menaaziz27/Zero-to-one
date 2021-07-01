@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport(
 // auth/register?redirectTo=roadmaps/webdev
 exports.getRegister = (req, res, next) => {
 	let redirectTo = req.query.redirectTo;
-	res.render('auth/register', {
+	res.render('auth/registerr', {
 		pageTitle: 'Registeration',
 		errorMassage: null,
 		oldInput: {
@@ -97,7 +97,7 @@ exports.postRegister = async (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/register', {
+		return res.status(422).render('auth/registerr', {
 			path: '/register',
 			pageTitle: 'Register',
 			// for displaying the red messages
@@ -141,10 +141,7 @@ exports.postRegister = async (req, res, next) => {
 			html: '<h1> You successfully signed up<h1>',
 		});
 	} catch (e) {
-		if (!e.statusCode) {
-			e.statusCode = 500;
-		}
-		next(e);
+		console.log(e);
 	}
 };
 
@@ -154,7 +151,7 @@ exports.getLogin = (req, res, next) => {
 	let redirectTo = req.query.redirectTo;
 
 	// const query = req.query.index || null;
-	res.render('auth/login', {
+	res.render('auth/loginn', {
 		pageTitle: 'Login',
 		errorMassage: null,
 		oldInput: {
@@ -195,7 +192,7 @@ exports.postlogin = async (req, res, next) => {
 
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
-		return res.status(422).render('auth/login', {
+		return res.status(422).render('auth/loginn', {
 			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: errors.array()[0].msg,
@@ -218,12 +215,9 @@ exports.postlogin = async (req, res, next) => {
 			if (user.role) {
 				req.session.isAdmin = true;
 			}
-			return req.session.save(e => {
-				if (e) {
-					if (!e.statusCode) {
-						e.statusCode = 500;
-					}
-					next(e);
+			return req.session.save(err => {
+				if (err) {
+					console.log(err);
 				}
 				if (redirectTo) {
 					res.redirect(redirectTo);
@@ -232,7 +226,7 @@ exports.postlogin = async (req, res, next) => {
 				}
 			});
 		}
-		res.status(422).render('auth/login', {
+		res.status(422).render('auth/loginn', {
 			path: '/login',
 			pageTitle: 'Login',
 			errorMassage: "Password don't match!",
@@ -250,8 +244,8 @@ exports.postlogin = async (req, res, next) => {
 
 //Post logout page
 exports.getLogout = (req, res, next) => {
-	req.session.destroy(e => {
-		console.log(e);
+	req.session.destroy(err => {
+		console.log(err);
 		res.redirect('/');
 	});
 };
@@ -264,7 +258,7 @@ exports.getReset = (req, res, next) => {
 	} else {
 		message = null;
 	}
-	res.render('auth/reset', {
+	res.render('auth/resett', {
 		path: '/reset',
 		pageTitle: 'Reset Password',
 		errorMassage: message,
@@ -279,14 +273,14 @@ exports.postReset = (req, res, next) => {
 				e.statusCode = 500;
 			}
 			next(e);
-			return res.redirect('/reset');
+			return res.redirect('/auth/reset');
 		}
 		const token = buffer.toString('hex');
 		User.findOne({ email: req.body.email })
 			.then(user => {
 				if (!user) {
 					req.flash('error', 'No account with that email found.');
-					res.redirect('/reset');
+					res.redirect('/auth/reset');
 				}
 				user.resetToken = token;
 				user.resetTokenExpiration = Date.now() + 3600000;
@@ -304,11 +298,8 @@ exports.postReset = (req, res, next) => {
 			`,
 				});
 			})
-			.catch(e => {
-				if (!e.statusCode) {
-					e.statusCode = 500;
-				}
-				next(e);
+			.catch(err => {
+				console.log(err);
 			});
 	});
 };
@@ -326,7 +317,7 @@ exports.getNewPassword = (req, res, next) => {
 			} else {
 				message = null;
 			}
-			res.render('auth/new-password', {
+			res.render('auth/new-passwordd', {
 				path: '/new-password',
 				pageTitle: 'New Password',
 				errorMessage: message,
@@ -334,11 +325,8 @@ exports.getNewPassword = (req, res, next) => {
 				passwordToken: token,
 			});
 		})
-		.catch(e => {
-			if (!e.statusCode) {
-				e.statusCode = 500;
-			}
-			next(e);
+		.catch(err => {
+			console.log(err);
 		});
 };
 
@@ -371,10 +359,7 @@ exports.postNewPassword = (req, res, next) => {
 				html: '<h1> You successfully reset your password<h1>',
 			});
 		})
-		.catch(e => {
-			if (!e.statusCode) {
-				e.statusCode = 500;
-			}
-			next(e);
+		.catch(err => {
+			console.log(err);
 		});
 };

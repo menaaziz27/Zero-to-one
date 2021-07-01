@@ -29,7 +29,7 @@
                         <header class="mt-2 profile-header crayons-card">
                             <div class="relative profile-header__top">
                                 <span class="crayons-avatar crayons-avatar--3xl">
-                                    <img src="/<%= user.Image %>" width="128" height="128"
+                                    <img src="/<%= user.Image %>"  width="128" height="128"
                                     alt="<%= user.name %> profile picture" class="crayons-avatar__image">
                                 </span>
                             </div>
@@ -228,8 +228,8 @@
                                         </div>
                             </div>
                             <div class="profile-header__bottom fs-base">
-                                <a href="/users/<%= user.username %>/following"><span id="followingValue"><%= user.following.length %></span> following</a>
-                                <a href="/users/<%= user.username %>/followers"><span id="followerValue"><%= user.followers.length %></span> followers</a>
+                                <a class="btn btn-info" href="/users/<%= user.username %>/following"><span id="followingValue"><%= user.following.length %></span> following</a>
+                                <a class="btn btn-info" href="/users/<%= user.username %>/followers"><span id="followerValue"><%= user.followers.length %></span> followers</a>
                                 <!-- <div class="crayons-definition">
                                     <strong class="crayons-definition__title">Education</strong>
                                     <p class="crayons-definition__value">FCI, Egypt</p>
@@ -332,7 +332,8 @@
                                                             d="M10 3h4a8 8 0 010 16v3.5c-5-2-12-5-12-11.5a8 8 0 018-8zm2 14h2a6 6 0 000-12h-4a6 6 0 00-6 6c0 3.61 2.462 5.966 8 8.48V17z">
                                                         </path>
                                                     </svg>
-                                                                    <a href="/users/profile/<%= user.username %>?comments=true"> <%=commentCount%> comments written</a>
+                                                                    <a href="/users/profile/<%= user.username %>?comments=true">
+                                                                        <%=commentCount%> comments written</a>
                                                                 </div>
                                                             </div>
                         </div>
@@ -417,6 +418,37 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
+                                    <!-- edit post -->
+                                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel">Edit Post</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="editPostContainer"></div>
+                                                    <div class="tab-pane fade show active" id="editPost" role="tabpanel" aria-labelledby="posts-tab">
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="post">post</label>
+                                                            <textarea style="resize: none;height:100px" class="form-control" name="post" id="edit" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button id="submitEditButton" type="button" class="btn btn-primary">Edit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                         </div>
                     </main>
                 </div>

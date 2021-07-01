@@ -5,9 +5,11 @@ const Notification = require('../models/Notification');
 const findHashtags = require('find-hashtags');
 const Roadmap = require('../models/Roadmap');
 
+//! no longer being used
 // /posts/:id/details
 exports.getEdit = async (req, res, next) => {
 	// if there's timeline query in the request let timeline = true else False
+	console.log('in edit post');
 	let timeline = req.query.timeline || false;
 	const postId = req.params.id;
 	let userid = req.user._id || null;
@@ -17,13 +19,14 @@ exports.getEdit = async (req, res, next) => {
 			return next(new Error('Post not found.'));
 		}
 		const roadmaps = await Roadmap.find({});
-		res.render('post/edit-post', {
-			post,
-			userid,
-			timeline,
-			roadmaps,
-			userLoggedIn: req.session.user,
-		});
+		res.send(post);
+		// res.render('post/edit-post', {
+		// 	post,
+		// 	userid,
+		// 	timeline,
+		// 	roadmaps,
+		// 	userLoggedIn: req.session.user,
+		// });
 	} catch (e) {
 		if (!e.statusCode) {
 			e.statusCode = 500;
@@ -33,26 +36,16 @@ exports.getEdit = async (req, res, next) => {
 };
 
 // /posts/:id/edit
-exports.postEdit = async (req, res) => {
+exports.postEdit = async (req, res, next) => {
 	const postId = req.params.id;
-	const { userid, description } = req.body;
+	const description = req.body.data;
 
 	try {
 		await Post.findByIdAndUpdate(postId, {
-			user: userid,
 			description: description,
-			readingTime:
-				Math.floor(description.split(' ').length / 100) === 0
-					? 1
-					: Math.floor(description.split(' ').length / 100),
 			hashtags: findHashtags(description),
 		});
-		// await editPost.save()
-		if (req.query.timeline) {
-			res.redirect('/timeline');
-		} else {
-			res.redirect('/users/profile/' + req.session.user.username);
-		}
+		return res.sendStatus(200);
 	} catch (e) {
 		if (!e.statusCode) {
 			e.statusCode = 500;

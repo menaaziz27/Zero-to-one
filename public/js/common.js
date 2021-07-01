@@ -61,6 +61,34 @@ $('#deletePostButton').click(e => {
 	});
 });
 
+$('#editModal').on('show.bs.modal', e => {
+	$('#editPostContainer').html('');
+	let button = $(e.relatedTarget);
+	let postId = getPostIdFromElement(button);
+	$('#submitEditButton').data('id', postId);
+
+	$.get(`/posts/${postId}`, postsAndUserId => {
+		let post = postsAndUserId.post;
+		userId = postsAndUserId.userId;
+		$('#edit').val(post.description);
+	});
+});
+
+$('#submitEditButton').click(e => {
+	let postId = $(e.target).data('id');
+	let editedPost = $('#edit').val();
+	$.post(
+		`/posts/${postId}/edit`,
+		{
+			data: editedPost,
+		},
+		postData => {
+			console.log(postData);
+			location.reload();
+		}
+	);
+});
+
 $('#createChatButton').click(e => {
 	let data = JSON.stringify(selectedUsers);
 
@@ -187,7 +215,7 @@ function createPostHtml(post, userId) {
 
 	let buttons = '';
 	if (post.user._id === userId) {
-		buttons = `<button class="btn btn-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
+		buttons = `<button class="btn border border-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
 	}
 
 	const inTimeline =
@@ -205,8 +233,8 @@ function createPostHtml(post, userId) {
                             <div class="crayons-story__author-pic">
 														<a href="/users/profile/${post.user.username}"
 														class="crayons-avatar crayons-avatar--l ">
-														<img src="/${post.user.Image}" alt="aemiej profile"
-														class="crayons-avatar__image" />
+														<img src="/${post.user.Image}" alt="not found"
+														class="crayons-avatar__image" onerror="this.src='assets/img/default.png';" />
 														</a>
                             </div>
                             <div>
@@ -286,13 +314,13 @@ function createPostHtml(post, userId) {
                                 </small>
                                 ${
 																	userId == post.user._id
-																		? `<a type="button" href="/posts/${post._id}/edit${inTimeline}"
+																		? `<button data-target="#editModal" data-toggle="modal" data-id="${post._id}"
                                         id="article-save-button-421966"
                                         class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
                                         data-reactable-id="421966" aria-label="Save to reading list"
                                         title="Save to reading list">
-                                        <span class="bm-initial">edit</span>
-                                    </a>`
+                                        <span class="bm-initial border border-info">edit</span>
+                                    </button>`
 																		: ''
 																}
                                 &nbsp
