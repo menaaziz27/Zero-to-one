@@ -64,6 +64,7 @@ function getChatImageElements(chatData) {
 
 function getUserChatImageElement(user) {
 	if (!user || !user.Image) {
+		// user.Image = 'assets/img/default.png';
 		return alert('User passed into function is invalid');
 	}
 

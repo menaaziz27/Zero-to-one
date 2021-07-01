@@ -27,7 +27,6 @@
                         <label for="exampleFormControlInput1" class="form-label">Name</label>
                         <input id="name" name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name">
                     </div>
-                    <!-- end name -->
 
                     <!-- Country -->
                     <div class="my-3 from-control">
@@ -450,7 +449,7 @@
                             <div class="p-0 m-0 col">
                                 <div class="form-check w-100">
                                     <%   for (var i = 0; i < roadmaps.length; i++) { %>
-                                        <div class="d-block">
+                                        <div class="d-block" style="margin-left: 14px;">
 
                                             <input name="skills" class="form-check-input skills" type="checkbox" id="flexSwitchCheckDefault" value="<%=roadmaps[i].title%>">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"><%=roadmaps[i].title%></label>

@@ -386,7 +386,7 @@ h6 {
 #hero {
     width: 100%;
     height: 100vh;
-    background: url('../img/roadmap.jpg') top center;
+    background: url('../img/logo.jpeg') center;
     background-size: cover;
     position: relative;
 }
