@@ -15,9 +15,7 @@ exports.getDashboard = async (req, res) => {
 			{ _id: { $ne: req.session.user._id.toString() } },
 			{ password: 0 }
 		);
-		const posts = await Post.find({
-			user: { $ne: req.session.user._id.toString() },
-		})
+		const posts = await Post.find({ user: { $ne: req.session.user._id.toString() }})
 			.sort({ createdAt: -1 })
 			.populate('user');
 		const roadmaps = await Roadmap.find({});
