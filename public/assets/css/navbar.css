@@ -1,9 +1,9 @@
 .bg-darkk {
-    background-color: #343A40;
+    background-color: #000;
 }
 
 .bg-darkk .navbar-nav .nav-link:hover {
-    color: #FFF600 !important;
+    color: #50DED3 !important;
 }
 
 .bg-darkk .navbar-nav .nav-link:active {
@@ -27,7 +27,7 @@
 }
 
 .bg-darkk .navbar-brand:hover {
-    color: #FFF600;
+    color: #50DED3;
 }
 
 
@@ -78,7 +78,7 @@
 } */
 
 #footer p {
-    color: #009961;
+    color: #50DED3;
 }
 
 

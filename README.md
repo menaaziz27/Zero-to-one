@@ -108,3 +108,4 @@
 - [] show alternative image if user image not found (onerror attr)
 - [X] delete a post with its comments
 - [] 404 page
+- [] add userLoggedIn to the index page
