@@ -15,7 +15,11 @@
             <style>
                 a {
                     text-decoration: none;
-                    color: #06A763;
+                    color: blue;
+                }
+                
+                h6 {
+                    color: #702C91 !important
                 }
                 
                 .card-content h6.head {
@@ -81,22 +85,22 @@
             <div class="container">
                 <!-- SECTION TITLE -->
                 <div class="section-title" style="height: 300px;">
-                    <h1 style="text-align: center; font-size: 50px; color: #06A763;">
+                    <h1 style="text-align: center; font-size: 50px; color: #702C91;">
                         <%= roadmap.title %>
                     </h1>
                     <P style="font-size: 25px;text-align: justify; margin-bottom: 20px;">
                         <%= roadmap.description %>
                     </P>
                     <input id="routeName" type="hidden" value="<%= roadmap.routeName %>">
-                    <button id="submitBookmarkButton" class="btn btn-success">
-                      <%if (user.bookmarks.some(road => road.title === roadmap.title)) {%>
-                      <i id='bookmarkIcon' class="far fa-bookmark"></i>
-                      <%}else{%>
-                        <i id='bookmarkIcon' class="fas fa-bookmark"></i>
+                    <button id="submitBookmarkButton" class="btn" style="color:#702C91">
+                    <%if (user.bookmarks.some(road => road.title === roadmap.title)) {%>
+                    <i id='bookmarkIcon' class="far fa-bookmark"></i>
+                    <%}else{%>
+                    <i id='bookmarkIcon' class="fas fa-bookmark"></i>
 
-                        <%}%>
-                   </button>
-                    <label style="font-style: italic;" for="Bookmark"><b>Bookmark</b></label>
+                    <%}%>
+                </button>
+                    <label class="strong font-weight-bold" for="Bookmark"><b>Bookmark</b></label>
                 </div>
 
                 <div id="timeline-experience">

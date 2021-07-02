@@ -247,7 +247,7 @@ function createPostHtml(post, userId) {
 	let showLikes = false;
 	if (post.likes.length > 0) {
 		showLikes = true;
-		likes = `<button style="border:none;background:white;" class="text-muted small" data-toggle="modal" data-target="#likesModal">${post.likes.length} likes</button>`;
+		likes = `<button style="border:none;background:white;color:#50DED3;" class="small" data-toggle="modal" data-target="#likesModal">likes</button>`;
 	}
 
 	return `
