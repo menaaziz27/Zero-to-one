@@ -106,4 +106,5 @@
 - [X] footer limited roadmaps
 - [X] disable link redirection in new message page
 - [] show alternative image if user image not found (onerror attr)
-- [X] delete ca post with its comments
+- [X] delete a post with its comments
+- [] 404 page

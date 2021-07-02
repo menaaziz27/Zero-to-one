@@ -56,7 +56,16 @@ $('#deletePostButton').click(e => {
 		url: `/posts/${postId}`,
 		type: 'DELETE',
 		success: postData => {
-			location.reload();
+			const baseUrl = 'http://localhost:3000';
+			if (window.location.pathname === '/timeline') {
+				window.location = `${baseUrl}/timeline`;
+			} else if (window.location.pathname === '/explore') {
+				window.location = `${baseUrl}/explore`;
+			} else if (window.location.pathname.includes('details')) {
+				window.location = `${baseUrl}/timeline`;
+			} else {
+				location.reload();
+			}
 		},
 	});
 });
@@ -74,9 +83,9 @@ $('#editModal').on('show.bs.modal', e => {
 	});
 });
 
-$("#submitEditButton").click(e => {
+$('#submitEditButton').click(e => {
 	e.preventDefault();
-})
+});
 
 $('#submitEditButton').click(e => {
 	let postId = $(e.target).data('id');
@@ -249,7 +258,9 @@ function createPostHtml(post, userId) {
                     Github Real-Time Status to Improve Your Profile</a>
                 <div class="crayons-story__body">
 
-${userId == post.user._id ? `<div class="dropdown dropleft clearfix">
+${
+	userId == post.user._id
+		? `<div class="dropdown dropleft clearfix">
  <div class=""  style="float:right;"  data-toggle="dropdown"><a><i class="fas fa-ellipsis-v"></i></a></div>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
   <li><a><button style="border: none;width: 100%;padding: 4px;"
@@ -258,7 +269,9 @@ ${userId == post.user._id ? `<div class="dropdown dropleft clearfix">
                                     </button></a></li>
   <li><a>${buttons}</a></li>
   </ul>
-</div>` : ''}
+</div>`
+		: ''
+}
 
 
                     <div class="crayons-story__top">
