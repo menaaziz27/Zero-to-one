@@ -74,6 +74,10 @@ $('#editModal').on('show.bs.modal', e => {
 	});
 });
 
+$("#submitEditButton").click(e => {
+	e.preventDefault();
+})
+
 $('#submitEditButton').click(e => {
 	let postId = $(e.target).data('id');
 	let editedPost = $('#edit').val();
@@ -224,7 +228,7 @@ function createPostHtml(post, userId) {
 
 	let buttons = '';
 	if (post.user._id === userId) {
-		buttons = `<button class="btn border border-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
+		buttons = `<button style="border: none;width: 100%;padding: 4px;" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">Delete</button>`;
 	}
 
 	const inTimeline =
@@ -245,16 +249,17 @@ function createPostHtml(post, userId) {
                     Github Real-Time Status to Improve Your Profile</a>
                 <div class="crayons-story__body">
 
-
-				<div class="dropdown dropleft clearfix">
+${userId == post.user._id ? `<div class="dropdown dropleft clearfix">
  <div class=""  style="float:right;"  data-toggle="dropdown"><a><i class="fas fa-ellipsis-v"></i></a></div>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
-  <li><a  href="#">One</a></li>
-  <li><a href="#">Two</a></li>
-
-
+  <li><a><button style="border: none;width: 100%;padding: 4px;"
+   data-target="#editModal" data-toggle="modal" data-id="${post._id}"
+                                        <span>Edit</span>
+                                    </button></a></li>
+  <li><a>${buttons}</a></li>
   </ul>
-</div>
+</div>` : ''}
+
 
                     <div class="crayons-story__top">
                         <div class="crayons-story__meta">
@@ -342,19 +347,6 @@ function createPostHtml(post, userId) {
                             <div class="crayons-story__save">
                                 <small class="mr-2 crayons-story__tertiary fs-xs">
                                 </small>
-                                ${
-																	userId == post.user._id
-																		? `<button data-target="#editModal" data-toggle="modal" data-id="${post._id}"
-                                        id="article-save-button-421966"
-                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                        data-reactable-id="421966" aria-label="Save to reading list"
-                                        title="Save to reading list">
-                                        <span class="bm-initial border border-info">edit</span>
-                                    </button>`
-																		: ''
-																}
-                                &nbsp
-                                ${buttons}
                             </div>
                         </div>
 						${showLikes ? likes : ''}

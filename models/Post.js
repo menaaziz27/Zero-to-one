@@ -28,8 +28,16 @@ const postSchema = new Schema(
 );
 
 postSchema.virtual('postCount').get(function () {
-	return Post.findByIdy({ user: this._id }).count;
+	return Post.findById({ user: this._id }).count;
 });
+
+
+postSchema.pre('remove', async function(next) {
+	const post = this;
+
+	await Post.deleteMany({replyTo: {$eq: post._id}})
+	next();
+})
 
 const Post = mongoose.model('Post', postSchema);
 

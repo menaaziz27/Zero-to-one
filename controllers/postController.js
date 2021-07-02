@@ -57,9 +57,13 @@ exports.postEdit = async (req, res, next) => {
 // DELETE /posts/:id
 exports.deletePost = async (req, res) => {
 	const postId = req.params.id;
-
 	try {
-		await Post.findByIdAndDelete(postId);
+		const post = await Post.findByIdAndDelete(postId);
+		if (!post) {
+			const error = new Error('no post found with this id');
+			throw error;
+		}
+		await post.remove();
 		res.sendStatus(202);
 	} catch (e) {
 		if (!e.statusCode) {
