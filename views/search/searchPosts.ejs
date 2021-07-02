@@ -13,6 +13,8 @@
         <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
         <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
+        <link rel="stylesheet" href="/assets/css/followersAndFollwing.css">
+
 
         <style>
             .form-search input {
@@ -35,7 +37,7 @@
             <form class="mt-4 form-search" method="POST" action="/search/posts">
                 <strong><h1>Search for posts</h1></strong>
                 <input id="submitButton" class="form-control mt-4" name="query" type="text" placeholder="Search for posts" aria-label="Search">
-                <a class="btn btn-info" href="/search">want to search for users ?</a>
+                <a class="btn border border-info" style="color:#702C91" href="/search">want to search for users ?</a>
             </form>
 
             <div id="match-list" class="container"></div>
@@ -68,6 +70,35 @@
             </div>
         </div>
 
+
+        <!-- likers modal -->
+        <div class="modal fade" id="likesModal" tabindex="-1" role="dialog" aria-labelledby="likesModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="likesModalLabel">Likes</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="resultsContainer"></div>
+                        <!-- <div class="tab-pane fade show active" id="likesPost" role="tabpanel" aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;height:100px" class="form-control" name="post" id="edit" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                </div>
+                                            </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <!-- <button id="submitEditButton" type="button" class="btn btn-primary">Edit</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- post delete modal -->
         <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -90,12 +121,15 @@
         </div>
 
 
+
+
         <script>
             let userLoggedIn = <%- JSON.stringify(user) %>
         </script>
 
         <%- include('../layouts/strapAndJQuery.ejs') %>
 
+            <script src="/js/followersAndFollwing.js"></script>
             <script src="/js/common.js"></script>
             <!-- <script src="/js/postPage.js"></script> -->
             <script>

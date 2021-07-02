@@ -11,8 +11,6 @@
 
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
-        <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
         <link href="/assets/css/navbar.css" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
 
@@ -25,10 +23,32 @@
     <%- include('./layouts/navbar.ejs') %>
 
         <div class="container mt-5">
-            <h1>
-                <%= error %>
-            </h1>
-            <span><a class="btn btn-info" onclick="goBack()">Back</a></span>
+            <!-- Header -->
+            <header id="header" class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="text-container">
+                                <h3 class="h1-large">
+                                    <%= error %>
+                                </h3>
+                                <a class="btn-outline-lg" style="cursor: pointer;" onclick="goBack()">Back</a>
+                            </div>
+                            <!-- end of text-container -->
+                        </div>
+                        <!-- end of col -->
+                        <div class="col-lg-7">
+                            <div class="image-container">
+                                <img id="image-banner" class="img-fluid" style="width: 80%;" src="images/404-removebg-preview.png" alt="alternative">
+                            </div>
+                            <!-- end of image-container -->
+                        </div>
+                        <!-- end of col -->
+                    </div>
+                    <!-- end of row -->
+                </div>
+                <!-- end of container -->
+            </header>
         </div>
 
 

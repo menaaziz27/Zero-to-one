@@ -111,6 +111,35 @@
                                 </div>
                             </div>
 
+
+                            <!-- likers modal -->
+                            <div class="modal fade" id="likesModal" tabindex="-1" role="dialog" aria-labelledby="likesModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="likesModalLabel">Likes</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                    </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="resultsContainer"></div>
+                                            <!-- <div class="tab-pane fade show active" id="likesPost" role="tabpanel" aria-labelledby="posts-tab">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="post">post</label>
+                                                    <textarea style="resize: none;height:100px" class="form-control" name="post" id="edit" rows="3" placeholder="What are you thinking..." required></textarea>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <!-- <button id="submitEditButton" type="button" class="btn btn-primary">Edit</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <!-- post delete modal -->
                             <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="deletePostModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -150,6 +179,8 @@
         </div>
 
         <script>
+            let selectedTap = <%- JSON.stringify(selectedTap) %>
+
             /* eslint-disable */
             var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
         </script>

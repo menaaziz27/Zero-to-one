@@ -15,7 +15,7 @@ button span {
 }
 
 .postButtonContainer.red button.active {
-    color: red;
+    color: #702C91;
 }
 
 button:focus {

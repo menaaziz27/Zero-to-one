@@ -11,6 +11,7 @@ const {
 	getPosts,
 	postLike,
 	getPostDetails,
+	getPostLikers,
 } = require('../controllers/postController');
 
 router.get('/:id', getPost);
@@ -21,6 +22,7 @@ router.get('/:id/edit', getEdit);
 router.post('/:id/edit', postEdit);
 router.post('/', createPost);
 router.get('/', getPosts);
+router.get('/likers/:postId', getPostLikers);
 // router.post('/:id/delete', deletePost);
 
 module.exports = router;

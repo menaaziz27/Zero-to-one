@@ -57,9 +57,13 @@ exports.postEdit = async (req, res, next) => {
 // DELETE /posts/:id
 exports.deletePost = async (req, res) => {
 	const postId = req.params.id;
-
 	try {
-		await Post.findByIdAndDelete(postId);
+		const post = await Post.findByIdAndDelete(postId);
+		if (!post) {
+			const error = new Error('no post found with this id');
+			throw error;
+		}
+		await post.remove();
 		res.sendStatus(202);
 	} catch (e) {
 		if (!e.statusCode) {
@@ -257,6 +261,7 @@ exports.getPostDetails = async (req, res, next) => {
 				postId: req.params.id,
 				userId,
 				user: req.session.user,
+				selectedTap: null,
 			};
 
 			return res.status(200).render('post/post-details.ejs', payload);
@@ -281,3 +286,18 @@ async function getPosts(criteria, skip = 0, limit = 0) {
 		console.log(e);
 	}
 }
+
+// GET /users/likers/:postId
+exports.getPostLikers = async (req, res, next) => {
+	const postId = req.params.postId;
+	try {
+		const likers = await Post.findById(postId).populate('likes');
+		console.log(likers.likes);
+		return res.status(200).send(likers.likes);
+	} catch (e) {
+		if (!e.statusCode) {
+			e.statusCode = 500;
+		}
+		next(e);
+	}
+};

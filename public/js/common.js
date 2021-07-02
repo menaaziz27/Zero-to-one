@@ -56,7 +56,16 @@ $('#deletePostButton').click(e => {
 		url: `/posts/${postId}`,
 		type: 'DELETE',
 		success: postData => {
-			location.reload();
+			const baseUrl = 'http://localhost:3000';
+			if (window.location.pathname === '/timeline') {
+				window.location = `${baseUrl}/timeline`;
+			} else if (window.location.pathname === '/explore') {
+				window.location = `${baseUrl}/explore`;
+			} else if (window.location.pathname.includes('details')) {
+				window.location = `${baseUrl}/timeline`;
+			} else {
+				location.reload();
+			}
 		},
 	});
 });
@@ -75,6 +84,10 @@ $('#editModal').on('show.bs.modal', e => {
 });
 
 $('#submitEditButton').click(e => {
+	e.preventDefault();
+});
+
+$('#submitEditButton').click(e => {
 	let postId = $(e.target).data('id');
 	let editedPost = $('#edit').val();
 	$.post(
@@ -87,6 +100,15 @@ $('#submitEditButton').click(e => {
 			location.reload();
 		}
 	);
+});
+
+$('#likesModal').on('shown.bs.modal', async e => {
+	const button = $(e.relatedTarget);
+	const postId = getPostIdFromElement(button);
+
+	$.get(`/posts/likers/${postId}`, likers => {
+		outputUsers(likers, $('.resultsContainer'));
+	});
 });
 
 $('#createChatButton').click(e => {
@@ -215,11 +237,18 @@ function createPostHtml(post, userId) {
 
 	let buttons = '';
 	if (post.user._id === userId) {
-		buttons = `<button class="btn border border-danger btn-sm" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">delete</button>`;
+		buttons = `<button style="border: none;width: 100%;padding: 4px;" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">Delete</button>`;
 	}
 
 	const inTimeline =
 		window.location.pathname === '/timeline' ? '?timeline=true' : '';
+
+	let likes;
+	let showLikes = false;
+	if (post.likes.length > 0) {
+		showLikes = true;
+		likes = `<button style="border:none;background:white;color:#50DED3;" class="small" data-toggle="modal" data-target="#likesModal">likes</button>`;
+	}
 
 	return `
         <div class="crayons-story post" data-id=${post._id}>
@@ -228,6 +257,23 @@ function createPostHtml(post, userId) {
                     class="crayons-story__hidden-navigation-link">Use
                     Github Real-Time Status to Improve Your Profile</a>
                 <div class="crayons-story__body">
+
+${
+	userId == post.user._id
+		? `<div class="dropdown dropleft clearfix">
+ <div class=""  style="float:right;"  data-toggle="dropdown"><a><i class="fas fa-ellipsis-v"></i></a></div>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
+  <li><a><button style="border: none;width: 100%;padding: 4px;"
+   data-target="#editModal" data-toggle="modal" data-id="${post._id}"
+                                        <span>Edit</span>
+                                    </button></a></li>
+  <li><a>${buttons}</a></li>
+  </ul>
+</div>`
+		: ''
+}
+
+
                     <div class="crayons-story__top">
                         <div class="crayons-story__meta">
                             <div class="crayons-story__author-pic">
@@ -258,6 +304,8 @@ function createPostHtml(post, userId) {
                             </div>
                         </div>
                     </div>
+
+
 										${replyFlag}
                     <div class="crayons-story__indention">
                         <h2 class="crayons-story__title">
@@ -312,22 +360,9 @@ function createPostHtml(post, userId) {
                             <div class="crayons-story__save">
                                 <small class="mr-2 crayons-story__tertiary fs-xs">
                                 </small>
-                                ${
-																	userId == post.user._id
-																		? `<button data-target="#editModal" data-toggle="modal" data-id="${post._id}"
-                                        id="article-save-button-421966"
-                                        class="crayons-btn crayons-btn--secondary crayons-btn--s bookmark-button"
-                                        data-reactable-id="421966" aria-label="Save to reading list"
-                                        title="Save to reading list">
-                                        <span class="bm-initial border border-info">edit</span>
-                                    </button>`
-																		: ''
-																}
-                                &nbsp
-                                ${buttons}
-
                             </div>
                         </div>
+						${showLikes ? likes : ''}
                     </div>
                 </div>
             </div>

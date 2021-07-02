@@ -1,8 +1,12 @@
 $(document).ready(function () {
-	if (window.location.pathname !== '/explore') {
+	if (selectedTap === undefined) {
+		selectedTap = null;
+	}
+	if (selectedTap !== undefined) {
 		if (selectedTap === 'followers') {
 			loadFollowers();
-		} else {
+		}
+		if (selectedTap === 'following') {
 			loadFollowing();
 		}
 	}
