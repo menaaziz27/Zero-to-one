@@ -109,5 +109,7 @@
 - [X] delete a post with its comments
 - [] 404 page
 - [] add userLoggedIn to the index page
-# 50DED3 labany
-# 702C91 mov
+
+# style.css
+
+1762:1855 err
