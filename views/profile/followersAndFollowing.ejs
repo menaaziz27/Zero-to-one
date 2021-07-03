@@ -24,7 +24,10 @@
                 </div>
                 <div class="col-lg-6 col-md-10 postContent">
                     <h1>
-                        <%= profileUser.name %>
+                        <%= profileUser.name %>'s
+                            <% if(selectedTab === 'followers')  { %>followers
+                                <% }else { %> followings
+                                    <% } %>
                     </h1>
                     <div>
                         <ul class="nav js-tabs row justify-content-between">

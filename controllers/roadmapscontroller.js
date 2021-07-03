@@ -86,6 +86,8 @@ exports.gettopic = async (req, res, next) => {
 			error.statusCode = 404;
 			return next(error);
 		}
+		referencee = topic.references;
+		console.log(referencee);
 		const roadmaps = await Roadmap.find();
 		res.render('roadmaps/topic', {
 			topic,

@@ -9,15 +9,20 @@
 
         <link rel="stylesheet" media="all" href="/assets/css/profile1.css" id="main-crayons-stylesheet" />
         <link rel="stylesheet" media="all" href="/assets/css/profile2.css" id="main-minimal-stylesheet" />
-        <link href="/assets/css/style.css" rel="stylesheet">
+        <!-- <link href="/assets/css/style.css" rel="stylesheet"> -->
         <link href="/assets/css/dashboard.css" rel="stylesheet">
 
         <link href="/assets/css/navbar.css" rel="stylesheet">
-        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"> -->
         <link rel="stylesheet" href="/assets/css/scrollbar.css">
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
         <title>Test2</title>
 
+        <style>
+            a:hover {
+                color: #702C91;
+            }
+        </style>
 
 </head>
 
@@ -29,51 +34,51 @@
         <div class="my-2 container-fluid">
             <div class="row">
                 <%- include('../layouts/sidebar.ejs') %>
-                <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
-                <div class="col-md-9">
+                    <!-- let the coloumn take the rest of available space and in small devicec it'll occupy 9 column when the news disappers-->
+                    <div class="col-md-9">
 
-                    <!--- Post Form Begins -->
-                    <section class="mb-2 card">
-                        <div class="card-body ">
-                            <div class="row d-flex  mt-100">
-                                <div class="col-md-12">
-                                    <div class="progress blue "> <span class="progress-left"> <span
+                        <!--- Post Form Begins -->
+                        <section class="mb-2 card">
+                            <div class="card-body ">
+                                <div class="row d-flex  mt-100">
+                                    <div class="col-md-12">
+                                        <div class="progress blue "> <span class="progress-left"> <span
                                                 class="progress-bar"></span> </span> <span class="progress-right"> <span
                                                 class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=roadmaps.length %> Roadmaps
+                                            <div class="progress-value">
+                                                <%=roadmaps.length %> Roadmaps
+                                            </div>
                                         </div>
-                                    </div>
-                                   
-                                    <div class="progress yellow "> <span class="progress-left"> <span
+
+                                        <div class="progress yellow "> <span class="progress-left"> <span
                                                 class="progress-bar"></span> </span> <span class="progress-right"> <span
                                                 class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=topics.length %> Topic
+                                            <div class="progress-value">
+                                                <%=topics.length %> Topic
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="progress yellow "> <span class="progress-left"> <span
+                                        <div class="progress yellow "> <span class="progress-left"> <span
                                                 class="progress-bar"></span> </span> <span class="progress-right"> <span
                                                 class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=posts.length %> Post
+                                            <div class="progress-value">
+                                                <%=posts.length %> Post
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="progress blue "> <span class="progress-left"> <span
+                                        <div class="progress blue "> <span class="progress-left"> <span
                                                 class="progress-bar"></span> </span> <span class="progress-right"> <span
                                                 class="progress-bar"></span> </span>
-                                        <div class="progress-value">
-                                            <%=users.length %> Users
+                                            <div class="progress-value">
+                                                <%=users.length %> Users
+                                            </div>
                                         </div>
+
                                     </div>
-                                    
+
                                 </div>
 
                             </div>
-
-                        </div>
-                    </section>
-                </div>
+                        </section>
+                    </div>
 
             </div>
         </div>

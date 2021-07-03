@@ -254,7 +254,7 @@ button:focus {
 }
 
 .followButton {
-    border: 1px solid rgb(rgb(30, 181, 252), green, blue);
+    border: 1px solid #702C91;
     color: rgb(rgb(81, 159, 211), green, blue);
     font-weight: bold;
     padding: 5px 15px;
@@ -264,6 +264,6 @@ button:focus {
 }
 
 .followButton.following {
-    background-color: rgb(0, 110, 184);
+    border: 1px solid #702C91;
     color: #fff;
 }

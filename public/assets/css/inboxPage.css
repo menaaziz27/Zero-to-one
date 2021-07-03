@@ -71,3 +71,7 @@
 .active {
     background-color: rgba(212, 237, 255, 0.6);
 }
+
+.resultsContainer span:hover {
+    color: #702C91;
+}
