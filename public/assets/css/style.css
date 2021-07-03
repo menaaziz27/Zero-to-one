@@ -2452,11 +2452,11 @@ a:hover.back-to-top {
     } */
     /* end of navigation */
     /* Header */
-    .header {
-        /* padding-bottom: 2rem; */
-        text-align: left;
+    /* .header { */
+    /* padding-bottom: 2rem; */
+    /* text-align: left;
         padding-top: 2.5rem;
-    }
+    } */
     .header .text-container {
         margin-top: 3.5rem;
     }

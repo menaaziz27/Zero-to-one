@@ -98,8 +98,9 @@ app.use('/api/notifications', notificationsApiRoutes);
 
 app.use((req, res) => {
 	if (!res.locals.error) {
-		res.locals.error = 'This page is not found.';
+		res.locals.error = 'This page is not found 😔\n';
 	}
+	res.locals.message = 'Please check your URL or return to your previous page.';
 	res.render('404.ejs', {
 		userLoggedIn: req.session.user,
 	});
