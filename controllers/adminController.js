@@ -15,7 +15,9 @@ exports.getDashboard = async (req, res) => {
 			{ _id: { $ne: req.session.user._id.toString() } },
 			{ password: 0 }
 		);
-		const posts = await Post.find({ user: { $ne: req.session.user._id.toString() }})
+		const posts = await Post.find({
+			user: { $ne: req.session.user._id.toString() },
+		})
 			.sort({ createdAt: -1 })
 			.populate('user');
 		const roadmaps = await Roadmap.find({});
@@ -345,7 +347,7 @@ exports.getEditRoadmapDashboard = async (req, res) => {
 		next(e);
 	}
 };
-exports.postEditroadmapDashboard = async (req, res) => {
+exports.postEditroadmapDashboard = async (req, res, next) => {
 	const title = req.body.title;
 	const summary = req.body.summary;
 	const description = req.body.description;
@@ -444,13 +446,11 @@ exports.validateTopic = [
 	body('title', 'title must be at least 2 characters.')
 		.isLength({ min: 2, max: 200 })
 		.exists(),
-	body('summary', 'summary must be less than 200 characters.')
-		.isLength({ min: 2, max: 60 })
-		.exists(),
+	body('summary', 'summary must be less than 200 characters.').exists(),
 	body(
 		'description',
 		'description must be at least 100 and less than 200 characters'
-	).isLength({ max: 300 }),
+	),
 	body(
 		'routeName',
 		'routename  must be at least 2 less than 30 characters'
@@ -627,7 +627,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 	}
 };
 
-exports.postEditTopicDashboard = async (req, res) => {
+exports.postEditTopicDashboard = async (req, res, next) => {
 	const title = req.body.title;
 	const summary = req.body.summary;
 	const description = req.body.description;
@@ -674,7 +674,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 		topic.summary = summary;
 		topic.description = description;
 		topic.routeName = routeName;
-		const ref = references.filter(ref => ref != '');
+		const ref = references?.filter(ref => ref != '');
 		topic.references = ref;
 		if (video != '' && regex.test(video)) {
 			topic.video = video;
@@ -701,7 +701,7 @@ exports.postEditTopicDashboard = async (req, res) => {
 	}
 };
 
-exports.getFeedback = async (req, res) => {
+exports.getFeedback = async (req, res, next) => {
 	try {
 		const feedbacks = await Feedback.find({});
 		res.render('dashboard/feedback.ejs', {
@@ -717,7 +717,7 @@ exports.getFeedback = async (req, res) => {
 	}
 };
 
-exports.deleteFeedback = async (req, res) => {
+exports.deleteFeedback = async (req, res, next) => {
 	const feedbackId = req.params.id;
 	try {
 		await Feedback.findByIdAndDelete(feedbackId);

@@ -109,7 +109,9 @@
 - [X] delete a post with its comments
 - [] 404 page
 - [] add userLoggedIn to the index page
+- [] edit post in dashboard
 
 # style.css
 
 1762:1855 err
+50DED3

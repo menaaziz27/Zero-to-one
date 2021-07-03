@@ -40,7 +40,7 @@ button:focus {
 }
 
 .followButton.following {
-    background-color: rgb(0, 110, 184);
+    background-color: #702C91;
     color: #fff;
 }
 

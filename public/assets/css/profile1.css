@@ -10533,7 +10533,7 @@ body.open-dyslexic-article-body {
     background-color: var(--bg);
     border-color: var(--border);
     box-shadow: var(--shadow);
-    color: var(#28a745);
+    /* color: var(#28a745); */
 }
 
 .crayons-btn[href]:hover,
