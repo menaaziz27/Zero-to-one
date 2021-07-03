@@ -237,7 +237,7 @@ function createPostHtml(post, userId) {
 
 	let buttons = '';
 	if (post.user._id === userId) {
-		buttons = `<button style="border: none;width: 100%;padding: 4px;" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">Delete</button>`;
+		buttons = `<button style="border: none;width: 100%;padding: 4px;color: #702C91"" data-id="${post._id}" data-toggle="modal" data-target="#deletePostModal">Delete</button>`;
 	}
 
 	const inTimeline =
@@ -263,7 +263,7 @@ ${
 		? `<div class="dropdown dropleft clearfix">
  <div class=""  style="float:right;"  data-toggle="dropdown"><a><i class="fas fa-ellipsis-v"></i></a></div>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" >
-  <li><a><button style="border: none;width: 100%;padding: 4px;"
+  <li><a><button  style="border: none;width: 100%;padding: 4px;color: #702C91"
    data-target="#editModal" data-toggle="modal" data-id="${post._id}"
                                         <span>Edit</span>
                                     </button></a></li>
