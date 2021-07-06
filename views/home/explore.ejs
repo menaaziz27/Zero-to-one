@@ -169,6 +169,8 @@
                             </div>
 
                 </div>
+
+
                 <div class="col-lg-4 col-md-4 col-xl-4 d-none d-lg-block d-lg-none">
                     <!-- aside latest news -->
                     <aside class="widget">
@@ -192,6 +194,9 @@
             var userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
         </script>
         <%- include('../layouts/strapAndJQuery.ejs') %>
+            <script>
+                console.log($('.similarContainer span:first-child'));
+            </script>
             <!-- Optional JavaScript -->
 
             <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

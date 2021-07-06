@@ -127,6 +127,7 @@ exports.getSearchPosts = (req, res) => {
 		moment,
 		query: '',
 		user: req.session.user,
+		selectedTap: null,
 	});
 };
 
