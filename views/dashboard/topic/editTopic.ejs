@@ -30,12 +30,17 @@
                 background-color: #702C91;
                 color: white;
             }
+            
+            #btnstep:hover {
+                background: #702C91;
+                color: white;
+            }
         </style>
         <script>
             const addtextfield = btn => {
 
                 //create the text box and x button next to it
-                var subtask = "<div class ='form-group' id='stepfield' ><input id='step' class='form-control' type='text' name='references'  style='width: 50%;'><button class=' btn btn-success' type='button'  name='deleteSubTask'>X</button></div>"
+                var subtask = "<div class ='form-group' id='stepfield' ><input id='step' class='form-control' type='text' name='references'  style='width: 50%;'><button class='btn' type='button'  name='deleteSubTask' >X</button></div>"
                 $(".references").append(subtask)
                 $(".references").on("click", "button[name=deleteSubTask]", function() {
                     //delete the tr containing the control
@@ -130,7 +135,8 @@
                         </div>
                         <div class="form-group references">
                             <label for="password">References</label>
-                            <button id="btnstep" type="button" name="button" onclick="addtextfield()">+</button>
+                            <button id="btnstep" type="button" name="button" style="border: 1px solid #702C91;
+                border-radius: 4px;" onclick="addtextfield()">+</button>
                             <% if (topic.references) { %>
                                 <% for (let reference of references) { %>
                                     <input id='step' class='form-control' type='text' name='references' value="<%=reference%>" style='width: 50%;'>
