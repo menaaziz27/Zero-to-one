@@ -107,7 +107,7 @@ $('#likesModal').on('shown.bs.modal', async e => {
 	const postId = getPostIdFromElement(button);
 
 	$.get(`/posts/likers/${postId}`, likers => {
-		outputUsers(likers, $('.resultsContainer'));
+		outputUsers(likers, $('.similarContainer'));
 	});
 });
 
