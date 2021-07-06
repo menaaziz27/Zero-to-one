@@ -675,11 +675,11 @@ section {
     border-radius: 50px;
     transition: 0.3s;
     line-height: 1;
-    color: #009961;
+    color: #702C91;
     -webkit-animation-delay: 0.8s;
     animation-delay: 0.8s;
     margin-top: 6px;
-    border: 2px solid #009961;
+    border: 2px solid #702C91;
 }
 
 .btn-learn-more,
@@ -2612,7 +2612,6 @@ a:hover.back-to-top {
     /* Header */
     .header {
         overflow-x: hidden;
-        padding-top: 2.75rem;
         /*!  */
         padding-bottom: 2rem;
     }
@@ -2693,6 +2692,17 @@ a:hover.back-to-top {
         margin-left: 2.875rem;
     }
     /* end of extra pages */
+}
+
+.similarContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.similarContainer .user {
+    padding: 15px;
+    display: flex;
+    border-bottom: 1px solid var(--lightGrey);
 }
 
 

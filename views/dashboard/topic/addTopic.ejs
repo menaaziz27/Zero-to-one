@@ -18,12 +18,22 @@
         <link href="/assets/css/errormessages.css" rel="stylesheet">
 
         <style>
-            label {
-                color: #009961;
-            }
-            
             .error-message {
                 color: red;
+            }
+            
+            #submitButton:hover {
+                background-color: #702C91;
+                color: white;
+            }
+            
+            label {
+                color: #702C91;
+            }
+            
+            #btnstep:hover {
+                background: #702C91;
+                color: white;
             }
         </style>
         <script>
@@ -43,8 +53,8 @@
 <body>
     <%- include('../../layouts/navbar.ejs') %>
 
-        <div class="container">
 
+        <div class="container">
             <div style="background-color: #eef0f1;border-radius: 10px; margin: 8px;" class="row align-items-center">
                 <div class="py-4 rounded col-md-6 offset-md-3">
                     <h3 style="text-align: center;">Add Topic</h3>
@@ -130,8 +140,10 @@
                                                         <% } %>
                         </div>
                         <div class="form-group references">
+                            <br>
                             <label for="password">References</label>
-                            <button id="btnstep" type="button" name="button" onclick="addtextfield()">+</button>
+                            <button id="btnstep" type="button" style="border: 1px solid #702C91;
+                border-radius: 4px;" name="button" onclick="addtextfield()">+</button>
 
                         </div>
                         <div class="form-check">
@@ -150,12 +162,13 @@
                                 <a class="mx-auto btn btn-outline-dark btn-block" href="/admin/dashboard/topics">BACK</a>
                             </div>
                             <div class="col-6">
-                                <button class="mx-auto btn btn-success btn-block" type="submit">SUBMIT</button>
+                                <button id="submitButton" class="mx-auto btn btn-block" style="border:1px solid #702C91;" type="submit">SUBMIT</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
 
         </div>
         <%- include('../../layouts/footer.ejs') %>
@@ -163,14 +176,8 @@
             <script>
                 let userLoggedIn = <%- JSON.stringify(userLoggedIn) %>
             </script>
-            <script>
-                $(document).ready(function() {
-                    $('input').each((e) => {
-                        $(this).val('').trim();
-                    })
-                })
-            </script>
             <%- include('../../layouts/strapAndJQuery.ejs') %>
+
 </body>
 
 </html>
