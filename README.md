@@ -25,7 +25,7 @@ social media website targets computer science enthusiasts with three types of us
 
 1. type in your terminal
 2. _git clone <https://github.com/menaaziz27/Zero-to-one.git>_
-3. _cd monaqsha_
+3. _cd Zero-to-one_
 4. _npm install_
 
 ### live version
